@@ -1,0 +1,56 @@
+{
+	"name": "miraheze/tsportal",
+	"type": "project",
+	"description": "Portal for handling and managing the investigation lifecycle for Trust and Safety at Miraheze",
+	"license": "MIT",
+	"require": {
+		"php": "^7.4",
+		"ext-json": "*",
+		"ext-pdo": "*",
+		"fakerphp/faker": "^1.19",
+		"fruitcake/laravel-cors": "3.0.0",
+		"guzzlehttp/guzzle": "7.4.3",
+		"laravel/framework": "8.83.15",
+		"laravel/sanctum": "2.15.1",
+		"laravel/serializable-closure": "1.2.0",
+		"laravel/socialite": "5.5.2",
+		"laravel/tinker": "2.7.2",
+		"taavi/laravel-socialite-mediawiki": "1.6.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "app/",
+			"Database\\Factories\\": "database/factories/"
+		}
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+			"@php artisan package:discover --ansi"
+		],
+		"post-update-cmd": [
+			"@php artisan vendor:publish --tag=laravel-assets --ansi",
+			"@php artisan config:cache",
+			"@php artisan route:cache",
+			"@php artisan view:cache"
+		],
+		"post-root-package-install": [
+			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+		],
+		"post-create-project-cmd": [
+			"@php artisan key:generate --ansi"
+		]
+	},
+	"extra": {
+		"laravel": {
+			"dont-discover": []
+		}
+	},
+	"config": {
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"sort-packages": true
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}
