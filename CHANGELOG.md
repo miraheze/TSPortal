@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Fixed
 
 - Renamed migration files to 00 for users and 01 for dependants. Thank you to [paladox](https://github.com/paladox) for the fix for this!
+- Attribute user flag changes to request user, not model user.
 
 ## Version 1 (2022-05-30)
 
