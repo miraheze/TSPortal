@@ -4,6 +4,8 @@ Miraheze TSPortal is the platform Miraheze is transitioning over to use as its i
 
 It is designed by [Owen Baines](https://github.com/OwenBaines) and is managed on [Phabricator](https://phabricator.miraheze.org/project/board/71/).
 
+This software is built on the [Laravel](https://laravel.com) framework, released under the MIT license.
+
 ## Code of Conduct
 
 In order to ensure that the community is welcoming to all, please review and abide by the [Code of Conduct](https://meta.miraheze.org/wiki/Code_of_Conduct).
