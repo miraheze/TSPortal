@@ -76,4 +76,16 @@ class Report extends Model
 	{
 		return User::findById( $id );
 	}
+
+	/**
+	 * Return a user object when querying the user attribute
+	 *
+	 * @param int $id
+	 *
+	 * @return User[]|Collection|Model|null
+	 */
+	public function getUserAttribute( int $id )
+	{
+		return User::findById( $id );
+	}
 }

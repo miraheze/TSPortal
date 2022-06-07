@@ -28,9 +28,19 @@ class InvestigationController extends Controller
 	{
 		$allInvestigations = Investigation::all();
 
-		if ( (int)$request->query( 'user' ) ) {
-			$allInvestigations = $allInvestigations->where( 'subject', User::findById( $request->query( 'user' ) ) );
-		} else {
+		$query = $request->query();
+
+		foreach ( $query as $type => $key ) {
+			if ( in_array( $type, [ 'subject', 'assigned' ] ) ) {
+				$allInvestigations = $allInvestigations->where( $type, User::findById( (int)$key ) );
+			} elseif ( in_array( $type, [ 'type', 'recommendation' ] ) ) {
+				$allInvestigations = $allInvestigations->where( $type, $key );
+			}
+		}
+
+		if ( $request->query( 'closed' ) ) {
+			$allInvestigations = $allInvestigations->whereNotNull( 'closed' );
+		} elseif ( !count( $query ) ) {
 			$allInvestigations = $allInvestigations->whereNull( 'closed' );
 		}
 

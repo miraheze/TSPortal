@@ -33,13 +33,22 @@ class ReportController extends Controller
 			$allReports = $allReports->where( 'reporter', $request->user() );
 		}
 
-		if ( (int)$request->query( 'user' ) ) {
-			$allReports = $allReports->where( 'subject', User::findById( $request->query( 'user' ) ) );
-		} elseif ( (int)$request->query( 'made' ) ) {
-			$allReports = $allReports->where( 'reporter', User::findById( $request->query( 'made' ) ) );
-		} else {
+		$query = $request->query();
+
+		foreach ( $query as $type => $key ) {
+			if ( in_array( $type, [ 'user', 'reporter' ] ) ) {
+				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
+			} elseif ( in_array( $type, [ 'investigation', 'type' ] ) ) {
+				$allReports = $allReports->where( $type, $key );
+			}
+		}
+
+		if ( $request->query( 'closed' ) ) {
+			$allReports = $allReports->whereNotNull( 'reviewed' );
+		} elseif ( !count( $query ) ) {
 			$allReports = $allReports->whereNull( 'reviewed' );
 		}
+
 		return view( 'reports' )
 			->with( 'reports', $allReports );
 	}
