@@ -101,7 +101,7 @@
 					<p class="text-primary m-0 fw-bold">{{ __('submission') }}</p>
 				</div>
 				<div class="card-body">
-					<button class="btn btn-primary d-none d-sm-inline-block" type="submit"
+					<button class="btn btn-primary" type="submit"
 					        style="padding: 4px 8px; margin: 10px 0 0 25px;">
 						<i class="fa-solid fa-magnifying-glass-plus fa-sm text-white-50"></i> {{ __('investigation-launch') }}
 					</button>

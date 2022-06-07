@@ -94,7 +94,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-primary d-none d-sm-inline-block" type="submit"
+					<button class="btn btn-primary" type="submit"
 					        style="padding: 4px 8px; margin: 10px 0 0 25px;"><i
 							class="fa-solid fa-hourglass fa-sm text-white-50"></i> {{ __('submit') }}
 					</button>

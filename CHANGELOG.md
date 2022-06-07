@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v1...master)
 
+### Changed
+
+- Modified how buttons and the nav bar displays on smaller screens to make them more accessible.
+
 ### Fixed
 
 - Renamed migration files to 00 for users and 01 for dependants. Thank you to [paladox](https://github.com/paladox) for the fix for this!

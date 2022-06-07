@@ -112,7 +112,7 @@
 					<p class="text-primary m-0 fw-bold">{{ __('submission') }}</p>
 				</div>
 				<div class="card-body">
-					<button class="btn btn-primary d-none d-sm-inline-block text-white" name="edit" type="submit"
+					<button class="btn btn-primary text-white" name="edit" type="submit"
 					        style="padding: 4px 8px; margin: 10px 0 0 25px;">
 						<i class="fa-solid fa-pen-square"></i> {{ __('investigation-update') }}
 					</button>

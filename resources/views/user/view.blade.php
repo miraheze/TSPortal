@@ -88,7 +88,7 @@
 										@endforeach
 									</fieldset>
 								</div>
-								<button class="btn btn-success d-none d-sm-inline-block text-white" type="submit"
+								<button class="btn btn-success text-white" type="submit"
 								        style="padding: 4px 8px; margin: 10px 0 0 25px;"><i
 										class="fa-solid fa-user-tag fa-sm text-white-50"></i> {{ __('user-flags-submit') }}
 								</button>

@@ -75,11 +75,11 @@
 						</p>
 						<div class="row">
 							<div class="col" style="text-align: center;">
-								<button class="btn btn-primary d-none d-sm-inline-block text-white" type="button" data-bs-target="#modal-1"
+								<button class="btn btn-primary text-white" type="button" data-bs-target="#modal-1"
 								        data-bs-toggle="modal"><i class="fa-solid fa-circle-plus"></i> {{ __('investigation-event') }}
 								</button>
 								<hr>
-								<button class="btn btn-primary d-none d-sm-inline-block text-white" onclick="location.href='/investigation/edit/{{ $investigation->id }}'" type="button"><i class="fa-solid fa-square-pen"></i> {{ __('investigation-edit') }}
+								<button class="btn btn-primary text-white" onclick="location.href='/investigation/edit/{{ $investigation->id }}'" type="button"><i class="fa-solid fa-square-pen"></i> {{ __('investigation-edit') }}
 								</button>
 							</div>
 						</div>
@@ -174,7 +174,7 @@
 						</label>
 					</div>
 					<div class="text-center">
-						<button class="btn btn-primary d-none d-sm-inline-block text-white" type="submit" style="padding: 4px 8px; margin: 10px 0 0 25px;">
+						<button class="btn btn-primary text-white" type="submit" style="padding: 4px 8px; margin: 10px 0 0 25px;">
 							<i class="fa-solid fa-comment-medical fa-sm text-white-50"></i> {{ __('comments-add') }}
 						</button>
 					</div>

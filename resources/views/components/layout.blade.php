@@ -156,8 +156,10 @@
 							<div class="nav-item dropdown no-arrow">
 								@auth('web')
 									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-									   href="#"><span
-											class="d-none d-lg-inline me-2 text-gray-600 small">{{ request()->user()->username }}</span></a>
+									   href="#">
+										<span class="d-none d-lg-inline me-2 text-gray-600 small">{{ request()->user()->username }}</span>
+										<span class="d-inline d-lg-none me-2 text-gray-600 small fa-solid fa-user"></span>
+									</a>
 									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="/user/{{ request()->user()->id }}">
 											<i class="fa-solid fa-user fa-sm fa-fw me-2 text-gray-400"></i>{{ __('profile') }}</a>
@@ -167,8 +169,10 @@
 									</div>
 								@else
 									<a href="/login"
-									   class="dropdown-toggle nav-link"><span
-											class="d-none d-lg-inline me-2 text-gray-600 small">{{ __('login') }}</span></a>
+									   class="dropdown-toggle nav-link">
+										<span class="d-none d-lg-inline me-2 text-gray-600 small">{{ __('login') }}</span>
+										<span class="d-inline d-lg-none me-2 text-gray-600 small fa-solid fa-right-to-bracket"></span>
+									</a>
 								@endauth
 							</div>
 						</li>
