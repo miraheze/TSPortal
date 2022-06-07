@@ -21,7 +21,7 @@ class CreateInvestigationsTable extends Migration
 			$table->text( 'recommendation' )->nullable();
 			$table->text( 'explanation' )->nullable();
 			$table->timestamp( 'created' );
-			$table->string( 'assigned' );
+			$table->foreignId( 'assigned' )->nullable()->constrained( 'users' );
 			$table->timestamp( 'closed' )->nullable()->default( null );
 		} );
 	}
