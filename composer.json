@@ -9,7 +9,7 @@
 		"ext-pdo": "*",
 		"fakerphp/faker": "^1.19",
 		"fruitcake/laravel-cors": "3.0.0",
-		"guzzlehttp/guzzle": "7.4.3",
+		"guzzlehttp/guzzle": "7.4.5",
 		"laravel/framework": "8.83.15",
 		"laravel/sanctum": "2.15.1",
 		"laravel/serializable-closure": "1.2.0",
