@@ -36,16 +36,18 @@ class ReportController extends Controller
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( in_array( $type, [ 'user', 'reporter' ] ) ) {
+			if ( !$key ) {
+				continue;
+			} elseif ( in_array( $type, [ 'user', 'reporter' ] ) ) {
 				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
 			} elseif ( in_array( $type, [ 'investigation', 'type' ] ) ) {
 				$allReports = $allReports->where( $type, $key );
 			}
 		}
 
-		if ( $request->query( 'closed' ) ) {
+		if ( $request->input( 'closed' ) ) {
 			$allReports = $allReports->whereNotNull( 'reviewed' );
-		} elseif ( !count( $query ) ) {
+		} else {
 			$allReports = $allReports->whereNull( 'reviewed' );
 		}
 

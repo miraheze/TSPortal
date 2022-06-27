@@ -31,16 +31,22 @@ class InvestigationController extends Controller
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( in_array( $type, [ 'subject', 'assigned' ] ) ) {
+			if ( !$key ) {
+				continue;
+			} elseif ( in_array( $type, [ 'subject', 'assigned' ] ) ) {
 				$allInvestigations = $allInvestigations->where( $type, User::findById( (int)$key ) );
 			} elseif ( in_array( $type, [ 'type', 'recommendation' ] ) ) {
+				if ( $key == 'unknown' ) {
+					$key = null;
+				}
+
 				$allInvestigations = $allInvestigations->where( $type, $key );
 			}
 		}
 
-		if ( $request->query( 'closed' ) ) {
+		if ( $request->input( 'closed' ) ) {
 			$allInvestigations = $allInvestigations->whereNotNull( 'closed' );
-		} elseif ( !count( $query ) ) {
+		} else {
 			$allInvestigations = $allInvestigations->whereNull( 'closed' );
 		}
 

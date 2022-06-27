@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Added
 
 - Add new filtering options for investigations and reports.
+- Filtering UI on investigations and reports list pages.
 
 ### Changed
 

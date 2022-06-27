@@ -4,6 +4,51 @@
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4">{{ __('open-investigations') }}</h3>
+		<div class="card shadow mb-4">
+			<div class="card-body text-center">
+				<form>
+					<div class="row container-fluid">
+						<div class="col col-sm-4">
+							<select class="form-select form-control" id="filter" onchange="updateFilter()">
+								<option value="">----</option>
+								<option value="type" {{ request()->input( 'type' ) ? 'selected' : '' }}>{{ __('topic') }}</option>
+								<option value="recommendation" {{ request()->input( 'recommendation' ) ? 'selected' : '' }}>{{ __('recommendation') }}</option>
+							</select>
+						</div>
+						<div class="col col-sm-1">
+							<p>{{ __('is') }}</p>
+						</div>
+						<div class="col col-sm-5">
+							<select class="form-select form-control toggle-hideall" name="type" id="filter-type" @disabled(!request()->input('type'))>
+								<option value="">----</option>
+								@foreach( config('app.investigationTopics') as $topic )
+									<option value="{{ $topic }}" {{ ( request()->input( 'type' ) == $topic ) ? 'selected' : '' }}>... {{ __('investigation-topic-' . $topic) }}.</option>
+								@endforeach
+							</select>
+							<select class="form-select form-control toggle-hideall" name="recommendation" id="filter-recommendation">
+								@foreach ( config('app.recommendations') as $recommend )
+									<option
+										value="{{ $recommend }}" {{ ( request()->input( 'recommendation' ) == $recommend ) ? 'selected' : '' }}>
+										... {{ __('recommendation-' . $recommend ) }}
+									</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col col-sm-2">
+							<div class="form-check">
+								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" {{ request()->input( 'closed' ) ? 'checked' : '' }}/>
+								<label class="form-check-label" for="formCheck-1">{{ __('filter-closed') }}</label>
+							</div>
+						</div>
+					</div>
+					<div class="row container-fluid justify-content-center">
+						<button class="btn btn-primary" type="submit" style="padding: 4px 8px; margin: 10px 0 0 25px; width: auto"><i
+								class="fa-solid fa-filter fa-sm text-white-50"></i> {{ __('filter') }}
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 		<div class="card shadow">
 			<div class="card-body">
 				<div class="table-responsive table mt-2">
@@ -49,5 +94,7 @@
 			</div>
 		</div>
 	</x-slot>
-	<x-slot name="scripts"></x-slot>
+	<x-slot name="scripts">
+		<script src="/js/filter.js"></script>
+	</x-slot>
 </x-layout>
