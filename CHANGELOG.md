@@ -13,6 +13,8 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Changed
 
 - Modified how buttons and the nav bar displays on smaller screens to make them more accessible.
+- Upgraded guzzlehttp/guzzle to v7.4.5.
+- Upgraded laravel/framework to v8.83.17.
 
 ### Fixed
 
