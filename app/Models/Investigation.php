@@ -79,13 +79,11 @@ class Investigation extends Model
 	/**
 	 * Return a user object when querying the subject attribute
 	 *
-	 * @param int $id
-	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getSubjectAttribute( int $id )
+	public function getSubjectAttribute()
 	{
-		return User::findById( $id );
+		return User::findById( $this->id );
 	}
 
 	/**
