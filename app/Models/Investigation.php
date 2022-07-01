@@ -112,17 +112,19 @@ class Investigation extends Model
 	 */
 	public function newEvent( string $action, bool $userRecord, ?string $comment = null, ?User $actor = null )
 	{
-		$subject = ( $userRecord ) ? $this->subject : null;
+		if ( !( $action == 'comment' && !$comment ) ) {
+			$subject = ( $userRecord ) ? $this->subject : null;
 
-		UserEvent::factory()->create(
-			[
-				'user'          => $subject,
-				'investigation' => $this,
-				'created'       => now(),
-				'created_by'    => $actor,
-				'action'        => $action,
-				'comment'       => $comment
-			]
-		);
+			UserEvent::factory()->create(
+				[
+					'user'          => $subject,
+					'investigation' => $this,
+					'created'       => now(),
+					'created_by'    => $actor,
+					'action'        => $action,
+					'comment'       => $comment
+				]
+			);
+		}
 	}
 }

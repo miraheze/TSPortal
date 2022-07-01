@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v2...master)
 
+### Fixed
+
+- Prevent empty comments being submitted to user events history
+
 ## Version 2 (2022-06-27)
 
 ### Added
