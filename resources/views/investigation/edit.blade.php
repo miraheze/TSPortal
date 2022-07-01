@@ -88,7 +88,7 @@
 										@if ( is_null($investigation->assigned) )
 											{{ __('reassign-claim') }}
 										@else
-											{{ __ ('reassign-assigned', [ 'assigned' => $investigation->assigned->username ]) }}
+											{!! __('reassign-assigned', [ 'assigned' => $investigation->assigned->username ]) !!}
 										@endif
 									</label>
 								</div>

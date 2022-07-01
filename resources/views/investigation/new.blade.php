@@ -36,7 +36,7 @@
 											<label class="form-label" for="username"><strong>{{ __('investigation-involved') }}:</strong><br/></label><input class="form-control" type="text"
 											                                                                                                                 name="username" id="username" value="{{ old('username') }}" placeholder="username"/>
 											<small class="form-text">
-												{{ __('investigation-involved-note') }}
+												{!! __('investigation-involved-note') !!}
 											</small>
 										</div>
 									</div>

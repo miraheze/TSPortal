@@ -7,7 +7,8 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Fixed
 
-- Prevent empty comments being submitted to user events history
+- Prevent empty comments being submitted to user events history.
+- Correctly render HTML tags on investigation pages.
 
 ## Version 2 (2022-06-27)
 
