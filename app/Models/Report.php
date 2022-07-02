@@ -60,7 +60,7 @@ class Report extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function subject(): BelongsTo
+	public function user(): BelongsTo
 	{
 		return $this->belongsTo( User::class, 'user' );
 	}

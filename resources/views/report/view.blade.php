@@ -37,7 +37,7 @@
 											<p><strong>{{ __('report-about') }} </strong>{{ __( 'report-topic-' . $report->type ) }}.</p>
 										</div>
 										<p><strong>{{ __('investigation-involved') }}:</strong> <a
-												href="/user/{{ $report->subject->id }}">{{ $report->subject->username }}</a>
+												href="/user/{{ $report->user->id }}">{{ $report->user->username }}</a>
 										</p>
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 					</div>
 					<div class="card-body">
 						@can('update', $report)
-							@if ( ( count( $report->subject->reports ) + count( $report->subject->investigations ) ) > 1 )
+							@if ( ( count( $report->user->reports ) + count( $report->user->investigations ) ) > 1 )
 								<div class="alert alert-danger text-center" role="alert">
 									<strong>{{ __('subject-known') }}</strong>
 								</div>
@@ -78,7 +78,7 @@
 							@endif
 						@endcan
 						<p>CentralAuth: <a
-								href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->subject->username }}">{{ $report->subject->username }}</a>
+								href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->user->username }}">{{ $report->user->username }}</a>
 						</p>
 					</div>
 				</div>
