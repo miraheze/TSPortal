@@ -27,7 +27,7 @@
 										<div class="col">
 											<div class="mb-3">
 												<label class="form-label"
-												       for="username"><strong>{{ __('username') }}: </strong>{{ $dpa->subject->username }}
+												       for="username"><strong>{{ __('username') }}: </strong>{{ $dpa->user->username }}
 												</label>
 											</div>
 										</div>
@@ -61,7 +61,7 @@
 			<div class="col-lg-4 mb-md-auto">
 				<div class="card shadow mb-4">
 					<div class="card-body text-center">
-						<x-user.verified :user="$dpa->subject"/>
+						<x-user.verified :user="$dpa->user"/>
 					</div>
 				</div>
 				@if ( !$dpa->completed && Gate::check('ts') )

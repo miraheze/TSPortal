@@ -19,7 +19,7 @@
 						@foreach ( $dpas as $dpa )
 							<tr>
 								<td><a class="nav-link" href="/dpa/{{ $dpa->id }}">{{ $dpa->id }}</a></td>
-								<td>{{ $dpa->subject->username }}</td>
+								<td>{{ $dpa->user->username }}</td>
 								<td>{{ $dpa->filed->diffForHumans() }}</td>
 							</tr>
 						@endforeach
