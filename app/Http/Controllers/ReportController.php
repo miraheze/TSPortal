@@ -125,7 +125,7 @@ class ReportController extends Controller
 	{
 		if ( $request->input( 'investigate' ) ?? false ) {
 			$investigation = Investigation::factory()->create( [
-				'subject'  => $report->subject,
+				'subject'  => $report->user,
 				'created'  => now(),
 				'assigned' => $request->user(),
 			] );

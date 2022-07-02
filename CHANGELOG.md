@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v3...master)
 
+### Fixed
+
+- Correctly assign subject field based on modified Report structure.
+
 ## Version 3 (2022-07-02)
 
 ### Fixed
