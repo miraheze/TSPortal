@@ -121,7 +121,7 @@ class DPAController extends Controller
 				'completed' => now()
 			] );
 
-			$dpa->subject->update( [
+			$dpa->user->update( [
 				'username' => 'MirahezeGDPR ' . $dpa->id
 			] );
 		} else {
@@ -131,7 +131,7 @@ class DPAController extends Controller
 			] );
 		}
 
-		$dpa->subject->newEvent( 'closed-dpa', $request->user() );
+		$dpa->user->newEvent( 'closed-dpa', $request->user() );
 
 		return back();
 	}

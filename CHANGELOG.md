@@ -12,6 +12,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Fixed
 
 - Correctly assign subject field based on modified Report structure.
+- Update usages of subject to user in DPA.
 
 ## Version 3 (2022-07-02)
 
