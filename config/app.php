@@ -361,6 +361,16 @@ return [
 		'Preparation of Terrorism Activity'                          => 'S.5 Terrorism Act 2006',
 		'Revenge Pornography'                                        => 'S.33 Criminal Justice and Courts Act 2015',
 		'Threats to Kill'                                            => 'S.16 Offences Against the Person Act 1861'
-	]
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| At Risk Emails
+	|--------------------------------------------------------------------------
+	|
+	| Where to send email alerts to for At Risk identified reports.
+	|
+	*/
+	'atrisk'              => env( 'ALERT_EMAIL' )
 
 ];

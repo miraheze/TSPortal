@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AtRiskAlert;
 use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Controller for all Report actions
@@ -87,6 +89,10 @@ class ReportController extends Controller
 		$subjectUser->newEvent( $event, $report->id );
 
 		$request->user()->newEvent( 'filed-report', $report->id );
+
+		if ( config( 'app.atrisk' ) && $request->input( 'at' ) ) {
+			Mail::to( config( 'app.atrisk' ) )->send( new AtRiskAlert( $report ) );
+		}
 
 		return redirect( '/reports' );
 	}

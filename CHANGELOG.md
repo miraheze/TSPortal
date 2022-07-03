@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Added
 
 - Allow disabling user login through a flag.
+- Implement sending emails for At Risk Reports.
 
 ### Changed
 

@@ -11,7 +11,7 @@ class EventServiceProvider extends ServiceProvider
 	 *
 	 * @var array
 	 */
-	protected $listen = []; // TODO: Email notifications for ts@
+	protected $listen = [];
 
 	/**
 	 * Register any events.
