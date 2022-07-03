@@ -41,6 +41,8 @@ class LoginController extends Controller
 			$user->newEvent( 'created-login' );
 		}
 
+		abort_if( $user->hasFlag( 'login-disabled' ), 403, __( 'login-disabled' ) );
+
 		Auth::login( $user );
 		return redirect()->intended();
 	}

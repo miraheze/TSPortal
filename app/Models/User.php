@@ -71,6 +71,7 @@ class User extends Authenticatable
 	 * @var array|string[]
 	 */
 	private array $allFlags = [
+		'login-disabled',
 		'ts',
 		'user-manager'
 	];

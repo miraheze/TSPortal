@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v3...master)
 
+### Added
+
+- Allow disabling user login through a flag.
+
 ### Changed
 
 - Add 'no comments' default text for stylistic purposes.
