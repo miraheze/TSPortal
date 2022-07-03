@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v5...master)
 
+### Fixed
+
+- Fix models passed through to events.
+
 ## Version 5 (2022-07-03)
 
 ### Fixed

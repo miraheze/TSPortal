@@ -74,7 +74,7 @@ class InvestigationController extends Controller
 
 		$investigationUser = User::findOrCreate( $request->input( 'username' ) );
 
-		$investigation::factory()->create(
+		$newInvestigation = $investigation::factory()->create(
 			[
 				'type'           => $request->input( 'topic' ),
 				'text'           => $request->input( 'evidence' ),
@@ -89,7 +89,7 @@ class InvestigationController extends Controller
 
 		$investigationUser->newEvent( $event );
 
-		InvestigationNew::dispatch( $investigation );
+		InvestigationNew::dispatch( $newInvestigation );
 
 		return redirect( '/investigations' );
 	}
@@ -178,7 +178,7 @@ class InvestigationController extends Controller
 					$investigation->newEvent( 'close-investigation', false, $request->input( 'comments' ), $request->user() );
 				}
 
-				InvestigationClosed::dispatch( $investigation );
+				InvestigationClosed::dispatch( $investigation, !$investigation->closed );
 			}
 		}
 

@@ -76,7 +76,7 @@ class ReportController extends Controller
 
 		$subjectUser = User::findOrCreate( $request->input( 'username' ) );
 
-		$report::factory()->create(
+		$newReport = $report::factory()->create(
 			[
 				'type'     => $request->input( 'report' ),
 				'user'     => $subjectUser,
@@ -95,7 +95,7 @@ class ReportController extends Controller
 			Mail::to( config( 'app.atrisk' ) )->send( new AtRiskAlert( $report ) );
 		}
 
-		ReportNew::dispatch( $report );
+		ReportNew::dispatch( $newReport );
 
 		return redirect( '/reports' );
 	}
