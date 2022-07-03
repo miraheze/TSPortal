@@ -19,12 +19,27 @@ class InvestigationClosed
 	public Investigation $model;
 
 	/**
+	 * Model name
+	 *
+	 * @var string
+	 */
+	public string $name = 'Investigation';
+
+	/**
+	 * Model state
+	 *
+	 * @var string
+	 */
+	public string $state;
+
+	/**
 	 * Create a new event instance.
 	 *
 	 * @return void
 	 */
-	public function __construct( Investigation $investigation )
+	public function __construct( Investigation $investigation, bool $closed )
 	{
 		$this->model = $investigation;
+		$this->state = ( $closed ) ? 'closed' : 'reopened';
 	}
 }

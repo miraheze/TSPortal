@@ -26,12 +26,17 @@ class SendDiscordNotification
 	public function handle( $event )
 	{
 		if ( config( 'app.discordhook' ) ) {
-			$fullModelName = explode( '\\', get_class( $event->model ) );
-			$modelName = array_pop( $fullModelName );
+			$content = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
 
-			Http::post( config( 'app.discordhook' ), [
-				'content' => 'New action for ' . $modelName . ' has been created. Link: ' . config( 'app.url' ) . '/' . strtolower( $modelName ) . '/' . $event->model->id
-			] );
+			if ( config( 'app.proxy' ) ) {
+				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
+					'content' => $content
+				] );
+			} else {
+				Http::post( config( 'app.discordhook' ), [
+					'content' => $content
+				] );
+			}
 		}
 	}
 }

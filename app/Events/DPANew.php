@@ -19,6 +19,20 @@ class DPANew
 	public DPA $model;
 
 	/**
+	 * Model name
+	 *
+	 * @var string
+	 */
+	public string $name = 'DPA';
+
+	/**
+	 * Model state
+	 *
+	 * @var string
+	 */
+	public string $state = 'created';
+
+	/**
 	 * Create a new event instance.
 	 *
 	 * @return void

@@ -24,7 +24,7 @@ return [
 	|
 	 */
 
-	'version' => 4,
+	'version' => 5,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -381,6 +381,16 @@ return [
 	| Where to send discord alerts for new models and major actions.
 	|
 	*/
-	'discordhook'         => env( 'DISCORD_WEBHOOK' )
+	'discordhook'         => env( 'DISCORD_WEBHOOK' ),
+
+	/*
+	|--------------------------------------------------------------------------
+	| Web Proxy
+	|--------------------------------------------------------------------------
+	|
+	| URL for HTTP cURL requests if a web proxy is required.
+	|
+	*/
+	'proxy'               => env( 'WEB_PROXY' )
 
 ];

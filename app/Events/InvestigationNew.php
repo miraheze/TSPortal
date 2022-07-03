@@ -19,6 +19,20 @@ class InvestigationNew
 	public Investigation $model;
 
 	/**
+	 * Model name
+	 *
+	 * @var string
+	 */
+	public string $name = 'Investigation';
+
+	/**
+	 * Model state
+	 *
+	 * @var string
+	 */
+	public string $state = 'created';
+
+	/**
 	 * Create a new event instance.
 	 *
 	 * @return void
