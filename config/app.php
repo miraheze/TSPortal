@@ -371,6 +371,16 @@ return [
 	| Where to send email alerts to for At Risk identified reports.
 	|
 	*/
-	'atrisk'              => env( 'ALERT_EMAIL' )
+	'atrisk'              => env( 'ALERT_EMAIL' ),
+
+	/*
+	|--------------------------------------------------------------------------
+	| Discord Webhook
+	|--------------------------------------------------------------------------
+	|
+	| Where to send discord alerts for new models and major actions.
+	|
+	*/
+	'discordhook'         => env( 'DISCORD_WEBHOOK' )
 
 ];

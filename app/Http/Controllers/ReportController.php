@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReportNew;
 use App\Mail\AtRiskAlert;
 use App\Models\Investigation;
 use App\Models\Report;
@@ -93,6 +94,8 @@ class ReportController extends Controller
 		if ( config( 'app.atrisk' ) && $request->input( 'at' ) ) {
 			Mail::to( config( 'app.atrisk' ) )->send( new AtRiskAlert( $report ) );
 		}
+
+		ReportNew::dispatch( $report );
 
 		return redirect( '/reports' );
 	}

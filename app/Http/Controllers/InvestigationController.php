@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\InvestigationClosed;
+use App\Events\InvestigationNew;
 use App\Models\Investigation;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
@@ -86,6 +88,8 @@ class InvestigationController extends Controller
 		$event = ( count( $investigationUser->events ) == 0 ) ? 'created-investigation' : 'new-investigation';
 
 		$investigationUser->newEvent( $event );
+
+		InvestigationNew::dispatch( $investigation );
 
 		return redirect( '/investigations' );
 	}
@@ -173,6 +177,8 @@ class InvestigationController extends Controller
 
 					$investigation->newEvent( 'close-investigation', false, $request->input( 'comments' ), $request->user() );
 				}
+
+				InvestigationClosed::dispatch( $investigation );
 			}
 		}
 

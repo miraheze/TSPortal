@@ -9,6 +9,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 - Allow disabling user login through a flag.
 - Implement sending emails for At Risk Reports.
+- Implement Discord notifications for all new resources and major reports.
 
 ### Changed
 

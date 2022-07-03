@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DPANew;
 use App\Models\DPA;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
@@ -92,6 +93,8 @@ class DPAController extends Controller
 		$event = ( count( $dpaUser->events ) == 0 ) ? 'created-dpa' : 'new-dpa';
 
 		$dpaUser->newEvent( $event );
+
+		DPANew::dispatch( $dpa );
 
 		return redirect( '/dpa' );
 	}
