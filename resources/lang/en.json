@@ -68,6 +68,7 @@
 	"events-new-dpa-desc": "New Data Protection Removal request opened.",
 	"events-new-investigation-desc": "New investigation opened on account.",
 	"events-new-report-desc": "New report created on account.",
+	"events-no-comment": "No additional information provided.",
 	"events-reopen-investigation-desc": "Reopened investigation.",
 	"events-update-flags-desc": "User access flags changed. Now: :flags",
 	"evidence": "Evidence",

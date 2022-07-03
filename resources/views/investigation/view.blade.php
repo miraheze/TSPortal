@@ -140,7 +140,7 @@
 					@foreach ( $investigation->events as $event)
 						<figure>
 							<blockquote class="blockquote">
-								<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'comment' => $event->comment ] ) }}</p>
+								<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'comment' => $event->comment ?? __('events-no-comment') ] ) }}</p>
 							</blockquote>
 							<figcaption class="blockquote-footer">{{ $event->created_by->username }}
 								at {{ $event->created }}</figcaption>
