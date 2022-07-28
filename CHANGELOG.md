@@ -5,6 +5,12 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v5...master)
 
+### Changed
+
+- Upgraded fakerphp/faker to 1.20.0.
+- Upgraded laravel/framework to 1.83.23.
+- Upgraded laravel/socialite to 5.5.3.
+
 ### Fixed
 
 - Fix models passed through to events.
