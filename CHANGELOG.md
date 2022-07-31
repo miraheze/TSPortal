@@ -14,6 +14,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Fixed
 
 - Fix models passed through to events.
+- User assigned needs to be passed ID not object.
 
 ## Version 5 (2022-07-03)
 

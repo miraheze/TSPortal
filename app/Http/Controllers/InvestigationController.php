@@ -147,7 +147,7 @@ class InvestigationController extends Controller
 			];
 
 			if ( !is_null( $request->input( 'assign' ) ) ) {
-				$updates['assigned'] = $request->user();
+				$updates['assigned'] = $request->user()->id;
 			}
 
 			$investigation->update( $updates );
