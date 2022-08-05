@@ -3,7 +3,13 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v6...master)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v7...master)
+
+## Version 7 (2022-08-05)
+
+### Fixed
+
+- API: Use correct name for DPA subject.
 
 ## Version 6 (2022-07-31)
 

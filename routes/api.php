@@ -18,6 +18,6 @@ Route::get( 'dpa/{dpa}/{username}', function( DPA $dpa, string $username ) {
 	return response()->json( [
 		'dpa-id'   => $dpa->id,
 		'username' => $username,
-		'match'    => ( $dpa->subject->username == $username )
+		'match'    => ( $dpa->user->username == $username )
 	] );
 } );
