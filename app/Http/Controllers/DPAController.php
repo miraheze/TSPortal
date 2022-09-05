@@ -74,14 +74,14 @@ class DPAController extends Controller
 				]
 			);
 
-			$newDPA = $dpa::factory()->create(
+			$dpa::factory()->create(
 				[
 					'user'      => $dpaUser,
 					'statutory' => (bool)$request->input( 'dpa' )
 				]
 			);
 		} else {
-			$newDPA = $dpa::factory()->create(
+			$dpa::factory()->create(
 				[
 					'user'      => $dpaUser,
 					'underage'  => $request->input( 'evidence' ),
@@ -93,6 +93,8 @@ class DPAController extends Controller
 		$event = ( count( $dpaUser->events ) == 0 ) ? 'created-dpa' : 'new-dpa';
 
 		$dpaUser->newEvent( $event );
+
+		$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get();
 
 		DPANew::dispatch( $newDPA );
 

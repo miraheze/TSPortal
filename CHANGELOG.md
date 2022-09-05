@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v7...master)
 
+### Fixed
+
+- Correctly display DPA ID on new event being triggered.
+
 ## Version 7 (2022-08-05)
 
 ### Fixed
