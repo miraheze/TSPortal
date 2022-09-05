@@ -11,6 +11,7 @@
 	"date-known": "Date Known",
 	"dpa": "Data Protection",
 	"dpa-accepted": "This request was accepted at :complete.",
+	"dpa-already-exists": "A Data Protection Request already exists for this user.",
 	"dpa-new": "Request Removal of Personally Identifiable Information",
 	"dpa-oauth-verify": "Once submitted, you will be asked to verify you own the account using OAuth.",
 	"dpa-own-account": "User stated they own the account.",

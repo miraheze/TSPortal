@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\DPANew;
 use App\Models\DPA;
 use App\Models\User;
+use App\Rules\DPAAlreadyLive;
 use App\Rules\MirahezeUsernameRule;
 use App\Rules\SameAccountRule;
 use Illuminate\Contracts\Foundation\Application;
@@ -61,7 +62,7 @@ class DPAController extends Controller
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule ]
+				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ]
 			]
 		);
 
