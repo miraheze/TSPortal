@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AppealNew;
 use App\Events\InvestigationClosed;
 use App\Events\InvestigationNew;
+use App\Models\Appeal;
 use App\Models\Investigation;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
@@ -153,6 +155,24 @@ class InvestigationController extends Controller
 			$investigation->update( $updates );
 
 			$investigation->newEvent( 'edit-investigation', false, null, $request->user() );
+		} elseif ( $request->input( 'event' ) == 'appeal-recv' ) {
+			$newAppeal = Appeal::factory()->create(
+				[
+					'investigation' => $investigation,
+					'type'          => $request->input( 'appeal-type' ),
+					'text'          => $request->input( 'comments' ),
+					'assigned'      => $request->user()->id
+				]
+			);
+
+			$investigation->newEvent(
+				'appeal-recv',
+				true,
+				'#' . $newAppeal->id,
+				$request->user()
+			);
+
+			AppealNew::dispatch( $newAppeal );
 		} else {
 			$investigation->newEvent(
 				$request->input( 'event' ),

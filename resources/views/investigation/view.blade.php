@@ -3,6 +3,14 @@
 		{{ __('investigations') }}
 	</x-slot>
 	<x-slot name="content">
+		@if ( $investigation->openAppeal() )
+			<div class="alert alert-danger text-center" role="alert">
+				<span>
+					<strong>{{ __('investigation-open-appeal') }} <a
+							href="/appeal/{{ $investigation->openAppeal() }}">#{{ $investigation->openAppeal() }}</a>.</strong>
+				</span>
+			</div>
+		@endif
 		<h3 class="text-dark mb-4">{{ __('investigation-header') }} (#{{ $investigation->id }})</h3>
 		<div class="row mb-3">
 			<div class="col-lg-8">
@@ -96,13 +104,19 @@
 										</div>
 										<div class="modal-body">
 											<label class="form-label" for="event"><strong>{{ __('investigation-event-q') }}</strong></label>
-											<select class="form-select" name="event" id="event">
+											<select class="form-select" name="event" id="event" onchange="updateAppealFilter()">
 												@foreach( config('app.events') as $type => $events )
 													<optgroup label="{{ __('events-' . $type ) }}">
 														@foreach ( $events as $event )
 															<option value="{{ $type . '-' . $event }}">{{ __('events-' . $type . '-' . $event ) }}</option>
 														@endforeach
 													</optgroup>
+												@endforeach
+											</select>
+											<label class="form-label toggle-hideall d-none" id="filter-appeal-recv-label" for="filter-appeal-recv"><strong>{{ __('appeal-type') }}</strong></label>
+											<select class="form-select form-control toggle-hideall d-none" name="appeal-type" id="filter-appeal-recv">
+												@foreach( config('app.appeals') as $type => $data )
+													<option value="{{ $type }}" {{ ( request()->input( 'type' ) == $type ) ? 'selected' : '' }}>{{ ucfirst(__('appeal-type-' . $type)) }}.</option>
 												@endforeach
 											</select>
 											<label class="form-label mt-1" for="comments"><strong>{{ __('comments') }}</strong></label><textarea
@@ -182,7 +196,9 @@
 			</form>
 		</div>
 	</x-slot>
-	<x-slot name="scripts"></x-slot>
+	<x-slot name="scripts">
+		<script src="/js/appeal-filter.js"></script>
+	</x-slot>
 </x-layout>
 
 

@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Added
 
 - Validate DPAs for open requests to prevent duplicates.
+- Implement appeals mechanism for investigations.
 
 ### Fixed
 

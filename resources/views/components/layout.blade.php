@@ -48,6 +48,13 @@
 							<span>{{ __('investigations') }}</span>
 						</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ ( $pgname == __('appeals') ) ? 'active' : '' }}"
+						   href="/appeals">
+							<i class="fa-solid fa-scale-balanced"></i>
+							<span>{{ __('appeals') }}</span>
+						</a>
+					</li>
 					<!-- TODO: Transparency Reports
 					<li class="nav-item">
 						<a class="nav-link {{ ( $pgname == 'Transparency Reports' ) ? 'active' : '' }}"

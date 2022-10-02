@@ -391,6 +391,72 @@ return [
 	| URL for HTTP cURL requests if a web proxy is required.
 	|
 	*/
-	'proxy'               => env( 'WEB_PROXY' )
+	'proxy'               => env( 'WEB_PROXY' ),
+
+	/*
+	|--------------------------------------------------------------------------
+	| Appeal Avenues
+	|--------------------------------------------------------------------------
+	|
+	| Config for handling all appeal avenues by type, boolean determines whether
+	| the weight a factor has on an appeal's recommended outcome.
+	|
+	*/
+	'appeals'             => [
+		'not-appropriate'    => [
+			'explained' => [
+				'yes' => 0,
+				'no'  => 1
+			],
+			'exhausted' => [
+				'yes' => 1,
+				'no'  => -1
+			],
+			'community' => [
+				'yes' => 0,
+				'no'  => 1
+			],
+			'purview'   => [
+				'yes' => -1,
+				'no'  => 1
+			]
+		],
+		'new-information'    => [
+			'relevant'   => [
+				'yes' => 0,
+				'no'  => 1,
+			],
+			'contradict' => [
+				'yes' => -1,
+				'no'  => 1
+			],
+			'sanctions'  => [
+				'yes' => 1,
+				'no'  => -1,
+			]
+		],
+		'impossible-outcome' => [
+			'disregard'  => [
+				'yes' => -1,
+				'no'  => 1,
+			],
+			'undisputed' => [
+				'yes' => 1,
+				'no'  => -1,
+			],
+			'justify'    => [
+				'yes' => 1,
+				'no'  => -1,
+			],
+			'follow'     => [
+				'yes' => 1,
+				'no'  => -1,
+			],
+			'lesser'     => [
+				'yes' => -1,
+				'no'  => 1,
+			]
+		]
+	]
 
 ];

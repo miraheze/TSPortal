@@ -43,7 +43,7 @@ class Investigation extends Model
 	 */
 	public function reports(): HasMany
 	{
-		return $this->hasMany( Report::class );
+		return $this->hasMany( Report::class, 'investigation' );
 	}
 
 	/**
@@ -74,6 +74,16 @@ class Investigation extends Model
 	public function events(): HasMany
 	{
 		return $this->hasMany( UserEvent::class, 'investigation' );
+	}
+
+	/**
+	 * Defines a relationship with all appeals within this investigation
+	 *
+	 * @return HasMany
+	 */
+	public function appeals(): HasMany
+	{
+		return $this->hasMany( Appeal::class, 'investigation' );
 	}
 
 	/**
@@ -126,5 +136,23 @@ class Investigation extends Model
 				]
 			);
 		}
+	}
+
+	/**
+	 * Get the information for the open appeal
+	 *
+	 * @return int|null
+	 */
+	public function openAppeal(): ?int
+	{
+		$appeals = $this->appeals;
+
+		foreach ( $appeals as $appeal ) {
+			if ( is_null( $appeal->reviewed ) ) {
+				return $appeal->id;
+			}
+		}
+
+		return null;
 	}
 }
