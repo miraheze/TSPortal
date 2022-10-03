@@ -11,6 +11,13 @@ The main reasoning behind this choice is the software is not built to be extende
 - Implement appeals mechanism for investigations.
 - Visual feedback for actions that change states (toasts).
 
+### Changed
+
+- Upgraded guzzlehttp/guzzle to 7.5.0.
+- Upgraded laravel/framework to 8.83.24.
+- Upgraded laravel/serializable-closure to 1.2.2.
+- Upgraded laravel/socialite to 5.5.5.
+
 ### Fixed
 
 - Correctly display DPA ID on new event being triggered.
