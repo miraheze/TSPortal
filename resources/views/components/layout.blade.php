@@ -207,9 +207,24 @@
 		</footer>
 	</div>
 	<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fa-solid fa-angle-up"></i></a>
+	@if( request()->session()->get('successFlash') )
+		<div class="toast-container position-fixed bottom-0 end-0 p-3">
+			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="toast-header">
+					<strong class="me-auto">{{ __('toast-header') }}</strong>
+					<small>Just Now</small>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+				<div class="toast-body">
+					{{ request()->session()->get('successFlash') }}
+				</div>
+			</div>
+		</div>
+	@endif
 </div>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/scroll.js"></script>
+<script src="/js/toast.js"></script>
 {{ $scripts }}
 </body>
 </html>

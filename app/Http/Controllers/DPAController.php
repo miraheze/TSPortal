@@ -99,6 +99,8 @@ class DPAController extends Controller
 
 		DPANew::dispatch( $newDPA );
 
+		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
+
 		return redirect( '/dpa' );
 	}
 
@@ -138,6 +140,8 @@ class DPAController extends Controller
 		}
 
 		$dpa->user->newEvent( 'closed-dpa', $request->user() );
+
+		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
 	}

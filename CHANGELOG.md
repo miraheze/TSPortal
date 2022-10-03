@@ -9,6 +9,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 - Validate DPAs for open requests to prevent duplicates.
 - Implement appeals mechanism for investigations.
+- Visual feedback for actions that change states (toasts).
 
 ### Fixed
 

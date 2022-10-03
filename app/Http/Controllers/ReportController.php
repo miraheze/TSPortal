@@ -97,6 +97,8 @@ class ReportController extends Controller
 
 		ReportNew::dispatch( $newReport );
 
+		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-submitted' ) );
+
 		return redirect( '/reports' );
 	}
 
@@ -148,6 +150,8 @@ class ReportController extends Controller
 				'reviewed' => now()
 			] );
 		}
+
+		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
 	}

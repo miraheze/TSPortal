@@ -93,6 +93,8 @@ class InvestigationController extends Controller
 
 		InvestigationNew::dispatch( $newInvestigation );
 
+		request()->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-submitted' ) );
+
 		return redirect( '/investigations' );
 	}
 
@@ -201,6 +203,8 @@ class InvestigationController extends Controller
 				InvestigationClosed::dispatch( $investigation, !$investigation->closed );
 			}
 		}
+
+		request()->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-updated' ) );
 
 		return redirect( '/investigation/' . $investigation->id );
 	}
