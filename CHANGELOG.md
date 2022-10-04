@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v8...master)
 
+### Fixed
+
+- Fix table name in down() for appeals migration.
+
 ## Version 8 (2022-10-03)
 
 ### Added
