@@ -33,6 +33,6 @@ class CreateAppealsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists( 'reports' );
+		Schema::dropIfExists( 'appeals' );
 	}
 }
