@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Fixed
 
 - Fix table name in down() for appeals migration.
+- Appeals i18n and policy fixes.
 
 ## Version 8 (2022-10-03)
 
