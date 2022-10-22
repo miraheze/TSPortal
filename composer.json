@@ -10,7 +10,7 @@
 		"fakerphp/faker": "1.20.0",
 		"fruitcake/laravel-cors": "3.0.0",
 		"guzzlehttp/guzzle": "7.5.0",
-		"laravel/framework": "8.83.24",
+		"laravel/framework": "8.83.25",
 		"laravel/sanctum": "2.15.1",
 		"laravel/serializable-closure": "1.2.2",
 		"laravel/socialite": "5.5.5",
