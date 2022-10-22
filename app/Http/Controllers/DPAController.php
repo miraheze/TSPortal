@@ -95,7 +95,7 @@ class DPAController extends Controller
 
 		$dpaUser->newEvent( $event );
 
-		$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get();
+		$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get()->all()[0];
 
 		DPANew::dispatch( $newDPA );
 
