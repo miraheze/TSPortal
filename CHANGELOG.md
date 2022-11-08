@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v9...master)
 
+### Added
+
+- API for creating DPA and Reports.
+
 ## Version 9 (2022-10-22)
 
 ### Fixed

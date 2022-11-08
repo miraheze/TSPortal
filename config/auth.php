@@ -103,4 +103,15 @@ return [
 
 	'password_timeout' => 10800,
 
+	/*
+	|--------------------------------------------------------------------------
+	| API Keys
+	|--------------------------------------------------------------------------
+	|
+	| Here we can maintain a list of API keys that are valid for write actions.
+	|
+	*/
+
+	'writekey' => env( 'WRITE_KEY' )
+
 ];
