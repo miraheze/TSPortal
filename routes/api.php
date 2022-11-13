@@ -3,6 +3,8 @@
 use App\Events\DPANew;
 use App\Events\ReportNew;
 use App\Models\DPA;
+use App\Models\IAL;
+use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,5 +94,38 @@ Route::post( 'report', function( Request $request ) {
 
 	return response()->json( [
 		'id' => $newReport->id
+	] );
+} );
+
+/*
+ * Internal Actions Log
+ */
+Route::post( 'ial', function( Request $request ) {
+	if ( config( 'auth.writekey' ) != $request->input( 'writekey' ) ) {
+		return response()->json( [ 'unauthorised' => true ] );
+	}
+
+	$comment = $request->input( 'comment' );
+	$serialisedID = preg_replace( '/[^a-z\d]/i', '', explode( '#', $comment )[1] );
+
+	$updates = [
+		'user'          => User::findOrCreate( $request->input( 'username' ) )->id,
+		'type'          => $request->input( 'log' ),
+		'wiki'          => $request->input( 'wiki' ),
+		'comments'      => $comment,
+		'dpa'           => null,
+		'investigation' => null
+	];
+
+	if ( is_numeric( $serialisedID ) && Investigation::all()->find( $serialisedID ) ) {
+		$updates['investigation'] = $serialisedID;
+	} elseif ( ctype_alnum( $serialisedID ) && DPA::all()->find( $serialisedID ) ) {
+		$updates['dpa'] = $serialisedID;
+	}
+
+	$newIAL = IAL::factory()->create( $updates );
+
+	return response()->json( [
+		'id' => $newIAL->id
 	] );
 } );

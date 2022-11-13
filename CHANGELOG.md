@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Added
 
 - API for creating DPA and Reports.
+- Internal Actions Log to ensure all actions can be transparent.
 
 ## Version 9 (2022-10-22)
 

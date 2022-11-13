@@ -65,6 +65,12 @@
 					</li>
 					-->
 					<li class="nav-item">
+						<a class="nav-link {{ ( $pgname = __('ial') ) ? 'active' : '' }}" href="/ial">
+							<i class="fa-solid fa-list-check"></i>
+							<span>{{ __('ial') }}</span>
+						</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link {{ ( $pgname == __('users') ) ? 'active' : '' }}" href="/user">
 							<i class="fa-solid fa-user"></i>
 							<span>{{ __('users') }}</span>
@@ -211,12 +217,26 @@
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 				<div class="toast-header">
-					<strong class="me-auto">{{ __('toast-header') }}</strong>
+					<strong class="me-auto">{{ __('toast-success') }}</strong>
 					<small>Just Now</small>
 					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
 				</div>
 				<div class="toast-body">
 					{{ request()->session()->get('successFlash') }}
+				</div>
+			</div>
+		</div>
+	@endif
+	@if( request()->session()->get('failureFlash') )
+		<div class="toast-container position-fixed bottom-0 end-0 p-3">
+			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="toast-header">
+					<strong class="me-auto">{{ __('toast-failure') }}</strong>
+					<small>Just Now</small>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+				<div class="toast-body">
+					{{ request()->session()->get('failureFlash') }}
 				</div>
 			</div>
 		</div>
