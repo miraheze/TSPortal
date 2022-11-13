@@ -10,6 +10,10 @@ The main reasoning behind this choice is the software is not built to be extende
 - API for creating DPA and Reports.
 - Internal Actions Log to ensure all actions can be transparent.
 
+### Changed
+
+- Changed flash messages to show colour for visual confirmation.
+
 ## Version 9 (2022-10-22)
 
 ### Fixed

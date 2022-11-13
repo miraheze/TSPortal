@@ -216,7 +216,7 @@
 	@if( request()->session()->get('successFlash') )
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="toast-header">
+				<div class="toast-header bg-gradient-success text-white">
 					<strong class="me-auto">{{ __('toast-success') }}</strong>
 					<small>Just Now</small>
 					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -230,7 +230,7 @@
 	@if( request()->session()->get('failureFlash') )
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="toast-header">
+				<div class="toast-header bg-gradient-danger text-white">
 					<strong class="me-auto">{{ __('toast-failure') }}</strong>
 					<small>Just Now</small>
 					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
