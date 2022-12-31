@@ -5,6 +5,10 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v10...master)
 
+### Fixed
+
+- Corrected language codes for toast messages.
+
 ## Version 10 (2022-11-13)
 
 ### Added

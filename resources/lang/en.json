@@ -219,7 +219,7 @@
 	"submit": "Submit",
 	"toast-failure": "Failed to Complete Action!",
 	"toast-invalid-id": "has not been updated as the ID provided does not match a valid resource!",
-	"toast-successful": "Successful!",
+	"toast-success": "Successful!",
 	"toast-submitted": "has been submitted successfully!",
 	"toast-updated": "has been updated successfully!",
 	"topic": "Topic",
