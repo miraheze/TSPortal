@@ -65,7 +65,7 @@
 					</li>
 					-->
 					<li class="nav-item">
-						<a class="nav-link {{ ( $pgname = __('ial') ) ? 'active' : '' }}" href="/ial">
+						<a class="nav-link {{ ( $pgname == __('ial') ) ? 'active' : '' }}" href="/ial">
 							<i class="fa-solid fa-list-check"></i>
 							<span>{{ __('ial') }}</span>
 						</a>

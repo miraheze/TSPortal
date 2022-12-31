@@ -8,6 +8,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Fixed
 
 - Corrected language codes for toast messages.
+- Fixed IAL showing as active in sidebar always.
 
 ## Version 10 (2022-11-13)
 
