@@ -19,7 +19,7 @@
 					<div class="col">
 						<div class="card shadow mb-3">
 							<div class="card-header py-3">
-								<p id="dpaSubject" class="text-primary m-0 fw-bold text-center"><i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="dpaSubject"></i>{{ __('subject') }}</p>
+								<p id="dpaSubject" class="text-primary m-0 fw-bold text-center"><i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="dpaSubject"></i>  {{ __('subject') }}</p>
 							</div>
 							<div class="card-body">
 								<form>
