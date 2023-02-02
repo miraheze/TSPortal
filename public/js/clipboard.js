@@ -1,6 +1,6 @@
 /*
- * To make this script copy elements to the clipboard, add the "copyToClipboard" button to a copy to clipboard element.
- * Then add a 'data-copy="idOfTheElementYouWantToCopy"' attribute to it.
+ * To make this script copy elements to the clipboard, add the "copyToClipboard" class to a copy to clipboard button.
+ * Then add a 'data-copy="idOfTheElementYouWantToCopy"' attribute to the element with the copyToClipboard class.
 */
 function copyToClipboard(event) {
 	try {
