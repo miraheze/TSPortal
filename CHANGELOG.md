@@ -5,6 +5,19 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v10...master)
 
+### Added
+
+- Added phpunit and mockery
+
+### Changed
+
+- Upgrade external dependencies
+	- Bootstrap -> 5.3.0-alpha
+	- fakerphp/faker -> 1.21.0
+	- laravel/framework -> 8.83.27
+	- laravel/socialite -> 5.6.1
+	- laravel/tinker -> 2.8.0
+
 ### Fixed
 
 - Corrected language codes for toast messages.
