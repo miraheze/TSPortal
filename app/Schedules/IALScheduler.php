@@ -16,6 +16,11 @@ class IALScheduler
 	public function __invoke()
 	{
 		$recentIALs = $this->getRecentIALs();
+
+		if ( $recentIALs['total'] == 0 ) {
+			return;
+		}
+
 		$message = $this->createMessage( $recentIALs );
 		$this->notify( $message );
 	}

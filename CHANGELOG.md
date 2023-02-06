@@ -17,6 +17,7 @@ The main reasoning behind this choice is the software is not built to be extende
 	- laravel/framework -> 8.83.27
 	- laravel/socialite -> 5.6.1
 	- laravel/tinker -> 2.8.0
+- Modified IAL Digest to only run when actions have occurred.
 
 ### Fixed
 
