@@ -22,6 +22,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 - Corrected language codes for toast messages.
 - Fixed IAL showing as active in sidebar always.
+- Fixed IAL fatal errors with accessing undefined index.
 
 ## Version 10 (2022-11-13)
 

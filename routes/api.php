@@ -106,7 +106,9 @@ Route::post( 'ial', function( Request $request ) {
 	}
 
 	$comment = $request->input( 'comment' );
-	$serialisedID = preg_replace( '/[^a-z\d]/i', '', explode( '#', $comment )[1] );
+	$explodedComment = explode( '#', $comment );
+
+	$serialisedID = ( is_array( $explodedComment ) ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
 
 	$updates = [
 		'user'          => User::findOrCreate( $request->input( 'username' ) )->id,
