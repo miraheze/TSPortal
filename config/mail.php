@@ -30,7 +30,7 @@ return [
 	'mailers' => [
 		'smtp'     => [
 			'transport'  => 'smtp',
-			'host'       => env( 'MAIL_HOST', 'ssl://smtp-relay.gmail.com' ),
+			'host'       => env( 'MAIL_HOST', 'smtp-relay.gmail.com' ),
 			'port'       => env( 'MAIL_PORT', 465 ),
 			'encryption' => env( 'MAIL_ENCRYPTION', 'tls' ),
 			'username'   => env( 'MAIL_USERNAME' ),
