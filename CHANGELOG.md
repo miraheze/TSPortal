@@ -5,6 +5,12 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v11...master)
 
+## Version 15 (2024-01-25)
+
+### Changed
+
+- Bumped version to 15.
+
 ## Version 14 (2024-01-25)
 
 ### Changed
