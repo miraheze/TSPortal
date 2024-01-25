@@ -5,6 +5,25 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v11...master)
 
+## Version 14 (2024-01-25)
+
+### Changed
+
+- Updated company owner in footer-company.
+
+## Version 13 (2024-01-25)
+
+### Changed
+
+- Updated composer lock file.
+
+## Version 12 (2024-01-25)
+
+### Changed
+
+- Changed default SMTP settings
+- Added support for php 8
+
 ## Version 11 (2023-02-06)
 
 ### Added
