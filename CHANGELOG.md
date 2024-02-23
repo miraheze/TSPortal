@@ -4,6 +4,12 @@ TSPortal follows a basic numerical increase system for releases and not Semantic
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v11...master)
+
+## Version 17 (2024-02-23)
+
+### Fixed
+- Fixed IAL fatal errors with accessing undefined index
+
 ## Version 16 (2024-02-09)
 
 ### Changed
