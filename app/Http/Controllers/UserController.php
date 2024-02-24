@@ -46,7 +46,7 @@ class UserController extends Controller
 	 */
 	public function update( Request $request, User $user ): RedirectResponse
 	{
-		$user->updateFlags( $request->input( 'new-access' ), $request->user() );
+		$user->updateFlags( $request->input( 'new-access' ) ?? [], $request->user() );
 
 		return back();
 	}
