@@ -105,7 +105,7 @@ Route::post( 'ial', function( Request $request ) {
 		return response()->json( [ 'unauthorised' => true ] );
 	}
 
-	$comment = $request->input( 'comment' );
+	$comment = $request->input( 'comment' ) ?? '';
 	$explodedComment = explode( '#', $comment );
 
 	$serialisedID = ( is_array( $explodedComment ) && isset( $explodedComment[1] ) ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
