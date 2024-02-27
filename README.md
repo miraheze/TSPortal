@@ -2,7 +2,7 @@
 
 TSPortal is the platform Miraheze uses as its in-house built platform for handling reports, investigations, appeals, and transparency.
 
-It is designed by [Owen Baines](https://github.com/OwenBaines) and is managed on [Phabricator](https://phabricator.miraheze.org/project/board/71/).
+It is designed by [Owen Baines](https://github.com/OwenBaines) and is managed on [Phorge](https://issue-tracker.miraheze.org/project/board/71/).
 
 This software is built on the [Laravel](https://laravel.com) framework, released under the MIT license.
 
