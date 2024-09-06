@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Support\Facades\Http;
 
-class SendDiscordNotification
+class SendWebhookNotification
 {
 	/**
 	 * Create the event listener.
@@ -37,6 +37,15 @@ class SendDiscordNotification
 					'content' => $content
 				] );
 			}
+		}
+
+		if ( config( 'app.mattermosthook' ) ) {
+			$text = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
+
+			Http::post( config( 'app.mattermosthook' ), [
+				'text' => $text,
+				'username' => 'TSPortal',
+			] );
 		}
 	}
 }

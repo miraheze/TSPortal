@@ -62,7 +62,7 @@ class IALScheduler
 	}
 
 	/**
-	 * Creates a message for Discord based on recent IALs
+	 * Creates a webhook message based on recent IALs
 	 *
 	 * @param array $recentIALs
 	 *
@@ -118,6 +118,13 @@ class IALScheduler
 					'content' => $message
 				] );
 			}
+		}
+
+		if ( config( 'app.mattermosthook' ) ) {
+			Http::post( config( 'app.mattermosthook' ), [
+				'text' => $message,
+				'username' => 'TSPortal',
+			] );
 		}
 	}
 }

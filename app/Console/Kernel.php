@@ -17,6 +17,6 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule( Schedule $schedule )
 	{
-		$schedule->call( new IALScheduler() )->dailyAt( '00:00' )->description( 'Daily Discord Disgest for IAL' );
+		$schedule->call( new IALScheduler() )->dailyAt( '00:00' )->description( 'Daily Webhook Disgest for IAL' );
 	}
 }
