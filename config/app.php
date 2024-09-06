@@ -391,7 +391,7 @@ return [
 	| Where to send mattermost alerts for new models and major actions.
 	|
 	*/
-	'mattermosthook'         => env( 'MATTERMOST_WEBHOOK' ),
+	'mattermosthook'      => env( 'MATTERMOST_WEBHOOK' ),
 
 	/*
 	|--------------------------------------------------------------------------
