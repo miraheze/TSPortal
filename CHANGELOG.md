@@ -3,7 +3,21 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v20...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v21...main)
+
+## Version 21 (2025-08-03)
+
+### Added
+
+- Added doctrine/dbal package to composer (required for migrations).
+
+### Changed
+
+- Removed support for PHP versions before 8.2.
+
+### Fixed
+
+- Fixed migration to change dpas underage field to TEXT rather than VARCHAR.
 
 ## Version 20 (2024-09-07)
 
