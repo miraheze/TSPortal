@@ -1,10 +1,10 @@
 {
-	"name": "miraheze/tsportal",
+	"name": "miraheze/ts-portal",
 	"type": "project",
-	"description": "Portal for handling and managing the investigation lifecycle for Trust and Safety at Miraheze",
+	"description": "Portal for handling and managing the investigation lifecycle for Trust and Safety at the WikiTide Foundation",
 	"license": "MIT",
 	"require": {
-		"php": "^7.4|^8.0",
+		"php": "^8.0",
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"fakerphp/faker": "1.21.0",
@@ -15,6 +15,7 @@
 		"laravel/serializable-closure": "1.2.2",
 		"laravel/socialite": "5.6.1",
 		"laravel/tinker": "2.8.0",
+        "doctrine/dbal": "4.3.1",
 		"taavi/laravel-socialite-mediawiki": "1.6.0",
 		"phpunit/phpunit": "9.5.25",
 		"mockery/mockery": "1.5.1"
