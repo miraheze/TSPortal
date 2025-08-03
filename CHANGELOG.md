@@ -3,7 +3,13 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v21...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v22...main)
+
+## Version 22 (2025-08-03)
+
+### Fixed
+
+- Fixed version of DBAL that we use.
 
 ## Version 21 (2025-08-03)
 
