@@ -4,7 +4,7 @@
 	"description": "Portal for handling and managing the investigation lifecycle for Trust and Safety at the WikiTide Foundation",
 	"license": "MIT",
 	"require": {
-		"php": "^8.0",
+		"php": "^8.2",
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"fakerphp/faker": "1.21.0",
