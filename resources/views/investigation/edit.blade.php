@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4">
-					@if ( $investigation->assigned != auth()->id() )
+					@if ( $investigation->assigned != auth()->user() )
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
 								<h6 class="text-primary fw-bold m-0 text-center"><label for="assign">{{ __('reassign') }}</label></h6>
