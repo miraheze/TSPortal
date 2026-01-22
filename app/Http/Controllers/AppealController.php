@@ -80,7 +80,7 @@ class AppealController extends Controller
 		$appeal->update(
 			[
 				'review'   => json_encode( $allInputs ),
-				'assigned' => auth()->user(),
+				'assigned' => auth()->id(),
 				'outcome'  => $allInputs['appeal-outcome'],
 				'reviewed' => now()
 			]
