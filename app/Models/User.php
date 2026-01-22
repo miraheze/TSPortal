@@ -114,7 +114,7 @@ class User extends Authenticatable
 	 */
 	public static function findById( int $id )
 	{
-		return static::all()->find( $id );
+		return self::find( $id );
 	}
 
 	/**
