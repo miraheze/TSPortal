@@ -86,10 +86,10 @@ class User extends Authenticatable
 	 */
 	public static function findOrCreate( string $username, bool $oauth = false )
 	{
-		$authUser = static::all()->firstWhere( 'username', $username );
+		$authUser = self::firstWhere( 'username', $username );
 
 		if ( !$authUser ) {
-			$authUser = static::factory()->createOne(
+			$authUser = self::factory()->createOne(
 				[
 					'username' => $username,
 				]
