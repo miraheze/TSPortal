@@ -7,6 +7,11 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## Version 26 (2026-01-25)
 
+### Added
+
+- Added development-only library nunomaduro/collision.
+- Added initial support for PHPUnit tests.
+
 ### Changed
 
 - Upgraded external libraries:
@@ -21,11 +26,6 @@ The main reasoning behind this choice is the software is not built to be extende
   - phpunit/phpunit
 - Migrate to the new streamlined file structure which was added in Laravel 11.
 - Some configuration options renamed to match what is now built into the framework.
-
-### Added
-
-- Added development-only library nunomaduro/collision.
-- Added initial support for PHPUnit tests.
 
 ## Version 25 (2026-01-24)
 
