@@ -32,7 +32,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 - Removed support for PHP versions before 8.4.
 - Renamed environmental variable FILESYSTEM_DRIVER to FILESYSTEM_DISK.
-- Upgraded external libraries
+- Upgraded external libraries:
   - Upgraded fakerphp/faker from 1.21.0 to 1.24.1.
   - Upgraded guzzlehttp/guzzle from 7.5.0 to 7.10.0.
   - Upgraded laravel/framework from 8.83.28 to 12.46.0.
