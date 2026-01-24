@@ -7,22 +7,30 @@
 		"php": "^8.4",
 		"ext-json": "*",
 		"ext-pdo": "*",
-		"fakerphp/faker": "1.24.1",
 		"guzzlehttp/guzzle": "7.10.0",
 		"laravel/framework": "12.48.1",
 		"laravel/sanctum": "4.2.4",
 		"laravel/serializable-closure": "2.0.8",
 		"laravel/socialite": "5.24.2",
 		"laravel/tinker": "2.11.0",
-		"doctrine/dbal": "^4.2",
-		"taavi/laravel-socialite-mediawiki": "1.6.0",
-		"phpunit/phpunit": "12.5.7",
-		"mockery/mockery": "1.6.12"
+		"doctrine/dbal": "^4.4",
+		"taavi/laravel-socialite-mediawiki": "1.6.0"
+	},
+	"require-dev": {
+		"fakerphp/faker": "1.24.1",
+		"mockery/mockery": "1.6.12",
+		"nunomaduro/collision": "^8.6",
+		"phpunit/phpunit": "12.5.7"
 	},
 	"autoload": {
 		"psr-4": {
 			"App\\": "app/",
 			"Database\\Factories\\": "database/factories/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
 		}
 	},
 	"scripts": {
