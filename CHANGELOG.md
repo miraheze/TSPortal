@@ -5,6 +5,15 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v25...main)
 
+### Changed
+
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.46.0 to 12.48.1.
+  - Upgraded laravel/sanctum from 4.2.2 to 4.2.4.
+  - Upgraded laravel/serializable-closure from 2.0.7 to 2.0.8.
+  - Upgraded laravel/socialite from 5.24.1 to 5.24.2.
+  - Upgraded phpunit/phpunit from 12.5.4 to 12.5.7.
+
 ## Version 25 (2026-01-24)
 
 ### Fixed
@@ -22,8 +31,22 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Changed
 
 - Removed support for PHP versions before 8.4.
-- Upgraded to Laravel 12.
-- Upgraded all other composer packages.
+- Renamed environmental variable FILESYSTEM_DRIVER to FILESYSTEM_DISK.
+- Upgraded external libraries:
+  - Upgraded fakerphp/faker from 1.21.0 to 1.24.1.
+  - Upgraded guzzlehttp/guzzle from 7.5.0 to 7.10.0.
+  - Upgraded laravel/framework from 8.83.28 to 12.46.0.
+  - Upgraded laravel/sanctum from 2.15.1 to 4.2.2.
+  - Upgraded laravel/serializable-closure from 1.2.2 to 2.0.7.
+  - Upgraded laravel/socialite from 5.6.1 to 5.24.1.
+  - Upgraded laravel/tinker from 2.8.0 to 2.11.0.
+  - Upgraded doctrine/dbal from ^2.13 to ^4.2.
+  - Upgraded phpunit/phpunit from 9.5.25 to 12.5.4.
+  - Upgraded mockery/mockery from 1.5.1 to 1.6.12.
+ 
+### Removed
+
+- Removed fruitcake/laravel-cors. Laravel 9+ includes CORS middleware in core.
 
 # Version 23 (2025-08-03)
 
