@@ -20,7 +20,7 @@
 							<tr>
 								<td><a class="nav-link" href="/dpa/{{ $dpa->id }}">{{ $dpa->id }}</a></td>
 								<td>{{ $dpa->user->username }}</td>
-								<td>{{ $dpa->filed->diffForHumans() }}</td>
+								<td>{{ \Carbon\Carbon::parse( $dpa->filed )->diffForHumans() }}</td>
 							</tr>
 						@endforeach
 						</tbody>
