@@ -16,7 +16,7 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 	->withMiddleware( function ( Middleware $middleware ): void {
 		$middleware->throttleApi();
 		$middleware->redirectTo(
-			guests: route( 'login' ),
+			guests: fn (): string => route( 'login' ),
 			users: RouteServiceProvider::HOME,
 		);
 
