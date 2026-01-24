@@ -11,7 +11,7 @@
 		"guzzlehttp/guzzle": "7.10.0",
 		"laravel/framework": "12.46.0",
 		"laravel/sanctum": "4.2.2",
-		"laravel/serializable-closure": "2.0.7",
+		"laravel/serializable-closure": "2.0.8",
 		"laravel/socialite": "5.24.1",
 		"laravel/tinker": "2.11.0",
 		"doctrine/dbal": "^4.2",
