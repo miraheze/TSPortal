@@ -29,11 +29,11 @@ class Investigation extends Model
 	/**
 	 * Automatically convert these to Carbon date items
 	 *
-	 * @var string[]
+	 * @var array
 	 */
-	protected $dates = [
-		'created',
-		'closed'
+	protected $casts = [
+		'created' => 'datetime',
+		'closed' => 'datetime',
 	];
 
 	/**

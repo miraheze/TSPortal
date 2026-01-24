@@ -28,10 +28,10 @@ class IAL extends Model
 	/**
 	 * Automatically convert these to Carbon date items
 	 *
-	 * @var string[]
+	 * @var array
 	 */
-	protected $dates = [
-		'added'
+	protected $casts = [
+		'added' => 'datetime',
 	];
 
 	/**

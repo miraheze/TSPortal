@@ -43,19 +43,11 @@ class User extends Authenticatable
 	/**
 	 * Casts an attribute by default
 	 *
-	 * @var string[]
+	 * @var array
 	 */
 	protected $casts = [
-		'flags' => 'array'
-	];
-
-	/**
-	 * Automatically convert these to Carbon date items
-	 *
-	 * @var string[]
-	 */
-	protected $dates = [
-		'created'
+		'created' => 'datetime',
+		'flags' => 'array',
 	];
 
 	/**

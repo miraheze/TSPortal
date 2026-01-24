@@ -28,10 +28,10 @@ class UserEvent extends Model
 	/**
 	 * Automatically convert these to Carbon date items
 	 *
-	 * @var string[]
+	 * @var array
 	 */
-	protected $dates = [
-		'created'
+	protected $casts = [
+		'created' => 'datetime',
 	];
 
 	/**

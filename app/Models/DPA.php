@@ -28,11 +28,11 @@ class DPA extends Model
 	/**
 	 * Automatically convert these to Carbon date items
 	 *
-	 * @var string[]
+	 * @var array
 	 */
-	protected $dates = [
-		'filed',
-		'completed'
+	protected $casts = [
+		'filed' => 'datetime',
+		'completed' => 'datetime',
 	];
 
 	/**

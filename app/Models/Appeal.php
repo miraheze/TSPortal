@@ -28,11 +28,11 @@ class Appeal extends Model
 	/**
 	 * Automatically convert these to Carbon date items
 	 *
-	 * @var string[]
+	 * @var array
 	 */
-	protected $dates = [
-		'created',
-		'reviewed'
+	protected $casts = [
+		'created' => 'datetime',
+		'reviewed' => 'datetime',
 	];
 
 	/**
