@@ -22,7 +22,7 @@
 											</label>
 										</div>
 										<div class="mt-1">
-											<p><strong>{{ __('date-known') }}:</strong> {{ $user->created->format('jS F Y') }}
+											<p><strong>{{ __('date-known') }}:</strong> {{ \Carbon\Carbon::parse( $user->created )->format('jS F Y') }}
 											</p>
 										</div>
 									</div>
@@ -116,7 +116,7 @@
 										@endif
 									</blockquote>
 									<figcaption class="blockquote-footer">{{ $event->created_by->username }}
-										at {{ $event->created->format('g:ia \o\n l jS F Y') }}</figcaption>
+										at {{ \Carbon\Carbon::parse( $event->created )->format('g:ia \o\n l jS F Y') }}</figcaption>
 								</figure>
 								@if (!$loop->last )
 									<hr/>
