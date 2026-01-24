@@ -7,7 +7,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Changed
 
-- Upgraded external libraries
+- Upgraded external libraries:
   - Upgraded laravel/framework from 12.46.0 to 12.48.1.
   - Upgraded laravel/sanctum from 4.2.2 to 4.2.4.
   - Upgraded laravel/serializable-closure from 2.0.7 to 2.0.8.
