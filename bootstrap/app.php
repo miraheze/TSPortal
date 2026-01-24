@@ -1,8 +1,10 @@
 <?php
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
 return Application::configure( basePath: dirname( __DIR__ ) )
 	->withRouting(
@@ -12,8 +14,22 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 		health: '/up',
 	)
 	->withMiddleware( function ( Middleware $middleware ): void {
-		//
+		$middleware->throttleApi();
+		$middleware->redirectTo(
+			guests: route( 'login' ),
+			users: RouteServiceProvider::HOME,
+		);
+
+		$middleware->trustProxies(
+			headers:
+				RequestAlias::HEADER_X_FORWARDED_FOR |
+				RequestAlias::HEADER_X_FORWARDED_HOST |
+				RequestAlias::HEADER_X_FORWARDED_PORT |
+				RequestAlias::HEADER_X_FORWARDED_PROTO |
+				RequestAlias::HEADER_X_FORWARDED_AWS_ELB
+		);
 	} )
 	->withExceptions( function ( Exceptions $exceptions ): void {
 		//
-	} )->create();
+	} )
+	->create();
