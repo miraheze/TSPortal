@@ -7,18 +7,17 @@
 		"php": "^8.4",
 		"ext-json": "*",
 		"ext-pdo": "*",
-		"fakerphp/faker": "1.21.0",
-		"fruitcake/laravel-cors": "3.0.0",
-		"guzzlehttp/guzzle": "7.5.0",
-		"laravel/framework": "8.83.28",
-		"laravel/sanctum": "2.15.1",
-		"laravel/serializable-closure": "1.2.2",
-		"laravel/socialite": "5.6.1",
-		"laravel/tinker": "2.8.0",
-		"doctrine/dbal": "^2.13",
+		"fakerphp/faker": "1.24.1",
+		"guzzlehttp/guzzle": "7.10.0",
+		"laravel/framework": "12.46.0",
+		"laravel/sanctum": "4.2.2",
+		"laravel/serializable-closure": "2.0.7",
+		"laravel/socialite": "5.24.1",
+		"laravel/tinker": "2.11.0",
+		"doctrine/dbal": "^4.2",
 		"taavi/laravel-socialite-mediawiki": "1.6.0",
-		"phpunit/phpunit": "9.5.25",
-		"mockery/mockery": "1.5.1"
+		"phpunit/phpunit": "12.5.4",
+		"mockery/mockery": "1.6.12"
 	},
 	"autoload": {
 		"psr-4": {
