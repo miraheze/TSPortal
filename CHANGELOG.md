@@ -3,7 +3,9 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v25...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v26...main)
+
+## Version 26 (2026-01-25)
 
 ### Changed
 
@@ -13,6 +15,17 @@ The main reasoning behind this choice is the software is not built to be extende
   - Upgraded laravel/serializable-closure from 2.0.7 to 2.0.8.
   - Upgraded laravel/socialite from 5.24.1 to 5.24.2.
   - Upgraded phpunit/phpunit from 12.5.4 to 12.5.7.
+- Moved some external libraries from require to require-dev:
+  - fakerphp/faker
+  - mockery/mockery
+  - phpunit/phpunit
+- Migrate to the new streamlined file structure which was added in Laravel 11.
+- Some configuration options renamed to match what is now built into the framework.
+
+### Added
+
+- Added development-only library nunomaduro/collision.
+- Added initial support for PHPUnit tests.
 
 ## Version 25 (2026-01-24)
 
