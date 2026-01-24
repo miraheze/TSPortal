@@ -33,8 +33,8 @@ Route::get( 'dpa/{dpa}/{username}', function( DPA $dpa, string $username ) {
 } );
 
 Route::post( 'dpa', function( Request $request ) {
-	if ( config( 'auth.writekey' ) != $request->input( 'writekey' ) ) {
-		return response()->json( [ 'unauthorised' => true ] );
+	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
+		return response()->json( [ 'unauthorized' => true ] );
 	}
 
 	$dpaUser = User::findOrCreate( $request->input( 'username' ) );
@@ -68,8 +68,8 @@ Route::post( 'dpa', function( Request $request ) {
  * Reports API Group
  */
 Route::post( 'report', function( Request $request ) {
-	if ( config( 'auth.writekey' ) != $request->input( 'writekey' ) ) {
-		return response()->json( [ 'unauthorised' => true ] );
+	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
+		return response()->json( [ 'unauthorized' => true ] );
 	}
 
 	$subjectUser = User::findOrCreate( $request->input( 'username' ) );
@@ -101,8 +101,8 @@ Route::post( 'report', function( Request $request ) {
  * Internal Actions Log
  */
 Route::post( 'ial', function( Request $request ) {
-	if ( config( 'auth.writekey' ) != $request->input( 'writekey' ) ) {
-		return response()->json( [ 'unauthorised' => true ] );
+	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
+		return response()->json( [ 'unauthorized' => true ] );
 	}
 
 	$comment = $request->input( 'comment' ) ?? '';
