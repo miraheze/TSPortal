@@ -9,7 +9,7 @@
 		"ext-pdo": "*",
 		"fakerphp/faker": "1.24.1",
 		"guzzlehttp/guzzle": "7.10.0",
-		"laravel/framework": "12.46.0",
+		"laravel/framework": "12.48.1",
 		"laravel/sanctum": "4.2.4",
 		"laravel/serializable-closure": "2.0.8",
 		"laravel/socialite": "5.24.2",
