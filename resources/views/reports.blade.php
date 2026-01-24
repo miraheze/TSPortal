@@ -63,7 +63,7 @@
 							<tr>
 								<td><a class="nav-link" href="/report/{{ $report->id }}">{{ $report->id }}</a></td>
 								<td>{{ ucfirst(__('report-topic-' . $report->type)) }}</td>
-								<td>{{ $report->created->diffForHumans() }}</td>
+								<td>{{ \Carbon\Carbon::parse( $report->created )->diffForHumans() }}</td>
 							</tr>
 						@endforeach
 						</tbody>
