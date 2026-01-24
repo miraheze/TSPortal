@@ -3,9 +3,23 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v23...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v24...main)
 
-## Version 23 (2025-08-03)
+## Version 24 (2026-01-24)
+
+### Fixed
+
+- Added migration to change ial comments field to LONGTEXT rather than STRING to avoid SQL errors.
+- Fixed query error when updating assigned field in appeals.
+- Improved performance of loading own DPA requests and reports.
+
+### Changed
+
+- Removed support for PHP versions before 8.4.
+- Upgraded to Laravel 12.
+- Upgraded all other composer packages.
+
+# Version 23 (2025-08-03)
 
 ### Fixed
 
