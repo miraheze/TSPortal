@@ -1,0 +1,20 @@
+{
+	"extends": [ "config:recommended" ],
+
+	"separateMajorMinor": false,
+	"separateMinorPatch": false,
+
+	"packageRules": [
+		{
+			"matchPackagePatterns": [ "*" ],
+			"groupName": "all dependencies",
+			"groupSlug": "all-deps"
+		},
+		{
+			"matchManagers": [ "composer" ],
+			"rangeStrategy": "replace"
+		}
+	],
+
+	"prConcurrentLimit": 1
+}
