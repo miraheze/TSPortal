@@ -108,23 +108,18 @@ class IALScheduler
 	 */
 	public function notify( string $message )
 	{
-		if ( config( 'app.discordhook' ) ) {
+		if ( config( 'app.slackhook' ) ) {
 			if ( config( 'app.proxy' ) ) {
-				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
-					'content' => $message
+				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.slackhook' ), [
+					'text' => $message,
+					'username' => 'TSPortal',
 				] );
 			} else {
-				Http::post( config( 'app.discordhook' ), [
-					'content' => $message
+				Http::post( config( 'app.slackhook' ), [
+					'text' => $message,
+					'username' => 'TSPortal',
 				] );
 			}
-		}
-
-		if ( config( 'app.mattermosthook' ) ) {
-			Http::post( config( 'app.mattermosthook' ), [
-				'text' => $message,
-				'username' => 'TSPortal',
-			] );
 		}
 	}
 }

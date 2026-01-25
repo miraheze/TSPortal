@@ -263,23 +263,13 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
-	| Discord Webhook
+	| Slack Webhook
 	|--------------------------------------------------------------------------
 	|
-	| Where to send discord alerts for new models and major actions.
+	| Where to send slack alerts for new models and major actions.
 	|
 	*/
-	'discordhook' => env( 'DISCORD_WEBHOOK' ),
-
-	/*
-	|--------------------------------------------------------------------------
-	| Mattermost Webhook
-	|--------------------------------------------------------------------------
-	|
-	| Where to send mattermost alerts for new models and major actions.
-	|
-	*/
-	'mattermosthook' => env( 'MATTERMOST_WEBHOOK' ),
+	'slackhook' => env( 'SLACK_WEBHOOK' ),
 
 	/*
 	|--------------------------------------------------------------------------

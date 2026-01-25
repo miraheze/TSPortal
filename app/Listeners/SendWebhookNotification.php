@@ -25,27 +25,20 @@ class SendWebhookNotification
 	 */
 	public function handle( $event )
 	{
-		if ( config( 'app.discordhook' ) ) {
-			$content = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
-
-			if ( config( 'app.proxy' ) ) {
-				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
-					'content' => $content
-				] );
-			} else {
-				Http::post( config( 'app.discordhook' ), [
-					'content' => $content
-				] );
-			}
-		}
-
-		if ( config( 'app.mattermosthook' ) ) {
+		if ( config( 'app.slackhook' ) ) {
 			$text = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
 
-			Http::post( config( 'app.mattermosthook' ), [
-				'text' => $text,
-				'username' => 'TSPortal',
-			] );
+			if ( config( 'app.proxy' ) ) {
+				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.slackhook' ), [
+					'text' => $text,
+					'username' => 'TSPortal',
+				] );
+			} else {
+				Http::post( config( 'app.slackhook' ), [
+					'text' => $text,
+					'username' => 'TSPortal',
+				] );
+			}
 		}
 	}
 }
