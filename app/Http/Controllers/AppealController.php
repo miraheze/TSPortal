@@ -79,12 +79,16 @@ class AppealController extends Controller
 		unset( $allInputs['_token'], $allInputs['_method'] );
 		$appeal->update(
 			[
-				'review'   => json_encode( $allInputs ),
-				'assigned' => auth()->id(),
-				'outcome'  => $allInputs['appeal-outcome'],
-				'reviewed' => now()
+				'review' => json_encode( $allInputs ),
+				'assigned' => $request->user()->id,
+				'outcome' => $allInputs['appeal-outcome'],
+				'reviewed' => now(),
 			]
 		);
+
+		if ( $allInputs['appeal-outcome'] === 'not-upheld' ) {
+			$appeal->investigation->subject->updateStanding( 'sanction-lifted' );
+		}
 
 		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
 
