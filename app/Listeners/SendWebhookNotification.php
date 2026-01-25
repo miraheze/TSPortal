@@ -4,15 +4,13 @@ namespace App\Listeners;
 
 use Illuminate\Support\Facades\Http;
 
-class SendWebhookNotification
-{
+class SendWebhookNotification {
 	/**
 	 * Create the event listener.
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		//
 	}
 
@@ -23,8 +21,7 @@ class SendWebhookNotification
 	 *
 	 * @return void
 	 */
-	public function handle( $event )
-	{
+	public function handle( $event ) {
 		if ( config( 'app.discordhook' ) ) {
 			$content = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
 

@@ -7,9 +7,10 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class InvestigationNew
-{
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+class InvestigationNew {
+	use Dispatchable;
+	use InteractsWithSockets;
+	use SerializesModels;
 
 	/**
 	 * Model for event
@@ -37,8 +38,7 @@ class InvestigationNew
 	 *
 	 * @return void
 	 */
-	public function __construct( Investigation $investigation )
-	{
+	public function __construct( Investigation $investigation ) {
 		$this->model = $investigation;
 	}
 }

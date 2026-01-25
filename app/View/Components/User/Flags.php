@@ -8,8 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Flags extends Component
-{
+class Flags extends Component {
 	/**
 	 * User flags
 	 *
@@ -22,8 +21,7 @@ class Flags extends Component
 	 *
 	 * @return void
 	 */
-	public function __construct( User $user )
-	{
+	public function __construct( User $user ) {
 		$this->flags = $user->flags;
 	}
 
@@ -32,8 +30,7 @@ class Flags extends Component
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function render()
-	{
+	public function render() {
 		return view( 'components.user.flags' );
 	}
 }

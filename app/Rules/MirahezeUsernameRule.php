@@ -5,15 +5,13 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Http;
 
-class MirahezeUsernameRule implements Rule
-{
+class MirahezeUsernameRule implements Rule {
 	/**
 	 * Create a new rule instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		//
 	}
 
@@ -25,8 +23,7 @@ class MirahezeUsernameRule implements Rule
 	 *
 	 * @return bool
 	 */
-	public function passes( $attribute, $value ): bool
-	{
+	public function passes( $attribute, $value ): bool {
 		return ( Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false );
 	}
 
@@ -35,8 +32,7 @@ class MirahezeUsernameRule implements Rule
 	 *
 	 * @return string
 	 */
-	public function message(): string
-	{
+	public function message(): string {
 		return __( 'username-exist' );
 	}
 }

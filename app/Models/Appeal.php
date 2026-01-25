@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Appeal extends Model
-{
+class Appeal extends Model {
 	use HasFactory;
 
 	/**
@@ -40,8 +39,7 @@ class Appeal extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function investigation(): BelongsTo
-	{
+	public function investigation(): BelongsTo {
 		return $this->belongsTo( Investigation::class, 'investigation' );
 	}
 
@@ -50,8 +48,7 @@ class Appeal extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function assigned(): BelongsTo
-	{
+	public function assigned(): BelongsTo {
 		return $this->belongsTo( User::class, 'assigned' );
 	}
 
@@ -62,8 +59,7 @@ class Appeal extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getAssignedAttribute( int $id )
-	{
+	public function getAssignedAttribute( int $id ) {
 		return User::findById( $id );
 	}
 
@@ -74,8 +70,7 @@ class Appeal extends Model
 	 *
 	 * @return Investigation[]|Collection|Model|null
 	 */
-	public function getInvestigationAttribute( int $id )
-	{
+	public function getInvestigationAttribute( int $id ) {
 		return Investigation::find( $id );
 	}
 }

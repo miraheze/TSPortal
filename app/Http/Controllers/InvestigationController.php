@@ -19,8 +19,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Controller class for all Investigation actions
  */
-class InvestigationController extends Controller
-{
+class InvestigationController extends Controller {
 	/**
 	 * Indexes all investigations, with filters for non-privileged users
 	 *
@@ -28,8 +27,7 @@ class InvestigationController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
-	{
+	public function index( Request $request ) {
 		$allInvestigations = Investigation::all();
 
 		$query = $request->query();
@@ -66,8 +64,7 @@ class InvestigationController extends Controller
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function store( Investigation $investigation, Request $request )
-	{
+	public function store( Investigation $investigation, Request $request ) {
 		$request->validate(
 			[
 				'username' => [ new MirahezeUsernameRule ]
@@ -103,8 +100,7 @@ class InvestigationController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function create()
-	{
+	public function create() {
 		return view( 'investigation.new' );
 	}
 
@@ -115,8 +111,7 @@ class InvestigationController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function show( Investigation $investigation )
-	{
+	public function show( Investigation $investigation ) {
 		return view( 'investigation.view' )->with( 'investigation', $investigation );
 	}
 
@@ -127,8 +122,7 @@ class InvestigationController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function edit( Investigation $investigation )
-	{
+	public function edit( Investigation $investigation ) {
 		return view( 'investigation.edit' )->with( 'investigation', $investigation );
 	}
 
@@ -140,9 +134,8 @@ class InvestigationController extends Controller
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function update( Investigation $investigation, Request $request )
-	{
-		if ( is_null( $request->input( 'event' ) ) ) {
+	public function update( Investigation $investigation, Request $request ) {
+		if ( $request->input( 'event' ) === null ) {
 			$updates = [
 				'type'           => $request->input( 'topic' ),
 				'text'           => $request->input( 'evidence' ),
@@ -150,7 +143,7 @@ class InvestigationController extends Controller
 				'explanation'    => $request->input( 'justify' ),
 			];
 
-			if ( !is_null( $request->input( 'assign' ) ) ) {
+			if ( $request->input( 'assign' ) !== null ) {
 				$updates['assigned'] = $request->user()->id;
 			}
 
@@ -185,7 +178,7 @@ class InvestigationController extends Controller
 
 			$investigation->subject->updateStanding( $request->input( 'event' ) );
 
-			if ( !is_null( $request->input( 'status' ) ) ) {
+			if ( $request->input( 'status' ) !== null ) {
 				if ( $investigation->closed ) {
 					$investigation->update( [
 						'closed' => null

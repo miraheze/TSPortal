@@ -7,9 +7,10 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class DPANew
-{
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+class DPANew {
+	use Dispatchable;
+	use InteractsWithSockets;
+	use SerializesModels;
 
 	/**
 	 * Model for event
@@ -37,8 +38,7 @@ class DPANew
 	 *
 	 * @return void
 	 */
-	public function __construct( DPA $dpa )
-	{
+	public function __construct( DPA $dpa ) {
 		$this->model = $dpa;
 	}
 }

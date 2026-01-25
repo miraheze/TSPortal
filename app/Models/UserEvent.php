@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserEvent extends Model
-{
+class UserEvent extends Model {
 	use HasFactory;
 
 	/**
@@ -46,8 +45,7 @@ class UserEvent extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function user(): BelongsTo
-	{
+	public function user(): BelongsTo {
 		return $this->belongsTo( User::class, 'user' );
 	}
 
@@ -56,8 +54,7 @@ class UserEvent extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function investigation(): BelongsTo
-	{
+	public function investigation(): BelongsTo {
 		return $this->belongsTo( Investigation::class, 'investigation' );
 	}
 
@@ -68,8 +65,7 @@ class UserEvent extends Model
 	 *
 	 * @return User|User[]|Collection|Model|null
 	 */
-	public function getCreatedByAttribute( ?int $user )
-	{
+	public function getCreatedByAttribute( ?int $user ) {
 		if ( !$user ) {
 			$user = new User();
 			$user->username = 'System';

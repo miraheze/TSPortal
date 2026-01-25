@@ -7,9 +7,10 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AppealNew
-{
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+class AppealNew {
+	use Dispatchable;
+	use InteractsWithSockets;
+	use SerializesModels;
 
 	/**
 	 * Model for event
@@ -37,8 +38,7 @@ class AppealNew
 	 *
 	 * @return void
 	 */
-	public function __construct( Appeal $appeal )
-	{
+	public function __construct( Appeal $appeal ) {
 		$this->model = $appeal;
 	}
 }

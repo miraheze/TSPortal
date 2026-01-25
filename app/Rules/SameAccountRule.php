@@ -4,15 +4,13 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class SameAccountRule implements Rule
-{
+class SameAccountRule implements Rule {
 	/**
 	 * Create a new rule instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		//
 	}
 
@@ -24,8 +22,7 @@ class SameAccountRule implements Rule
 	 *
 	 * @return bool
 	 */
-	public function passes( $attribute, $value ): bool
-	{
+	public function passes( $attribute, $value ): bool {
 		return ( auth()->user()->username == $value );
 	}
 
@@ -34,8 +31,7 @@ class SameAccountRule implements Rule
 	 *
 	 * @return string
 	 */
-	public function message(): string
-	{
+	public function message(): string {
 		return __( 'username-not-same' );
 	}
 }

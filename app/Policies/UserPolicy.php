@@ -6,8 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class UserPolicy
-{
+class UserPolicy {
 	use HandlesAuthorization;
 
 	/**
@@ -17,8 +16,7 @@ class UserPolicy
 	 *
 	 * @return Response|null
 	 */
-	public function before( User $user ): ?Response
-	{
+	public function before( User $user ): ?Response {
 		if ( $user->hasFlag( 'ts' ) ) {
 			return Response::allow();
 		}
@@ -33,8 +31,7 @@ class UserPolicy
 	 *
 	 * @return Response
 	 */
-	public function viewAny( User $user ): Response
-	{
+	public function viewAny( User $user ): Response {
 		return Response::deny( 'no access' );
 	}
 
@@ -46,8 +43,7 @@ class UserPolicy
 	 *
 	 * @return Response
 	 */
-	public function view( User $user, User $model ): Response
-	{
+	public function view( User $user, User $model ): Response {
 		if ( $model->id === $user->id ) {
 			return Response::allow();
 		} else {
@@ -62,8 +58,7 @@ class UserPolicy
 	 *
 	 * @return Response
 	 */
-	public function create( User $user ): Response
-	{
+	public function create( User $user ): Response {
 		return Response::deny( 'no access' );
 	}
 
@@ -75,8 +70,7 @@ class UserPolicy
 	 *
 	 * @return Response
 	 */
-	public function update( User $user, User $model ): Response
-	{
+	public function update( User $user, User $model ): Response {
 		if ( $user->hasFlag( 'user-manager' ) ) {
 			return Response::allow();
 		} else {

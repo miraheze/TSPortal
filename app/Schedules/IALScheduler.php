@@ -6,15 +6,13 @@ use App\Models\IAL;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
-class IALScheduler
-{
+class IALScheduler {
 	/**
 	 * Invoke the scheduler task
 	 *
 	 * @return void
 	 */
-	public function __invoke()
-	{
+	public function __invoke() {
 		$recentIALs = $this->getRecentIALs();
 
 		if ( $recentIALs['total'] == 0 ) {
@@ -30,8 +28,7 @@ class IALScheduler
 	 *
 	 * @return array
 	 */
-	private function getRecentIALs(): array
-	{
+	private function getRecentIALs(): array {
 		$data = [
 			'total'        => 0,
 			'actors'       => [],
@@ -68,8 +65,7 @@ class IALScheduler
 	 *
 	 * @return array|string|string[]
 	 */
-	private function createMessage( array $recentIALs )
-	{
+	private function createMessage( array $recentIALs ) {
 		$varActors = '';
 		foreach ( $recentIALs['actors'] as $actor => $num ) {
 			$varActors .= $actor . '(' . $num . ') ';
@@ -106,8 +102,7 @@ class IALScheduler
 	 *
 	 * @return void
 	 */
-	public function notify( string $message )
-	{
+	public function notify( string $message ) {
 		if ( config( 'app.discordhook' ) ) {
 			if ( config( 'app.proxy' ) ) {
 				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [

@@ -7,8 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class AppealPolicy
-{
+class AppealPolicy {
 	use HandlesAuthorization;
 
 	/**
@@ -18,8 +17,7 @@ class AppealPolicy
 	 *
 	 * @return Response|null
 	 */
-	public function before( User $user ): ?Response
-	{
+	public function before( User $user ): ?Response {
 		if ( $user->hasFlag( 'ts' ) ) {
 			return Response::allow();
 		}
@@ -34,8 +32,7 @@ class AppealPolicy
 	 *
 	 * @return Response
 	 */
-	public function viewAny( User $user ): Response
-	{
+	public function viewAny( User $user ): Response {
 		return Response::deny();
 	}
 
@@ -47,8 +44,7 @@ class AppealPolicy
 	 *
 	 * @return Response
 	 */
-	public function view( User $user, Appeal $appeal ): Response
-	{
+	public function view( User $user, Appeal $appeal ): Response {
 		return Response::deny();
 	}
 
@@ -60,8 +56,7 @@ class AppealPolicy
 	 *
 	 * @return Response
 	 */
-	public function update( User $user, Appeal $appeal ): Response
-	{
+	public function update( User $user, Appeal $appeal ): Response {
 		return Response::deny();
 	}
 }

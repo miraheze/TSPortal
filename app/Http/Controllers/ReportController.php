@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\Mail;
 /**
  * Controller for all Report actions
  */
-class ReportController extends Controller
-{
+class ReportController extends Controller {
 	/**
 	 * Indexes all reports, filtering for non-privileged users
 	 *
@@ -28,8 +27,7 @@ class ReportController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
-	{
+	public function index( Request $request ) {
 		$allReports = Report::all();
 
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
@@ -66,8 +64,7 @@ class ReportController extends Controller
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function store( Report $report, Request $request )
-	{
+	public function store( Report $report, Request $request ) {
 		$request->validate(
 			[
 				'username' => [ new MirahezeUsernameRule ]
@@ -107,8 +104,7 @@ class ReportController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function create()
-	{
+	public function create() {
 		return view( 'report.new' );
 	}
 
@@ -119,8 +115,7 @@ class ReportController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function show( Report $report )
-	{
+	public function show( Report $report ) {
 		return view( 'report.view' )->with( 'report', $report );
 	}
 
@@ -132,8 +127,7 @@ class ReportController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function update( Report $report, Request $request ): RedirectResponse
-	{
+	public function update( Report $report, Request $request ): RedirectResponse {
 		if ( $request->input( 'investigate' ) ?? false ) {
 			$investigation = Investigation::factory()->create( [
 				'subject'  => $report->user,

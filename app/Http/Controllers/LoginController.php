@@ -15,13 +15,11 @@ use Laravel\Socialite\Facades\Socialite;
 /**
  * Controller for handling user logins and creations
  */
-class LoginController extends Controller
-{
+class LoginController extends Controller {
 	/**
 	 * Constructor class for applying middleware
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->middleware( 'guest' )->only( [ 'login', 'callback' ] );
 		$this->middleware( 'auth' )->only( 'logout' );
 	}
@@ -31,8 +29,7 @@ class LoginController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function callback(): RedirectResponse
-	{
+	public function callback(): RedirectResponse {
 		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
 
 		$user = User::findOrCreate( $socialiteUser->name, true );
@@ -52,8 +49,7 @@ class LoginController extends Controller
 	 *
 	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function login()
-	{
+	public function login() {
 		return Socialite::driver( 'mediawiki' )->redirect();
 	}
 
@@ -64,8 +60,7 @@ class LoginController extends Controller
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function logout( Request $request )
-	{
+	public function logout( Request $request ) {
 		$this->guard()->logout();
 		$request->session()->invalidate();
 		return redirect( '/' );
@@ -76,8 +71,7 @@ class LoginController extends Controller
 	 *
 	 * @return Guard|StatefulGuard
 	 */
-	private function guard()
-	{
+	private function guard() {
 		return Auth::guard();
 	}
 }

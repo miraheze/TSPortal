@@ -18,8 +18,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Controller class for DPA request and actions
  */
-class DPAController extends Controller
-{
+class DPAController extends Controller {
 	/**
 	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users
 	 *
@@ -27,8 +26,7 @@ class DPAController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
-	{
+	public function index( Request $request ) {
 		$allDPAs = DPA::all();
 
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
@@ -45,8 +43,7 @@ class DPAController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function show( DPA $dpa )
-	{
+	public function show( DPA $dpa ) {
 		return view( 'dpa.view' )->with( 'dpa', $dpa );
 	}
 
@@ -58,8 +55,7 @@ class DPAController extends Controller
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function store( DPA $dpa, Request $request )
-	{
+	public function store( DPA $dpa, Request $request ) {
 		$request->validate(
 			[
 				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ]
@@ -109,8 +105,7 @@ class DPAController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function create()
-	{
+	public function create() {
 		return view( 'dpa.new' );
 	}
 
@@ -122,8 +117,7 @@ class DPAController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function update( DPA $dpa, Request $request ): RedirectResponse
-	{
+	public function update( DPA $dpa, Request $request ): RedirectResponse {
 		if ( $request->input( 'approve' ) ?? false ) {
 			$dpa->update( [
 				'completed' => now()

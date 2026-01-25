@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 /*
  * DPA API Group
  */
-Route::get( 'dpa/{dpa}/{username}', function( DPA $dpa, string $username ) {
+Route::get( 'dpa/{dpa}/{username}', static function ( DPA $dpa, string $username ) {
 	return response()->json( [
 		'dpa-id'   => $dpa->id,
 		'username' => $username,
@@ -32,7 +32,7 @@ Route::get( 'dpa/{dpa}/{username}', function( DPA $dpa, string $username ) {
 	] );
 } );
 
-Route::post( 'dpa', function( Request $request ) {
+Route::post( 'dpa', static function ( Request $request ) {
 	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
@@ -67,7 +67,7 @@ Route::post( 'dpa', function( Request $request ) {
 /*
  * Reports API Group
  */
-Route::post( 'report', function( Request $request ) {
+Route::post( 'report', static function ( Request $request ) {
 	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
@@ -100,7 +100,7 @@ Route::post( 'report', function( Request $request ) {
 /*
  * Internal Actions Log
  */
-Route::post( 'ial', function( Request $request ) {
+Route::post( 'ial', static function ( Request $request ) {
 	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}

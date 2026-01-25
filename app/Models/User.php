@@ -10,9 +10,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
-	use HasApiTokens, HasFactory, Notifiable;
+class User extends Authenticatable {
+	use HasApiTokens;
+	use HasFactory;
+	use Notifiable;
 
 	/**
 	 * Standing constants to ensure consistency
@@ -38,7 +39,6 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $guarded = [];
-
 
 	/**
 	 * Casts an attribute by default
@@ -76,8 +76,7 @@ class User extends Authenticatable
 	 *
 	 * @return Model|mixed
 	 */
-	public static function findOrCreate( string $username, bool $oauth = false )
-	{
+	public static function findOrCreate( string $username, bool $oauth = false ) {
 		$authUser = self::firstWhere( 'username', $username );
 
 		if ( !$authUser ) {
@@ -104,8 +103,7 @@ class User extends Authenticatable
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public static function findById( int $id )
-	{
+	public static function findById( int $id ) {
 		return self::find( $id );
 	}
 
@@ -114,8 +112,7 @@ class User extends Authenticatable
 	 *
 	 * @return HasMany
 	 */
-	public function investigations(): HasMany
-	{
+	public function investigations(): HasMany {
 		return $this->hasMany( Investigation::class, 'subject' );
 	}
 
@@ -124,8 +121,7 @@ class User extends Authenticatable
 	 *
 	 * @return HasMany
 	 */
-	public function reports(): HasMany
-	{
+	public function reports(): HasMany {
 		return $this->hasMany( Report::class, 'user' );
 	}
 
@@ -134,8 +130,7 @@ class User extends Authenticatable
 	 *
 	 * @return HasMany
 	 */
-	public function reportsMade(): HasMany
-	{
+	public function reportsMade(): HasMany {
 		return $this->hasMany( Report::class, 'reporter' );
 	}
 
@@ -144,8 +139,7 @@ class User extends Authenticatable
 	 *
 	 * @return HasMany
 	 */
-	public function events(): HasMany
-	{
+	public function events(): HasMany {
 		return $this->hasMany( UserEvent::class, 'user' );
 	}
 
@@ -156,8 +150,7 @@ class User extends Authenticatable
 	 *
 	 * @return bool
 	 */
-	public function hasFlag( string $flag ): bool
-	{
+	public function hasFlag( string $flag ): bool {
 		return in_array( $flag, $this->flags );
 	}
 
@@ -166,8 +159,7 @@ class User extends Authenticatable
 	 *
 	 * @return array|string[]
 	 */
-	public function allFlags(): array
-	{
+	public function allFlags(): array {
 		return $this->allFlags;
 	}
 
@@ -179,8 +171,7 @@ class User extends Authenticatable
 	 *
 	 * @return void
 	 */
-	public function updateFlags( array $newFlags, ?User $actor = null )
-	{
+	public function updateFlags( array $newFlags, ?User $actor = null ) {
 		$this->flags = $newFlags;
 		$this->save();
 
@@ -196,8 +187,7 @@ class User extends Authenticatable
 	 *
 	 * @return void
 	 */
-	public function newEvent( string $action, ?string $comment = null, ?User $actor = null )
-	{
+	public function newEvent( string $action, ?string $comment = null, ?User $actor = null ) {
 		UserEvent::factory()->create(
 			[
 				'user'       => $this,
@@ -214,8 +204,7 @@ class User extends Authenticatable
 	 *
 	 * @return string
 	 */
-	public function getStanding(): string
-	{
+	public function getStanding(): string {
 		return ucfirst( strtolower( array_flip( self::STANDING )[$this->standing] ) );
 	}
 
@@ -224,8 +213,7 @@ class User extends Authenticatable
 	 *
 	 * @return void
 	 */
-	public function updateStanding( string $event )
-	{
+	public function updateStanding( string $event ) {
 		if ( in_array( $event, [ 'ban-partial', 'ban-full' ] ) && ( $this->standing > self::STANDING['BANNED'] ) ) {
 			$this->update( [
 				'standing' => self::STANDING['BANNED']

@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Report extends Model
-{
+class Report extends Model {
 	use HasFactory;
 
 	/**
@@ -40,8 +39,7 @@ class Report extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function investigation(): BelongsTo
-	{
+	public function investigation(): BelongsTo {
 		return $this->belongsTo( Investigation::class, 'investigation' );
 	}
 
@@ -50,8 +48,7 @@ class Report extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function reporter(): BelongsTo
-	{
+	public function reporter(): BelongsTo {
 		return $this->belongsTo( User::class, 'reporter' );
 	}
 
@@ -60,8 +57,7 @@ class Report extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function user(): BelongsTo
-	{
+	public function user(): BelongsTo {
 		return $this->belongsTo( User::class, 'user' );
 	}
 
@@ -72,8 +68,7 @@ class Report extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getReporterAttribute( int $id )
-	{
+	public function getReporterAttribute( int $id ) {
 		return User::findById( $id );
 	}
 
@@ -84,8 +79,7 @@ class Report extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getUserAttribute( int $id )
-	{
+	public function getUserAttribute( int $id ) {
 		return User::findById( $id );
 	}
 }

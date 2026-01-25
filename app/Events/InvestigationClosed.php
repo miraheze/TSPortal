@@ -7,9 +7,10 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class InvestigationClosed
-{
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+class InvestigationClosed {
+	use Dispatchable;
+	use InteractsWithSockets;
+	use SerializesModels;
 
 	/**
 	 * Model for event
@@ -37,8 +38,7 @@ class InvestigationClosed
 	 *
 	 * @return void
 	 */
-	public function __construct( Investigation $investigation, bool $closed )
-	{
+	public function __construct( Investigation $investigation, bool $closed ) {
 		$this->model = $investigation;
 		$this->state = ( $closed ) ? 'closed' : 'reopened';
 	}

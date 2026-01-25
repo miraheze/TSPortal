@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Controller class for Internal Actions Log requests and actions
  */
-class IALController extends Controller
-{
+class IALController extends Controller {
 	/**
 	 * Indexes and shows all IALs
 	 *
@@ -24,10 +23,8 @@ class IALController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
-	{
+	public function index( Request $request ) {
 		$allIALs = DB::table( 'ial' )->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
-
 
 		return view( 'ial' )->with( 'ials', $allIALs );
 	}
@@ -40,8 +37,7 @@ class IALController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function update( IAL $ial, Request $request ): RedirectResponse
-	{
+	public function update( IAL $ial, Request $request ): RedirectResponse {
 		$id = $request->input( 'assign-id' );
 
 		if ( is_numeric( $id ) && Investigation::all()->find( $id ) ) {

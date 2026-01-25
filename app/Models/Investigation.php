@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Investigation extends Model
-{
+class Investigation extends Model {
 	use HasFactory;
 
 	/**
@@ -41,8 +40,7 @@ class Investigation extends Model
 	 *
 	 * @return HasMany
 	 */
-	public function reports(): HasMany
-	{
+	public function reports(): HasMany {
 		return $this->hasMany( Report::class, 'investigation' );
 	}
 
@@ -51,8 +49,7 @@ class Investigation extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function subject(): BelongsTo
-	{
+	public function subject(): BelongsTo {
 		return $this->belongsTo( User::class, 'subject' );
 	}
 
@@ -61,8 +58,7 @@ class Investigation extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function assigned(): BelongsTo
-	{
+	public function assigned(): BelongsTo {
 		return $this->belongsTo( User::class, 'assigned' );
 	}
 
@@ -71,8 +67,7 @@ class Investigation extends Model
 	 *
 	 * @return HasMany
 	 */
-	public function events(): HasMany
-	{
+	public function events(): HasMany {
 		return $this->hasMany( UserEvent::class, 'investigation' );
 	}
 
@@ -81,8 +76,7 @@ class Investigation extends Model
 	 *
 	 * @return HasMany
 	 */
-	public function appeals(): HasMany
-	{
+	public function appeals(): HasMany {
 		return $this->hasMany( Appeal::class, 'investigation' );
 	}
 
@@ -93,8 +87,7 @@ class Investigation extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getSubjectAttribute( int $id )
-	{
+	public function getSubjectAttribute( int $id ) {
 		return User::findById( $id );
 	}
 
@@ -105,8 +98,7 @@ class Investigation extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getAssignedAttribute( int $id )
-	{
+	public function getAssignedAttribute( int $id ) {
 		return User::findById( $id );
 	}
 
@@ -120,8 +112,7 @@ class Investigation extends Model
 	 *
 	 * @return void
 	 */
-	public function newEvent( string $action, bool $userRecord, ?string $comment = null, ?User $actor = null )
-	{
+	public function newEvent( string $action, bool $userRecord, ?string $comment = null, ?User $actor = null ) {
 		if ( !( $action == 'comment' && !$comment ) ) {
 			$subject = ( $userRecord ) ? $this->subject : null;
 
@@ -143,12 +134,11 @@ class Investigation extends Model
 	 *
 	 * @return int|null
 	 */
-	public function openAppeal(): ?int
-	{
+	public function openAppeal(): ?int {
 		$appeals = $this->appeals;
 
 		foreach ( $appeals as $appeal ) {
-			if ( is_null( $appeal->reviewed ) ) {
+			if ( $appeal->reviewed === null ) {
 				return $appeal->id;
 			}
 		}

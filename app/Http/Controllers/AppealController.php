@@ -14,8 +14,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Controller class for all Appeal actions
  */
-class AppealController extends Controller
-{
+class AppealController extends Controller {
 	/**
 	 * Indexes all appeals, with filters for non-privileged users
 	 *
@@ -23,8 +22,7 @@ class AppealController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
-	{
+	public function index( Request $request ) {
 		$allAppeals = Appeal::all();
 
 		$query = $request->query();
@@ -60,8 +58,7 @@ class AppealController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function show( Appeal $appeal )
-	{
+	public function show( Appeal $appeal ) {
 		return view( 'appeal.view' )->with( 'appeal', $appeal );
 	}
 
@@ -73,8 +70,7 @@ class AppealController extends Controller
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function update( Appeal $appeal, Request $request )
-	{
+	public function update( Appeal $appeal, Request $request ) {
 		$allInputs = $request->input();
 		unset( $allInputs['_token'], $allInputs['_method'] );
 		$appeal->update(

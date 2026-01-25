@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class IAL extends Model
-{
+class IAL extends Model {
 	use HasFactory;
 
 	/**
@@ -46,8 +45,7 @@ class IAL extends Model
 	 *
 	 * @return BelongsTo
 	 */
-	public function user(): BelongsTo
-	{
+	public function user(): BelongsTo {
 		return $this->belongsTo( User::class, 'user' );
 	}
 
@@ -58,8 +56,7 @@ class IAL extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getUserAttribute( int $id )
-	{
+	public function getUserAttribute( int $id ) {
 		return User::findById( $id );
 	}
 }

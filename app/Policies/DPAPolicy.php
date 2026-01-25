@@ -7,8 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class DPAPolicy
-{
+class DPAPolicy {
 	use HandlesAuthorization;
 
 	/**
@@ -18,8 +17,7 @@ class DPAPolicy
 	 *
 	 * @return Response|null
 	 */
-	public function before( User $user ): ?Response
-	{
+	public function before( User $user ): ?Response {
 		if ( $user->hasFlag( 'ts' ) ) {
 			return Response::allow();
 		}
@@ -35,8 +33,7 @@ class DPAPolicy
 	 *
 	 * @return Response
 	 */
-	public function view( User $user, DPA $dpa ): Response
-	{
+	public function view( User $user, DPA $dpa ): Response {
 		if ( $user->id == $dpa->subject->id ) {
 			return Response::allow();
 		} else {
@@ -51,8 +48,7 @@ class DPAPolicy
 	 *
 	 * @return Response
 	 */
-	public function create( User $user ): Response
-	{
+	public function create( User $user ): Response {
 		return Response::allow();
 	}
 
@@ -64,8 +60,7 @@ class DPAPolicy
 	 *
 	 * @return Response
 	 */
-	public function update( User $user, DPA $dpa ): Response
-	{
+	public function update( User $user, DPA $dpa ): Response {
 		return Response::deny();
 	}
 }

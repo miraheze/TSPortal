@@ -7,8 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class InvestigationPolicy
-{
+class InvestigationPolicy {
 	use HandlesAuthorization;
 
 	/**
@@ -18,8 +17,7 @@ class InvestigationPolicy
 	 *
 	 * @return Response|null
 	 */
-	public function before( User $user ): ?Response
-	{
+	public function before( User $user ): ?Response {
 		if ( $user->hasFlag( 'ts' ) ) {
 			return Response::allow();
 		}
@@ -34,8 +32,7 @@ class InvestigationPolicy
 	 *
 	 * @return Response
 	 */
-	public function viewAny( User $user ): Response
-	{
+	public function viewAny( User $user ): Response {
 		return Response::deny();
 	}
 
@@ -47,8 +44,7 @@ class InvestigationPolicy
 	 *
 	 * @return Response
 	 */
-	public function view( User $user, Investigation $investigation ): Response
-	{
+	public function view( User $user, Investigation $investigation ): Response {
 		return Response::deny();
 	}
 
@@ -59,8 +55,7 @@ class InvestigationPolicy
 	 *
 	 * @return Response
 	 */
-	public function create( User $user ): Response
-	{
+	public function create( User $user ): Response {
 		return Response::deny();
 	}
 
@@ -72,8 +67,7 @@ class InvestigationPolicy
 	 *
 	 * @return Response
 	 */
-	public function update( User $user, Investigation $investigation ): Response
-	{
+	public function update( User $user, Investigation $investigation ): Response {
 		return Response::deny();
 	}
 }

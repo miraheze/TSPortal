@@ -12,15 +12,13 @@ use Illuminate\Http\Request;
 /**
  * Controller for all user related actions outside a login
  */
-class UserController extends Controller
-{
+class UserController extends Controller {
 	/**
 	 * Shows a list of all users
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function index()
-	{
+	public function index() {
 		return view( 'user' )->with( 'users', User::all() );
 	}
 
@@ -31,8 +29,7 @@ class UserController extends Controller
 	 *
 	 * @return Application|Factory|View
 	 */
-	public function show( User $user )
-	{
+	public function show( User $user ) {
 		return view( 'user.view' )->with( 'user', $user );
 	}
 
@@ -44,8 +41,7 @@ class UserController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function update( Request $request, User $user ): RedirectResponse
-	{
+	public function update( Request $request, User $user ): RedirectResponse {
 		$user->updateFlags( $request->input( 'new-access' ) ?? [], $request->user() );
 
 		return back();

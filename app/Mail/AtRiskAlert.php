@@ -7,9 +7,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AtRiskAlert extends Mailable
-{
-	use Queueable, SerializesModels;
+class AtRiskAlert extends Mailable {
+	use Queueable;
+	use SerializesModels;
 
 	/**
 	 * ID of report the email is regarding.
@@ -23,8 +23,7 @@ class AtRiskAlert extends Mailable
 	 *
 	 * @return void
 	 */
-	public function __construct( Report $report )
-	{
+	public function __construct( Report $report ) {
 		$this->id = $report->id;
 	}
 
@@ -33,8 +32,7 @@ class AtRiskAlert extends Mailable
 	 *
 	 * @return $this
 	 */
-	public function build(): AtRiskAlert
-	{
+	public function build(): AtRiskAlert {
 		return $this->text( 'emails.atrisk' );
 	}
 }

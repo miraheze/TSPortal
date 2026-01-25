@@ -6,15 +6,13 @@ use App\Models\DPA;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 
-class DPAAlreadyLive implements Rule
-{
+class DPAAlreadyLive implements Rule {
 	/**
 	 * Create a new rule instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		//
 	}
 
@@ -26,8 +24,7 @@ class DPAAlreadyLive implements Rule
 	 *
 	 * @return bool
 	 */
-	public function passes( $attribute, $value ): bool
-	{
+	public function passes( $attribute, $value ): bool {
 		$userId = ( auth()->id() == User::findOrCreate( $value )->id ) ? auth()->id() : $value;
 
 		return !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
@@ -38,8 +35,7 @@ class DPAAlreadyLive implements Rule
 	 *
 	 * @return string
 	 */
-	public function message(): string
-	{
+	public function message(): string {
 		return __( 'dpa-already-exists' );
 	}
 }
