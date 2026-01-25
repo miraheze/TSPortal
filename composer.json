@@ -20,7 +20,11 @@
 		"fakerphp/faker": "1.24.1",
 		"mockery/mockery": "1.6.12",
 		"nunomaduro/collision": "^8.6",
-		"phpunit/phpunit": "12.5.7"
+		"phpunit/phpunit": "12.5.7",
+		"mediawiki/mediawiki-codesniffer": "49.0.0",
+		"mediawiki/minus-x": "2.0.1",
+		"php-parallel-lint/php-console-highlighter": "1.0.0",
+		"php-parallel-lint/php-parallel-lint": "1.4.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -49,7 +53,17 @@
 		],
 		"post-create-project-cmd": [
 			"@php artisan key:generate --ansi"
-		]
+		],
+		"fix": [
+			"minus-x fix .",
+			"phpcbf; if [ $? -eq 1 ]; then exit 0; fi"
+		],
+		"test": [
+			"parallel-lint . --exclude node_modules --exclude vendor",
+			"minus-x check .",
+			"@phpcs"
+		],
+		"phpcs": "phpcs -sp --cache"
 	},
 	"extra": {
 		"laravel": {
