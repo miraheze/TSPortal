@@ -21,22 +21,18 @@ class DPAAlreadyLive implements Rule
 	/**
 	 * Compare DPA user to see if another request already exists.
 	 *
-	 * @param string $attribute
-	 * @param mixed $value
-	 *
-	 * @return bool
+	 * @param  string  $attribute
+	 * @param  mixed  $value
 	 */
 	public function passes( $attribute, $value ): bool
 	{
 		$userId = ( auth()->id() == User::findOrCreate( $value )->id ) ? auth()->id() : $value;
 
-		return !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
+		return ! ( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
 	}
 
 	/**
 	 * Get the validation error message.
-	 *
-	 * @return string
 	 */
 	public function message(): string
 	{

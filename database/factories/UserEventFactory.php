@@ -17,18 +17,16 @@ class UserEventFactory extends Factory
 
 	/**
 	 * Define the model's default state.
-	 *
-	 * @return array
 	 */
 	public function definition(): array
 	{
 		return [
-			'user'          => User::class,
+			'user' => User::class,
 			'investigation' => null,
-			'created'       => now(),
-			'created_by'    => User::class,
-			'action'        => 'unknown',
-			'comment'       => null
+			'created' => now(),
+			'created_by' => User::class,
+			'action' => 'unknown',
+			'comment' => null,
 		];
 	}
 }

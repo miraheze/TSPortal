@@ -13,10 +13,6 @@ class DPAPolicy
 
 	/**
 	 * Initial auth check
-	 *
-	 * @param User $user
-	 *
-	 * @return Response|null
 	 */
 	public function before( User $user ): ?Response
 	{
@@ -29,11 +25,6 @@ class DPAPolicy
 
 	/**
 	 * Determine whether the user can view a specific DPA.
-	 *
-	 * @param User $user
-	 * @param DPA $dpa
-	 *
-	 * @return Response
 	 */
 	public function view( User $user, DPA $dpa ): Response
 	{
@@ -46,10 +37,6 @@ class DPAPolicy
 
 	/**
 	 * Determine whether the user can create a DPA.
-	 *
-	 * @param User $user
-	 *
-	 * @return Response
 	 */
 	public function create( User $user ): Response
 	{
@@ -58,11 +45,6 @@ class DPAPolicy
 
 	/**
 	 * Determine whether the user can update a DPA.
-	 *
-	 * @param User $user
-	 * @param DPA $dpa
-	 *
-	 * @return Response
 	 */
 	public function update( User $user, DPA $dpa ): Response
 	{

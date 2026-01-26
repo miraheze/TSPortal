@@ -20,20 +20,16 @@ class MirahezeUsernameRule implements Rule
 	/**
 	 * Conduct a HTTP request.
 	 *
-	 * @param string $attribute
-	 * @param mixed $value
-	 *
-	 * @return bool
+	 * @param  string  $attribute
+	 * @param  mixed  $value
 	 */
 	public function passes( $attribute, $value ): bool
 	{
-		return ( Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false );
+		return  Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser='.htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
 	}
 
 	/**
 	 * Get the validation error message.
-	 *
-	 * @return string
 	 */
 	public function message(): string
 	{

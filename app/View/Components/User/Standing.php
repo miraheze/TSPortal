@@ -12,8 +12,6 @@ class Standing extends Component
 {
 	/**
 	 * User standing
-	 *
-	 * @var string
 	 */
 	public string $standing;
 

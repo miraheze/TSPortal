@@ -51,8 +51,6 @@ class DPA extends Model
 
 	/**
 	 * Return a relationship between a DPA and the subject user
-	 *
-	 * @return BelongsTo
 	 */
 	public function user(): BelongsTo
 	{
@@ -62,7 +60,6 @@ class DPA extends Model
 	/**
 	 * Return a user object when querying the user attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */

@@ -19,19 +19,18 @@ class IALFactory extends Factory
 	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
 	 * @throws Exception
 	 */
 	public function definition(): array
 	{
 		return [
-			'added'         => now(),
-			'user'          => User::class,
-			'type'          => 'log',
-			'wiki'          => 'wiki',
-			'comments'      => null,
-			'dpa'           => null,
-			'investigation' => null
+			'added' => now(),
+			'user' => User::class,
+			'type' => 'log',
+			'wiki' => 'wiki',
+			'comments' => null,
+			'dpa' => null,
+			'investigation' => null,
 		];
 	}
 }

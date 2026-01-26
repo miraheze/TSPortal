@@ -24,7 +24,6 @@ class InvestigationController extends Controller
 	/**
 	 * Indexes all investigations, with filters for non-privileged users
 	 *
-	 * @param Request $request
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -35,11 +34,11 @@ class InvestigationController extends Controller
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( !$key ) {
+			if ( ! $key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'subject', 'assigned' ] ) ) {
-				$allInvestigations = $allInvestigations->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'type', 'recommendation' ] ) ) {
+			} elseif ( in_array( $type, ['subject', 'assigned'] ) ) {
+				$allInvestigations = $allInvestigations->where( $type, User::findById( (int) $key ) );
+			} elseif ( in_array( $type, ['type', 'recommendation'] ) ) {
 				if ( $key == 'unknown' ) {
 					$key = null;
 				}
@@ -61,8 +60,6 @@ class InvestigationController extends Controller
 	/**
 	 * Stores a new investigation once created
 	 *
-	 * @param Investigation $investigation
-	 * @param Request $request
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -70,7 +67,7 @@ class InvestigationController extends Controller
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule() ]
+				'username' => [new MirahezeUsernameRule],
 			]
 		);
 
@@ -78,12 +75,12 @@ class InvestigationController extends Controller
 
 		$newInvestigation = $investigation::factory()->create(
 			[
-				'type'           => $request->input( 'topic' ),
-				'text'           => $request->input( 'evidence' ),
+				'type' => $request->input( 'topic' ),
+				'text' => $request->input( 'evidence' ),
 				'recommendation' => $request->input( 'recommend' ),
-				'explanation'    => $request->input( 'justify' ),
-				'subject'        => $investigationUser,
-				'assigned'       => $request->user()
+				'explanation' => $request->input( 'justify' ),
+				'subject' => $investigationUser,
+				'assigned' => $request->user(),
 			]
 		);
 
@@ -93,7 +90,7 @@ class InvestigationController extends Controller
 
 		InvestigationNew::dispatch( $newInvestigation );
 
-		request()->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-submitted' ) );
+		request()->session()->flash( 'successFlash', __( 'investigation' ).' '.__( 'toast-submitted' ) );
 
 		return redirect( '/investigations' );
 	}
@@ -111,7 +108,6 @@ class InvestigationController extends Controller
 	/**
 	 * Shows a specific investigation
 	 *
-	 * @param Investigation $investigation
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -123,7 +119,6 @@ class InvestigationController extends Controller
 	/**
 	 * Form for editing an investigation
 	 *
-	 * @param Investigation $investigation
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -135,22 +130,20 @@ class InvestigationController extends Controller
 	/**
 	 * Processor for processing updates to an investigation
 	 *
-	 * @param Investigation $investigation
-	 * @param Request $request
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
 	public function update( Investigation $investigation, Request $request )
 	{
-		if ( null === $request->input( 'event' ) ) {
+		if ( $request->input( 'event' ) === null ) {
 			$updates = [
-				'type'           => $request->input( 'topic' ),
-				'text'           => $request->input( 'evidence' ),
+				'type' => $request->input( 'topic' ),
+				'text' => $request->input( 'evidence' ),
 				'recommendation' => $request->input( 'recommend' ),
-				'explanation'    => $request->input( 'justify' ),
+				'explanation' => $request->input( 'justify' ),
 			];
 
-			if ( null !== $request->input( 'assign' ) ) {
+			if ( $request->input( 'assign' ) !== null ) {
 				$updates['assigned'] = $request->user()->id;
 			}
 
@@ -161,16 +154,16 @@ class InvestigationController extends Controller
 			$newAppeal = Appeal::factory()->create(
 				[
 					'investigation' => $investigation,
-					'type'          => $request->input( 'appeal-type' ),
-					'text'          => $request->input( 'comments' ),
-					'assigned'      => $request->user()->id
+					'type' => $request->input( 'appeal-type' ),
+					'text' => $request->input( 'comments' ),
+					'assigned' => $request->user()->id,
 				]
 			);
 
 			$investigation->newEvent(
 				'appeal-recv',
 				true,
-				'#' . $newAppeal->id,
+				'#'.$newAppeal->id,
 				$request->user()
 			);
 
@@ -178,34 +171,34 @@ class InvestigationController extends Controller
 		} else {
 			$investigation->newEvent(
 				$request->input( 'event' ),
-				!( in_array( $request->input( 'event' ), [ 'comment', 'edit-investigation' ] ) ),
+				! ( in_array( $request->input( 'event' ), ['comment', 'edit-investigation'] ) ),
 				$request->input( 'comments' ),
 				$request->user()
 			);
 
 			$investigation->subject->updateStanding( $request->input( 'event' ) );
 
-			if ( null !== $request->input( 'status' ) ) {
+			if ( $request->input( 'status' ) !== null ) {
 				if ( $investigation->closed ) {
 					$investigation->update( [
-						'closed' => null
+						'closed' => null,
 					] );
 
 					$investigation->newEvent( 'reopen-investigation', false, $request->input( 'comments' ), $request->user() );
 				} else {
 					$investigation->update( [
-						'closed' => now()
+						'closed' => now(),
 					] );
 
 					$investigation->newEvent( 'close-investigation', false, $request->input( 'comments' ), $request->user() );
 				}
 
-				InvestigationClosed::dispatch( $investigation, !$investigation->closed );
+				InvestigationClosed::dispatch( $investigation, ! $investigation->closed );
 			}
 		}
 
-		request()->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'investigation' ).' '.__( 'toast-updated' ) );
 
-		return redirect( '/investigation/' . $investigation->id );
+		return redirect( '/investigation/'.$investigation->id );
 	}
 }

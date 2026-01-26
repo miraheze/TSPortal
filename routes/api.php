@@ -26,28 +26,28 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get( 'dpa/{dpa}/{username}', function ( DPA $dpa, string $username ) {
 	return response()->json( [
-		'dpa-id'   => $dpa->id,
+		'dpa-id' => $dpa->id,
 		'username' => $username,
-		'match'    => ( $dpa->user->username == $username )
+		'match' => ( $dpa->user->username == $username ),
 	] );
 } );
 
 Route::post( 'dpa', function ( Request $request ) {
 	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
-		return response()->json( [ 'unauthorized' => true ] );
+		return response()->json( ['unauthorized' => true] );
 	}
 
 	$dpaUser = User::findOrCreate( $request->input( 'username' ) );
 
 	if ( count( DPA::query()->where( 'user', $dpaUser->id )->whereNull( 'completed' )->limit( 1 )->get() ) ) {
-		return response()->json( [ 'exists' => true ] );
+		return response()->json( ['exists' => true] );
 	}
 
 	DPA::factory()->create(
 		[
-			'user'      => $dpaUser,
-			'underage'  => $request->input( 'evidence' ),
-			'statutory' => true
+			'user' => $dpaUser,
+			'underage' => $request->input( 'evidence' ),
+			'statutory' => true,
 		]
 	);
 
@@ -60,7 +60,7 @@ Route::post( 'dpa', function ( Request $request ) {
 	DPANew::dispatch( $newDPA );
 
 	return response()->json( [
-		'id' => $newDPA->id
+		'id' => $newDPA->id,
 	] );
 } );
 
@@ -69,7 +69,7 @@ Route::post( 'dpa', function ( Request $request ) {
  */
 Route::post( 'report', function ( Request $request ) {
 	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
-		return response()->json( [ 'unauthorized' => true ] );
+		return response()->json( ['unauthorized' => true] );
 	}
 
 	$subjectUser = User::findOrCreate( $request->input( 'username' ) );
@@ -77,10 +77,10 @@ Route::post( 'report', function ( Request $request ) {
 
 	$newReport = Report::factory()->create(
 		[
-			'type'     => $request->input( 'report' ),
-			'user'     => $subjectUser,
+			'type' => $request->input( 'report' ),
+			'user' => $subjectUser,
 			'reporter' => $reportingUser,
-			'text'     => $request->input( 'evidence' ),
+			'text' => $request->input( 'evidence' ),
 		]
 	);
 
@@ -93,7 +93,7 @@ Route::post( 'report', function ( Request $request ) {
 	ReportNew::dispatch( $newReport );
 
 	return response()->json( [
-		'id' => $newReport->id
+		'id' => $newReport->id,
 	] );
 } );
 
@@ -102,7 +102,7 @@ Route::post( 'report', function ( Request $request ) {
  */
 Route::post( 'ial', function ( Request $request ) {
 	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
-		return response()->json( [ 'unauthorized' => true ] );
+		return response()->json( ['unauthorized' => true] );
 	}
 
 	$comment = $request->input( 'comment' ) ?? '';
@@ -111,12 +111,12 @@ Route::post( 'ial', function ( Request $request ) {
 	$serialisedID = ( is_array( $explodedComment ) && isset( $explodedComment[1] ) ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
 
 	$updates = [
-		'user'          => User::findOrCreate( $request->input( 'username' ) )->id,
-		'type'          => $request->input( 'log' ),
-		'wiki'          => $request->input( 'wiki' ),
-		'comments'      => $comment,
-		'dpa'           => null,
-		'investigation' => null
+		'user' => User::findOrCreate( $request->input( 'username' ) )->id,
+		'type' => $request->input( 'log' ),
+		'wiki' => $request->input( 'wiki' ),
+		'comments' => $comment,
+		'dpa' => null,
+		'investigation' => null,
 	];
 
 	if ( is_numeric( $serialisedID ) && Investigation::all()->find( $serialisedID ) ) {
@@ -128,6 +128,6 @@ Route::post( 'ial', function ( Request $request ) {
 	$newIAL = IAL::factory()->create( $updates );
 
 	return response()->json( [
-		'id' => $newIAL->id
+		'id' => $newIAL->id,
 	] );
 } );

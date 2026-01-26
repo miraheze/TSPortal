@@ -38,8 +38,6 @@ class Investigation extends Model
 
 	/**
 	 * Defines a relationship with reports leading to this investigation
-	 *
-	 * @return HasMany
 	 */
 	public function reports(): HasMany
 	{
@@ -48,8 +46,6 @@ class Investigation extends Model
 
 	/**
 	 * Defines a relationship to the subject of this investigation
-	 *
-	 * @return BelongsTo
 	 */
 	public function subject(): BelongsTo
 	{
@@ -58,8 +54,6 @@ class Investigation extends Model
 
 	/**
 	 * Defines a relationship to the user assigned to investigate
-	 *
-	 * @return BelongsTo
 	 */
 	public function assigned(): BelongsTo
 	{
@@ -68,8 +62,6 @@ class Investigation extends Model
 
 	/**
 	 * Defines a relationship with all events within this investigation
-	 *
-	 * @return HasMany
 	 */
 	public function events(): HasMany
 	{
@@ -78,8 +70,6 @@ class Investigation extends Model
 
 	/**
 	 * Defines a relationship with all appeals within this investigation
-	 *
-	 * @return HasMany
 	 */
 	public function appeals(): HasMany
 	{
@@ -89,7 +79,6 @@ class Investigation extends Model
 	/**
 	 * Return a user object when querying the subject attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -101,7 +90,6 @@ class Investigation extends Model
 	/**
 	 * Return a user object when querying the assigned attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -113,26 +101,22 @@ class Investigation extends Model
 	/**
 	 * Create a new event for this investigation
 	 *
-	 * @param string $action
-	 * @param bool $userRecord
-	 * @param string|null $comment
-	 * @param User|null $actor
 	 *
 	 * @return void
 	 */
 	public function newEvent( string $action, bool $userRecord, ?string $comment = null, ?User $actor = null )
 	{
-		if ( !( $action == 'comment' && !$comment ) ) {
+		if ( ! ( $action == 'comment' && ! $comment ) ) {
 			$subject = ( $userRecord ) ? $this->subject : null;
 
 			UserEvent::factory()->create(
 				[
-					'user'          => $subject,
+					'user' => $subject,
 					'investigation' => $this,
-					'created'       => now(),
-					'created_by'    => $actor,
-					'action'        => $action,
-					'comment'       => $comment
+					'created' => now(),
+					'created_by' => $actor,
+					'action' => $action,
+					'comment' => $comment,
 				]
 			);
 		}
@@ -140,15 +124,13 @@ class Investigation extends Model
 
 	/**
 	 * Get the information for the open appeal
-	 *
-	 * @return int|null
 	 */
 	public function openAppeal(): ?int
 	{
 		$appeals = $this->appeals;
 
 		foreach ( $appeals as $appeal ) {
-			if ( null === $appeal->reviewed ) {
+			if ( $appeal->reviewed === null ) {
 				return $appeal->id;
 			}
 		}

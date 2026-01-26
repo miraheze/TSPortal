@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
 			$table->string( 'username' );
 			$table->boolean( 'user_verified' )->default( false );
 			$table->tinyInteger( 'standing' )->default( 0 );
-			$table->json( 'flags' )->default( "[]" );
+			$table->json( 'flags' )->default( '[]' );
 		} );
 	}
 

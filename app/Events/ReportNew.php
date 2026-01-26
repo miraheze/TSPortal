@@ -15,22 +15,16 @@ class ReportNew
 
 	/**
 	 * Model for event
-	 *
-	 * @var Report
 	 */
 	public Report $model;
 
 	/**
 	 * Model name
-	 *
-	 * @var string
 	 */
 	public string $name = 'Report';
 
 	/**
 	 * Model state
-	 *
-	 * @var string
 	 */
 	public string $state = 'created';
 

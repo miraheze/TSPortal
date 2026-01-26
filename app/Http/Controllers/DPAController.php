@@ -23,7 +23,6 @@ class DPAController extends Controller
 	/**
 	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users
 	 *
-	 * @param Request $request
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -31,7 +30,7 @@ class DPAController extends Controller
 	{
 		$allDPAs = DPA::all();
 
-		if ( !$request->user()->hasFlag( 'ts' ) ) {
+		if ( ! $request->user()->hasFlag( 'ts' ) ) {
 			$allDPAs = $allDPAs->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
 
@@ -41,7 +40,6 @@ class DPAController extends Controller
 	/**
 	 *  Shows a specific DPA request
 	 *
-	 * @param DPA $dpa
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -53,8 +51,6 @@ class DPAController extends Controller
 	/**
 	 * Stores a processed new DPA request
 	 *
-	 * @param DPA $dpa
-	 * @param Request $request
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -62,7 +58,7 @@ class DPAController extends Controller
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule(), new DPAAlreadyLive() ]
+				'username' => [new MirahezeUsernameRule, new DPAAlreadyLive],
 			]
 		);
 
@@ -71,22 +67,22 @@ class DPAController extends Controller
 		if ( $request->input( 'username-type' ) == 'own-removal' ) {
 			$request->validate(
 				[
-					'username' => [ new SameAccountRule() ]
+					'username' => [new SameAccountRule],
 				]
 			);
 
 			$dpa::factory()->create(
 				[
-					'user'      => $dpaUser,
-					'statutory' => (bool)$request->input( 'dpa' )
+					'user' => $dpaUser,
+					'statutory' => (bool) $request->input( 'dpa' ),
 				]
 			);
 		} else {
 			$dpa::factory()->create(
 				[
-					'user'      => $dpaUser,
-					'underage'  => $request->input( 'evidence' ),
-					'statutory' => true
+					'user' => $dpaUser,
+					'underage' => $request->input( 'evidence' ),
+					'statutory' => true,
 				]
 			);
 		}
@@ -99,7 +95,7 @@ class DPAController extends Controller
 
 		DPANew::dispatch( $newDPA );
 
-		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
+		request()->session()->flash( 'successFlash', __( 'dpa' ).' '.__( 'toast-submitted' ) );
 
 		return redirect( '/dpa' );
 	}
@@ -116,32 +112,27 @@ class DPAController extends Controller
 
 	/**
 	 * Processor for updating a request once processed
-	 *
-	 * @param DPA $dpa
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
 	 */
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->input( 'approve' ) ?? false ) {
 			$dpa->update( [
-				'completed' => now()
+				'completed' => now(),
 			] );
 
 			$dpa->user->update( [
-				'username' => 'MirahezeGDPR ' . $dpa->id
+				'username' => 'MirahezeGDPR '.$dpa->id,
 			] );
 		} else {
 			$dpa->update( [
 				'completed' => now(),
-				'reject'    => $request->input( 'reason' )
+				'reject' => $request->input( 'reason' ),
 			] );
 		}
 
 		$dpa->user->newEvent( 'closed-dpa', $request->user() );
 
-		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'dpa' ).' '.__( 'toast-updated' ) );
 
 		return back();
 	}

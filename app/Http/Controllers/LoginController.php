@@ -22,14 +22,12 @@ class LoginController extends Controller
 	 */
 	public function __construct()
 	{
-		$this->middleware( 'guest' )->only( [ 'login', 'callback' ] );
+		$this->middleware( 'guest' )->only( ['login', 'callback'] );
 		$this->middleware( 'auth' )->only( 'logout' );
 	}
 
 	/**
 	 * Callback for OAuth application to handle processing of logins
-	 *
-	 * @return RedirectResponse
 	 */
 	public function callback(): RedirectResponse
 	{
@@ -44,6 +42,7 @@ class LoginController extends Controller
 		abort_if( $user->hasFlag( 'login-disabled' ), 403, __( 'login-disabled' ) );
 
 		Auth::login( $user );
+
 		return redirect()->intended();
 	}
 
@@ -60,7 +59,6 @@ class LoginController extends Controller
 	/**
 	 * Handles a logout
 	 *
-	 * @param Request $request
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -68,6 +66,7 @@ class LoginController extends Controller
 	{
 		$this->guard()->logout();
 		$request->session()->invalidate();
+
 		return redirect( '/' );
 	}
 

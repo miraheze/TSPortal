@@ -37,8 +37,6 @@ class Appeal extends Model
 
 	/**
 	 * Defines a relationship to the investigation of this appeal
-	 *
-	 * @return BelongsTo
 	 */
 	public function investigation(): BelongsTo
 	{
@@ -47,8 +45,6 @@ class Appeal extends Model
 
 	/**
 	 * Defines a relationship to the user assigned to the appeal
-	 *
-	 * @return BelongsTo
 	 */
 	public function assigned(): BelongsTo
 	{
@@ -58,7 +54,6 @@ class Appeal extends Model
 	/**
 	 * Return a user object when querying the assigned attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -70,7 +65,6 @@ class Appeal extends Model
 	/**
 	 * Return an investigation object when querying the investigation attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return Investigation[]|Collection|Model|null
 	 */

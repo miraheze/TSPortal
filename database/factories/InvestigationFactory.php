@@ -17,20 +17,18 @@ class InvestigationFactory extends Factory
 
 	/**
 	 * Define the model's default state.
-	 *
-	 * @return array
 	 */
 	public function definition(): array
 	{
 		return [
-			'subject'        => User::class,
-			'type'           => 'other',
-			'text'           => null,
+			'subject' => User::class,
+			'type' => 'other',
+			'text' => null,
 			'recommendation' => null,
-			'explanation'    => null,
-			'created'        => now(),
-			'assigned'       => null,
-			'closed'         => null
+			'explanation' => null,
+			'created' => now(),
+			'assigned' => null,
+			'closed' => null,
 		];
 	}
 }

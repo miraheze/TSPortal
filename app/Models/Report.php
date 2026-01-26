@@ -37,8 +37,6 @@ class Report extends Model
 
 	/**
 	 * Defines a relationship with the investigation this report creates
-	 *
-	 * @return BelongsTo
 	 */
 	public function investigation(): BelongsTo
 	{
@@ -47,8 +45,6 @@ class Report extends Model
 
 	/**
 	 * Defines a relationship with the reporter of this report
-	 *
-	 * @return BelongsTo
 	 */
 	public function reporter(): BelongsTo
 	{
@@ -57,8 +53,6 @@ class Report extends Model
 
 	/**
 	 * Defines a relationship with the subject of this report
-	 *
-	 * @return BelongsTo
 	 */
 	public function user(): BelongsTo
 	{
@@ -68,7 +62,6 @@ class Report extends Model
 	/**
 	 * Return a user object when querying the reporter attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -80,7 +73,6 @@ class Report extends Model
 	/**
 	 * Return a user object when querying the user attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */

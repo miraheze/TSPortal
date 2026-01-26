@@ -15,22 +15,16 @@ class AppealNew
 
 	/**
 	 * Model for event
-	 *
-	 * @var Appeal
 	 */
 	public Appeal $model;
 
 	/**
 	 * Model name
-	 *
-	 * @var string
 	 */
 	public string $name = 'Appeal';
 
 	/**
 	 * Model state
-	 *
-	 * @var string
 	 */
 	public string $state = 'created';
 

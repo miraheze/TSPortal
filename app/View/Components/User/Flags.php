@@ -12,8 +12,6 @@ class Flags extends Component
 {
 	/**
 	 * User flags
-	 *
-	 * @var array
 	 */
 	public array $flags;
 

@@ -17,19 +17,17 @@ class ReportFactory extends Factory
 
 	/**
 	 * Define the model's default state.
-	 *
-	 * @return array
 	 */
 	public function definition(): array
 	{
 		return [
 			'investigation' => null,
-			'type'          => 'other',
-			'text'          => null,
-			'user'          => User::class,
-			'reporter'      => User::class,
-			'created'       => now(),
-			'reviewed'      => null
+			'type' => 'other',
+			'text' => null,
+			'user' => User::class,
+			'reporter' => User::class,
+			'created' => now(),
+			'reviewed' => null,
 		];
 	}
 }

@@ -22,9 +22,9 @@ class User extends Authenticatable
 	 * @var int[]
 	 */
 	public const STANDING = [
-		'GOOD'       => 1,
+		'GOOD' => 1,
 		'SANCTIONED' => 0,
-		'BANNED'     => -1
+		'BANNED' => -1,
 	];
 
 	/**
@@ -40,7 +40,6 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $guarded = [];
-
 
 	/**
 	 * Casts an attribute by default
@@ -67,14 +66,12 @@ class User extends Authenticatable
 	private array $allFlags = [
 		'login-disabled',
 		'ts',
-		'user-manager'
+		'user-manager',
 	];
 
 	/**
 	 * Find a user by username, or create a new user with the username
 	 *
-	 * @param string $username
-	 * @param bool $oauth
 	 *
 	 * @return Model|mixed
 	 */
@@ -82,7 +79,7 @@ class User extends Authenticatable
 	{
 		$authUser = self::firstWhere( 'username', $username );
 
-		if ( !$authUser ) {
+		if ( ! $authUser ) {
 			$authUser = self::factory()->createOne(
 				[
 					'username' => $username,
@@ -92,7 +89,7 @@ class User extends Authenticatable
 
 		if ( $oauth ) {
 			$authUser->update( [
-				'user_verified' => true
+				'user_verified' => true,
 			] );
 		}
 
@@ -102,7 +99,6 @@ class User extends Authenticatable
 	/**
 	 * Find a user by ID
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -113,8 +109,6 @@ class User extends Authenticatable
 
 	/**
 	 * Defines a relationship with all investigations the user is a subject of
-	 *
-	 * @return HasMany
 	 */
 	public function investigations(): HasMany
 	{
@@ -123,8 +117,6 @@ class User extends Authenticatable
 
 	/**
 	 * Defines a relationship with all reports the user is the subject of
-	 *
-	 * @return HasMany
 	 */
 	public function reports(): HasMany
 	{
@@ -133,8 +125,6 @@ class User extends Authenticatable
 
 	/**
 	 * Defines a relationship with all reports the user has made
-	 *
-	 * @return HasMany
 	 */
 	public function reportsMade(): HasMany
 	{
@@ -143,8 +133,6 @@ class User extends Authenticatable
 
 	/**
 	 * Defines a relationship with all events associated with the user
-	 *
-	 * @return HasMany
 	 */
 	public function events(): HasMany
 	{
@@ -153,10 +141,6 @@ class User extends Authenticatable
 
 	/**
 	 * Checks whether the user has a certain flag
-	 *
-	 * @param string $flag
-	 *
-	 * @return bool
 	 */
 	public function hasFlag( string $flag ): bool
 	{
@@ -176,8 +160,6 @@ class User extends Authenticatable
 	/**
 	 * Updates a users flags
 	 *
-	 * @param array $newFlags
-	 * @param User|null $actor
 	 *
 	 * @return void
 	 */
@@ -192,9 +174,6 @@ class User extends Authenticatable
 	/**
 	 * Creates a new event associated with the user
 	 *
-	 * @param string $action
-	 * @param string|null $comment
-	 * @param User|null $actor
 	 *
 	 * @return void
 	 */
@@ -202,19 +181,17 @@ class User extends Authenticatable
 	{
 		UserEvent::factory()->create(
 			[
-				'user'       => $this,
-				'created'    => now(),
+				'user' => $this,
+				'created' => now(),
 				'created_by' => $actor,
-				'action'     => $action,
-				'comment'    => $comment
+				'action' => $action,
+				'comment' => $comment,
 			]
 		);
 	}
 
 	/**
 	 * Retrieve the current user standing
-	 *
-	 * @return string
 	 */
 	public function getStanding(): string
 	{
@@ -228,15 +205,15 @@ class User extends Authenticatable
 	 */
 	public function updateStanding( string $event )
 	{
-		if ( in_array( $event, [ 'ban-partial', 'ban-full' ] ) && ( $this->standing > self::STANDING['BANNED'] ) ) {
+		if ( in_array( $event, ['ban-partial', 'ban-full'] ) && ( $this->standing > self::STANDING['BANNED'] ) ) {
 			$this->update( [
-				'standing' => self::STANDING['BANNED']
+				'standing' => self::STANDING['BANNED'],
 			] );
-		} elseif ( in_array( $event, [ 'nd-checkuser', 'nd-protect', 'd-checkuser' ] ) ) {
+		} elseif ( in_array( $event, ['nd-checkuser', 'nd-protect', 'd-checkuser'] ) ) {
 			return null;
 		} elseif ( $this->standing > self::STANDING['SANCTIONED'] ) {
 			$this->update( [
-				'standing' => self::STANDING['SANCTIONED']
+				'standing' => self::STANDING['SANCTIONED'],
 			] );
 		}
 	}

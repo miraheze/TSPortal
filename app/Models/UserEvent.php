@@ -43,8 +43,6 @@ class UserEvent extends Model
 
 	/**
 	 * Defines a relationship with the user the event is for
-	 *
-	 * @return BelongsTo
 	 */
 	public function user(): BelongsTo
 	{
@@ -53,8 +51,6 @@ class UserEvent extends Model
 
 	/**
 	 * Defines a relationship with the investigation an event is for
-	 *
-	 * @return BelongsTo
 	 */
 	public function investigation(): BelongsTo
 	{
@@ -64,14 +60,13 @@ class UserEvent extends Model
 	/**
 	 * Returns a User object for the created_by attribute
 	 *
-	 * @param int|null $user
 	 *
 	 * @return User|User[]|Collection|Model|null
 	 */
 	public function getCreatedByAttribute( ?int $user )
 	{
-		if ( !$user ) {
-			$user = new User();
+		if ( ! $user ) {
+			$user = new User;
 			$user->username = 'System';
 		} else {
 			$user = User::findById( $user );

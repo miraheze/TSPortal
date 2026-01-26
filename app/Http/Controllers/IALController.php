@@ -20,7 +20,6 @@ class IALController extends Controller
 	/**
 	 * Indexes and shows all IALs
 	 *
-	 * @param Request $request
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -28,17 +27,11 @@ class IALController extends Controller
 	{
 		$allIALs = DB::table( 'ial' )->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
 
-
 		return view( 'ial' )->with( 'ials', $allIALs );
 	}
 
 	/**
 	 * Processor for updating a request once processed
-	 *
-	 * @param IAL $ial
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
 	 */
 	public function update( IAL $ial, Request $request ): RedirectResponse
 	{
@@ -47,21 +40,22 @@ class IALController extends Controller
 		if ( is_numeric( $id ) && Investigation::all()->find( $id ) ) {
 			$ial->update(
 				[
-					'investigation' => $id
+					'investigation' => $id,
 				]
 			);
 		} elseif ( ctype_alnum( $id ) && DPA::all()->find( $id ) ) {
 			$ial->update(
 				[
-					'dpa' => $id
+					'dpa' => $id,
 				]
 			);
 		} else {
-			request()->session()->flash( 'failureFlash', __( 'ial' ) . ' ' . __( 'toast-invalid-id' ) );
+			request()->session()->flash( 'failureFlash', __( 'ial' ).' '.__( 'toast-invalid-id' ) );
+
 			return back();
 		}
 
-		request()->session()->flash( 'successFlash', __( 'ial' ) . ' ' . __( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'ial' ).' '.__( 'toast-updated' ) );
 
 		return back();
 	}

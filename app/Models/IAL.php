@@ -43,8 +43,6 @@ class IAL extends Model
 
 	/**
 	 * Return a relationship between a IAL and the adding user
-	 *
-	 * @return BelongsTo
 	 */
 	public function user(): BelongsTo
 	{
@@ -54,7 +52,6 @@ class IAL extends Model
 	/**
 	 * Return a user object when querying the user attribute
 	 *
-	 * @param int $id
 	 *
 	 * @return User[]|Collection|Model|null
 	 */

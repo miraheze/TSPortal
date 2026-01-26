@@ -19,19 +19,18 @@ class DPAFactory extends Factory
 	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
 	 * @throws Exception
 	 */
 	public function definition(): array
 	{
 		return [
-			'id'        => substr( sha1( random_bytes( 10 ) ), 0, 32 ),
-			'filed'     => now(),
-			'user'      => User::class,
-			'underage'  => null,
+			'id' => substr( sha1( random_bytes( 10 ) ), 0, 32 ),
+			'filed' => now(),
+			'user' => User::class,
+			'underage' => null,
 			'statutory' => false,
 			'completed' => null,
-			'reject'    => null
+			'reject' => null,
 		];
 	}
 }

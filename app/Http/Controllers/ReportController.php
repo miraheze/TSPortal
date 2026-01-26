@@ -24,7 +24,6 @@ class ReportController extends Controller
 	/**
 	 * Indexes all reports, filtering for non-privileged users
 	 *
-	 * @param Request $request
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -32,18 +31,18 @@ class ReportController extends Controller
 	{
 		$allReports = Report::all();
 
-		if ( !$request->user()->hasFlag( 'ts' ) ) {
+		if ( ! $request->user()->hasFlag( 'ts' ) ) {
 			$allReports = $allReports->where( 'reporter', $request->user() );
 		}
 
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( !$key ) {
+			if ( ! $key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'user', 'reporter' ] ) ) {
-				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'investigation', 'type' ] ) ) {
+			} elseif ( in_array( $type, ['user', 'reporter'] ) ) {
+				$allReports = $allReports->where( $type, User::findById( (int) $key ) );
+			} elseif ( in_array( $type, ['investigation', 'type'] ) ) {
 				$allReports = $allReports->where( $type, $key );
 			}
 		}
@@ -61,8 +60,6 @@ class ReportController extends Controller
 	/**
 	 * Stores a new report once made
 	 *
-	 * @param Report $report
-	 * @param Request $request
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -70,7 +67,7 @@ class ReportController extends Controller
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule() ]
+				'username' => [new MirahezeUsernameRule],
 			]
 		);
 
@@ -78,10 +75,10 @@ class ReportController extends Controller
 
 		$newReport = $report::factory()->create(
 			[
-				'type'     => $request->input( 'report' ),
-				'user'     => $subjectUser,
+				'type' => $request->input( 'report' ),
+				'user' => $subjectUser,
 				'reporter' => $request->user(),
-				'text'     => $request->input( 'evidence' ),
+				'text' => $request->input( 'evidence' ),
 			]
 		);
 
@@ -97,7 +94,7 @@ class ReportController extends Controller
 
 		ReportNew::dispatch( $newReport );
 
-		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-submitted' ) );
+		request()->session()->flash( 'successFlash', __( 'report' ).' '.__( 'toast-submitted' ) );
 
 		return redirect( '/reports' );
 	}
@@ -115,7 +112,6 @@ class ReportController extends Controller
 	/**
 	 * Shows a specific report
 	 *
-	 * @param Report $report
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -126,32 +122,27 @@ class ReportController extends Controller
 
 	/**
 	 * Processor for handling a change in a reports state
-	 *
-	 * @param Report $report
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
 	 */
 	public function update( Report $report, Request $request ): RedirectResponse
 	{
 		if ( $request->input( 'investigate' ) ?? false ) {
 			$investigation = Investigation::factory()->create( [
-				'subject'  => $report->user,
-				'created'  => now(),
+				'subject' => $report->user,
+				'created' => now(),
 				'assigned' => $request->user(),
 			] );
 
 			$report->update( [
 				'investigation' => $investigation->id,
-				'reviewed'      => now()
+				'reviewed' => now(),
 			] );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [
-				'reviewed' => now()
+				'reviewed' => now(),
 			] );
 		}
 
-		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'report' ).' '.__( 'toast-updated' ) );
 
 		return back();
 	}

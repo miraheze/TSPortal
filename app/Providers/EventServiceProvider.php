@@ -17,10 +17,10 @@ class EventServiceProvider extends ServiceProvider
 	 * @var array
 	 */
 	protected $listen = [
-		DPANew::class              => [ SendWebhookNotification::class ],
-		InvestigationNew::class    => [ SendWebhookNotification::class ],
-		InvestigationClosed::class => [ SendWebhookNotification::class ],
-		ReportNew::class           => [ SendWebhookNotification::class ]
+		DPANew::class => [SendWebhookNotification::class],
+		InvestigationNew::class => [SendWebhookNotification::class],
+		InvestigationClosed::class => [SendWebhookNotification::class],
+		ReportNew::class => [SendWebhookNotification::class],
 	];
 
 	/**
@@ -28,7 +28,5 @@ class EventServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot()
-	{
-	}
+	public function boot() {}
 }

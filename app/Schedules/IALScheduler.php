@@ -27,20 +27,18 @@ class IALScheduler
 
 	/**
 	 * Gets all recent IALs and counts by types, actors and associations
-	 *
-	 * @return array
 	 */
 	private function getRecentIALs(): array
 	{
 		$data = [
-			'total'        => 0,
-			'actors'       => [],
-			'types'        => [],
+			'total' => 0,
+			'actors' => [],
+			'types' => [],
 			'associations' => [
-				'dpa'           => 0,
+				'dpa' => 0,
 				'investigation' => 0,
-				'unknown'       => 0
-			]
+				'unknown' => 0,
+			],
 		];
 
 		$allRecentIALs = IAL::all()->where( 'added', '>=', Carbon::yesterday() );
@@ -64,7 +62,6 @@ class IALScheduler
 	/**
 	 * Creates a webhook message based on recent IALs
 	 *
-	 * @param array $recentIALs
 	 *
 	 * @return array|string|string[]
 	 */
@@ -72,29 +69,29 @@ class IALScheduler
 	{
 		$varActors = '';
 		foreach ( $recentIALs['actors'] as $actor => $num ) {
-			$varActors .= $actor . '(' . $num . ') ';
+			$varActors .= $actor.'('.$num.') ';
 		}
 
 		$varAssociations = '';
 		foreach ( array_count_values( $recentIALs['associations'] ) as $association => $num ) {
-			$varAssociations .= $association . '(' . $num . ') ';
+			$varAssociations .= $association.'('.$num.') ';
 		}
 
 		$varActions = '';
 		foreach ( array_count_values( $recentIALs['types'] ) as $actions => $num ) {
-			$varActions .= $actions . '(' . $num . ') ';
+			$varActions .= $actions.'('.$num.') ';
 		}
 
 		$replacements = [
-			'{num:actions}'       => $recentIALs['total'],
-			'{list:actors}'       => $varActors,
+			'{num:actions}' => $recentIALs['total'],
+			'{list:actors}' => $varActors,
 			'{list:associations}' => $varAssociations,
-			'{list:actions}'      => $varActions
+			'{list:actions}' => $varActions,
 		];
 
-		$msg = "**Trust and Safety Internal Action Log Daily Disgest!**\nOver the past 24 hours there have been **{num:actions}** actions!\n" .
-			"The following members have taken actions today: {list:actors}\nThese actions have been associated to: {list:associations}\n" .
-			"Finally, the actions completed are as follows: {list:actions}";
+		$msg = "**Trust and Safety Internal Action Log Daily Disgest!**\nOver the past 24 hours there have been **{num:actions}** actions!\n".
+			"The following members have taken actions today: {list:actors}\nThese actions have been associated to: {list:associations}\n".
+			'Finally, the actions completed are as follows: {list:actions}';
 
 		return str_replace( array_keys( $replacements ), array_values( $replacements ), $msg );
 	}
@@ -102,7 +99,6 @@ class IALScheduler
 	/**
 	 * Handle the notification.
 	 *
-	 * @param string $message
 	 *
 	 * @return void
 	 */
@@ -110,12 +106,12 @@ class IALScheduler
 	{
 		if ( config( 'app.discordhook' ) ) {
 			if ( config( 'app.proxy' ) ) {
-				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
-					'content' => $message
+				Http::withOptions( ['proxy' => config( 'app.proxy' )] )->post( config( 'app.discordhook' ), [
+					'content' => $message,
 				] );
 			} else {
 				Http::post( config( 'app.discordhook' ), [
-					'content' => $message
+					'content' => $message,
 				] );
 			}
 		}

@@ -16,17 +16,15 @@ class UserFactory extends Factory
 
 	/**
 	 * Define the model's default state.
-	 *
-	 * @return array
 	 */
 	public function definition(): array
 	{
 		return [
-			'created'       => now(),
-			'username'      => 'username',
+			'created' => now(),
+			'username' => 'username',
 			'user_verified' => false,
-			'standing'      => 1,
-			'flags'         => []
+			'standing' => 1,
+			'flags' => [],
 		];
 	}
 }

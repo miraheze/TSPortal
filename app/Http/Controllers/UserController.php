@@ -27,7 +27,6 @@ class UserController extends Controller
 	/**
 	 * Show a specific user page
 	 *
-	 * @param User $user
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -38,11 +37,6 @@ class UserController extends Controller
 
 	/**
 	 * Update a users flags
-	 *
-	 * @param Request $request
-	 * @param User $user
-	 *
-	 * @return RedirectResponse
 	 */
 	public function update( Request $request, User $user ): RedirectResponse
 	{

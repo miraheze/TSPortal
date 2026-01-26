@@ -17,20 +17,18 @@ class AppealFactory extends Factory
 
 	/**
 	 * Define the model's default state.
-	 *
-	 * @return array
 	 */
 	public function definition(): array
 	{
 		return [
 			'investigation' => Investigation::class,
-			'type'          => 'new-information',
-			'text'          => null,
-			'review'        => null,
-			'assigned'      => null,
-			'outcome'       => null,
-			'created'       => now(),
-			'reviewed'      => null
+			'type' => 'new-information',
+			'text' => null,
+			'review' => null,
+			'assigned' => null,
+			'outcome' => null,
+			'created' => now(),
+			'reviewed' => null,
 		];
 	}
 }

@@ -19,7 +19,6 @@ class AppealController extends Controller
 	/**
 	 * Indexes all appeals, with filters for non-privileged users
 	 *
-	 * @param Request $request
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -30,11 +29,11 @@ class AppealController extends Controller
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( !$key ) {
+			if ( ! $key ) {
 				continue;
 			} elseif ( $type == 'assigned' ) {
-				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'type', 'outcome' ] ) ) {
+				$allAppeals = $allAppeals->where( $type, User::findById( (int) $key ) );
+			} elseif ( in_array( $type, ['type', 'outcome'] ) ) {
 				if ( $key == 'unknown' ) {
 					$key = null;
 				}
@@ -56,7 +55,6 @@ class AppealController extends Controller
 	/**
 	 * Shows a specific appeal
 	 *
-	 * @param Appeal $appeal
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -68,8 +66,6 @@ class AppealController extends Controller
 	/**
 	 * Processor for processing updates to an appeal
 	 *
-	 * @param Appeal $appeal
-	 * @param Request $request
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -79,14 +75,14 @@ class AppealController extends Controller
 		unset( $allInputs['_token'], $allInputs['_method'] );
 		$appeal->update(
 			[
-				'review'   => json_encode( $allInputs ),
+				'review' => json_encode( $allInputs ),
 				'assigned' => auth()->id(),
-				'outcome'  => $allInputs['appeal-outcome'],
-				'reviewed' => now()
+				'outcome' => $allInputs['appeal-outcome'],
+				'reviewed' => now(),
 			]
 		);
 
-		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'appeal' ).' '.__( 'toast-updated' ) );
 
 		return redirect( "/appeal/{$appeal->id}" );
 	}

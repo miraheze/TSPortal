@@ -12,8 +12,6 @@ class Verified extends Component
 {
 	/**
 	 * User we want to verify
-	 *
-	 * @var User
 	 */
 	public User $user;
 
