@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 /*
  * Main web route returning the home/dashboard view.
  */
-Route::get( '/', function() {
+Route::get( '/', function () {
 	return view( 'home' );
 } );
 

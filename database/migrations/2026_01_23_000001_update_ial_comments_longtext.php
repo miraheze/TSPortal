@@ -13,7 +13,7 @@ class UpdateIALCommentsLongtext extends Migration
 	 */
 	public function up()
 	{
-		Schema::table( 'ial', function( Blueprint $table ) {
+		Schema::table( 'ial', function ( Blueprint $table ) {
 			$table->longText( 'comments' )->change();
 		} );
 	}
@@ -25,7 +25,7 @@ class UpdateIALCommentsLongtext extends Migration
 	 */
 	public function down()
 	{
-		Schema::table( 'ial', function( Blueprint $table ) {
+		Schema::table( 'ial', function ( Blueprint $table ) {
 			$table->string( 'comments' )->change();
 		} );
 	}

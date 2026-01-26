@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class AtRiskAlert extends Mailable
 {
-	use Queueable, SerializesModels;
+	use Queueable;
+	use SerializesModels;
 
 	/**
 	 * ID of report the email is regarding.

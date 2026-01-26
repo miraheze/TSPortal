@@ -13,7 +13,7 @@ class CreateUserEventsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create( 'users_events', function( Blueprint $table ) {
+		Schema::create( 'users_events', function ( Blueprint $table ) {
 			$table->foreignId( 'user' )->nullable()->constrained( 'users' );
 			$table->foreignId( 'investigation' )->nullable()->constrained( 'investigations' );
 			$table->timestamp( 'created' );

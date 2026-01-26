@@ -13,7 +13,7 @@ class CreateAppealsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create( 'appeals', function( Blueprint $table ) {
+		Schema::create( 'appeals', function ( Blueprint $table ) {
 			$table->id();
 			$table->foreignId( 'investigation' )->constrained( 'investigations' );
 			$table->string( 'type' );

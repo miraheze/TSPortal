@@ -9,7 +9,9 @@ use Illuminate\Queue\SerializesModels;
 
 class AppealNew
 {
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+	use Dispatchable;
+	use InteractsWithSockets;
+	use SerializesModels;
 
 	/**
 	 * Model for event

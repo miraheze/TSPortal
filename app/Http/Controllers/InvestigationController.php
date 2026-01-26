@@ -70,7 +70,7 @@ class InvestigationController extends Controller
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule ]
+				'username' => [ new MirahezeUsernameRule() ]
 			]
 		);
 
@@ -142,7 +142,7 @@ class InvestigationController extends Controller
 	 */
 	public function update( Investigation $investigation, Request $request )
 	{
-		if ( is_null( $request->input( 'event' ) ) ) {
+		if ( null === $request->input( 'event' ) ) {
 			$updates = [
 				'type'           => $request->input( 'topic' ),
 				'text'           => $request->input( 'evidence' ),
@@ -150,7 +150,7 @@ class InvestigationController extends Controller
 				'explanation'    => $request->input( 'justify' ),
 			];
 
-			if ( !is_null( $request->input( 'assign' ) ) ) {
+			if ( null !== $request->input( 'assign' ) ) {
 				$updates['assigned'] = $request->user()->id;
 			}
 
@@ -185,7 +185,7 @@ class InvestigationController extends Controller
 
 			$investigation->subject->updateStanding( $request->input( 'event' ) );
 
-			if ( !is_null( $request->input( 'status' ) ) ) {
+			if ( null !== $request->input( 'status' ) ) {
 				if ( $investigation->closed ) {
 					$investigation->update( [
 						'closed' => null

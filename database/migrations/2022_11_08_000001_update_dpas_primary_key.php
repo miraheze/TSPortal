@@ -13,7 +13,7 @@ class UpdateDPASPrimaryKey extends Migration
 	 */
 	public function up()
 	{
-		Schema::table( 'dpas', function( Blueprint $table ) {
+		Schema::table( 'dpas', function ( Blueprint $table ) {
 			$table->primary( 'id' );
 		} );
 	}
@@ -25,7 +25,7 @@ class UpdateDPASPrimaryKey extends Migration
 	 */
 	public function down()
 	{
-		Schema::table( 'dpas', function( Blueprint $table ) {
+		Schema::table( 'dpas', function ( Blueprint $table ) {
 			$table->dropPrimary( 'id' );
 		} );
 	}

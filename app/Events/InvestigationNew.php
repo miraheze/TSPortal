@@ -9,7 +9,9 @@ use Illuminate\Queue\SerializesModels;
 
 class InvestigationNew
 {
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+	use Dispatchable;
+	use InteractsWithSockets;
+	use SerializesModels;
 
 	/**
 	 * Model for event

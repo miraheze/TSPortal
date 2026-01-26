@@ -13,7 +13,7 @@ class CreateIALTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create( 'ial', function( Blueprint $table ) {
+		Schema::create( 'ial', function ( Blueprint $table ) {
 			$table->id();
 			$table->timestamp( 'added' );
 			$table->foreignId( 'user' )->constrained( 'users' );

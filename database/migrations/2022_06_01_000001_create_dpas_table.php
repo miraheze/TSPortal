@@ -13,7 +13,7 @@ class CreateDPASTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create( 'dpas', function( Blueprint $table ) {
+		Schema::create( 'dpas', function ( Blueprint $table ) {
 			$table->string( 'id', 32 );
 			$table->timestamp( 'filed' );
 			$table->foreignId( 'user' )->constrained( 'users' );

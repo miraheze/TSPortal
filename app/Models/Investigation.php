@@ -148,7 +148,7 @@ class Investigation extends Model
 		$appeals = $this->appeals;
 
 		foreach ( $appeals as $appeal ) {
-			if ( is_null( $appeal->reviewed ) ) {
+			if ( null === $appeal->reviewed ) {
 				return $appeal->id;
 			}
 		}

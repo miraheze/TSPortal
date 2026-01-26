@@ -13,7 +13,7 @@ class UpdateDPASUnderage extends Migration
 	 */
 	public function up()
 	{
-		Schema::table( 'dpas', function( Blueprint $table ) {
+		Schema::table( 'dpas', function ( Blueprint $table ) {
 			$table->text( 'underage' )->nullable()->change();
 		} );
 	}
@@ -25,7 +25,7 @@ class UpdateDPASUnderage extends Migration
 	 */
 	public function down()
 	{
-		Schema::table( 'dpas', function( Blueprint $table ) {
+		Schema::table( 'dpas', function ( Blueprint $table ) {
 			$table->string( 'underage' )->nullable()->change();
 		} );
 	}

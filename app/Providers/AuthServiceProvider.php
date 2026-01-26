@@ -31,11 +31,11 @@ class AuthServiceProvider extends ServiceProvider
 	{
 		$this->registerPolicies();
 
-		Gate::define( 'ts', function( User $user ) {
+		Gate::define( 'ts', function ( User $user ) {
 			return $user->hasFlag( 'ts' );
 		} );
 
-		Gate::define( 'user-manager', function( User $user ) {
+		Gate::define( 'user-manager', function ( User $user ) {
 			return $user->hasFlag( 'user-manager' );
 		} );
 	}

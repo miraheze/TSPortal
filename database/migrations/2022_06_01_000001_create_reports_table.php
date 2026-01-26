@@ -13,7 +13,7 @@ class CreateReportsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create( 'reports', function( Blueprint $table ) {
+		Schema::create( 'reports', function ( Blueprint $table ) {
 			$table->id();
 			$table->foreignId( 'investigation' )->nullable()->default( null )->constrained( 'investigations' );
 			$table->string( 'type' );

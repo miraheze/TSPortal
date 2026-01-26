@@ -13,7 +13,7 @@ class CreateInvestigationsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create( 'investigations', function( Blueprint $table ) {
+		Schema::create( 'investigations', function ( Blueprint $table ) {
 			$table->id();
 			$table->foreignId( 'subject' )->constrained( 'users' );
 			$table->string( 'type' );
