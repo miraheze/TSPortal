@@ -9,32 +9,32 @@ use Illuminate\Queue\SerializesModels;
 
 class AtRiskAlert extends Mailable
 {
-	use Queueable, SerializesModels;
+    use Queueable, SerializesModels;
 
-	/**
-	 * ID of report the email is regarding.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * ID of report the email is regarding.
+     *
+     * @var int
+     */
+    private $id;
 
-	/**
-	 * Create a new message instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( Report $report )
-	{
-		$this->id = $report->id;
-	}
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct(Report $report)
+    {
+        $this->id = $report->id;
+    }
 
-	/**
-	 * Build the message.
-	 *
-	 * @return $this
-	 */
-	public function build(): AtRiskAlert
-	{
-		return $this->text( 'emails.atrisk' );
-	}
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build(): AtRiskAlert
+    {
+        return $this->text('emails.atrisk');
+    }
 }

@@ -10,30 +10,28 @@ use Illuminate\View\Component;
 
 class Verified extends Component
 {
-	/**
-	 * User we want to verify
-	 *
-	 * @var User
-	 */
-	public User $user;
+    /**
+     * User we want to verify
+     */
+    public User $user;
 
-	/**
-	 * Create a new component instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( User $user )
-	{
-		$this->user = $user;
-	}
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
-	/**
-	 * Get the view that represent the component.
-	 *
-	 * @return Application|Factory|View
-	 */
-	public function render()
-	{
-		return view( 'components.user.verified' );
-	}
+    /**
+     * Get the view that represent the component.
+     *
+     * @return Application|Factory|View
+     */
+    public function render()
+    {
+        return view('components.user.verified');
+    }
 }

@@ -9,36 +9,30 @@ use Illuminate\Queue\SerializesModels;
 
 class ReportNew
 {
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-	/**
-	 * Model for event
-	 *
-	 * @var Report
-	 */
-	public Report $model;
+    /**
+     * Model for event
+     */
+    public Report $model;
 
-	/**
-	 * Model name
-	 *
-	 * @var string
-	 */
-	public string $name = 'Report';
+    /**
+     * Model name
+     */
+    public string $name = 'Report';
 
-	/**
-	 * Model state
-	 *
-	 * @var string
-	 */
-	public string $state = 'created';
+    /**
+     * Model state
+     */
+    public string $state = 'created';
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( Report $report )
-	{
-		$this->model = $report;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct(Report $report)
+    {
+        $this->model = $report;
+    }
 }

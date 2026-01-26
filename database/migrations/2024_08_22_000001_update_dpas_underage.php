@@ -6,27 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 class UpdateDPASUnderage extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::table( 'dpas', function( Blueprint $table ) {
-			$table->text( 'underage' )->nullable()->change();
-		} );
-	}
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('dpas', function (Blueprint $table) {
+            $table->text('underage')->nullable()->change();
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::table( 'dpas', function( Blueprint $table ) {
-			$table->string( 'underage' )->nullable()->change();
-		} );
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('dpas', function (Blueprint $table) {
+            $table->string('underage')->nullable()->change();
+        });
+    }
 }

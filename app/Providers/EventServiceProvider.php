@@ -11,24 +11,22 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
-	/**
-	 * The event listener mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $listen = [
-		DPANew::class              => [ SendWebhookNotification::class ],
-		InvestigationNew::class    => [ SendWebhookNotification::class ],
-		InvestigationClosed::class => [ SendWebhookNotification::class ],
-		ReportNew::class           => [ SendWebhookNotification::class ]
-	];
+    /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        DPANew::class => [SendWebhookNotification::class],
+        InvestigationNew::class => [SendWebhookNotification::class],
+        InvestigationClosed::class => [SendWebhookNotification::class],
+        ReportNew::class => [SendWebhookNotification::class],
+    ];
 
-	/**
-	 * Register any events.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-	}
+    /**
+     * Register any events.
+     *
+     * @return void
+     */
+    public function boot() {}
 }

@@ -9,36 +9,30 @@ use Illuminate\Queue\SerializesModels;
 
 class AppealNew
 {
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-	/**
-	 * Model for event
-	 *
-	 * @var Appeal
-	 */
-	public Appeal $model;
+    /**
+     * Model for event
+     */
+    public Appeal $model;
 
-	/**
-	 * Model name
-	 *
-	 * @var string
-	 */
-	public string $name = 'Appeal';
+    /**
+     * Model name
+     */
+    public string $name = 'Appeal';
 
-	/**
-	 * Model state
-	 *
-	 * @var string
-	 */
-	public string $state = 'created';
+    /**
+     * Model state
+     */
+    public string $state = 'created';
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( Appeal $appeal )
-	{
-		$this->model = $appeal;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct(Appeal $appeal)
+    {
+        $this->model = $appeal;
+    }
 }

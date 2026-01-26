@@ -8,29 +8,27 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvestigationFactory extends Factory
 {
-	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = Investigation::class;
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Investigation::class;
 
-	/**
-	 * Define the model's default state.
-	 *
-	 * @return array
-	 */
-	public function definition(): array
-	{
-		return [
-			'subject'        => User::class,
-			'type'           => 'other',
-			'text'           => null,
-			'recommendation' => null,
-			'explanation'    => null,
-			'created'        => now(),
-			'assigned'       => null,
-			'closed'         => null
-		];
-	}
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        return [
+            'subject' => User::class,
+            'type' => 'other',
+            'text' => null,
+            'recommendation' => null,
+            'explanation' => null,
+            'created' => now(),
+            'assigned' => null,
+            'closed' => null,
+        ];
+    }
 }

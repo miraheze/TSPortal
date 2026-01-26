@@ -14,40 +14,34 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
-	/**
-	 * Shows a list of all users
-	 *
-	 * @return Application|Factory|View
-	 */
-	public function index()
-	{
-		return view( 'user' )->with( 'users', User::all() );
-	}
+    /**
+     * Shows a list of all users
+     *
+     * @return Application|Factory|View
+     */
+    public function index()
+    {
+        return view('user')->with('users', User::all());
+    }
 
-	/**
-	 * Show a specific user page
-	 *
-	 * @param User $user
-	 *
-	 * @return Application|Factory|View
-	 */
-	public function show( User $user )
-	{
-		return view( 'user.view' )->with( 'user', $user );
-	}
+    /**
+     * Show a specific user page
+     *
+     *
+     * @return Application|Factory|View
+     */
+    public function show(User $user)
+    {
+        return view('user.view')->with('user', $user);
+    }
 
-	/**
-	 * Update a users flags
-	 *
-	 * @param Request $request
-	 * @param User $user
-	 *
-	 * @return RedirectResponse
-	 */
-	public function update( Request $request, User $user ): RedirectResponse
-	{
-		$user->updateFlags( $request->input( 'new-access' ) ?? [], $request->user() );
+    /**
+     * Update a users flags
+     */
+    public function update(Request $request, User $user): RedirectResponse
+    {
+        $user->updateFlags($request->input('new-access') ?? [], $request->user());
 
-		return back();
-	}
+        return back();
+    }
 }

@@ -8,35 +8,35 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-	/**
-	 * The policy mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $policies = [
-		'App\Models\Appeals'       => 'App\Policies\AppealPolicy',
-		'App\Models\DPA'           => 'App\Policies\DPAPolicy',
-		'App\Models\IAL'           => 'App\Policies\IALPolicy',
-		'App\Models\Investigation' => 'App\Policies\InvestigationPolicy',
-		'App\Models\Report'        => 'App\Policies\ReportPolicy',
-		'App\Models\User'          => 'App\Policies\UserPolicy',
-	];
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        'App\Models\Appeals' => 'App\Policies\AppealPolicy',
+        'App\Models\DPA' => 'App\Policies\DPAPolicy',
+        'App\Models\IAL' => 'App\Policies\IALPolicy',
+        'App\Models\Investigation' => 'App\Policies\InvestigationPolicy',
+        'App\Models\Report' => 'App\Policies\ReportPolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
+    ];
 
-	/**
-	 * Register any authentication / authorization services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		$this->registerPolicies();
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
 
-		Gate::define( 'ts', function( User $user ) {
-			return $user->hasFlag( 'ts' );
-		} );
+        Gate::define('ts', function (User $user) {
+            return $user->hasFlag('ts');
+        });
 
-		Gate::define( 'user-manager', function( User $user ) {
-			return $user->hasFlag( 'user-manager' );
-		} );
-	}
+        Gate::define('user-manager', function (User $user) {
+            return $user->hasFlag('user-manager');
+        });
+    }
 }

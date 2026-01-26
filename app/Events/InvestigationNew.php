@@ -9,36 +9,30 @@ use Illuminate\Queue\SerializesModels;
 
 class InvestigationNew
 {
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-	/**
-	 * Model for event
-	 *
-	 * @var Investigation
-	 */
-	public Investigation $model;
+    /**
+     * Model for event
+     */
+    public Investigation $model;
 
-	/**
-	 * Model name
-	 *
-	 * @var string
-	 */
-	public string $name = 'Investigation';
+    /**
+     * Model name
+     */
+    public string $name = 'Investigation';
 
-	/**
-	 * Model state
-	 *
-	 * @var string
-	 */
-	public string $state = 'created';
+    /**
+     * Model state
+     */
+    public string $state = 'created';
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( Investigation $investigation )
-	{
-		$this->model = $investigation;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct(Investigation $investigation)
+    {
+        $this->model = $investigation;
+    }
 }

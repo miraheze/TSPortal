@@ -16,78 +16,74 @@ use Illuminate\Routing\Redirector;
  */
 class AppealController extends Controller
 {
-	/**
-	 * Indexes all appeals, with filters for non-privileged users
-	 *
-	 * @param Request $request
-	 *
-	 * @return Application|Factory|View
-	 */
-	public function index( Request $request )
-	{
-		$allAppeals = Appeal::all();
+    /**
+     * Indexes all appeals, with filters for non-privileged users
+     *
+     *
+     * @return Application|Factory|View
+     */
+    public function index(Request $request)
+    {
+        $allAppeals = Appeal::all();
 
-		$query = $request->query();
+        $query = $request->query();
 
-		foreach ( $query as $type => $key ) {
-			if ( !$key ) {
-				continue;
-			} elseif ( $type == 'assigned' ) {
-				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'type', 'outcome' ] ) ) {
-				if ( $key == 'unknown' ) {
-					$key = null;
-				}
+        foreach ($query as $type => $key) {
+            if (! $key) {
+                continue;
+            } elseif ($type == 'assigned') {
+                $allAppeals = $allAppeals->where($type, User::findById((int) $key));
+            } elseif (in_array($type, ['type', 'outcome'])) {
+                if ($key == 'unknown') {
+                    $key = null;
+                }
 
-				$allAppeals = $allAppeals->where( $type, $key );
-			}
-		}
+                $allAppeals = $allAppeals->where($type, $key);
+            }
+        }
 
-		if ( $request->input( 'closed' ) ) {
-			$allAppeals = $allAppeals->whereNotNull( 'reviewed' );
-		} else {
-			$allAppeals = $allAppeals->whereNull( 'reviewed' );
-		}
+        if ($request->input('closed')) {
+            $allAppeals = $allAppeals->whereNotNull('reviewed');
+        } else {
+            $allAppeals = $allAppeals->whereNull('reviewed');
+        }
 
-		return view( 'appeals' )
-			->with( 'appeals', $allAppeals );
-	}
+        return view('appeals')
+            ->with('appeals', $allAppeals);
+    }
 
-	/**
-	 * Shows a specific appeal
-	 *
-	 * @param Appeal $appeal
-	 *
-	 * @return Application|Factory|View
-	 */
-	public function show( Appeal $appeal )
-	{
-		return view( 'appeal.view' )->with( 'appeal', $appeal );
-	}
+    /**
+     * Shows a specific appeal
+     *
+     *
+     * @return Application|Factory|View
+     */
+    public function show(Appeal $appeal)
+    {
+        return view('appeal.view')->with('appeal', $appeal);
+    }
 
-	/**
-	 * Processor for processing updates to an appeal
-	 *
-	 * @param Appeal $appeal
-	 * @param Request $request
-	 *
-	 * @return Application|RedirectResponse|Redirector
-	 */
-	public function update( Appeal $appeal, Request $request )
-	{
-		$allInputs = $request->input();
-		unset( $allInputs['_token'], $allInputs['_method'] );
-		$appeal->update(
-			[
-				'review'   => json_encode( $allInputs ),
-				'assigned' => auth()->id(),
-				'outcome'  => $allInputs['appeal-outcome'],
-				'reviewed' => now()
-			]
-		);
+    /**
+     * Processor for processing updates to an appeal
+     *
+     *
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(Appeal $appeal, Request $request)
+    {
+        $allInputs = $request->input();
+        unset($allInputs['_token'], $allInputs['_method']);
+        $appeal->update(
+            [
+                'review' => json_encode($allInputs),
+                'assigned' => auth()->id(),
+                'outcome' => $allInputs['appeal-outcome'],
+                'reviewed' => now(),
+            ]
+        );
 
-		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
+        request()->session()->flash('successFlash', __('appeal').' '.__('toast-updated'));
 
-		return redirect( "/appeal/{$appeal->id}" );
-	}
+        return redirect("/appeal/{$appeal->id}");
+    }
 }

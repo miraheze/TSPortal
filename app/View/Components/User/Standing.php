@@ -10,30 +10,28 @@ use Illuminate\View\Component;
 
 class Standing extends Component
 {
-	/**
-	 * User standing
-	 *
-	 * @var string
-	 */
-	public string $standing;
+    /**
+     * User standing
+     */
+    public string $standing;
 
-	/**
-	 * Create a new component instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( User $user )
-	{
-		$this->standing = $user->getStanding();
-	}
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct(User $user)
+    {
+        $this->standing = $user->getStanding();
+    }
 
-	/**
-	 * Get the view that represent the component.
-	 *
-	 * @return Application|Factory|View
-	 */
-	public function render()
-	{
-		return view( 'components.user.standing' );
-	}
+    /**
+     * Get the view that represent the component.
+     *
+     * @return Application|Factory|View
+     */
+    public function render()
+    {
+        return view('components.user.standing');
+    }
 }

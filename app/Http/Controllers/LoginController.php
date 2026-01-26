@@ -17,67 +17,66 @@ use Laravel\Socialite\Facades\Socialite;
  */
 class LoginController extends Controller
 {
-	/**
-	 * Constructor class for applying middleware
-	 */
-	public function __construct()
-	{
-		$this->middleware( 'guest' )->only( [ 'login', 'callback' ] );
-		$this->middleware( 'auth' )->only( 'logout' );
-	}
+    /**
+     * Constructor class for applying middleware
+     */
+    public function __construct()
+    {
+        $this->middleware('guest')->only(['login', 'callback']);
+        $this->middleware('auth')->only('logout');
+    }
 
-	/**
-	 * Callback for OAuth application to handle processing of logins
-	 *
-	 * @return RedirectResponse
-	 */
-	public function callback(): RedirectResponse
-	{
-		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
+    /**
+     * Callback for OAuth application to handle processing of logins
+     */
+    public function callback(): RedirectResponse
+    {
+        $socialiteUser = Socialite::driver('mediawiki')->user();
 
-		$user = User::findOrCreate( $socialiteUser->name, true );
+        $user = User::findOrCreate($socialiteUser->name, true);
 
-		if ( count( $user->events ) == 0 ) {
-			$user->newEvent( 'created-login' );
-		}
+        if (count($user->events) == 0) {
+            $user->newEvent('created-login');
+        }
 
-		abort_if( $user->hasFlag( 'login-disabled' ), 403, __( 'login-disabled' ) );
+        abort_if($user->hasFlag('login-disabled'), 403, __('login-disabled'));
 
-		Auth::login( $user );
-		return redirect()->intended();
-	}
+        Auth::login($user);
 
-	/**
-	 * Handles login web requests to forward to OAuth
-	 *
-	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-	 */
-	public function login()
-	{
-		return Socialite::driver( 'mediawiki' )->redirect();
-	}
+        return redirect()->intended();
+    }
 
-	/**
-	 * Handles a logout
-	 *
-	 * @param Request $request
-	 *
-	 * @return Application|RedirectResponse|Redirector
-	 */
-	public function logout( Request $request )
-	{
-		$this->guard()->logout();
-		$request->session()->invalidate();
-		return redirect( '/' );
-	}
+    /**
+     * Handles login web requests to forward to OAuth
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function login()
+    {
+        return Socialite::driver('mediawiki')->redirect();
+    }
 
-	/**
-	 * Guards the application for logins
-	 *
-	 * @return Guard|StatefulGuard
-	 */
-	private function guard()
-	{
-		return Auth::guard();
-	}
+    /**
+     * Handles a logout
+     *
+     *
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->invalidate();
+
+        return redirect('/');
+    }
+
+    /**
+     * Guards the application for logins
+     *
+     * @return Guard|StatefulGuard
+     */
+    private function guard()
+    {
+        return Auth::guard();
+    }
 }

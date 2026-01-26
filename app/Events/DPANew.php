@@ -9,36 +9,30 @@ use Illuminate\Queue\SerializesModels;
 
 class DPANew
 {
-	use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-	/**
-	 * Model for event
-	 *
-	 * @var DPA
-	 */
-	public DPA $model;
+    /**
+     * Model for event
+     */
+    public DPA $model;
 
-	/**
-	 * Model name
-	 *
-	 * @var string
-	 */
-	public string $name = 'DPA';
+    /**
+     * Model name
+     */
+    public string $name = 'DPA';
 
-	/**
-	 * Model state
-	 *
-	 * @var string
-	 */
-	public string $state = 'created';
+    /**
+     * Model state
+     */
+    public string $state = 'created';
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct( DPA $dpa )
-	{
-		$this->model = $dpa;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct(DPA $dpa)
+    {
+        $this->model = $dpa;
+    }
 }
