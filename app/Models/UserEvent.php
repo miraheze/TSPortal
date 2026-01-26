@@ -66,7 +66,7 @@ class UserEvent extends Model
     public function getCreatedByAttribute(?int $user)
     {
         if (! $user) {
-            $user = new User;
+            $user = new User();
             $user->username = 'System';
         } else {
             $user = User::findById($user);

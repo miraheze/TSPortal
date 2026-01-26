@@ -24,7 +24,7 @@ class SameAccountRule implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return  auth()->user()->username == $value;
+        return auth()->user()->username == $value;
     }
 
     /**

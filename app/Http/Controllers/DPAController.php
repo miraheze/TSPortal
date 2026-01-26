@@ -58,7 +58,7 @@ class DPAController extends Controller
     {
         $request->validate(
             [
-                'username' => [new MirahezeUsernameRule, new DPAAlreadyLive],
+                'username' => [new MirahezeUsernameRule(), new DPAAlreadyLive()],
             ]
         );
 
@@ -67,7 +67,7 @@ class DPAController extends Controller
         if ($request->input('username-type') == 'own-removal') {
             $request->validate(
                 [
-                    'username' => [new SameAccountRule],
+                    'username' => [new SameAccountRule()],
                 ]
             );
 

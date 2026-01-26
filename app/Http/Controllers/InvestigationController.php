@@ -67,7 +67,7 @@ class InvestigationController extends Controller
     {
         $request->validate(
             [
-                'username' => [new MirahezeUsernameRule],
+                'username' => [new MirahezeUsernameRule()],
             ]
         );
 

@@ -208,7 +208,7 @@ class User extends Authenticatable
                 'standing' => self::STANDING['BANNED'],
             ]);
         } elseif (in_array($event, ['nd-checkuser', 'nd-protect', 'd-checkuser'])) {
-            return null;
+            return;
         } elseif ($this->standing > self::STANDING['SANCTIONED']) {
             $this->update([
                 'standing' => self::STANDING['SANCTIONED'],
