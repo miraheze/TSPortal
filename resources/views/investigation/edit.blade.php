@@ -85,7 +85,7 @@
 									<input class="form-check-input" type="checkbox" name="assign" id="assign" value="assign"
 									       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;"/>
 									<label class="form-check-label" for="assign">
-										@if ( is_null($investigation->assigned) )
+										@if ( $investigation->assigned === null )
 											{{ __('reassign-claim') }}
 										@else
 											{!! __('reassign-assigned', [ 'assigned' => $investigation->assigned->username ]) !!}

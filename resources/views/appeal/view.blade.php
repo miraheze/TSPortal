@@ -25,7 +25,7 @@
 								<p class="text-primary m-0 fw-bold text-center">{{ __('appeal-review') }}</p>
 							</div>
 							<div class="card-body">
-								@if( is_null($appeal->review) )
+								@if( $appeal->review === null )
 									<div class="row">
 										<div class="col">
 											{{ __('empty') }}

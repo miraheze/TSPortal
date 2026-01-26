@@ -43,7 +43,7 @@
 								<form>
 									<div class="row">
 										<div class="col">
-											@if ( is_null( $dpa->underage ) )
+											@if ( $dpa->underage === null )
 												<div class="alert alert-success text-center text-primary" role="alert">
 													<span><strong>{{ __('dpa-own-account') }}</strong><br/></span>
 												</div>

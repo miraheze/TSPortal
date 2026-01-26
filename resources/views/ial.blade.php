@@ -65,7 +65,7 @@
 					@endif
 				</div>
 				@foreach ( $ials as $ial )
-					@if ( is_null($ial->investigation) && is_null($ial->dpa) )
+					@if ( $ial->investigation === null && $ial->dpa === null )
 						<div class="modal fade" role="dialog" tabindex="-1" id="ial-{{ $ial->id }}-modal">
 							<form method="POST" action="/ial/{{ $ial->id }}">
 								@csrf
