@@ -25,7 +25,7 @@ class MirahezeUsernameRule implements Rule
 	 */
 	public function passes( $attribute, $value ): bool
 	{
-		return  Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser='.htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
+		return Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser='.htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
 	}
 
 	/**
