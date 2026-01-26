@@ -21,6 +21,10 @@ return ( new PhpCsFixer\Config() )
 		'is_null' => true,
 		'spaces_inside_parentheses' => [ 'space' => 'single' ],
 
+		'declare_strict_types' => true,
+		'strict_comparison' => true,
+		'strict_param' => true,
+
 		'array_indentation' => true,
 		'array_syntax' => [ 'syntax' => 'short' ],
 		'binary_operator_spaces' => [
@@ -45,7 +49,9 @@ return ( new PhpCsFixer\Config() )
 			'allow_single_line_empty_anonymous_classes' => false,
 			'allow_single_line_anonymous_functions' => false,
 		],
-		'cast_spaces' => true,
+		'cast_spaces' => [
+			'space' => 'none',
+		],
 		'class_attributes_separation' => [
 			'elements' => [
 				'const' => 'one',
@@ -62,7 +68,7 @@ return ( new PhpCsFixer\Config() )
 		'clean_namespace' => true,
 		'compact_nullable_type_declaration' => true,
 		'concat_space' => [
-			'spacing' => 'none',
+			'spacing' => 'one',
 		],
 		'constant_case' => [ 'case' => 'lower' ],
 		'control_structure_braces' => true,
@@ -153,11 +159,11 @@ return ( new PhpCsFixer\Config() )
 		'no_whitespace_before_comma_in_array' => true,
 		'no_whitespace_in_blank_line' => true,
 		'normalize_index_brace' => true,
-		'not_operator_with_successor_space' => true,
+		'not_operator_with_successor_space' => false,
 		'nullable_type_declaration' => true,
 		'nullable_type_declaration_for_default_null_value' => true,
 		'object_operator_without_whitespace' => true,
-		'ordered_imports' => [ 'sort_algorithm' => 'alpha', 'imports_order' => [ 'const', 'class', 'function' ] ],
+		'ordered_imports' => [ 'sort_algorithm' => 'alpha', 'imports_order' => [ 'class', 'function', 'const' ] ],
 		'ordered_interfaces' => true,
 		'ordered_traits' => true,
 		'php_unit_method_casing' => [ 'case' => 'snake_case' ],
@@ -224,7 +230,7 @@ return ( new PhpCsFixer\Config() )
 		'switch_case_space' => true,
 		'ternary_operator_spaces' => true,
 		'trailing_comma_in_multiline' => [ 'elements' => [ 'arrays' ] ],
-		'trim_array_spaces' => true,
+		'trim_array_spaces' => false,
 		'type_declaration_spaces' => true,
 		'types_spaces' => true,
 		'unary_operator_spaces' => true,
