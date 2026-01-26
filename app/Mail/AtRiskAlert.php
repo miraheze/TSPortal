@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mail;
 
 use App\Models\Report;
@@ -33,7 +35,7 @@ class AtRiskAlert extends Mailable
      *
      * @return $this
      */
-    public function build(): AtRiskAlert
+    public function build(): self
     {
         return $this->text('emails.atrisk');
     }

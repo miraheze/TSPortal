@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\DPA;
@@ -28,11 +30,12 @@ class DPAPolicy
      */
     public function view(User $user, DPA $dpa): Response
     {
-        if ($user->id == $dpa->subject->id) {
+        if ($user->id === $dpa->subject->id) {
             return Response::allow();
-        } else {
-            return Response::deny();
         }
+
+        return Response::deny();
+
     }
 
     /**

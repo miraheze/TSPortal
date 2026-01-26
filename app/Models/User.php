@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -161,7 +163,7 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function updateFlags(array $newFlags, ?User $actor = null)
+    public function updateFlags(array $newFlags, ?self $actor = null): void
     {
         $this->flags = $newFlags;
         $this->save();
@@ -175,7 +177,7 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function newEvent(string $action, ?string $comment = null, ?User $actor = null)
+    public function newEvent(string $action, ?string $comment = null, ?self $actor = null): void
     {
         UserEvent::factory()->create(
             [
@@ -193,7 +195,7 @@ class User extends Authenticatable
      */
     public function getStanding(): string
     {
-        return ucfirst(strtolower(array_flip(self::STANDING)[$this->standing]));
+        return ucfirst(mb_strtolower(array_flip(self::STANDING)[$this->standing]));
     }
 
     /**
@@ -201,7 +203,7 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function updateStanding(string $event)
+    public function updateStanding(string $event): void
     {
         if (in_array($event, ['ban-partial', 'ban-full']) && ($this->standing > self::STANDING['BANNED'])) {
             $this->update([

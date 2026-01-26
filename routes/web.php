@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\AppealController;
 use App\Http\Controllers\DPAController;
 use App\Http\Controllers\IALController;
@@ -18,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 /*
  * Main web route returning the home/dashboard view.
  */
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', fn () => view('home'));
 
 /*
  * Web group for account actions

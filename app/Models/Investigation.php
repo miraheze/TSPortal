@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -104,9 +106,9 @@ class Investigation extends Model
      *
      * @return void
      */
-    public function newEvent(string $action, bool $userRecord, ?string $comment = null, ?User $actor = null)
+    public function newEvent(string $action, bool $userRecord, ?string $comment = null, ?User $actor = null): void
     {
-        if (! ($action == 'comment' && ! $comment)) {
+        if (! ($action === 'comment' && ! $comment)) {
             $subject = ($userRecord) ? $this->subject : null;
 
             UserEvent::factory()->create(

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Events\AppealNew;
@@ -36,10 +38,11 @@ class InvestigationController extends Controller
         foreach ($query as $type => $key) {
             if (! $key) {
                 continue;
-            } elseif (in_array($type, ['subject', 'assigned'])) {
+            }
+            if (in_array($type, ['subject', 'assigned'])) {
                 $allInvestigations = $allInvestigations->where($type, User::findById((int) $key));
             } elseif (in_array($type, ['type', 'recommendation'])) {
-                if ($key == 'unknown') {
+                if ($key === 'unknown') {
                     $key = null;
                 }
 
@@ -84,7 +87,7 @@ class InvestigationController extends Controller
             ]
         );
 
-        $event = (count($investigationUser->events) == 0) ? 'created-investigation' : 'new-investigation';
+        $event = (count($investigationUser->events) === 0) ? 'created-investigation' : 'new-investigation';
 
         $investigationUser->newEvent($event);
 
@@ -150,7 +153,7 @@ class InvestigationController extends Controller
             $investigation->update($updates);
 
             $investigation->newEvent('edit-investigation', false, null, $request->user());
-        } elseif ($request->input('event') == 'appeal-recv') {
+        } elseif ($request->input('event') === 'appeal-recv') {
             $newAppeal = Appeal::factory()->create(
                 [
                     'investigation' => $investigation,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Appeal;
@@ -31,10 +33,11 @@ class AppealController extends Controller
         foreach ($query as $type => $key) {
             if (! $key) {
                 continue;
-            } elseif ($type == 'assigned') {
+            }
+            if ($type === 'assigned') {
                 $allAppeals = $allAppeals->where($type, User::findById((int) $key));
             } elseif (in_array($type, ['type', 'outcome'])) {
-                if ($key == 'unknown') {
+                if ($key === 'unknown') {
                     $key = null;
                 }
 

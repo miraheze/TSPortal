@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Schedules;
 
 use App\Models\IAL;
@@ -13,16 +15,44 @@ class IALScheduler
      *
      * @return void
      */
-    public function __invoke()
+    public function __invoke(): void
     {
         $recentIALs = $this->getRecentIALs();
 
-        if ($recentIALs['total'] == 0) {
+        if ($recentIALs['total'] === 0) {
             return;
         }
 
         $message = $this->createMessage($recentIALs);
         $this->notify($message);
+    }
+
+    /**
+     * Handle the notification.
+     *
+     *
+     * @return void
+     */
+    public function notify(string $message): void
+    {
+        if (config('app.discordhook')) {
+            if (config('app.proxy')) {
+                Http::withOptions(['proxy' => config('app.proxy')])->post(config('app.discordhook'), [
+                    'content' => $message,
+                ]);
+            } else {
+                Http::post(config('app.discordhook'), [
+                    'content' => $message,
+                ]);
+            }
+        }
+
+        if (config('app.mattermosthook')) {
+            Http::post(config('app.mattermosthook'), [
+                'text' => $message,
+                'username' => 'TSPortal',
+            ]);
+        }
     }
 
     /**
@@ -94,33 +124,5 @@ class IALScheduler
             'Finally, the actions completed are as follows: {list:actions}';
 
         return str_replace(array_keys($replacements), array_values($replacements), $msg);
-    }
-
-    /**
-     * Handle the notification.
-     *
-     *
-     * @return void
-     */
-    public function notify(string $message)
-    {
-        if (config('app.discordhook')) {
-            if (config('app.proxy')) {
-                Http::withOptions(['proxy' => config('app.proxy')])->post(config('app.discordhook'), [
-                    'content' => $message,
-                ]);
-            } else {
-                Http::post(config('app.discordhook'), [
-                    'content' => $message,
-                ]);
-            }
-        }
-
-        if (config('app.mattermosthook')) {
-            Http::post(config('app.mattermosthook'), [
-                'text' => $message,
-                'username' => 'TSPortal',
-            ]);
-        }
     }
 }

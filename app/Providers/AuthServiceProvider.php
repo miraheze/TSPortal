@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Models\User;
@@ -27,16 +29,12 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
-        Gate::define('ts', function (User $user) {
-            return $user->hasFlag('ts');
-        });
+        Gate::define('ts', fn (User $user) => $user->hasFlag('ts'));
 
-        Gate::define('user-manager', function (User $user) {
-            return $user->hasFlag('user-manager');
-        });
+        Gate::define('user-manager', fn (User $user) => $user->hasFlag('user-manager'));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,9 +13,9 @@ class CreateDPASTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('dpas', function (Blueprint $table) {
+        Schema::create('dpas', function (Blueprint $table): void {
             $table->string('id', 32);
             $table->timestamp('filed');
             $table->foreignId('user')->constrained('users');
@@ -29,7 +31,7 @@ class CreateDPASTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('dpas');
     }

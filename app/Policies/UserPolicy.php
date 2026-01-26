@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\User;
@@ -37,9 +39,10 @@ class UserPolicy
     {
         if ($model->id === $user->id) {
             return Response::allow();
-        } else {
-            return Response::deny('no access');
         }
+
+        return Response::deny('no access');
+
     }
 
     /**
@@ -57,8 +60,9 @@ class UserPolicy
     {
         if ($user->hasFlag('user-manager')) {
             return Response::allow();
-        } else {
-            return Response::deny();
         }
+
+        return Response::deny();
+
     }
 }

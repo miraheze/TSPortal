@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listeners;
 
 use Illuminate\Support\Facades\Http;
@@ -22,10 +24,10 @@ class SendWebhookNotification
      *
      * @return void
      */
-    public function handle($event)
+    public function handle($event): void
     {
         if (config('app.discordhook')) {
-            $content = 'New '.$event->name.' has been '.$event->state.'. Link: '.config('app.url').'/'.strtolower($event->name).'/'.$event->model->id;
+            $content = 'New '.$event->name.' has been '.$event->state.'. Link: '.config('app.url').'/'.mb_strtolower($event->name).'/'.$event->model->id;
 
             if (config('app.proxy')) {
                 Http::withOptions(['proxy' => config('app.proxy')])->post(config('app.discordhook'), [
@@ -39,7 +41,7 @@ class SendWebhookNotification
         }
 
         if (config('app.mattermosthook')) {
-            $text = 'New '.$event->name.' has been '.$event->state.'. Link: '.config('app.url').'/'.strtolower($event->name).'/'.$event->model->id;
+            $text = 'New '.$event->name.' has been '.$event->state.'. Link: '.config('app.url').'/'.mb_strtolower($event->name).'/'.$event->model->id;
 
             Http::post(config('app.mattermosthook'), [
                 'text' => $text,

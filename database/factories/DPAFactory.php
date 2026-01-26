@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\DPA;
@@ -24,7 +26,7 @@ class DPAFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => substr(sha1(random_bytes(10)), 0, 32),
+            'id' => mb_substr(sha1(random_bytes(10)), 0, 32),
             'filed' => now(),
             'user' => User::class,
             'underage' => null,

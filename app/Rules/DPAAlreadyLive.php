@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Rules;
 
 use App\Models\DPA;
@@ -26,7 +28,7 @@ class DPAAlreadyLive implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        $userId = (auth()->id() == User::findOrCreate($value)->id) ? auth()->id() : $value;
+        $userId = (auth()->id() === User::findOrCreate($value)->id) ? auth()->id() : $value;
 
         return ! (count(DPA::query()->where('user', $userId)->whereNull('completed')->limit(1)->get()));
     }

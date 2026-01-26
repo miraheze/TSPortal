@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -35,7 +37,7 @@ class LoginController extends Controller
 
         $user = User::findOrCreate($socialiteUser->name, true);
 
-        if (count($user->events) == 0) {
+        if (count($user->events) === 0) {
             $user->newEvent('created-login');
         }
 

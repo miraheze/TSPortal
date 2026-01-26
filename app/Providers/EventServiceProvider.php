@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Events\DPANew;
@@ -28,5 +30,5 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot() {}
+    public function boot(): void {}
 }

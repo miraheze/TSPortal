@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Events\DPANew;
@@ -64,7 +66,7 @@ class DPAController extends Controller
 
         $dpaUser = User::findOrCreate($request->input('username'));
 
-        if ($request->input('username-type') == 'own-removal') {
+        if ($request->input('username-type') === 'own-removal') {
             $request->validate(
                 [
                     'username' => [new SameAccountRule()],
@@ -87,7 +89,7 @@ class DPAController extends Controller
             );
         }
 
-        $event = (count($dpaUser->events) == 0) ? 'created-dpa' : 'new-dpa';
+        $event = (count($dpaUser->events) === 0) ? 'created-dpa' : 'new-dpa';
 
         $dpaUser->newEvent($event);
 
