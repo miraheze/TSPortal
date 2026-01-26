@@ -10,8 +10,6 @@ class UpdateDPASPrimaryKey extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
@@ -22,8 +20,6 @@ class UpdateDPASPrimaryKey extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {

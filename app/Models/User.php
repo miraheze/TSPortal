@@ -159,9 +159,6 @@ class User extends Authenticatable
 
     /**
      * Updates a users flags
-     *
-     *
-     * @return void
      */
     public function updateFlags(array $newFlags, ?self $actor = null): void
     {
@@ -173,9 +170,6 @@ class User extends Authenticatable
 
     /**
      * Creates a new event associated with the user
-     *
-     *
-     * @return void
      */
     public function newEvent(string $action, ?string $comment = null, ?self $actor = null): void
     {
@@ -200,8 +194,6 @@ class User extends Authenticatable
 
     /**
      * Updating standing based on recorded event
-     *
-     * @return void
      */
     public function updateStanding(string $event): void
     {

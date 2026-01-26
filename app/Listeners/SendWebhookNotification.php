@@ -20,9 +20,6 @@ class SendWebhookNotification
 
     /**
      * Handle the event.
-     *
-     *
-     * @return void
      */
     public function handle($event): void
     {

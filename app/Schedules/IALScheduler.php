@@ -12,8 +12,6 @@ class IALScheduler
 {
     /**
      * Invoke the scheduler task
-     *
-     * @return void
      */
     public function __invoke(): void
     {
@@ -29,9 +27,6 @@ class IALScheduler
 
     /**
      * Handle the notification.
-     *
-     *
-     * @return void
      */
     public function notify(string $message): void
     {

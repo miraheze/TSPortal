@@ -23,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define route model bindings, pattern filters, etc.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -44,8 +42,6 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Configure rate limiters.
-     *
-     * @return void
      */
     protected function configureRateLimiting(): void
     {

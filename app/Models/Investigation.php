@@ -102,9 +102,6 @@ class Investigation extends Model
 
     /**
      * Create a new event for this investigation
-     *
-     *
-     * @return void
      */
     public function newEvent(string $action, bool $userRecord, ?string $comment = null, ?User $actor = null): void
     {
