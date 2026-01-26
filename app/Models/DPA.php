@@ -26,14 +26,17 @@ class DPA extends Model
 	protected $guarded = [];
 
 	/**
-	 * Automatically convert these to Carbon date items
+	 * Get the attributes that should be cast.
 	 *
-	 * @var array
+	 * @return array<string, string>
 	 */
-	protected $casts = [
-		'filed' => 'datetime',
-		'completed' => 'datetime',
-	];
+	protected function casts(): array
+	{
+		return [
+			'filed' => 'datetime',
+			'completed' => 'datetime',
+		];
+	}
 
 	/**
 	 * Type casting the main ID
