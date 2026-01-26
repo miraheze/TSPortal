@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -65,7 +67,7 @@ class UserEvent extends Model
 	 */
 	public function getCreatedByAttribute( ?int $user )
 	{
-		if ( ! $user ) {
+		if ( !$user ) {
 			$user = new User;
 			$user->username = 'System';
 		} else {

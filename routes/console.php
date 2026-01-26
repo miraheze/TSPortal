@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Schedules\IALScheduler;
 use Illuminate\Support\Facades\Schedule;
 

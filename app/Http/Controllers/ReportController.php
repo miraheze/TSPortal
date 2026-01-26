@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Events\ReportNew;
@@ -31,18 +33,18 @@ class ReportController extends Controller
 	{
 		$allReports = Report::all();
 
-		if ( ! $request->user()->hasFlag( 'ts' ) ) {
+		if ( !$request->user()->hasFlag( 'ts' ) ) {
 			$allReports = $allReports->where( 'reporter', $request->user() );
 		}
 
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( ! $key ) {
+			if ( !$key ) {
 				continue;
-			} elseif ( in_array( $type, ['user', 'reporter'] ) ) {
-				$allReports = $allReports->where( $type, User::findById( (int) $key ) );
-			} elseif ( in_array( $type, ['investigation', 'type'] ) ) {
+			} elseif ( in_array( $type, ['user', 'reporter'], true ) ) {
+				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
+			} elseif ( in_array( $type, ['investigation', 'type'], true ) ) {
 				$allReports = $allReports->where( $type, $key );
 			}
 		}
@@ -82,7 +84,7 @@ class ReportController extends Controller
 			]
 		);
 
-		$event = ( count( $subjectUser->events ) == 0 ) ? 'created-report' : 'new-report';
+		$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
 
 		$subjectUser->newEvent( $event, $report->id );
 
@@ -94,7 +96,7 @@ class ReportController extends Controller
 
 		ReportNew::dispatch( $newReport );
 
-		request()->session()->flash( 'successFlash', __( 'report' ).' '.__( 'toast-submitted' ) );
+		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-submitted' ) );
 
 		return redirect( '/reports' );
 	}
@@ -142,7 +144,7 @@ class ReportController extends Controller
 			] );
 		}
 
-		request()->session()->flash( 'successFlash', __( 'report' ).' '.__( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
 	}

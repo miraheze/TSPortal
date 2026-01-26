@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Appeal;
@@ -29,12 +31,12 @@ class AppealController extends Controller
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
-			if ( ! $key ) {
+			if ( !$key ) {
 				continue;
-			} elseif ( $type == 'assigned' ) {
-				$allAppeals = $allAppeals->where( $type, User::findById( (int) $key ) );
-			} elseif ( in_array( $type, ['type', 'outcome'] ) ) {
-				if ( $key == 'unknown' ) {
+			} elseif ( $type === 'assigned' ) {
+				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
+			} elseif ( in_array( $type, ['type', 'outcome'], true ) ) {
+				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 
@@ -82,7 +84,7 @@ class AppealController extends Controller
 			]
 		);
 
-		request()->session()->flash( 'successFlash', __( 'appeal' ).' '.__( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
 
 		return redirect( "/appeal/{$appeal->id}" );
 	}

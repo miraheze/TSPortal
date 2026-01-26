@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\AppealController;
 use App\Http\Controllers\DPAController;
 use App\Http\Controllers\IALController;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -79,7 +81,7 @@ class User extends Authenticatable
 	{
 		$authUser = self::firstWhere( 'username', $username );
 
-		if ( ! $authUser ) {
+		if ( !$authUser ) {
 			$authUser = self::factory()->createOne(
 				[
 					'username' => $username,
@@ -144,7 +146,7 @@ class User extends Authenticatable
 	 */
 	public function hasFlag( string $flag ): bool
 	{
-		return in_array( $flag, $this->flags );
+		return in_array( $flag, $this->flags, true );
 	}
 
 	/**
@@ -205,11 +207,11 @@ class User extends Authenticatable
 	 */
 	public function updateStanding( string $event )
 	{
-		if ( in_array( $event, ['ban-partial', 'ban-full'] ) && ( $this->standing > self::STANDING['BANNED'] ) ) {
+		if ( in_array( $event, ['ban-partial', 'ban-full'], true ) && ( $this->standing > self::STANDING['BANNED'] ) ) {
 			$this->update( [
 				'standing' => self::STANDING['BANNED'],
 			] );
-		} elseif ( in_array( $event, ['nd-checkuser', 'nd-protect', 'd-checkuser'] ) ) {
+		} elseif ( in_array( $event, ['nd-checkuser', 'nd-protect', 'd-checkuser'], true ) ) {
 			return null;
 		} elseif ( $this->standing > self::STANDING['SANCTIONED'] ) {
 			$this->update( [

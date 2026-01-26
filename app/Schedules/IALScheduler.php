@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Schedules;
 
 use App\Models\IAL;
@@ -17,7 +19,7 @@ class IALScheduler
 	{
 		$recentIALs = $this->getRecentIALs();
 
-		if ( $recentIALs['total'] == 0 ) {
+		if ( $recentIALs['total'] === 0 ) {
 			return;
 		}
 
@@ -69,17 +71,17 @@ class IALScheduler
 	{
 		$varActors = '';
 		foreach ( $recentIALs['actors'] as $actor => $num ) {
-			$varActors .= $actor.'('.$num.') ';
+			$varActors .= $actor . '(' . $num . ') ';
 		}
 
 		$varAssociations = '';
 		foreach ( array_count_values( $recentIALs['associations'] ) as $association => $num ) {
-			$varAssociations .= $association.'('.$num.') ';
+			$varAssociations .= $association . '(' . $num . ') ';
 		}
 
 		$varActions = '';
 		foreach ( array_count_values( $recentIALs['types'] ) as $actions => $num ) {
-			$varActions .= $actions.'('.$num.') ';
+			$varActions .= $actions . '(' . $num . ') ';
 		}
 
 		$replacements = [
@@ -89,8 +91,8 @@ class IALScheduler
 			'{list:actions}' => $varActions,
 		];
 
-		$msg = "**Trust and Safety Internal Action Log Daily Disgest!**\nOver the past 24 hours there have been **{num:actions}** actions!\n".
-			"The following members have taken actions today: {list:actors}\nThese actions have been associated to: {list:associations}\n".
+		$msg = "**Trust and Safety Internal Action Log Daily Disgest!**\nOver the past 24 hours there have been **{num:actions}** actions!\n" .
+			"The following members have taken actions today: {list:actors}\nThese actions have been associated to: {list:associations}\n" .
 			'Finally, the actions completed are as follows: {list:actions}';
 
 		return str_replace( array_keys( $replacements ), array_values( $replacements ), $msg );

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\Report;
@@ -28,7 +30,7 @@ class ReportPolicy
 	 */
 	public function view( User $user, Report $report ): Response
 	{
-		if ( $user == $report->reporter ) {
+		if ( $user === $report->reporter ) {
 			return Response::allow();
 		} else {
 			return Response::deny( 'no access' );

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
 	/*
@@ -50,7 +52,7 @@ return [
 	|
 	*/
 
-	'debug' => (bool) env( 'APP_DEBUG', false ),
+	'debug' => (bool)env( 'APP_DEBUG', false ),
 
 	/*
 	|--------------------------------------------------------------------------

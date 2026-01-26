@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\DPA;
@@ -50,12 +52,12 @@ class IALController extends Controller
 				]
 			);
 		} else {
-			request()->session()->flash( 'failureFlash', __( 'ial' ).' '.__( 'toast-invalid-id' ) );
+			request()->session()->flash( 'failureFlash', __( 'ial' ) . ' ' . __( 'toast-invalid-id' ) );
 
 			return back();
 		}
 
-		request()->session()->flash( 'successFlash', __( 'ial' ).' '.__( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'ial' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
 	}

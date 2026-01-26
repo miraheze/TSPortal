@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Events\DPANew;
@@ -30,7 +32,7 @@ class DPAController extends Controller
 	{
 		$allDPAs = DPA::all();
 
-		if ( ! $request->user()->hasFlag( 'ts' ) ) {
+		if ( !$request->user()->hasFlag( 'ts' ) ) {
 			$allDPAs = $allDPAs->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
 
@@ -64,7 +66,7 @@ class DPAController extends Controller
 
 		$dpaUser = User::findOrCreate( $request->input( 'username' ) );
 
-		if ( $request->input( 'username-type' ) == 'own-removal' ) {
+		if ( $request->input( 'username-type' ) === 'own-removal' ) {
 			$request->validate(
 				[
 					'username' => [new SameAccountRule],
@@ -74,7 +76,7 @@ class DPAController extends Controller
 			$dpa::factory()->create(
 				[
 					'user' => $dpaUser,
-					'statutory' => (bool) $request->input( 'dpa' ),
+					'statutory' => (bool)$request->input( 'dpa' ),
 				]
 			);
 		} else {
@@ -87,7 +89,7 @@ class DPAController extends Controller
 			);
 		}
 
-		$event = ( count( $dpaUser->events ) == 0 ) ? 'created-dpa' : 'new-dpa';
+		$event = ( count( $dpaUser->events ) === 0 ) ? 'created-dpa' : 'new-dpa';
 
 		$dpaUser->newEvent( $event );
 
@@ -95,7 +97,7 @@ class DPAController extends Controller
 
 		DPANew::dispatch( $newDPA );
 
-		request()->session()->flash( 'successFlash', __( 'dpa' ).' '.__( 'toast-submitted' ) );
+		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
 
 		return redirect( '/dpa' );
 	}
@@ -121,7 +123,7 @@ class DPAController extends Controller
 			] );
 
 			$dpa->user->update( [
-				'username' => 'MirahezeGDPR '.$dpa->id,
+				'username' => 'MirahezeGDPR ' . $dpa->id,
 			] );
 		} else {
 			$dpa->update( [
@@ -132,7 +134,7 @@ class DPAController extends Controller
 
 		$dpa->user->newEvent( 'closed-dpa', $request->user() );
 
-		request()->session()->flash( 'successFlash', __( 'dpa' ).' '.__( 'toast-updated' ) );
+		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
 	}
