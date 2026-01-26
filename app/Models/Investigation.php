@@ -27,14 +27,17 @@ class Investigation extends Model
 	protected $guarded = [];
 
 	/**
-	 * Automatically convert these to Carbon date items
+	 * Get the attributes that should be cast.
 	 *
-	 * @var array
+	 * @return array<string, string>
 	 */
-	protected $casts = [
-		'created' => 'datetime',
-		'closed' => 'datetime',
-	];
+	protected function casts(): array
+	{
+		return [
+			'created' => 'datetime',
+			'closed' => 'datetime',
+		];
+	}
 
 	/**
 	 * Defines a relationship with reports leading to this investigation

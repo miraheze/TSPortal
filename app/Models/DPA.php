@@ -26,19 +26,6 @@ class DPA extends Model
 	protected $guarded = [];
 
 	/**
-	 * Get the attributes that should be cast.
-	 *
-	 * @return array<string, string>
-	 */
-	protected function casts(): array
-	{
-		return [
-			'filed' => 'datetime',
-			'completed' => 'datetime',
-		];
-	}
-
-	/**
 	 * Type casting the main ID
 	 *
 	 * @var string
@@ -51,6 +38,19 @@ class DPA extends Model
 	 * @var string
 	 */
 	protected $table = 'dpas';
+
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array
+	{
+		return [
+			'filed' => 'datetime',
+			'completed' => 'datetime',
+		];
+	}
 
 	/**
 	 * Return a relationship between a DPA and the subject user

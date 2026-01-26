@@ -39,17 +39,6 @@ class User extends Authenticatable
 	 */
 	protected $guarded = [];
 
-
-	/**
-	 * Casts an attribute by default
-	 *
-	 * @var array
-	 */
-	protected $casts = [
-		'created' => 'datetime',
-		'flags' => 'array',
-	];
-
 	/**
 	 * Table associated with this model
 	 *
@@ -67,6 +56,19 @@ class User extends Authenticatable
 		'ts',
 		'user-manager'
 	];
+
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array
+	{
+		return [
+			'created' => 'datetime',
+			'flags' => 'array',
+		];
+	}
 
 	/**
 	 * Find a user by username, or create a new user with the username

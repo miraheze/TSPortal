@@ -26,20 +26,23 @@ class IAL extends Model
 	protected $guarded = [];
 
 	/**
-	 * Automatically convert these to Carbon date items
-	 *
-	 * @var array
-	 */
-	protected $casts = [
-		'added' => 'datetime',
-	];
-
-	/**
 	 * Table associated with model
 	 *
 	 * @var string
 	 */
 	protected $table = 'ial';
+
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array
+	{
+		return [
+			'added' => 'datetime',
+		];
+	}
 
 	/**
 	 * Return a relationship between a IAL and the adding user
