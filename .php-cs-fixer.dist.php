@@ -22,6 +22,7 @@ return ( new Config() )
 		'@PSR12' => true,
 		'array_indentation' => true,
 		'array_syntax' => [ 'syntax' => 'short' ],
+		'assign_null_coalescing_to_coalesce_equal' => true,
 		'binary_operator_spaces' => [
 			'default' => 'single_space',
 		],
