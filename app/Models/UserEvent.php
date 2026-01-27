@@ -26,20 +26,23 @@ class UserEvent extends Model
 	protected $guarded = [];
 
 	/**
-	 * Automatically convert these to Carbon date items
-	 *
-	 * @var array
-	 */
-	protected $casts = [
-		'created' => 'datetime',
-	];
-
-	/**
 	 * Table associated with the model
 	 *
 	 * @var string
 	 */
 	protected $table = 'users_events';
+
+	/**
+	 * Get the attributes that should be cast.
+	 *
+	 * @return array<string, string>
+	 */
+	protected function casts(): array
+	{
+		return [
+			'created' => 'datetime',
+		];
+	}
 
 	/**
 	 * Defines a relationship with the user the event is for

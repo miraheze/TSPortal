@@ -26,14 +26,17 @@ class Report extends Model
 	protected $guarded = [];
 
 	/**
-	 * Automatically convert these to Carbon date items
+	 * Get the attributes that should be cast.
 	 *
-	 * @var array
+	 * @return array<string, string>
 	 */
-	protected $casts = [
-		'created' => 'datetime',
-		'reviewed' => 'datetime',
-	];
+	protected function casts(): array
+	{
+		return [
+			'created' => 'datetime',
+			'reviewed' => 'datetime',
+		];
+	}
 
 	/**
 	 * Defines a relationship with the investigation this report creates

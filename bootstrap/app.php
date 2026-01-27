@@ -1,6 +1,5 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,7 +16,7 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 		$middleware->throttleApi();
 		$middleware->redirectTo(
 			guests: fn (): string => route( 'login' ),
-			users: RouteServiceProvider::HOME,
+			users: '/',
 		);
 
 		$middleware->trustProxies(
