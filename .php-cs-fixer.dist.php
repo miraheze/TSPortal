@@ -77,7 +77,9 @@ return ( new Config() )
 		'elseif' => true,
 		'encoding' => true,
 		'full_opening_tag' => true,
-		'fully_qualified_strict_types' => false,
+		'fully_qualified_strict_types' => [
+			'import_symbols' => true,
+		],
 		'function_declaration' => true,
 		'general_phpdoc_tag_rename' => true,
 		'global_namespace_import' => [
