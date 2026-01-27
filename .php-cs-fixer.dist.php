@@ -2,7 +2,10 @@
 
 declare( strict_types=1 );
 
-$finder = PhpCsFixer\Finder::create()
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
 	->in( __DIR__ )
 	->exclude( [
 		'vendor',
@@ -11,20 +14,12 @@ $finder = PhpCsFixer\Finder::create()
 	] )
 	->name( '*.php' );
 
-return ( new PhpCsFixer\Config() )
+return ( new Config() )
 	->setRiskyAllowed( true )
 	->setIndent( "\t" )
 	->setLineEnding( "\n" )
 	->setRules( [
 		'@PSR12' => true,
-
-		'is_null' => true,
-		'spaces_inside_parentheses' => [ 'space' => 'single' ],
-
-		'declare_strict_types' => true,
-		'strict_comparison' => true,
-		'strict_param' => true,
-
 		'array_indentation' => true,
 		'array_syntax' => [ 'syntax' => 'short' ],
 		'binary_operator_spaces' => [
@@ -77,17 +72,24 @@ return ( new PhpCsFixer\Config() )
 		],
 		'declare_equal_normalize' => true,
 		'declare_parentheses' => true,
+		'declare_strict_types' => true,
 		'elseif' => true,
 		'encoding' => true,
 		'full_opening_tag' => true,
 		'fully_qualified_strict_types' => false,
 		'function_declaration' => true,
 		'general_phpdoc_tag_rename' => true,
+		'global_namespace_import' => [
+			'import_classes' => true,
+			'import_functions' => true,
+			'import_constants' => true,
+		],
 		'heredoc_to_nowdoc' => true,
 		'include' => true,
 		'increment_style' => [ 'style' => 'post' ],
 		'indentation_type' => true,
 		'integer_literal_case' => true,
+		'is_null' => true,
 		'lambda_not_used_import' => true,
 		'line_ending' => true,
 		'linebreak_after_opening_tag' => true,
@@ -223,9 +225,11 @@ return ( new PhpCsFixer\Config() )
 		'single_quote' => true,
 		'single_space_around_construct' => true,
 		'space_after_semicolon' => true,
-
+		'spaces_inside_parentheses' => [ 'space' => 'single' ],
 		'standardize_not_equals' => true,
 		'statement_indentation' => true,
+		'strict_comparison' => true,
+		'strict_param' => true,
 		'switch_case_semicolon_to_colon' => true,
 		'switch_case_space' => true,
 		'ternary_operator_spaces' => true,
@@ -239,10 +243,10 @@ return ( new PhpCsFixer\Config() )
 		],
 		'whitespace_after_comma_in_array' => true,
 		'yoda_style' => [
-			   'always_move_variable' => false,
-			   'equal' => false,
-			   'identical' => false,
-			   'less_and_greater' => false,
+			'always_move_variable' => false,
+			'equal' => false,
+			'identical' => false,
+			'less_and_greater' => false,
 		],
 	] )
 	->setFinder( $finder );
