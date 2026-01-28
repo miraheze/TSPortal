@@ -1,4 +1,4 @@
-# Miraheze TSPortal
+# TSPortal
 
 TSPortal is the platform Miraheze uses as its in-house built platform for handling reports, investigations, appeals, and transparency.
 
@@ -8,7 +8,7 @@ This software is built on the [Laravel](https://laravel.com) framework, released
 
 ## Code of Conduct
 
-In order to ensure that the community is welcoming to all, please review and abide by the [Code of Conduct](https://meta.miraheze.org/wiki/Special:MyLanguage/Code_of_Conduct).
+In order to ensure that the community is welcoming to all, please review and abide by the [Code of Conduct](https://meta.miraheze.org/wiki/Special:MyLanguage/Global_Conduct_Policy).
 
 ## Security Vulnerabilities
 
