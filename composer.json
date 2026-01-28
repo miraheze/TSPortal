@@ -8,7 +8,7 @@
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"guzzlehttp/guzzle": "7.10.0",
-		"laravel/framework": "12.48.1",
+		"laravel/framework": "12.49.0",
 		"laravel/serializable-closure": "2.0.8",
 		"laravel/socialite": "5.24.2",
 		"laravel/tinker": "2.11.0",
