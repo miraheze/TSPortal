@@ -1,19 +1,19 @@
 # TSPortal
 
-TSPortal is the platform Miraheze uses as its in-house built platform for handling reports, investigations, appeals, and transparency.
+TSPortal is the WikiTide Foundation’s in-house platform used by the Trust and Safety team to manage reports, investigations, appeals, and transparency work.
 
-It is designed by [Owen Baines](https://github.com/OwenBaines) and is managed on [Phorge](https://issue-tracker.miraheze.org/project/board/71/).
+The platform was originally designed by [Owen Baines](https://github.com/OwenBaines). Ongoing development and maintenance are handled by the Technology team in collaboration with Trust and Safety. Project tracking is managed on [Phorge](https://issue-tracker.miraheze.org/project/board/71/).
 
-This software is built on the [Laravel](https://laravel.com) framework, released under the MIT license.
+TSPortal is built using the [Laravel](https://laravel.com) framework and is released under the MIT license.
 
 ## Code of Conduct
 
-In order to ensure that the community is welcoming to all, please review and abide by the [Code of Conduct](https://meta.miraheze.org/wiki/Special:MyLanguage/Global_Conduct_Policy).
+To help keep the community welcoming and respectful, please review and follow the [Code of Conduct](https://meta.miraheze.org/wiki/Special:MyLanguage/Global_Conduct_Policy).
 
 ## Security Vulnerabilities
 
-Please review [our security policy](https://meta.miraheze.org/wiki/Special:MyLanguage/Security) on how to report security vulnerabilities.
+For information on reporting security issues, please see [our security policy](https://meta.miraheze.org/wiki/Special:MyLanguage/Security).
 
 ## License
 
-This is open-sourced software licensed under the [MIT license](LICENSE.md).
+This project is open-source software licensed under the [MIT license](LICENSE.md).
