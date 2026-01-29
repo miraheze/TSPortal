@@ -22,7 +22,7 @@
 		"enabled": true,
 		"automerge": true,
 		"automergeType": "branch",
-		"schedule": [ "before 12am on sunday" ]
+		"schedule": [ "after 12am and before 5am on sunday" ]
 	},
 
 	"prConcurrentLimit": 1
