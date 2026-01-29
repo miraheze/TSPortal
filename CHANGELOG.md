@@ -3,7 +3,20 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v26...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v27...main)
+
+## Version 27 (2026-01-29)
+
+### Changed
+
+- Some more cleanup/migration to streamlined file structure added in Laravel 11.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.48.1 to 12.49.0.
+  - Upgraded phpunit/phpunit from 12.5.7 to 12.5.8.
+ 
+### Removed
+
+- Removed laravel/sanctum. No longer included by default and the only usage in this was project was unnecessary.
 
 ## Version 26 (2026-01-25)
 
