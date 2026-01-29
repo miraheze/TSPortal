@@ -18,5 +18,11 @@
 		}
 	],
 
+	"lockFileMaintenance": {
+		"enabled": true,
+		"automerge": true,
+		"automergeType": "branch"
+	},
+
 	"prConcurrentLimit": 1
 }
