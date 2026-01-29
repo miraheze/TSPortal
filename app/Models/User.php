@@ -225,17 +225,33 @@ class User extends Authenticatable
 	 *
 	 * @return void
 	 */
-	public function updateStanding( string $event )
+	public function updateStanding( string $event ): void
 	{
-		if ( in_array( $event, [ 'ban-partial', 'ban-full' ] ) && ( $this->standing > self::STANDING['BANNED'] ) ) {
+		if ( $event === 'sanction-lifted' ) {
+			if ( $this->standing !== self::STANDING['GOOD'] ) {
+				$this->update( [
+					'standing' => self::STANDING['GOOD'],
+				] );
+			}
+			return;
+		}
+
+		if ( in_array( $event, [ 'ban-partial', 'ban-full' ], true )
+			&& ( $this->standing > self::STANDING['BANNED'] )
+		) {
 			$this->update( [
-				'standing' => self::STANDING['BANNED']
+				'standing' => self::STANDING['BANNED'],
 			] );
-		} elseif ( in_array( $event, [ 'nd-checkuser', 'nd-protect', 'd-checkuser' ] ) ) {
-			return null;
-		} elseif ( $this->standing > self::STANDING['SANCTIONED'] ) {
+			return;
+		}
+
+		if ( in_array( $event, [ 'nd-checkuser', 'nd-protect', 'd-checkuser' ], true ) ) {
+			return;
+		}
+
+		if ( $this->standing > self::STANDING['SANCTIONED'] ) {
 			$this->update( [
-				'standing' => self::STANDING['SANCTIONED']
+				'standing' => self::STANDING['SANCTIONED'],
 			] );
 		}
 	}
