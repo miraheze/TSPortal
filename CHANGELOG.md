@@ -3,7 +3,22 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v27...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v28...main)
+
+## Version 28 (2026-02-20)
+
+### Fixed
+
+- Fixed exception in DPAPolicy.
+
+### Changed
+
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.49.0 to 12.52.0.
+  - Upgraded laravel/serializable-closure from 2.0.8 to 2.0.9.
+  - Upgraded laravel/tinker from 2.11.0 to 2.11.1.
+  - Upgraded nunomaduro/collision from ^8.6 to ^8.9.
+  - Upgraded phpunit/phpunit from 12.5.7 to 13.0.5.
 
 ## Version 27 (2026-01-29)
 
