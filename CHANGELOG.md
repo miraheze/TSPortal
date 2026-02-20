@@ -9,7 +9,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Fixed
 
-- Restore webhook event listener functionality.
+- Restored webhook event listener functionality.
 
 ## Version 28 (2026-02-20)
 
