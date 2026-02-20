@@ -2,10 +2,17 @@
 
 namespace App\Providers;
 
+use App\Events\AppealNew;
+use App\Events\DPANew;
+use App\Events\InvestigationClosed;
+use App\Events\InvestigationNew;
+use App\Events\ReportNew;
+use App\Listeners\SendWebhookNotification;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +47,17 @@ class AppServiceProvider extends ServiceProvider
 		Gate::define( 'user-manager', function ( User $user ) {
 			return $user->hasFlag( 'user-manager' );
 		} );
+
+		Event::listen(
+			[
+				AppealNew::class,
+				DPANew::class,
+				InvestigationClosed::class,
+				InvestigationNew::class,
+				ReportNew::class,
+			],
+			SendWebhookNotification::class
+		);
 
 		Paginator::useBootstrap();
 	}
