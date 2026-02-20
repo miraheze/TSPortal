@@ -37,11 +37,11 @@ class DPAPolicy
 	 */
 	public function view( User $user, DPA $dpa ): Response
 	{
-		if ( $user->id == $dpa->subject->id ) {
+		if ( $user->id === $dpa->user->id ) {
 			return Response::allow();
-		} else {
-			return Response::deny();
 		}
+
+		return Response::deny();
 	}
 
 	/**
