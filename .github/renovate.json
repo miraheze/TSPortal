@@ -1,20 +1,36 @@
 {
 	"extends": [ "config:recommended" ],
 
+	"prConcurrentLimit": 3,
 	"separateMajorMinor": false,
-	"separateMinorPatch": false,
 
+	"labels": [ "dependencies" ],
 	"packageRules": [
 		{
-			"matchPackagePatterns": [ "*" ],
-			"groupName": "all dependencies",
-			"groupSlug": "all-deps",
+			"matchDepTypes": [ "require" ],
+			"groupName": "prod dependencies",
+			"groupSlug": "prod-deps",
+			"addLabels": [ "composer" ]
+		},
+		{
+			"matchDepTypes": [ "require-dev" ],
+			"groupName": "dev dependencies",
+			"groupSlug": "dev-deps",
 			"automerge": true,
-			"automergeType": "branch"
+			"automergeType": "branch",
+			"addLabels": [ "composer" ]
+		},
+		{
+			"matchManagers": [ "github-actions" ],
+			"groupName": "github actions",
+			"groupSlug": "github-actions",
+			"automerge": true,
+			"automergeType": "branch",
+			"addLabels": [ "github-actions" ]
 		},
 		{
 			"matchManagers": [ "composer" ],
-			"rangeStrategy": "replace"
+			"rangeStrategy": "bump"
 		}
 	],
 
@@ -23,7 +39,5 @@
 		"automerge": true,
 		"automergeType": "branch",
 		"schedule": [ "after 12am and before 5am on sunday" ]
-	},
-
-	"prConcurrentLimit": 1
+	}
 }
