@@ -6,6 +6,7 @@ use App\Events\AppealNew;
 use App\Events\DPANew;
 use App\Events\InvestigationClosed;
 use App\Events\InvestigationNew;
+use App\Events\InvestigationReopened;
 use App\Events\ReportNew;
 use App\Listeners\SendWebhookNotification;
 use App\Models\User;
@@ -54,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
 				DPANew::class,
 				InvestigationClosed::class,
 				InvestigationNew::class,
+				InvestigationReopened::class,
 				ReportNew::class,
 			],
 			SendWebhookNotification::class
