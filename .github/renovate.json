@@ -30,11 +30,9 @@
 		},
 		{
 			"matchManagers": [ "composer" ],
-			"rangeStrategy": "bump"
+			"rangeStrategy": "replace"
 		}
 	],
-
-	"ignoreDeps": [ "php" ],
 
 	"lockFileMaintenance": {
 		"enabled": true,
