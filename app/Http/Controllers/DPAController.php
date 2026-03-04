@@ -82,6 +82,12 @@ class DPAController extends Controller
 				]
 			);
 		} else {
+			$request->validate(
+				[
+					'evidence' => [ 'required', 'string' ],
+				]
+			);
+
 			$dpa::factory()->create(
 				[
 					'user'      => $dpaUser,
