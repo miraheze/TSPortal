@@ -7,7 +7,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class InvestigationClosed
+class InvestigationReopened
 {
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -30,7 +30,7 @@ class InvestigationClosed
 	 *
 	 * @var string
 	 */
-	public string $state = 'closed';
+	public string $state = 'reopened';
 
 	/**
 	 * Create a new event instance.

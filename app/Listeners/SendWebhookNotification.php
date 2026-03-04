@@ -25,23 +25,26 @@ class SendWebhookNotification
 	 */
 	public function handle( $event )
 	{
-		if ( config( 'app.discordhook' ) ) {
-			$content = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
+		$text = '';
+		if ( !in_array( $event->state, [ 'closed', 'reopened' ], true ) ) {
+			$text .= 'New ';
+		}
 
+		$text .= $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
+
+		if ( config( 'app.discordhook' ) ) {
 			if ( config( 'app.proxy' ) ) {
 				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
-					'content' => $content
+					'content' => $text,
 				] );
 			} else {
 				Http::post( config( 'app.discordhook' ), [
-					'content' => $content
+					'content' => $text,
 				] );
 			}
 		}
 
 		if ( config( 'app.mattermosthook' ) ) {
-			$text = 'New ' . $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
-
 			Http::post( config( 'app.mattermosthook' ), [
 				'text' => $text,
 				'username' => 'TSPortal',

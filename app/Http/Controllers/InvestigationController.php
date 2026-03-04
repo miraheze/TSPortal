@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\AppealNew;
 use App\Events\InvestigationClosed;
 use App\Events\InvestigationNew;
+use App\Events\InvestigationReopened;
 use App\Models\Appeal;
 use App\Models\Investigation;
 use App\Models\User;
@@ -188,19 +189,19 @@ class InvestigationController extends Controller
 			if ( !is_null( $request->input( 'status' ) ) ) {
 				if ( $investigation->closed ) {
 					$investigation->update( [
-						'closed' => null
+						'closed' => null,
 					] );
 
 					$investigation->newEvent( 'reopen-investigation', false, $request->input( 'comments' ), $request->user() );
+					InvestigationReopened::dispatch( $investigation );
 				} else {
 					$investigation->update( [
-						'closed' => now()
+						'closed' => now(),
 					] );
 
 					$investigation->newEvent( 'close-investigation', false, $request->input( 'comments' ), $request->user() );
+					InvestigationClosed::dispatch( $investigation );
 				}
-
-				InvestigationClosed::dispatch( $investigation, !$investigation->closed );
 			}
 		}
 
