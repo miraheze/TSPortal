@@ -9,6 +9,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Added
 
+- SECURITY: Added validation to the evidence field when creating a DPA for another user ([GHSA-gfhq-7499-f3f2](https://github.com/miraheze/TSPortal/security/advisories/GHSA-gfhq-7499-f3f2)).
 - Added new InvestigationReopened event.
 
 ### Fixed
