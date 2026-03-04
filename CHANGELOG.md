@@ -3,7 +3,26 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v29...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v30...main)
+
+## Version 30 (2026-03-04)
+
+### Added
+
+- Added new InvestigationReopened event.
+
+### Fixed
+
+- Fixed a logic error causing InvestigationReopened events to be triggered when the Investigation is actually closed.
+- Fixed webhook notifications to not say "New" before "Investigation" if it's not a new investigation (if state is closed or reopened, it removes the "New").
+
+### Changed
+
+- Changed the InvestigationClosed event to only be closed, not reopened as well.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.52.0 to 12.53.0.
+  - Upgraded laravel/serializable-closure from 2.0.9 to 2.0.10.
+  - Upgraded laravel/socialite from 5.24.2 to 5.24.3.
 
 ## Version 29 (2026-02-20)
 
