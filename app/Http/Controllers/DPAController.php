@@ -29,13 +29,12 @@ class DPAController
 	 */
 	public function index( Request $request )
 	{
-		$allDPAs = DPA::all();
-
+		$query = DPA::query()->whereNull( 'completed' )->latest( 'filed' );
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allDPAs = $allDPAs->where( 'user', $request->user()->id )->whereNull( 'underage' );
+			$query->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
 
-		return view( 'dpa' )->with( 'dpas', $allDPAs->whereNull( 'completed' ) );
+		return view( 'dpa' )->with( 'dpas', $query->get() );
 	}
 
 	/**
@@ -97,12 +96,10 @@ class DPAController
 			);
 		}
 
-		$event = ( count( $dpaUser->events ) == 0 ) ? 'created-dpa' : 'new-dpa';
-
+		$event = $dpaUser->events()->exists() ? 'new-dpa' : 'created-dpa';
 		$dpaUser->newEvent( $event );
 
-		$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get()->all()[0];
-
+		$newDPA = DPA::query()->latest( 'filed' )->first();
 		DPANew::dispatch( $newDPA );
 
 		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
