@@ -3,7 +3,20 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v30...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v31...main)
+
+## Version 31 (2026-03-10)
+
+### Fixed
+
+- Fixed associations in IALScheduler to actually show properly rather than random numbers.
+
+### Changed
+
+- Changed IALScheduler to omly count the number of actions per actor rather than listing the same actor repeatedly.
+- Changed the query used in IALScheduler to not use `::all()` to improve performance.
+- Upgraded external libraries:
+  - Upgraded Bootstrap from 5.3.0-alpha1 to 5.3.8.
 
 ## Version 30 (2026-03-04)
 
