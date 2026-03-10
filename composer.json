@@ -8,9 +8,9 @@
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"guzzlehttp/guzzle": "7.10.0",
-		"laravel/framework": "12.53.0",
+		"laravel/framework": "12.54.0",
 		"laravel/serializable-closure": "2.0.10",
-		"laravel/socialite": "5.24.3",
+		"laravel/socialite": "5.25.0",
 		"laravel/tinker": "2.11.1",
 		"doctrine/dbal": "^4.4",
 		"taavi/laravel-socialite-mediawiki": "1.6.0"
