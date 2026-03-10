@@ -69,8 +69,8 @@ class DPA extends Model
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
-	public function getUserAttribute( int $id )
+	/*public function getUserAttribute( int $id )
 	{
 		return User::findById( $id );
-	}
+	}*/
 }
