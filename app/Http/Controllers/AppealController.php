@@ -14,7 +14,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Controller class for all Appeal actions
  */
-class AppealController extends Controller
+class AppealController
 {
 	/**
 	 * Indexes all appeals, with filters for non-privileged users

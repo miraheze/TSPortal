@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 /**
  * Controller for all user related actions outside a login
  */
-class UserController extends Controller
+class UserController
 {
 	/**
 	 * Shows a list of all users

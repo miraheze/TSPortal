@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Mail;
 /**
  * Controller for all Report actions
  */
-class ReportController extends Controller
+class ReportController
 {
 	/**
 	 * Indexes all reports, filtering for non-privileged users

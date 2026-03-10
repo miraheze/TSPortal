@@ -18,7 +18,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Controller class for DPA request and actions
  */
-class DPAController extends Controller
+class DPAController
 {
 	/**
 	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users
