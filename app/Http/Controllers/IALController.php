@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Controller class for Internal Actions Log requests and actions
  */
-class IALController extends Controller
+class IALController
 {
 	/**
 	 * Indexes and shows all IALs

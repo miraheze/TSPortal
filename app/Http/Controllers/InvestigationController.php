@@ -20,7 +20,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Controller class for all Investigation actions
  */
-class InvestigationController extends Controller
+class InvestigationController
 {
 	/**
 	 * Indexes all investigations, with filters for non-privileged users

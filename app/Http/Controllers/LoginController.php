@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -16,7 +16,7 @@ use Laravel\Socialite\Facades\Socialite;
 /**
  * Controller for handling user logins and creations
  */
-class LoginController extends BaseController
+class LoginController extends Controller
 {
 	/**
 	 * Constructor class for applying middleware
