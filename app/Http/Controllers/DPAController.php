@@ -29,7 +29,7 @@ class DPAController
 	 */
 	public function index( Request $request )
 	{
-		$query = DPA::query()->whereNull( 'completed' )->latest( 'filed' );
+		$query = DPA::query()->whereNull( 'completed' )->oldest( 'filed' );
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
 			$query->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
@@ -61,7 +61,7 @@ class DPAController
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ]
+				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ],
 			]
 		);
 
@@ -70,14 +70,14 @@ class DPAController
 		if ( $request->input( 'username-type' ) == 'own-removal' ) {
 			$request->validate(
 				[
-					'username' => [ new SameAccountRule ]
+					'username' => [ new SameAccountRule ],
 				]
 			);
 
 			$dpa::factory()->create(
 				[
-					'user'      => $dpaUser,
-					'statutory' => (bool)$request->input( 'dpa' )
+					'user' => $dpaUser,
+					'statutory' => (bool)$request->input( 'dpa' ),
 				]
 			);
 		} else {
@@ -89,9 +89,9 @@ class DPAController
 
 			$dpa::factory()->create(
 				[
-					'user'      => $dpaUser,
-					'underage'  => $request->input( 'evidence' ),
-					'statutory' => true
+					'user' => $dpaUser,
+					'underage' => $request->input( 'evidence' ),
+					'statutory' => true,
 				]
 			);
 		}
@@ -129,21 +129,20 @@ class DPAController
 	{
 		if ( $request->input( 'approve' ) ?? false ) {
 			$dpa->update( [
-				'completed' => now()
+				'completed' => now(),
 			] );
 
 			$dpa->user->update( [
-				'username' => 'MirahezeGDPR ' . $dpa->id
+				'username' => 'MirahezeGDPR ' . $dpa->id,
 			] );
 		} else {
 			$dpa->update( [
 				'completed' => now(),
-				'reject'    => $request->input( 'reason' )
+				'reject' => $request->input( 'reason' ),
 			] );
 		}
 
 		$dpa->user->newEvent( 'closed-dpa', $request->user() );
-
 		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
