@@ -61,6 +61,6 @@ class AppServiceProvider extends ServiceProvider
 			SendWebhookNotification::class
 		);
 
-		Paginator::useBootstrap();
+		Paginator::useBootstrapFive();
 	}
 }
