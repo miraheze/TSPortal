@@ -3,7 +3,22 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v31...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v32...main)
+
+## Version 32 (2026-03-13)
+
+### Changed
+
+- Changed `Paginator::useBootstrap()` (which uses Bootstrap 4) to `Paginator::useBootstrapFive()`.
+- Changed DPAs to sort by the filed timestamp.
+- Changed the query used in DPAController to not use `::all()` to improve performance.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.53.0 to 12.54.1.
+  - Upgraded laravel/socialite from 5.24.3 to 5.25.0.
+ 
+### Removed
+
+- Removed stub Controller class.
 
 ## Version 31 (2026-03-10)
 
@@ -13,7 +28,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Changed
 
-- Changed IALScheduler to omly count the number of actions per actor rather than listing the same actor repeatedly.
+- Changed IALScheduler to only count the number of actions per actor rather than listing the same actor repeatedly.
 - Changed the query used in IALScheduler to not use `::all()` to improve performance.
 - Upgraded external libraries:
   - Upgraded Bootstrap from 5.3.0-alpha1 to 5.3.8.
