@@ -18,7 +18,7 @@ return new class extends Migration {
 			$table->string( 'username' );
 			$table->boolean( 'user_verified' )->default( false );
 			$table->tinyInteger( 'standing' )->default( 0 );
-			$table->json( 'flags' )->default( "[]" );
+			$table->json( 'flags' )->default( '[]' );
 		} );
 	}
 
@@ -29,6 +29,6 @@ return new class extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists( 'users' );
 	}
 };
