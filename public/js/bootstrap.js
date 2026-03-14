@@ -1894,7 +1894,7 @@
         referenceElement = this._config.reference;
       }
       const popperConfig = this._getPopperConfig();
-      this._popper = Popper__namespace.createPopper(referenceElement, this._menu, popperConfig);
+      // this._popper = Popper__namespace.createPopper(referenceElement, this._menu, popperConfig);
     }
     _isShown() {
       return this._menu.classList.contains(CLASS_NAME_SHOW$6);
