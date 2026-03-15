@@ -98,7 +98,7 @@
 	"events-no-comment": "No additional information provided.",
 	"events-reopen-investigation-desc": "Reopened investigation.",
 	"events-sanction-lifted": "Sanction Lifted",
-	"events-sanction-lifted-desc": "Sanction Lifted after appeal: :comment",
+	"events-sanction-lifted-desc": "Sanction Lifted after successful appeal: :comment",
 	"events-update-flags-desc": "User access flags changed. Now: :flags",
 	"evidence": "Evidence",
 	"filter": "Filter",
