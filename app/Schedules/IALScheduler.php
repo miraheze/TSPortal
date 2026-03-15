@@ -61,10 +61,8 @@ class IALScheduler
 
 	/**
 	 * Creates a webhook message based on recent IALs.
-	 *
-	 * @return array|string|string[]
 	 */
-	private function createMessage( array $recentIALs )
+	private function createMessage( array $recentIALs ): string
 	{
 		$varActors = '';
 		foreach ( $recentIALs['actors'] as $actor => $num ) {
@@ -81,8 +79,8 @@ class IALScheduler
 		}
 
 		$varActions = '';
-		foreach ( array_count_values( $recentIALs['types'] ) as $actions => $num ) {
-			$varActions .= $actions . '(' . $num . ') ';
+		foreach ( array_count_values( $recentIALs['types'] ) as $action => $num ) {
+			$varActions .= $action . '(' . $num . ') ';
 		}
 
 		$replacements = [
