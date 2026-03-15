@@ -71,11 +71,16 @@ class AppealController
 		$appeal->update(
 			[
 				'review' => json_encode( $allInputs ),
-				'assigned' => auth()->id(),
+				'assigned' => $request->user()->id,
 				'outcome' => $allInputs['appeal-outcome'],
 				'reviewed' => now(),
 			]
 		);
+
+		if ( $allInputs['appeal-outcome'] === 'not-upheld' ) {
+			$appeal->investigation->newEvent( 'sanction-lifted', true, $allInputs['appeal-outcome'], $request->user() );
+			$appeal->investigation->subject->updateStanding( 'sanction-lifted' );
+		}
 
 		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
 		return redirect( "/appeal/{$appeal->id}" );
