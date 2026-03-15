@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Http;
 class IALScheduler
 {
 	/**
-	 * Invoke the scheduler task
-	 *
-	 * @return void
+	 * Invoke the scheduler task.
 	 */
-	public function __invoke()
+	public function __invoke(): void
 	{
 		$recentIALs = $this->getRecentIALs();
 		if ( $recentIALs['total'] === 0 ) {
@@ -25,9 +23,7 @@ class IALScheduler
 	}
 
 	/**
-	 * Gets all recent IALs and counts by types, actors and associations
-	 *
-	 * @return array
+	 * Gets all recent IALs and counts by types, actors and associations.
 	 */
 	private function getRecentIALs(): array
 	{
@@ -64,13 +60,9 @@ class IALScheduler
 	}
 
 	/**
-	 * Creates a webhook message based on recent IALs
-	 *
-	 * @param array $recentIALs
-	 *
-	 * @return array|string|string[]
+	 * Creates a webhook message based on recent IALs.
 	 */
-	private function createMessage( array $recentIALs )
+	private function createMessage( array $recentIALs ): string
 	{
 		$varActors = '';
 		foreach ( $recentIALs['actors'] as $actor => $num ) {
@@ -87,8 +79,8 @@ class IALScheduler
 		}
 
 		$varActions = '';
-		foreach ( array_count_values( $recentIALs['types'] ) as $actions => $num ) {
-			$varActions .= $actions . '(' . $num . ') ';
+		foreach ( array_count_values( $recentIALs['types'] ) as $action => $num ) {
+			$varActions .= $action . '(' . $num . ') ';
 		}
 
 		$replacements = [
@@ -107,12 +99,8 @@ class IALScheduler
 
 	/**
 	 * Handle the notification.
-	 *
-	 * @param string $message
-	 *
-	 * @return void
 	 */
-	public function notify( string $message )
+	public function notify( string $message ): void
 	{
 		if ( config( 'app.discordhook' ) ) {
 			if ( config( 'app.proxy' ) ) {

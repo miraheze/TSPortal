@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\InvestigationFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Investigation extends Model
 {
+	/** @use HasFactory<InvestigationFactory> */
 	use HasFactory;
 
 	/**
@@ -40,9 +42,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Defines a relationship with reports leading to this investigation
-	 *
-	 * @return HasMany
+	 * Defines a relationship with reports leading to this investigation.
 	 */
 	public function reports(): HasMany
 	{
@@ -50,9 +50,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Defines a relationship to the subject of this investigation
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship to the subject of this investigation.
 	 */
 	public function subject(): BelongsTo
 	{
@@ -60,9 +58,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Defines a relationship to the user assigned to investigate
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship to the user assigned to investigate.
 	 */
 	public function assigned(): BelongsTo
 	{
@@ -70,9 +66,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Defines a relationship with all events within this investigation
-	 *
-	 * @return HasMany
+	 * Defines a relationship with all events within this investigation.
 	 */
 	public function events(): HasMany
 	{
@@ -80,9 +74,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Defines a relationship with all appeals within this investigation
-	 *
-	 * @return HasMany
+	 * Defines a relationship with all appeals within this investigation.
 	 */
 	public function appeals(): HasMany
 	{
@@ -90,9 +82,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Return a user object when querying the subject attribute
-	 *
-	 * @param int $id
+	 * Return a user object when querying the subject attribute.
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -102,9 +92,7 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Return a user object when querying the assigned attribute
-	 *
-	 * @param int $id
+	 * Return a user object when querying the assigned attribute.
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -114,44 +102,33 @@ class Investigation extends Model
 	}
 
 	/**
-	 * Create a new event for this investigation
-	 *
-	 * @param string $action
-	 * @param bool $userRecord
-	 * @param string|null $comment
-	 * @param User|null $actor
-	 *
-	 * @return void
+	 * Create a new event for this investigation.
 	 */
-	public function newEvent( string $action, bool $userRecord, ?string $comment = null, ?User $actor = null )
+	public function newEvent( string $action, bool $userRecord, ?string $comment = null, ?User $actor = null ): void
 	{
-		if ( !( $action == 'comment' && !$comment ) ) {
-			$subject = ( $userRecord ) ? $this->subject : null;
-
+		if ( !( $action === 'comment' && !$comment ) ) {
+			$subject = $userRecord ? $this->subject : null;
 			UserEvent::factory()->create(
 				[
-					'user'          => $subject,
+					'user' => $subject,
 					'investigation' => $this,
-					'created'       => now(),
-					'created_by'    => $actor,
-					'action'        => $action,
-					'comment'       => $comment
+					'created' => now(),
+					'created_by' => $actor,
+					'action' => $action,
+					'comment' => $comment,
 				]
 			);
 		}
 	}
 
 	/**
-	 * Get the information for the open appeal
-	 *
-	 * @return int|null
+	 * Get the information for the open appeal.
 	 */
 	public function openAppeal(): ?int
 	{
 		$appeals = $this->appeals;
-
 		foreach ( $appeals as $appeal ) {
-			if ( is_null( $appeal->reviewed ) ) {
+			if ( $appeal->reviewed === null ) {
 				return $appeal->id;
 			}
 		}

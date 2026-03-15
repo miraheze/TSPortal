@@ -13,15 +13,11 @@ class AtRiskAlert extends Mailable
 
 	/**
 	 * ID of report the email is regarding.
-	 *
-	 * @var int
 	 */
-	private $id;
+	private int $id;
 
 	/**
 	 * Create a new message instance.
-	 *
-	 * @return void
 	 */
 	public function __construct( Report $report )
 	{
@@ -30,10 +26,8 @@ class AtRiskAlert extends Mailable
 
 	/**
 	 * Build the message.
-	 *
-	 * @return $this
 	 */
-	public function build(): AtRiskAlert
+	public function build(): self
 	{
 		return $this->text( 'emails.atrisk' );
 	}

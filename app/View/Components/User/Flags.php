@@ -11,16 +11,12 @@ use Illuminate\View\Component;
 class Flags extends Component
 {
 	/**
-	 * User flags
-	 *
-	 * @var array
+	 * User flags.
 	 */
 	public array $flags;
 
 	/**
 	 * Create a new component instance.
-	 *
-	 * @return void
 	 */
 	public function __construct( User $user )
 	{

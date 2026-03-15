@@ -22,20 +22,16 @@ class AppServiceProvider extends ServiceProvider
 {
 	/**
 	 * Register any application services.
-	 *
-	 * @return void
 	 */
-	public function register()
+	public function register(): void
 	{
 		//
 	}
 
 	/**
 	 * Bootstrap any application services.
-	 *
-	 * @return void
 	 */
-	public function boot()
+	public function boot(): void
 	{
 		RateLimiter::for( 'api', function ( Request $request ) {
 			return Limit::perMinute( 60 )->by( $request->user()?->id ?: $request->ip() );

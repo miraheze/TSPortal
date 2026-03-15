@@ -8,8 +8,6 @@ class SendWebhookNotification
 {
 	/**
 	 * Create the event listener.
-	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -20,10 +18,8 @@ class SendWebhookNotification
 	 * Handle the event.
 	 *
 	 * @param $event
-	 *
-	 * @return void
 	 */
-	public function handle( $event )
+	public function handle( $event ): void
 	{
 		$text = '';
 		if ( !in_array( $event->state, [ 'closed', 'reopened' ], true ) ) {

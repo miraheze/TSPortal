@@ -6,31 +6,27 @@ use App\Models\Appeal;
 use App\Models\Investigation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Appeal>
+ */
 class AppealFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = Appeal::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
 			'investigation' => Investigation::class,
-			'type'          => 'new-information',
-			'text'          => null,
-			'review'        => null,
-			'assigned'      => null,
-			'outcome'       => null,
-			'created'       => now(),
-			'reviewed'      => null
+			'type' => 'new-information',
+			'text' => null,
+			'review' => null,
+			'assigned' => null,
+			'outcome' => null,
+			'created' => now(),
+			'reviewed' => null,
 		];
 	}
 }

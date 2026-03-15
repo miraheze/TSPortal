@@ -10,8 +10,6 @@ class DPAAlreadyLive implements Rule
 {
 	/**
 	 * Create a new rule instance.
-	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -23,20 +21,15 @@ class DPAAlreadyLive implements Rule
 	 *
 	 * @param string $attribute
 	 * @param mixed $value
-	 *
-	 * @return bool
 	 */
 	public function passes( $attribute, $value ): bool
 	{
-		$userId = ( auth()->id() == User::findOrCreate( $value )->id ) ? auth()->id() : $value;
-
+		$userId = ( auth()->id() === User::findOrCreate( $value )->id ) ? auth()->id() : $value;
 		return !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
 	}
 
 	/**
 	 * Get the validation error message.
-	 *
-	 * @return string
 	 */
 	public function message(): string
 	{

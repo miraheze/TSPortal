@@ -12,21 +12,18 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 /**
- * Controller class for all Appeal actions
+ * Controller class for all Appeal actions.
  */
 class AppealController
 {
 	/**
-	 * Indexes all appeals, with filters for non-privileged users
-	 *
-	 * @param Request $request
+	 * Indexes all appeals, with filters for non-privileged users.
 	 *
 	 * @return Application|Factory|View
 	 */
 	public function index( Request $request )
 	{
 		$allAppeals = Appeal::all();
-
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
@@ -34,7 +31,7 @@ class AppealController
 				continue;
 			} elseif ( $type == 'assigned' ) {
 				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'type', 'outcome' ] ) ) {
+			} elseif ( in_array( $type, [ 'type', 'outcome' ], true ) ) {
 				if ( $key == 'unknown' ) {
 					$key = null;
 				}
@@ -49,14 +46,11 @@ class AppealController
 			$allAppeals = $allAppeals->whereNull( 'reviewed' );
 		}
 
-		return view( 'appeals' )
-			->with( 'appeals', $allAppeals );
+		return view( 'appeals' )->with( 'appeals', $allAppeals );
 	}
 
 	/**
-	 * Shows a specific appeal
-	 *
-	 * @param Appeal $appeal
+	 * Shows a specific appeal.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -66,10 +60,7 @@ class AppealController
 	}
 
 	/**
-	 * Processor for processing updates to an appeal
-	 *
-	 * @param Appeal $appeal
-	 * @param Request $request
+	 * Processor for processing updates to an appeal.
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -79,15 +70,14 @@ class AppealController
 		unset( $allInputs['_token'], $allInputs['_method'] );
 		$appeal->update(
 			[
-				'review'   => json_encode( $allInputs ),
+				'review' => json_encode( $allInputs ),
 				'assigned' => auth()->id(),
-				'outcome'  => $allInputs['appeal-outcome'],
-				'reviewed' => now()
+				'outcome' => $allInputs['appeal-outcome'],
+				'reviewed' => now(),
 			]
 		);
 
 		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
-
 		return redirect( "/appeal/{$appeal->id}" );
 	}
 }

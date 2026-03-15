@@ -16,14 +16,12 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 /**
- * Controller class for DPA request and actions
+ * Controller class for DPA request and actions.
  */
 class DPAController
 {
 	/**
-	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users
-	 *
-	 * @param Request $request
+	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -38,9 +36,7 @@ class DPAController
 	}
 
 	/**
-	 *  Shows a specific DPA request
-	 *
-	 * @param DPA $dpa
+	 * Shows a specific DPA request.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -50,10 +46,7 @@ class DPAController
 	}
 
 	/**
-	 * Stores a processed new DPA request
-	 *
-	 * @param DPA $dpa
-	 * @param Request $request
+	 * Stores a processed new DPA request.
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -66,8 +59,7 @@ class DPAController
 		);
 
 		$dpaUser = User::findOrCreate( $request->input( 'username' ) );
-
-		if ( $request->input( 'username-type' ) == 'own-removal' ) {
+		if ( $request->input( 'username-type' ) === 'own-removal' ) {
 			$request->validate(
 				[
 					'username' => [ new SameAccountRule ],
@@ -103,12 +95,11 @@ class DPAController
 		DPANew::dispatch( $newDPA );
 
 		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
-
 		return redirect( '/dpa' );
 	}
 
 	/**
-	 * Shows the form to create a new DPA request
+	 * Shows the form to create a new DPA request.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -118,19 +109,14 @@ class DPAController
 	}
 
 	/**
-	 * Processor for updating a request once processed
-	 *
-	 * @param DPA $dpa
-	 * @param Request $request
+	 * Processor for updating a request once processed.
 	 *
 	 * @return RedirectResponse
 	 */
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->input( 'approve' ) ?? false ) {
-			$dpa->update( [
-				'completed' => now(),
-			] );
+			$dpa->update( [ 'completed' => now() ] );
 
 			$dpa->user->update( [
 				'username' => 'MirahezeGDPR ' . $dpa->id,

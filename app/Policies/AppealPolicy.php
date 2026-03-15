@@ -12,13 +12,9 @@ class AppealPolicy
 	use HandlesAuthorization;
 
 	/**
-	 * Initial auth check
-	 *
-	 * @param User $user
-	 *
-	 * @return Response|null
+	 * Initial auth check.
 	 */
-	public function before( User $user ): ?Response
+	public function before( User $user ): Response
 	{
 		if ( $user->hasFlag( 'ts' ) ) {
 			return Response::allow();
@@ -29,10 +25,6 @@ class AppealPolicy
 
 	/**
 	 * Determine whether the user can view all appeals.
-	 *
-	 * @param User $user
-	 *
-	 * @return Response
 	 */
 	public function viewAny( User $user ): Response
 	{
@@ -41,11 +33,6 @@ class AppealPolicy
 
 	/**
 	 * Determine whether the user can view a specific appeal.
-	 *
-	 * @param User $user
-	 * @param Appeal $appeal
-	 *
-	 * @return Response
 	 */
 	public function view( User $user, Appeal $appeal ): Response
 	{
@@ -54,11 +41,6 @@ class AppealPolicy
 
 	/**
 	 * Determine whether the user can update a specific appeal.
-	 *
-	 * @param User $user
-	 * @param Appeal $appeal
-	 *
-	 * @return Response
 	 */
 	public function update( User $user, Appeal $appeal ): Response
 	{

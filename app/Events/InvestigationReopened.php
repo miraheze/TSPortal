@@ -12,30 +12,22 @@ class InvestigationReopened
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	/**
-	 * Model for event
-	 *
-	 * @var Investigation
+	 * Model for event.
 	 */
 	public Investigation $model;
 
 	/**
-	 * Model name
-	 *
-	 * @var string
+	 * Model name.
 	 */
 	public string $name = 'Investigation';
 
 	/**
-	 * Model state
-	 *
-	 * @var string
+	 * Model state.
 	 */
 	public string $state = 'reopened';
 
 	/**
 	 * Create a new event instance.
-	 *
-	 * @return void
 	 */
 	public function __construct( Investigation $investigation )
 	{
