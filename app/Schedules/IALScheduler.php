@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Http;
 class IALScheduler
 {
 	/**
-	 * Invoke the scheduler task
-	 *
-	 * @return void
+	 * Invoke the scheduler task.
 	 */
-	public function __invoke()
+	public function __invoke(): void
 	{
 		$recentIALs = $this->getRecentIALs();
 		if ( $recentIALs['total'] === 0 ) {
@@ -25,9 +23,7 @@ class IALScheduler
 	}
 
 	/**
-	 * Gets all recent IALs and counts by types, actors and associations
-	 *
-	 * @return array
+	 * Gets all recent IALs and counts by types, actors and associations.
 	 */
 	private function getRecentIALs(): array
 	{
@@ -64,9 +60,7 @@ class IALScheduler
 	}
 
 	/**
-	 * Creates a webhook message based on recent IALs
-	 *
-	 * @param array $recentIALs
+	 * Creates a webhook message based on recent IALs.
 	 *
 	 * @return array|string|string[]
 	 */
@@ -107,12 +101,8 @@ class IALScheduler
 
 	/**
 	 * Handle the notification.
-	 *
-	 * @param string $message
-	 *
-	 * @return void
 	 */
-	public function notify( string $message )
+	public function notify( string $message ): void
 	{
 		if ( config( 'app.discordhook' ) ) {
 			if ( config( 'app.proxy' ) ) {

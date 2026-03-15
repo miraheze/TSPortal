@@ -6,31 +6,27 @@ use App\Models\Investigation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Investigation>
+ */
 class InvestigationFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = Investigation::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
-			'subject'        => User::class,
-			'type'           => 'other',
-			'text'           => null,
+			'subject' => User::class,
+			'type' => 'other',
+			'text' => null,
 			'recommendation' => null,
-			'explanation'    => null,
-			'created'        => now(),
-			'assigned'       => null,
-			'closed'         => null
+			'explanation' => null,
+			'created' => now(),
+			'assigned' => null,
+			'closed' => null,
 		];
 	}
 }

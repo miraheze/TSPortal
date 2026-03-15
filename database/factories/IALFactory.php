@@ -4,34 +4,28 @@ namespace Database\Factories;
 
 use App\Models\IAL;
 use App\Models\User;
-use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<IAL>
+ */
 class IALFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = IAL::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
-	 * @throws Exception
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
-			'added'         => now(),
-			'user'          => User::class,
-			'type'          => 'log',
-			'wiki'          => 'wiki',
-			'comments'      => null,
-			'dpa'           => null,
-			'investigation' => null
+			'added' => now(),
+			'user' => User::class,
+			'type' => 'log',
+			'wiki' => 'wiki',
+			'comments' => null,
+			'dpa' => null,
+			'investigation' => null,
 		];
 	}
 }

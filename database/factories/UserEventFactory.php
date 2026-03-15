@@ -6,29 +6,25 @@ use App\Models\User;
 use App\Models\UserEvent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<UserEvent>
+ */
 class UserEventFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = UserEvent::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
-			'user'          => User::class,
+			'user' => User::class,
 			'investigation' => null,
-			'created'       => now(),
-			'created_by'    => User::class,
-			'action'        => 'unknown',
-			'comment'       => null
+			'created' => now(),
+			'created_by' => User::class,
+			'action' => 'unknown',
+			'comment' => null,
 		];
 	}
 }

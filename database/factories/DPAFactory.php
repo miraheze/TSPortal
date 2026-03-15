@@ -4,34 +4,28 @@ namespace Database\Factories;
 
 use App\Models\DPA;
 use App\Models\User;
-use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<DPA>
+ */
 class DPAFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = DPA::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
-	 * @throws Exception
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
-			'id'        => substr( sha1( random_bytes( 10 ) ), 0, 32 ),
-			'filed'     => now(),
-			'user'      => User::class,
-			'underage'  => null,
+			'id' => substr( sha1( random_bytes( 10 ) ), 0, 32 ),
+			'filed' => now(),
+			'user' => User::class,
+			'underage' => null,
 			'statutory' => false,
 			'completed' => null,
-			'reject'    => null
+			'reject' => null,
 		];
 	}
 }

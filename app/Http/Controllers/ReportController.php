@@ -17,33 +17,29 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Controller for all Report actions
+ * Controller for all Report actions.
  */
 class ReportController
 {
 	/**
-	 * Indexes all reports, filtering for non-privileged users
-	 *
-	 * @param Request $request
+	 * Indexes all reports, filtering for non-privileged users.
 	 *
 	 * @return Application|Factory|View
 	 */
 	public function index( Request $request )
 	{
 		$allReports = Report::all();
-
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
 			$allReports = $allReports->where( 'reporter', $request->user() );
 		}
 
 		$query = $request->query();
-
 		foreach ( $query as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'user', 'reporter' ] ) ) {
+			} elseif ( in_array( $type, [ 'user', 'reporter' ], true ) ) {
 				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'investigation', 'type' ] ) ) {
+			} elseif ( in_array( $type, [ 'investigation', 'type' ], true ) ) {
 				$allReports = $allReports->where( $type, $key );
 			}
 		}
@@ -54,15 +50,11 @@ class ReportController
 			$allReports = $allReports->whereNull( 'reviewed' );
 		}
 
-		return view( 'reports' )
-			->with( 'reports', $allReports );
+		return view( 'reports' )->with( 'reports', $allReports );
 	}
 
 	/**
-	 * Stores a new report once made
-	 *
-	 * @param Report $report
-	 * @param Request $request
+	 * Stores a new report once made.
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -70,40 +62,36 @@ class ReportController
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule ]
+				'username' => [ new MirahezeUsernameRule ],
 			]
 		);
 
 		$subjectUser = User::findOrCreate( $request->input( 'username' ) );
-
 		$newReport = $report::factory()->create(
 			[
-				'type'     => $request->input( 'report' ),
-				'user'     => $subjectUser,
+				'type' => $request->input( 'report' ),
+				'user' => $subjectUser,
 				'reporter' => $request->user(),
-				'text'     => $request->input( 'evidence' ),
+				'text' => $request->input( 'evidence' ),
 			]
 		);
 
-		$event = ( count( $subjectUser->events ) == 0 ) ? 'created-report' : 'new-report';
-
+		$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
 		$subjectUser->newEvent( $event, $report->id );
 
 		$request->user()->newEvent( 'filed-report', $report->id );
-
 		if ( config( 'app.atrisk' ) && $request->input( 'at' ) ) {
 			Mail::to( config( 'app.atrisk' ) )->send( new AtRiskAlert( $report ) );
 		}
 
 		ReportNew::dispatch( $newReport );
-
 		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-submitted' ) );
 
 		return redirect( '/reports' );
 	}
 
 	/**
-	 * Shows the creation form for a new report
+	 * Shows the creation form for a new report.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -113,9 +101,7 @@ class ReportController
 	}
 
 	/**
-	 * Shows a specific report
-	 *
-	 * @param Report $report
+	 * Shows a specific report.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -125,34 +111,26 @@ class ReportController
 	}
 
 	/**
-	 * Processor for handling a change in a reports state
-	 *
-	 * @param Report $report
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
+	 * Processor for handling a change in a reports state.
 	 */
 	public function update( Report $report, Request $request ): RedirectResponse
 	{
 		if ( $request->input( 'investigate' ) ?? false ) {
 			$investigation = Investigation::factory()->create( [
-				'subject'  => $report->user,
-				'created'  => now(),
+				'subject' => $report->user,
+				'created' => now(),
 				'assigned' => $request->user(),
 			] );
 
 			$report->update( [
 				'investigation' => $investigation->id,
-				'reviewed'      => now()
+				'reviewed' => now(),
 			] );
 		} elseif ( $request->input( 'close' ) ?? false ) {
-			$report->update( [
-				'reviewed' => now()
-			] );
+			$report->update( [ 'reviewed' => now() ] );
 		}
 
 		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
-
 		return back();
 	}
 }

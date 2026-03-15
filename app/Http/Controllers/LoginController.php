@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 /**
- * Controller for handling user logins and creations
+ * Controller for handling user logins and creations.
  */
 class LoginController extends Controller
 {
 	/**
-	 * Constructor class for applying middleware
+	 * Constructor class for applying middleware.
 	 */
 	public function __construct()
 	{
@@ -28,17 +28,14 @@ class LoginController extends Controller
 	}
 
 	/**
-	 * Callback for OAuth application to handle processing of logins
-	 *
-	 * @return RedirectResponse
+	 * Callback for OAuth application to handle processing of logins.
 	 */
 	public function callback(): RedirectResponse
 	{
 		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
-
 		$user = User::findOrCreate( $socialiteUser->name, true );
 
-		if ( count( $user->events ) == 0 ) {
+		if ( count( $user->events ) === 0 ) {
 			$user->newEvent( 'created-login' );
 		}
 
@@ -49,7 +46,7 @@ class LoginController extends Controller
 	}
 
 	/**
-	 * Handles login web requests to forward to OAuth
+	 * Handles login web requests to forward to OAuth.
 	 *
 	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
 	 */
@@ -59,9 +56,7 @@ class LoginController extends Controller
 	}
 
 	/**
-	 * Handles a logout
-	 *
-	 * @param Request $request
+	 * Handles a logout.
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -73,7 +68,7 @@ class LoginController extends Controller
 	}
 
 	/**
-	 * Guards the application for logins
+	 * Guards the application for logins.
 	 *
 	 * @return Guard|StatefulGuard
 	 */

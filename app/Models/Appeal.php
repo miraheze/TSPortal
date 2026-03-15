@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\AppealFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Appeal extends Model
 {
+	/** @use HasFactory<AppealFactory> */
 	use HasFactory;
 
 	/**
@@ -39,9 +41,7 @@ class Appeal extends Model
 	}
 
 	/**
-	 * Defines a relationship to the investigation of this appeal
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship to the investigation of this appeal.
 	 */
 	public function investigation(): BelongsTo
 	{
@@ -49,9 +49,7 @@ class Appeal extends Model
 	}
 
 	/**
-	 * Defines a relationship to the user assigned to the appeal
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship to the user assigned to the appeal.
 	 */
 	public function assigned(): BelongsTo
 	{
@@ -59,9 +57,7 @@ class Appeal extends Model
 	}
 
 	/**
-	 * Return a user object when querying the assigned attribute
-	 *
-	 * @param int $id
+	 * Return a user object when querying the assigned attribute.
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -71,9 +67,7 @@ class Appeal extends Model
 	}
 
 	/**
-	 * Return an investigation object when querying the investigation attribute
-	 *
-	 * @param int $id
+	 * Return an investigation object when querying the investigation attribute.
 	 *
 	 * @return Investigation[]|Collection|Model|null
 	 */

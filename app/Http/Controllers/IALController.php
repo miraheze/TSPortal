@@ -13,56 +13,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Controller class for Internal Actions Log requests and actions
+ * Controller class for Internal Actions Log requests and actions.
  */
 class IALController
 {
 	/**
-	 * Indexes and shows all IALs
-	 *
-	 * @param Request $request
+	 * Indexes and shows all IALs.
 	 *
 	 * @return Application|Factory|View
 	 */
 	public function index( Request $request )
 	{
 		$allIALs = DB::table( 'ial' )->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
-
-
 		return view( 'ial' )->with( 'ials', $allIALs );
 	}
 
 	/**
-	 * Processor for updating a request once processed
-	 *
-	 * @param IAL $ial
-	 * @param Request $request
-	 *
-	 * @return RedirectResponse
+	 * Processor for updating a request once processed.
 	 */
 	public function update( IAL $ial, Request $request ): RedirectResponse
 	{
 		$id = $request->input( 'assign-id' );
-
 		if ( is_numeric( $id ) && Investigation::all()->find( $id ) ) {
-			$ial->update(
-				[
-					'investigation' => $id
-				]
-			);
+			$ial->update( [ 'investigation' => $id ] );
 		} elseif ( ctype_alnum( $id ) && DPA::all()->find( $id ) ) {
-			$ial->update(
-				[
-					'dpa' => $id
-				]
-			);
+			$ial->update( [ 'dpa' => $id ] );
 		} else {
 			request()->session()->flash( 'failureFlash', __( 'ial' ) . ' ' . __( 'toast-invalid-id' ) );
 			return back();
 		}
 
 		request()->session()->flash( 'successFlash', __( 'ial' ) . ' ' . __( 'toast-updated' ) );
-
 		return back();
 	}
 }

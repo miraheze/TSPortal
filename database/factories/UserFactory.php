@@ -5,28 +5,24 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = User::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
-			'created'       => now(),
-			'username'      => 'username',
+			'created' => now(),
+			'username' => 'username',
 			'user_verified' => false,
-			'standing'      => 1,
-			'flags'         => []
+			'standing' => 1,
+			'flags' => [],
 		];
 	}
 }
