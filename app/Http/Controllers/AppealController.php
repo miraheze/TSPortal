@@ -78,6 +78,7 @@ class AppealController
 		);
 
 		if ( $allInputs['appeal-outcome'] === 'not-upheld' ) {
+			$appeal->investigation->newEvent( 'sanction-lifted', true, $allInputs['appeal-outcome'], $request->user() );
 			$appeal->investigation->subject->updateStanding( 'sanction-lifted' );
 		}
 
