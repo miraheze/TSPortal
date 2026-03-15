@@ -2,10 +2,18 @@
 
 namespace App\Providers;
 
+use App\Events\AppealNew;
+use App\Events\DPANew;
+use App\Events\InvestigationClosed;
+use App\Events\InvestigationNew;
+use App\Events\InvestigationReopened;
+use App\Events\ReportNew;
+use App\Listeners\SendWebhookNotification;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -14,20 +22,16 @@ class AppServiceProvider extends ServiceProvider
 {
 	/**
 	 * Register any application services.
-	 *
-	 * @return void
 	 */
-	public function register()
+	public function register(): void
 	{
 		//
 	}
 
 	/**
 	 * Bootstrap any application services.
-	 *
-	 * @return void
 	 */
-	public function boot()
+	public function boot(): void
 	{
 		RateLimiter::for( 'api', function ( Request $request ) {
 			return Limit::perMinute( 60 )->by( $request->user()?->id ?: $request->ip() );
@@ -41,6 +45,18 @@ class AppServiceProvider extends ServiceProvider
 			return $user->hasFlag( 'user-manager' );
 		} );
 
-		Paginator::useBootstrap();
+		Event::listen(
+			[
+				AppealNew::class,
+				DPANew::class,
+				InvestigationClosed::class,
+				InvestigationNew::class,
+				InvestigationReopened::class,
+				ReportNew::class,
+			],
+			SendWebhookNotification::class
+		);
+
+		Paginator::useBootstrapFive();
 	}
 }

@@ -3,7 +3,95 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v26...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v33...main)
+
+## Version 33 (2026-03-14)
+
+### Fixed
+
+- Fixed broken Bootstrap JS.
+
+## Version 32 (2026-03-13)
+
+### Changed
+
+- Changed `Paginator::useBootstrap()` (which uses Bootstrap 4) to `Paginator::useBootstrapFive()`.
+- Changed DPAs to sort by the filed timestamp.
+- Changed the query used in DPAController to not use `::all()` to improve performance.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.53.0 to 12.54.1.
+  - Upgraded laravel/socialite from 5.24.3 to 5.25.0.
+ 
+### Removed
+
+- Removed stub Controller class.
+
+## Version 31 (2026-03-10)
+
+### Fixed
+
+- Fixed associations in IALScheduler to actually show properly rather than random numbers.
+
+### Changed
+
+- Changed IALScheduler to only count the number of actions per actor rather than listing the same actor repeatedly.
+- Changed the query used in IALScheduler to not use `::all()` to improve performance.
+- Upgraded external libraries:
+  - Upgraded Bootstrap from 5.3.0-alpha1 to 5.3.8.
+
+## Version 30 (2026-03-04)
+
+### Added
+
+- SECURITY: Added validation to the evidence field when creating a DPA for another user ([GHSA-gfhq-7499-f3f2](https://github.com/miraheze/TSPortal/security/advisories/GHSA-gfhq-7499-f3f2)).
+- Added new InvestigationReopened event.
+
+### Fixed
+
+- Fixed a logic error causing InvestigationReopened events to be triggered when the Investigation is actually closed.
+- Fixed webhook notifications to not say "New" before "Investigation" if it's not a new investigation (if state is closed or reopened, it removes the "New").
+
+### Changed
+
+- Changed the InvestigationClosed event to only be closed, not reopened as well.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.52.0 to 12.53.0.
+  - Upgraded laravel/serializable-closure from 2.0.9 to 2.0.10.
+  - Upgraded laravel/socialite from 5.24.2 to 5.24.3.
+
+## Version 29 (2026-02-20)
+
+### Fixed
+
+- Restored webhook event listener functionality.
+
+## Version 28 (2026-02-20)
+
+### Fixed
+
+- Fixed exception in DPAPolicy.
+
+### Changed
+
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.49.0 to 12.52.0.
+  - Upgraded laravel/serializable-closure from 2.0.8 to 2.0.9.
+  - Upgraded laravel/tinker from 2.11.0 to 2.11.1.
+  - Upgraded nunomaduro/collision from ^8.6 to ^8.9.
+  - Upgraded phpunit/phpunit from 12.5.7 to 13.0.5.
+
+## Version 27 (2026-01-29)
+
+### Changed
+
+- Some more cleanup/migration to streamlined file structure added in Laravel 11.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.48.1 to 12.49.0.
+  - Upgraded phpunit/phpunit from 12.5.7 to 12.5.8.
+ 
+### Removed
+
+- Removed laravel/sanctum. No longer included by default and the only usage in this was project was unnecessary.
 
 ## Version 26 (2026-01-25)
 

@@ -11,16 +11,12 @@ use Illuminate\View\Component;
 class Standing extends Component
 {
 	/**
-	 * User standing
-	 *
-	 * @var string
+	 * User standing.
 	 */
 	public string $standing;
 
 	/**
 	 * Create a new component instance.
-	 *
-	 * @return void
 	 */
 	public function __construct( User $user )
 	{

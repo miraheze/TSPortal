@@ -16,32 +16,27 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 /**
- * Controller class for DPA request and actions
+ * Controller class for DPA request and actions.
  */
-class DPAController extends Controller
+class DPAController
 {
 	/**
-	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users
-	 *
-	 * @param Request $request
+	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users.
 	 *
 	 * @return Application|Factory|View
 	 */
 	public function index( Request $request )
 	{
-		$allDPAs = DPA::all();
-
+		$query = DPA::query()->whereNull( 'completed' )->oldest( 'filed' );
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allDPAs = $allDPAs->where( 'user', $request->user()->id )->whereNull( 'underage' );
+			$query->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
 
-		return view( 'dpa' )->with( 'dpas', $allDPAs->whereNull( 'completed' ) );
+		return view( 'dpa' )->with( 'dpas', $query->get() );
 	}
 
 	/**
-	 *  Shows a specific DPA request
-	 *
-	 * @param DPA $dpa
+	 * Shows a specific DPA request.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -51,10 +46,7 @@ class DPAController extends Controller
 	}
 
 	/**
-	 * Stores a processed new DPA request
-	 *
-	 * @param DPA $dpa
-	 * @param Request $request
+	 * Stores a processed new DPA request.
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -62,50 +54,52 @@ class DPAController extends Controller
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ]
+				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ],
 			]
 		);
 
 		$dpaUser = User::findOrCreate( $request->input( 'username' ) );
-
-		if ( $request->input( 'username-type' ) == 'own-removal' ) {
+		if ( $request->input( 'username-type' ) === 'own-removal' ) {
 			$request->validate(
 				[
-					'username' => [ new SameAccountRule ]
+					'username' => [ new SameAccountRule ],
 				]
 			);
 
 			$dpa::factory()->create(
 				[
-					'user'      => $dpaUser,
-					'statutory' => (bool)$request->input( 'dpa' )
+					'user' => $dpaUser,
+					'statutory' => (bool)$request->input( 'dpa' ),
 				]
 			);
 		} else {
+			$request->validate(
+				[
+					'evidence' => [ 'required', 'string' ],
+				]
+			);
+
 			$dpa::factory()->create(
 				[
-					'user'      => $dpaUser,
-					'underage'  => $request->input( 'evidence' ),
-					'statutory' => true
+					'user' => $dpaUser,
+					'underage' => $request->input( 'evidence' ),
+					'statutory' => true,
 				]
 			);
 		}
 
-		$event = ( count( $dpaUser->events ) == 0 ) ? 'created-dpa' : 'new-dpa';
-
+		$event = $dpaUser->events()->exists() ? 'new-dpa' : 'created-dpa';
 		$dpaUser->newEvent( $event );
 
-		$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get()->all()[0];
-
+		$newDPA = DPA::query()->latest( 'filed' )->first();
 		DPANew::dispatch( $newDPA );
 
 		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
-
 		return redirect( '/dpa' );
 	}
 
 	/**
-	 * Shows the form to create a new DPA request
+	 * Shows the form to create a new DPA request.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -115,32 +109,26 @@ class DPAController extends Controller
 	}
 
 	/**
-	 * Processor for updating a request once processed
-	 *
-	 * @param DPA $dpa
-	 * @param Request $request
+	 * Processor for updating a request once processed.
 	 *
 	 * @return RedirectResponse
 	 */
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->input( 'approve' ) ?? false ) {
-			$dpa->update( [
-				'completed' => now()
-			] );
+			$dpa->update( [ 'completed' => now() ] );
 
 			$dpa->user->update( [
-				'username' => 'MirahezeGDPR ' . $dpa->id
+				'username' => 'MirahezeGDPR ' . $dpa->id,
 			] );
 		} else {
 			$dpa->update( [
 				'completed' => now(),
-				'reject'    => $request->input( 'reason' )
+				'reject' => $request->input( 'reason' ),
 			] );
 		}
 
 		$dpa->user->newEvent( 'closed-dpa', $request->user() );
-
 		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();

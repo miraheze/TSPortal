@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,17 +12,18 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+	/** @use HasFactory<UserFactory> */
 	use HasFactory, Notifiable;
 
 	/**
-	 * Standing constants to ensure consistency
+	 * Standing constants to ensure consistency.
 	 *
 	 * @var int[]
 	 */
 	public const STANDING = [
-		'GOOD'       => 1,
+		'GOOD' => 1,
 		'SANCTIONED' => 0,
-		'BANNED'     => -1
+		'BANNED' => -1,
 	];
 
 	/**
@@ -46,14 +48,14 @@ class User extends Authenticatable
 	protected $table = 'users';
 
 	/**
-	 * All flags available to be assigned to users
+	 * All flags available to be assigned to users.
 	 *
 	 * @var array|string[]
 	 */
 	private array $allFlags = [
 		'login-disabled',
 		'ts',
-		'user-manager'
+		'user-manager',
 	];
 
 	/**
@@ -70,17 +72,13 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Find a user by username, or create a new user with the username
-	 *
-	 * @param string $username
-	 * @param bool $oauth
+	 * Find a user by username, or create a new user with the username.
 	 *
 	 * @return Model|mixed
 	 */
 	public static function findOrCreate( string $username, bool $oauth = false )
 	{
 		$authUser = self::firstWhere( 'username', $username );
-
 		if ( !$authUser ) {
 			$authUser = self::factory()->createOne(
 				[
@@ -91,7 +89,7 @@ class User extends Authenticatable
 
 		if ( $oauth ) {
 			$authUser->update( [
-				'user_verified' => true
+				'user_verified' => true,
 			] );
 		}
 
@@ -99,9 +97,7 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Find a user by ID
-	 *
-	 * @param int $id
+	 * Find a user by ID.
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -111,9 +107,7 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Defines a relationship with all investigations the user is a subject of
-	 *
-	 * @return HasMany
+	 * Defines a relationship with all investigations the user is a subject of.
 	 */
 	public function investigations(): HasMany
 	{
@@ -121,9 +115,7 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Defines a relationship with all reports the user is the subject of
-	 *
-	 * @return HasMany
+	 * Defines a relationship with all reports the user is the subject of.
 	 */
 	public function reports(): HasMany
 	{
@@ -131,9 +123,7 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Defines a relationship with all reports the user has made
-	 *
-	 * @return HasMany
+	 * Defines a relationship with all reports the user has made.
 	 */
 	public function reportsMade(): HasMany
 	{
@@ -141,9 +131,7 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Defines a relationship with all events associated with the user
-	 *
-	 * @return HasMany
+	 * Defines a relationship with all events associated with the user.
 	 */
 	public function events(): HasMany
 	{
@@ -151,19 +139,15 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Checks whether the user has a certain flag
-	 *
-	 * @param string $flag
-	 *
-	 * @return bool
+	 * Checks whether the user has a certain flag.
 	 */
 	public function hasFlag( string $flag ): bool
 	{
-		return in_array( $flag, $this->flags );
+		return in_array( $flag, $this->flags, true );
 	}
 
 	/**
-	 * Returns all flags that are available for the user
+	 * Returns all flags that are available for the user.
 	 *
 	 * @return array|string[]
 	 */
@@ -173,14 +157,9 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Updates a users flags
-	 *
-	 * @param array $newFlags
-	 * @param User|null $actor
-	 *
-	 * @return void
+	 * Updates a users flags.
 	 */
-	public function updateFlags( array $newFlags, ?User $actor = null )
+	public function updateFlags( array $newFlags, ?User $actor = null ): void
 	{
 		$this->flags = $newFlags;
 		$this->save();
@@ -189,31 +168,23 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Creates a new event associated with the user
-	 *
-	 * @param string $action
-	 * @param string|null $comment
-	 * @param User|null $actor
-	 *
-	 * @return void
+	 * Creates a new event associated with the user.
 	 */
-	public function newEvent( string $action, ?string $comment = null, ?User $actor = null )
+	public function newEvent( string $action, ?string $comment = null, ?User $actor = null ): void
 	{
 		UserEvent::factory()->create(
 			[
-				'user'       => $this,
-				'created'    => now(),
+				'user' => $this,
+				'created' => now(),
 				'created_by' => $actor,
-				'action'     => $action,
-				'comment'    => $comment
+				'action' => $action,
+				'comment' => $comment,
 			]
 		);
 	}
 
 	/**
-	 * Retrieve the current user standing
-	 *
-	 * @return string
+	 * Retrieve the current user standing.
 	 */
 	public function getStanding(): string
 	{
@@ -221,9 +192,7 @@ class User extends Authenticatable
 	}
 
 	/**
-	 * Updating standing based on recorded event
-	 *
-	 * @return void
+	 * Updating standing based on recorded event.
 	 */
 	public function updateStanding( string $event ): void
 	{

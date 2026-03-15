@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Symfony\Component\HttpFoundation\Request as RequestAlias;
+use Symfony\Component\HttpFoundation\Request;
 
 return Application::configure( basePath: dirname( __DIR__ ) )
 	->withRouting(
@@ -21,11 +21,11 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 
 		$middleware->trustProxies(
 			headers:
-				RequestAlias::HEADER_X_FORWARDED_FOR |
-				RequestAlias::HEADER_X_FORWARDED_HOST |
-				RequestAlias::HEADER_X_FORWARDED_PORT |
-				RequestAlias::HEADER_X_FORWARDED_PROTO |
-				RequestAlias::HEADER_X_FORWARDED_AWS_ELB
+				Request::HEADER_X_FORWARDED_FOR |
+				Request::HEADER_X_FORWARDED_HOST |
+				Request::HEADER_X_FORWARDED_PORT |
+				Request::HEADER_X_FORWARDED_PROTO |
+				Request::HEADER_X_FORWARDED_AWS_ELB
 		);
 	} )
 	->withExceptions( function ( Exceptions $exceptions ): void {

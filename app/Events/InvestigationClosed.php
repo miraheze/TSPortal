@@ -12,34 +12,25 @@ class InvestigationClosed
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	/**
-	 * Model for event
-	 *
-	 * @var Investigation
+	 * Model for event.
 	 */
 	public Investigation $model;
 
 	/**
-	 * Model name
-	 *
-	 * @var string
+	 * Model name.
 	 */
 	public string $name = 'Investigation';
 
 	/**
-	 * Model state
-	 *
-	 * @var string
+	 * Model state.
 	 */
-	public string $state;
+	public string $state = 'closed';
 
 	/**
 	 * Create a new event instance.
-	 *
-	 * @return void
 	 */
-	public function __construct( Investigation $investigation, bool $closed )
+	public function __construct( Investigation $investigation )
 	{
 		$this->model = $investigation;
-		$this->state = ( $closed ) ? 'closed' : 'reopened';
 	}
 }

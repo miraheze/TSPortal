@@ -10,12 +10,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 /**
- * Controller for all user related actions outside a login
+ * Controller for all user related actions outside a login.
  */
-class UserController extends Controller
+class UserController
 {
 	/**
-	 * Shows a list of all users
+	 * Shows a list of all users.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -25,9 +25,7 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Show a specific user page
-	 *
-	 * @param User $user
+	 * Show a specific user page.
 	 *
 	 * @return Application|Factory|View
 	 */
@@ -37,17 +35,11 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Update a users flags
-	 *
-	 * @param Request $request
-	 * @param User $user
-	 *
-	 * @return RedirectResponse
+	 * Update a users flags.
 	 */
 	public function update( Request $request, User $user ): RedirectResponse
 	{
 		$user->updateFlags( $request->input( 'new-access' ) ?? [], $request->user() );
-
 		return back();
 	}
 }

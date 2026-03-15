@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\ReportFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Report extends Model
 {
+	/** @use HasFactory<ReportFactory> */
 	use HasFactory;
 
 	/**
@@ -39,9 +41,7 @@ class Report extends Model
 	}
 
 	/**
-	 * Defines a relationship with the investigation this report creates
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship with the investigation this report creates.
 	 */
 	public function investigation(): BelongsTo
 	{
@@ -49,9 +49,7 @@ class Report extends Model
 	}
 
 	/**
-	 * Defines a relationship with the reporter of this report
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship with the reporter of this report.
 	 */
 	public function reporter(): BelongsTo
 	{
@@ -59,9 +57,7 @@ class Report extends Model
 	}
 
 	/**
-	 * Defines a relationship with the subject of this report
-	 *
-	 * @return BelongsTo
+	 * Defines a relationship with the subject of this report.
 	 */
 	public function user(): BelongsTo
 	{
@@ -69,9 +65,7 @@ class Report extends Model
 	}
 
 	/**
-	 * Return a user object when querying the reporter attribute
-	 *
-	 * @param int $id
+	 * Return a user object when querying the reporter attribute.
 	 *
 	 * @return User[]|Collection|Model|null
 	 */
@@ -81,9 +75,7 @@ class Report extends Model
 	}
 
 	/**
-	 * Return a user object when querying the user attribute
-	 *
-	 * @param int $id
+	 * Return a user object when querying the user attribute.
 	 *
 	 * @return User[]|Collection|Model|null
 	 */

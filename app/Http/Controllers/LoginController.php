@@ -8,18 +8,18 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 /**
- * Controller for handling user logins and creations
+ * Controller for handling user logins and creations.
  */
-class LoginController extends BaseController
+class LoginController extends Controller
 {
 	/**
-	 * Constructor class for applying middleware
+	 * Constructor class for applying middleware.
 	 */
 	public function __construct()
 	{
@@ -28,17 +28,14 @@ class LoginController extends BaseController
 	}
 
 	/**
-	 * Callback for OAuth application to handle processing of logins
-	 *
-	 * @return RedirectResponse
+	 * Callback for OAuth application to handle processing of logins.
 	 */
 	public function callback(): RedirectResponse
 	{
 		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
-
 		$user = User::findOrCreate( $socialiteUser->name, true );
 
-		if ( count( $user->events ) == 0 ) {
+		if ( count( $user->events ) === 0 ) {
 			$user->newEvent( 'created-login' );
 		}
 
@@ -49,7 +46,7 @@ class LoginController extends BaseController
 	}
 
 	/**
-	 * Handles login web requests to forward to OAuth
+	 * Handles login web requests to forward to OAuth.
 	 *
 	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
 	 */
@@ -59,9 +56,7 @@ class LoginController extends BaseController
 	}
 
 	/**
-	 * Handles a logout
-	 *
-	 * @param Request $request
+	 * Handles a logout.
 	 *
 	 * @return Application|RedirectResponse|Redirector
 	 */
@@ -73,7 +68,7 @@ class LoginController extends BaseController
 	}
 
 	/**
-	 * Guards the application for logins
+	 * Guards the application for logins.
 	 *
 	 * @return Guard|StatefulGuard
 	 */

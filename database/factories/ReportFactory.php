@@ -6,30 +6,26 @@ use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Report>
+ */
 class ReportFactory extends Factory
 {
 	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = Report::class;
-
-	/**
 	 * Define the model's default state.
 	 *
-	 * @return array
+	 * @return array<string, mixed>
 	 */
 	public function definition(): array
 	{
 		return [
 			'investigation' => null,
-			'type'          => 'other',
-			'text'          => null,
-			'user'          => User::class,
-			'reporter'      => User::class,
-			'created'       => now(),
-			'reviewed'      => null
+			'type' => 'other',
+			'text' => null,
+			'user' => User::class,
+			'reporter' => User::class,
+			'created' => now(),
+			'reviewed' => null,
 		];
 	}
 }

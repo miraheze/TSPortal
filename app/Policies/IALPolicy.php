@@ -12,11 +12,7 @@ class IALPolicy
 	use HandlesAuthorization;
 
 	/**
-	 * Initial auth check
-	 *
-	 * @param User $user
-	 *
-	 * @return Response|null
+	 * Initial auth check.
 	 */
 	public function before( User $user ): ?Response
 	{
@@ -29,10 +25,6 @@ class IALPolicy
 
 	/**
 	 * Determine whether the user can view all IALs.
-	 *
-	 * @param User $user
-	 *
-	 * @return Response
 	 */
 	public function viewAny( User $user ): Response
 	{
@@ -41,11 +33,6 @@ class IALPolicy
 
 	/**
 	 * Determine whether the user can update an IAL.
-	 *
-	 * @param User $user
-	 * @param IAL $ial
-	 *
-	 * @return Response
 	 */
 	public function update( User $user, IAL $ial ): Response
 	{
