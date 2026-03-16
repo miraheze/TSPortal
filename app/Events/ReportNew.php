@@ -12,11 +12,6 @@ class ReportNew
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	/**
-	 * Model for event.
-	 */
-	public Report $model;
-
-	/**
 	 * Model name.
 	 */
 	public string $name = 'Report';
@@ -29,8 +24,8 @@ class ReportNew
 	/**
 	 * Create a new event instance.
 	 */
-	public function __construct( Report $report )
-	{
-		$this->model = $report;
+	public function __construct(
+		public Report $model,
+	) {
 	}
 }
