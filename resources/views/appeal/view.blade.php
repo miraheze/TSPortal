@@ -25,7 +25,7 @@
 								<p class="text-primary m-0 fw-bold text-center">{{ __('appeal-review') }}</p>
 							</div>
 							<div class="card-body">
-								@if( is_null($appeal->review) )
+								@if( $appeal->review === null )
 									<div class="row">
 										<div class="col">
 											{{ __('empty') }}
@@ -34,24 +34,24 @@
 								@else
 									<div class="container text-center">
 										@foreach( json_decode( $appeal->review, true ) as $name => $data )
-											@if( $name == 'appeal-outcome' )
+											@if( $name === 'appeal-outcome' )
 												<div class="row mt-2 mb-2">
 													<div class="col-10 fw-bold align-content-center">{{ __($name) }}</div>
-													@if( $data == 'upheld')
+													@if( $data === 'upheld')
 														<div class="col-2"><p class="btn btn-outline-danger fw-bold disabled">{{ ucfirst( __( 'appeal-outcome-upheld' ) ) }}</p></div>
 													@else
 														<div class="col-2"><p class="btn btn-outline-success fw-bold disabled">{{ ucfirst( __( 'appeal-outcome-not-upheld' ) ) }}</p></div>
 													@endif
 												</div>
-											@elseif( $name == 'comments' )
+											@elseif( $name === 'comments' )
 												<div class="row mt-2 mb-2">
 													<div class="col">{{ $data }}</div>
 												</div>
 											@else
 												@php
-													$longOpt = ( $data == 'y' ) ? 'yes' : 'no';
+													$longOpt = ( $data === 'y' ) ? 'yes' : 'no';
 													$value = config('app.appeals.' . $appeal->type . '.' . $name )[$longOpt];
-													$colour = ( $value == 1 ) ? 'success' : ( ( $value == -1 ) ? 'danger' : 'secondary' );
+													$colour = ( $value === 1 ) ? 'success' : ( ( $value === -1 ) ? 'danger' : 'secondary' );
 												@endphp
 												<div class="row mb-2 mt-2">
 													<div class="col-10 fw-bold">{{ __('appeal-review-' . $appeal->type . '-' . $name) }}</div>
@@ -111,8 +111,8 @@
 												<p class="form-label py-2"><strong>{{ __('appeal-review-' . $appeal->type . '-' . $label) }}</strong></p>
 												@foreach( $outcomes as $opt => $value )
 													@php
-														$sc = ( $opt == 'yes' ) ? 'y' : 'n';
-														$colour = ( $value == 1 ) ? 'success' : ( ( $value == -1 ) ? 'danger' : 'secondary' );
+														$sc = ( $opt === 'yes' ) ? 'y' : 'n';
+														$colour = ( $value === 1 ) ? 'success' : ( ( $value === -1 ) ? 'danger' : 'secondary' );
 													@endphp
 													<input type="radio" class="btn-check" name="{{ $label }}" id="{{ $label . '-' . $sc }}" autocomplete="off" value="{{ $sc }}">
 													<label class="btn btn-outline-{{ $colour }}" for="{{ $label . '-' . $sc }}">{{ __( $opt ) }}</label>
@@ -157,7 +157,7 @@
 							@if( $loop->first && $loop->count > 1)
 								<p class="fw-bold mt-1 mb-1">{{ __('appeal') }}</p>
 							@endif
-							@if ( $appeal->id != $otherAppeal->id )
+							@if ( $appeal->id !== $otherAppeal->id )
 								<a href="/appeal/{{ $otherAppeal->id }}">#{{ $otherAppeal->id }}</a>
 								@if( !$loop->last )
 									<br>

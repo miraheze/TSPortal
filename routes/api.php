@@ -24,16 +24,16 @@ use Illuminate\Support\Facades\Route;
 /*
  * DPA API Group
  */
-Route::get( 'dpa/{dpa}/{username}', function( DPA $dpa, string $username ) {
+Route::get( 'dpa/{dpa}/{username}', function ( DPA $dpa, string $username ) {
 	return response()->json( [
 		'dpa-id'   => $dpa->id,
 		'username' => $username,
-		'match'    => ( $dpa->user->username == $username )
+		'match'    => $dpa->user->username === $username,
 	] );
 } );
 
-Route::post( 'dpa', function( Request $request ) {
-	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
+Route::post( 'dpa', function ( Request $request ) {
+	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
 
@@ -51,7 +51,7 @@ Route::post( 'dpa', function( Request $request ) {
 		]
 	);
 
-	$event = ( count( $dpaUser->events ) == 0 ) ? 'created-dpa' : 'new-dpa';
+	$event = ( count( $dpaUser->events ) === 0 ) ? 'created-dpa' : 'new-dpa';
 
 	$dpaUser->newEvent( $event );
 
@@ -67,8 +67,8 @@ Route::post( 'dpa', function( Request $request ) {
 /*
  * Reports API Group
  */
-Route::post( 'report', function( Request $request ) {
-	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
+Route::post( 'report', function ( Request $request ) {
+	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
 
@@ -84,7 +84,7 @@ Route::post( 'report', function( Request $request ) {
 		]
 	);
 
-	$event = ( count( $subjectUser->events ) == 0 ) ? 'created-report' : 'new-report';
+	$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
 
 	$subjectUser->newEvent( $event, $newReport->id );
 
@@ -100,8 +100,8 @@ Route::post( 'report', function( Request $request ) {
 /*
  * Internal Actions Log
  */
-Route::post( 'ial', function( Request $request ) {
-	if ( config( 'app.writekey' ) != $request->input( 'writekey' ) ) {
+Route::post( 'ial', function ( Request $request ) {
+	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
 

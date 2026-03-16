@@ -29,10 +29,10 @@ class AppealController
 		foreach ( $query as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( $type == 'assigned' ) {
+			} elseif ( $type === 'assigned' ) {
 				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
 			} elseif ( in_array( $type, [ 'type', 'outcome' ], true ) ) {
-				if ( $key == 'unknown' ) {
+				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 

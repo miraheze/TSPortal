@@ -109,7 +109,7 @@
 							@foreach ( $user->events as $event)
 								<figure>
 									<blockquote class="blockquote">
-										@if ( $event->action == 'update-flags' )
+										@if ( $event->action === 'update-flags' )
 											<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'flags' => implode( ', ', json_decode( $event->comment, true ) ) ] ) }}</p>
 										@else
 											<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'comment' => $event->comment ] ) }}</p>

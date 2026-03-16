@@ -23,33 +23,33 @@
 			<hr class="sidebar-divider my-0">
 			<ul class="navbar-nav text-light" id="accordionSidebar">
 				<li class="nav-item">
-					<a class="nav-link {{ ( $pgname == __('home') ) ? 'active' : '' }}" href="/">
+					<a class="nav-link {{ ( $pgname === __('home') ) ? 'active' : '' }}" href="/">
 						<i class="fa-solid fa-house"></i>
 						<span>{{ __('home') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ ( $pgname == __('reports') ) ? 'active' : '' }}" href="/reports">
+					<a class="nav-link {{ ( $pgname === __('reports') ) ? 'active' : '' }}" href="/reports">
 						<i class="fa-solid fa-triangle-exclamation"></i>
 						<span>{{ __('reports') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ ( $pgname == __('dpa') ) ? 'active' : '' }}" href="/dpa">
+					<a class="nav-link {{ ( $pgname === __('dpa') ) ? 'active' : '' }}" href="/dpa">
 						<i class="fa-solid fa-user-slash"></i>
 						<span>{{ __('dpa') }}</span>
 					</a>
 				</li>
 				@can('ts')
 					<li class="nav-item">
-						<a class="nav-link {{ ( $pgname == __('investigations') ) ? 'active' : '' }}"
+						<a class="nav-link {{ ( $pgname === __('investigations') ) ? 'active' : '' }}"
 						   href="/investigations">
 							<i class="fa-solid fa-magnifying-glass"></i>
 							<span>{{ __('investigations') }}</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ ( $pgname == __('appeals') ) ? 'active' : '' }}"
+						<a class="nav-link {{ ( $pgname === __('appeals') ) ? 'active' : '' }}"
 						   href="/appeals">
 							<i class="fa-solid fa-scale-balanced"></i>
 							<span>{{ __('appeals') }}</span>
@@ -57,7 +57,7 @@
 					</li>
 					<!-- TODO: Transparency Reports
 					<li class="nav-item">
-						<a class="nav-link {{ ( $pgname == 'Transparency Reports' ) ? 'active' : '' }}"
+						<a class="nav-link {{ ( $pgname === 'Transparency Reports' ) ? 'active' : '' }}"
 						   href="/transparency">
 							<i class="fas fa-chart-bar"></i>
 							<span>Transparency Report</span>
@@ -65,13 +65,13 @@
 					</li>
 					-->
 					<li class="nav-item">
-						<a class="nav-link {{ ( $pgname == __('ial') ) ? 'active' : '' }}" href="/ial">
+						<a class="nav-link {{ ( $pgname === __('ial') ) ? 'active' : '' }}" href="/ial">
 							<i class="fa-solid fa-list-check"></i>
 							<span>{{ __('ial') }}</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ ( $pgname == __('users') ) ? 'active' : '' }}" href="/user">
+						<a class="nav-link {{ ( $pgname === __('users') ) ? 'active' : '' }}" href="/user">
 							<i class="fa-solid fa-user"></i>
 							<span>{{ __('users') }}</span>
 						</a>

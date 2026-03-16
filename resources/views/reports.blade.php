@@ -25,7 +25,7 @@
 									<optgroup label="{{ $type }}">
 										@foreach( $topics as $topic )
 											{{ $allTopics[] = $topic }}
-											<option value="{{ $type . '-' . $topic }}" {{ ( request()->input( 'type' ) == $type . '-' . $topic ) ? 'selected' : '' }}>... {{ __('report-topic-' . $type . '-' . $topic) }}.</option>
+											<option value="{{ $type . '-' . $topic }}" {{ ( request()->input( 'type' ) === $type . '-' . $topic ) ? 'selected' : '' }}>... {{ __('report-topic-' . $type . '-' . $topic) }}.</option>
 										@endforeach
 									</optgroup>
 								@endforeach
