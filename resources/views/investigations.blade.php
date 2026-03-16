@@ -22,13 +22,13 @@
 							<select class="form-select form-control toggle-hideall" name="type" id="filter-type" @disabled(!request()->input('type'))>
 								<option value="">----</option>
 								@foreach( config('app.investigationTopics') as $topic )
-									<option value="{{ $topic }}" {{ ( request()->input( 'type' ) == $topic ) ? 'selected' : '' }}>... {{ __('investigation-topic-' . $topic) }}.</option>
+									<option value="{{ $topic }}" {{ request()->input( 'type' ) === $topic ? 'selected' : '' }}>... {{ __('investigation-topic-' . $topic) }}.</option>
 								@endforeach
 							</select>
 							<select class="form-select form-control toggle-hideall" name="recommendation" id="filter-recommendation">
 								@foreach ( config('app.recommendations') as $recommend )
 									<option
-										value="{{ $recommend }}" {{ ( request()->input( 'recommendation' ) == $recommend ) ? 'selected' : '' }}>
+										value="{{ $recommend }}" {{ request()->input( 'recommendation' ) === $recommend ? 'selected' : '' }}>
 										... {{ __('recommendation-' . $recommend ) }}
 									</option>
 								@endforeach

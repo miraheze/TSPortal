@@ -22,7 +22,7 @@
 											<select class="form-select" name="topic" id="topic">
 												@foreach ( config('app.investigationTopics') as $topic )
 													<option
-														value="{{ $topic }}" {{ ( $investigation->type == $topic ) ? "selected" : "" }}>
+														value="{{ $topic }}" {{ ( $investigation->type === $topic ) ? "selected" : "" }}>
 														... {{ __('investigation-topic-' . $topic ) }}
 													</option>
 												@endforeach
@@ -58,7 +58,7 @@
 											<select class="form-select" name="recommend" id="recommend">
 												@foreach ( config('app.recommendations') as $recommend )
 													<option
-														value="{{ $recommend }}" {{ ( $investigation->recommendation == $recommend ) ? "selected" : "" }}>
+														value="{{ $recommend }}" {{ ( $investigation->recommendation === $recommend ) ? "selected" : "" }}>
 														... {{ __('recommendation-' . $recommend ) }}
 													</option>
 												@endforeach
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4">
-					@if ( $investigation->assigned != auth()->user() )
+					@if ( $investigation->assigned !== auth()->user() )
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
 								<h6 class="text-primary fw-bold m-0 text-center"><label for="assign">{{ __('reassign') }}</label></h6>
@@ -85,7 +85,7 @@
 									<input class="form-check-input" type="checkbox" name="assign" id="assign" value="assign"
 									       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;"/>
 									<label class="form-check-label" for="assign">
-										@if ( is_null($investigation->assigned) )
+										@if ( $investigation->assigned === null )
 											{{ __('reassign-claim') }}
 										@else
 											{!! __('reassign-assigned', [ 'assigned' => $investigation->assigned->username ]) !!}

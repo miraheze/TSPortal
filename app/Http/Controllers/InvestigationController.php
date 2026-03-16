@@ -38,7 +38,7 @@ class InvestigationController
 			} elseif ( in_array( $type, [ 'subject', 'assigned' ], true ) ) {
 				$allInvestigations = $allInvestigations->where( $type, User::findById( (int)$key ) );
 			} elseif ( in_array( $type, [ 'type', 'recommendation' ], true ) ) {
-				if ( $key == 'unknown' ) {
+				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 
