@@ -22,13 +22,13 @@
 							<select class="form-select form-control toggle-hideall" name="type" id="filter-type" @disabled(!request()->input('type'))>
 								<option value="">----</option>
 								@foreach( config('app.appeals') as $type => $data )
-									<option value="{{ $type }}" {{ request()->input( 'type' ) === $type ? 'selected' : '' }}>... {{ __('appeal-type-' . $type) }}.</option>
+									<option value="{{ $type }}" {{ ( request()->input( 'type' ) === $type ) ? 'selected' : '' }}>... {{ __('appeal-type-' . $type) }}.</option>
 								@endforeach
 							</select>
 							<select class="form-select form-control toggle-hideall" name="outcome" id="filter-outcome">
 								@foreach ( [ 'upheld', 'not-upheld' ] as $outcome )
 									<option
-										value="{{ $outcome }}" {{ request()->input( 'outcome' ) === $outcome ? 'selected' : '' }}>
+										value="{{ $outcome }}" {{ ( request()->input( 'outcome' ) === $outcome ) ? 'selected' : '' }}>
 										... {{ __('appeal-outcome-' . $outcome ) }}
 									</option>
 								@endforeach
