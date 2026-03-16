@@ -48,7 +48,7 @@ class User extends Authenticatable
 	/**
 	 * All flags available to be assigned to users.
 	 *
-	 * @var array|string[]
+	 * @var string[]
 	 */
 	private array $allFlags = [
 		'login-disabled',
@@ -139,7 +139,7 @@ class User extends Authenticatable
 	/**
 	 * Returns all flags that are available for the user.
 	 *
-	 * @return array|string[]
+	 * @return string[]
 	 */
 	public function allFlags(): array
 	{
