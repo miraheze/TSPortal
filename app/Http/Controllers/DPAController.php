@@ -110,8 +110,6 @@ class DPAController
 
 	/**
 	 * Processor for updating a request once processed.
-	 *
-	 * @return RedirectResponse
 	 */
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
