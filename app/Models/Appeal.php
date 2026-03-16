@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Database\Factories\AppealFactory;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -66,10 +65,8 @@ class Appeal extends Model
 
 	/**
 	 * Return an investigation object when querying the investigation attribute.
-	 *
-	 * @return Investigation[]|Collection|Model|null
 	 */
-	public function getInvestigationAttribute( int $id )
+	public function getInvestigationAttribute( int $id ): Investigation
 	{
 		return Investigation::find( $id );
 	}
