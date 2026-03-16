@@ -161,6 +161,10 @@ class User extends Authenticatable
 	 */
 	public function updateFlags( array $newFlags, ?User $actor = null ): void
 	{
+		if ( $newFlags === $this->flags ) {
+			return;
+		}
+
 		$this->flags = $newFlags;
 		$this->save();
 
