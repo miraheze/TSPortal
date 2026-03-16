@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Database\Factories\UserEventFactory;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -64,10 +63,8 @@ class UserEvent extends Model
 
 	/**
 	 * Returns a User object for the created_by attribute.
-	 *
-	 * @return User|User[]|Collection|Model|null
 	 */
-	public function getCreatedByAttribute( ?int $user )
+	public function getCreatedByAttribute( ?int $user ): User
 	{
 		if ( !$user ) {
 			$user = new User();

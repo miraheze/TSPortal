@@ -58,10 +58,8 @@ class Appeal extends Model
 
 	/**
 	 * Return a user object when querying the assigned attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getAssignedAttribute( int $id )
+	public function getAssignedAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}

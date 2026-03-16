@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Database\Factories\InvestigationFactory;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -83,20 +82,16 @@ class Investigation extends Model
 
 	/**
 	 * Return a user object when querying the subject attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getSubjectAttribute( int $id )
+	public function getSubjectAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}
 
 	/**
 	 * Return a user object when querying the assigned attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getAssignedAttribute( int $id )
+	public function getAssignedAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}

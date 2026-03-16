@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -73,24 +71,18 @@ class User extends Authenticatable
 
 	/**
 	 * Find a user by username, or create a new user with the username.
-	 *
-	 * @return Model|mixed
 	 */
-	public static function findOrCreate( string $username, bool $oauth = false )
+	public static function findOrCreate( string $username, bool $oauth = false ): self
 	{
 		$authUser = self::firstWhere( 'username', $username );
 		if ( !$authUser ) {
 			$authUser = self::factory()->createOne(
-				[
-					'username' => $username,
-				]
+				[ 'username' => $username ]
 			);
 		}
 
 		if ( $oauth ) {
-			$authUser->update( [
-				'user_verified' => true,
-			] );
+			$authUser->update( [ 'user_verified' => true ] );
 		}
 
 		return $authUser;
@@ -98,10 +90,8 @@ class User extends Authenticatable
 
 	/**
 	 * Find a user by ID.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public static function findById( int $id )
+	public static function findById( int $id ): self
 	{
 		return self::find( $id );
 	}
