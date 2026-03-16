@@ -18,9 +18,9 @@ class User extends Authenticatable
 	/**
 	 * Standing constants to ensure consistency.
 	 *
-	 * @var int[]
+	 * @var array<string, int>
 	 */
-	public const STANDING = [
+	private const array STANDING = [
 		'GOOD' => 1,
 		'SANCTIONED' => 0,
 		'BANNED' => -1,
