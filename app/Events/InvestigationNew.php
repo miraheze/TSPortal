@@ -12,11 +12,6 @@ class InvestigationNew
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	/**
-	 * Model for event.
-	 */
-	public Investigation $model;
-
-	/**
 	 * Model name.
 	 */
 	public string $name = 'Investigation';
@@ -29,8 +24,8 @@ class InvestigationNew
 	/**
 	 * Create a new event instance.
 	 */
-	public function __construct( Investigation $investigation )
-	{
-		$this->model = $investigation;
+	public function __construct(
+		public Investigation $model,
+	) {
 	}
 }

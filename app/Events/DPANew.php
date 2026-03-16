@@ -12,11 +12,6 @@ class DPANew
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	/**
-	 * Model for event.
-	 */
-	public DPA $model;
-
-	/**
 	 * Model name.
 	 */
 	public string $name = 'DPA';
@@ -29,8 +24,8 @@ class DPANew
 	/**
 	 * Create a new event instance.
 	 */
-	public function __construct( DPA $dpa )
-	{
-		$this->model = $dpa;
+	public function __construct(
+		public DPA $model,
+	) {
 	}
 }
