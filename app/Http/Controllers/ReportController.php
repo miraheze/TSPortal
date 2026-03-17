@@ -41,7 +41,7 @@ class ReportController
 
 		if ( $request->input( 'closed' ) ) {
 			$allReports = $allReports->whereNotNull( 'reviewed' );
-		} else {
+		} elseif ( $request->input( 'reporter' ) === null && $request->input( 'user' ) === null ) {
 			$allReports = $allReports->whereNull( 'reviewed' );
 		}
 
