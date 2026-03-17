@@ -10,12 +10,9 @@ use App\Models\Appeal;
 use App\Models\Investigation;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 
 /**
  * Controller class for all Investigation actions.
@@ -24,10 +21,8 @@ class InvestigationController
 {
 	/**
 	 * Indexes all investigations, with filters for non-privileged users.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
+	public function index( Request $request ): View
 	{
 		$allInvestigations = Investigation::all();
 		$query = $request->query();
@@ -57,10 +52,8 @@ class InvestigationController
 
 	/**
 	 * Stores a new investigation once created.
-	 *
-	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function store( Investigation $investigation, Request $request )
+	public function store( Investigation $investigation, Request $request ): RedirectResponse
 	{
 		$request->validate(
 			[
@@ -91,40 +84,32 @@ class InvestigationController
 
 	/**
 	 * Shows creation form for a new investigation.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function create()
+	public function create(): View
 	{
 		return view( 'investigation.new' );
 	}
 
 	/**
 	 * Shows a specific investigation.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function show( Investigation $investigation )
+	public function show( Investigation $investigation ): View
 	{
 		return view( 'investigation.view' )->with( 'investigation', $investigation );
 	}
 
 	/**
 	 * Form for editing an investigation.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function edit( Investigation $investigation )
+	public function edit( Investigation $investigation ): View
 	{
 		return view( 'investigation.edit' )->with( 'investigation', $investigation );
 	}
 
 	/**
 	 * Processor for processing updates to an investigation.
-	 *
-	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function update( Investigation $investigation, Request $request )
+	public function update( Investigation $investigation, Request $request ): RedirectResponse
 	{
 		if ( $request->input( 'event' ) === null ) {
 			$updates = [
