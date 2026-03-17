@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+#[Table( name: 'users', timestamps: false )]
+#[Unguarded]
 class User extends Authenticatable
 {
 	/** @use HasFactory<UserFactory> */
@@ -23,27 +27,6 @@ class User extends Authenticatable
 		'SANCTIONED' => 0,
 		'BANNED' => -1,
 	];
-
-	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
-
-	/**
-	 * Table associated with this model
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
 
 	/**
 	 * All flags available to be assigned to users.

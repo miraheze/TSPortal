@@ -6,27 +6,19 @@ use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Controllers\Attributes\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 /**
  * Controller for handling user logins and creations.
  */
-class LoginController extends Controller
+class LoginController
 {
-	/**
-	 * Constructor class for applying middleware.
-	 */
-	public function __construct()
-	{
-		$this->middleware( 'guest' )->only( [ 'login', 'callback' ] );
-		$this->middleware( 'auth' )->only( 'logout' );
-	}
-
 	/**
 	 * Callback for OAuth application to handle processing of logins.
 	 */
+	#[Middleware( 'guest' )]
 	public function callback(): RedirectResponse
 	{
 		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
@@ -45,6 +37,7 @@ class LoginController extends Controller
 	/**
 	 * Handles login web requests to forward to OAuth.
 	 */
+	#[Middleware( 'guest' )]
 	public function login(): RedirectResponse
 	{
 		return Socialite::driver( 'mediawiki' )->redirect();
@@ -53,6 +46,7 @@ class LoginController extends Controller
 	/**
 	 * Handles a logout.
 	 */
+	#[Middleware( 'auth' )]
 	public function logout( Request $request ): RedirectResponse
 	{
 		$this->guard()->logout();
