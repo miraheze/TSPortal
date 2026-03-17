@@ -15,6 +15,10 @@ The main reasoning behind this choice is the software is not built to be extende
 - Fixed Popper in Bootstrap JS properly.
 - Fixed to not save flags and add an event when no changes are actually made.
 - Fixed an issue with a migration order.
+- Fixed link to reports made in user view.
+- Fixed link to investigations in user view.
+- Fixed to show all reports by default when providing reporter or user query parameters.
+- Fixed to show all investigations by default when providing assigned or subject query parameters.
 
 ### Changed
 
