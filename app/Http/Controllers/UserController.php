@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,20 +14,16 @@ class UserController
 {
 	/**
 	 * Shows a list of all users.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function index()
+	public function index(): View
 	{
 		return view( 'user' )->with( 'users', User::all() );
 	}
 
 	/**
 	 * Show a specific user page.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function show( User $user )
+	public function show( User $user ): View
 	{
 		return view( 'user.view' )->with( 'user', $user );
 	}

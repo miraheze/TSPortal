@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\DPA;
 use App\Models\IAL;
 use App\Models\Investigation;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,10 +17,8 @@ class IALController
 {
 	/**
 	 * Indexes and shows all IALs.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
+	public function index( Request $request ): View
 	{
 		$allIALs = DB::table( 'ial' )->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
 		return view( 'ial' )->with( 'ials', $allIALs );

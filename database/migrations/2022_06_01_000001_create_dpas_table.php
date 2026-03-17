@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create( 'dpas', function ( Blueprint $table ) {
+		Schema::create( 'dpas', static function ( Blueprint $table ): void {
 			$table->string( 'id', 32 );
 			$table->timestamp( 'filed' );
 			$table->foreignId( 'user' )->constrained( 'users' );
