@@ -8,12 +8,9 @@ use App\Models\User;
 use App\Rules\DPAAlreadyLive;
 use App\Rules\MirahezeUsernameRule;
 use App\Rules\SameAccountRule;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 
 /**
  * Controller class for DPA request and actions.
@@ -22,10 +19,8 @@ class DPAController
 {
 	/**
 	 * Indexes and shows all DPA requests that are open, filtered for non-privileged users.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
+	public function index( Request $request ): View
 	{
 		$query = DPA::query()->whereNull( 'completed' )->oldest( 'filed' );
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
@@ -37,20 +32,16 @@ class DPAController
 
 	/**
 	 * Shows a specific DPA request.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function show( DPA $dpa )
+	public function show( DPA $dpa ): View
 	{
 		return view( 'dpa.view' )->with( 'dpa', $dpa );
 	}
 
 	/**
 	 * Stores a processed new DPA request.
-	 *
-	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function store( DPA $dpa, Request $request )
+	public function store( DPA $dpa, Request $request ): RedirectResponse
 	{
 		$request->validate(
 			[
@@ -100,10 +91,8 @@ class DPAController
 
 	/**
 	 * Shows the form to create a new DPA request.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function create()
+	public function create(): View
 	{
 		return view( 'dpa.new' );
 	}
@@ -115,7 +104,6 @@ class DPAController
 	{
 		if ( $request->input( 'approve' ) ?? false ) {
 			$dpa->update( [ 'completed' => now() ] );
-
 			$dpa->user->update( [
 				'username' => 'MirahezeGDPR ' . $dpa->id,
 			] );
