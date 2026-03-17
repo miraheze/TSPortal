@@ -20,6 +20,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Fixed to show all reports by default when providing reporter or user query parameters.
 - Fixed to show all investigations by default when providing assigned or subject query parameters.
 - Fixed allowing users to view and update their own reports.
+- Fixed checking for assigned when editing investigations.
 
 ### Changed
 
