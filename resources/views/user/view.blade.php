@@ -36,7 +36,7 @@
 							<div class="card-body">
 								@can('ts')
 									<div class="mt-1">
-										<p><strong>{{ __('investigations') }}:</strong> <a href="/investigations?user={{ $user->id }}">{{ count($user->investigations) }} </a>
+										<p><strong>{{ __('investigations') }}:</strong> <a href="/investigations?subject={{ $user->id }}">{{ count($user->investigations) }} </a>
 										</p>
 									</div>
 									<div class="mt-1">
