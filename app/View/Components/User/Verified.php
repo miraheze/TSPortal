@@ -9,16 +9,11 @@ use Illuminate\View\Component;
 class Verified extends Component
 {
 	/**
-	 * User we want to verify.
-	 */
-	public User $user;
-
-	/**
 	 * Create a new component instance.
 	 */
-	public function __construct( User $user )
-	{
-		$this->user = $user;
+	public function __construct(
+		public User $user,
+	) {
 	}
 
 	/**
