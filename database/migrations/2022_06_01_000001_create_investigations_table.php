@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create( 'investigations', function ( Blueprint $table ) {
+		Schema::create( 'investigations', static function ( Blueprint $table ): void {
 			$table->id();
 			$table->foreignId( 'subject' )->constrained( 'users' );
 			$table->string( 'type' );
