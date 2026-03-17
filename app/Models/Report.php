@@ -3,28 +3,18 @@
 namespace App\Models;
 
 use Database\Factories\ReportFactory;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table( timestamps: false )]
+#[Unguarded]
 class Report extends Model
 {
 	/** @use HasFactory<ReportFactory> */
 	use HasFactory;
-
-	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
 
 	/**
 	 * Get the attributes that should be cast.
