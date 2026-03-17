@@ -16,10 +16,8 @@ class SendWebhookNotification
 
 	/**
 	 * Handle the event.
-	 *
-	 * @param $event
 	 */
-	public function handle( $event ): void
+	public function handle( object $event ): void
 	{
 		$text = '';
 		if ( !in_array( $event->state, [ 'closed', 'reopened' ], true ) ) {

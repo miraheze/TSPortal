@@ -12,11 +12,6 @@ class AppealNew
 	use Dispatchable, InteractsWithSockets, SerializesModels;
 
 	/**
-	 * Model for event.
-	 */
-	public Appeal $model;
-
-	/**
 	 * Model name.
 	 */
 	public string $name = 'Appeal';
@@ -29,8 +24,8 @@ class AppealNew
 	/**
 	 * Create a new event instance.
 	 */
-	public function __construct( Appeal $appeal )
-	{
-		$this->model = $appeal;
+	public function __construct(
+		public Appeal $model,
+	) {
 	}
 }

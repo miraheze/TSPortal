@@ -22,13 +22,13 @@
 							<select class="form-select form-control toggle-hideall" name="type" id="filter-type" @disabled(!request()->input('type'))>
 								<option value="">----</option>
 								@foreach( config('app.appeals') as $type => $data )
-									<option value="{{ $type }}" {{ ( request()->input( 'type' ) == $type ) ? 'selected' : '' }}>... {{ __('appeal-type-' . $type) }}.</option>
+									<option value="{{ $type }}" {{ ( request()->input( 'type' ) === $type ) ? 'selected' : '' }}>... {{ __('appeal-type-' . $type) }}.</option>
 								@endforeach
 							</select>
 							<select class="form-select form-control toggle-hideall" name="outcome" id="filter-outcome">
 								@foreach ( [ 'upheld', 'not-upheld' ] as $outcome )
 									<option
-										value="{{ $outcome }}" {{ ( request()->input( 'outcome' ) == $outcome ) ? 'selected' : '' }}>
+										value="{{ $outcome }}" {{ ( request()->input( 'outcome' ) === $outcome ) ? 'selected' : '' }}>
 										... {{ __('appeal-outcome-' . $outcome ) }}
 									</option>
 								@endforeach
@@ -72,9 +72,9 @@
 								       href="/investigation/{{ $appeal->investigation->id }}">{{ '#' . $appeal->investigation->id }}</a>
 								</td>
 								<td>{{ $appeal->assigned->username }}</td>
-								@if ( $appeal->outcome == 'upheld' )
+								@if ( $appeal->outcome === 'upheld' )
 									<td><span class="badge bg-warning">{{ __('appeal-outcome-upheld') }}</span></td>
-								@elseif ( $appeal->outcome == 'not-upheld' )
+								@elseif ( $appeal->outcome === 'not-upheld' )
 									<td><span class="badge bg-success">{{ __('appeal-outcome-not-upheld') }}</span></td>
 								@else
 									<td><span class="badge bg-danger">{{ __('status-open') }}</span></td>

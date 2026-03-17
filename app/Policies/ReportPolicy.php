@@ -28,7 +28,7 @@ class ReportPolicy
 	 */
 	public function view( User $user, Report $report ): Response
 	{
-		if ( $user === $report->reporter ) {
+		if ( $user->id === $report->reporter->id ) {
 			return Response::allow();
 		}
 
@@ -48,7 +48,7 @@ class ReportPolicy
 	 */
 	public function update( User $user, Report $report ): Response
 	{
-		if ( $user === $report->reporter ) {
+		if ( $user->id === $report->reporter->id ) {
 			return Response::allow();
 		}
 

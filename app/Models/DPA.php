@@ -3,43 +3,18 @@
 namespace App\Models;
 
 use Database\Factories\DPAFactory;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table( name: 'dpas', keyType: 'string', timestamps: false )]
+#[Unguarded]
 class DPA extends Model
 {
 	/** @use HasFactory<DPAFactory> */
 	use HasFactory;
-
-	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
-
-	/**
-	 * Type casting the main ID
-	 *
-	 * @var string
-	 */
-	protected $keyType = 'string';
-
-	/**
-	 * Table associated with model
-	 *
-	 * @var string
-	 */
-	protected $table = 'dpas';
 
 	/**
 	 * Get the attributes that should be cast.
@@ -64,10 +39,8 @@ class DPA extends Model
 
 	/**
 	 * Return a user object when querying the user attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getUserAttribute( int $id )
+	public function getUserAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}

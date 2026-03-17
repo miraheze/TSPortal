@@ -12,10 +12,10 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 		commands: __DIR__ . '/../routes/console.php',
 		health: '/up',
 	)
-	->withMiddleware( function ( Middleware $middleware ): void {
+	->withMiddleware( static function ( Middleware $middleware ): void {
 		$middleware->throttleApi();
 		$middleware->redirectTo(
-			guests: fn (): string => route( 'login' ),
+			guests: static fn (): string => route( 'login' ),
 			users: '/',
 		);
 
@@ -28,7 +28,7 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 				Request::HEADER_X_FORWARDED_AWS_ELB
 		);
 	} )
-	->withExceptions( function ( Exceptions $exceptions ): void {
+	->withExceptions( static function ( Exceptions $exceptions ): void {
 		//
 	} )
 	->create();

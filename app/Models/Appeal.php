@@ -3,29 +3,18 @@
 namespace App\Models;
 
 use Database\Factories\AppealFactory;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table( timestamps: false )]
+#[Unguarded]
 class Appeal extends Model
 {
 	/** @use HasFactory<AppealFactory> */
 	use HasFactory;
-
-	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
 
 	/**
 	 * Get the attributes that should be cast.
@@ -58,20 +47,16 @@ class Appeal extends Model
 
 	/**
 	 * Return a user object when querying the assigned attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getAssignedAttribute( int $id )
+	public function getAssignedAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}
 
 	/**
 	 * Return an investigation object when querying the investigation attribute.
-	 *
-	 * @return Investigation[]|Collection|Model|null
 	 */
-	public function getInvestigationAttribute( int $id )
+	public function getInvestigationAttribute( int $id ): Investigation
 	{
 		return Investigation::find( $id );
 	}

@@ -3,30 +3,19 @@
 namespace App\Models;
 
 use Database\Factories\InvestigationFactory;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Table( timestamps: false )]
+#[Unguarded]
 class Investigation extends Model
 {
 	/** @use HasFactory<InvestigationFactory> */
 	use HasFactory;
-
-	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
 
 	/**
 	 * Get the attributes that should be cast.
@@ -83,20 +72,16 @@ class Investigation extends Model
 
 	/**
 	 * Return a user object when querying the subject attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getSubjectAttribute( int $id )
+	public function getSubjectAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}
 
 	/**
 	 * Return a user object when querying the assigned attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getAssignedAttribute( int $id )
+	public function getAssignedAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}

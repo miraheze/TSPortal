@@ -39,11 +39,11 @@
 											<label class="form-label" for="username-type"><strong>{{ __('dpa-username-above') }}...</strong></label>
 											<select class="form-select" id="username-type" name="username-type" onchange="dpaEvidence()">
 												<option
-													value="own-removal" {{ ( old('username-type') == 'own-removal' ) ? 'selected' : '' }}>
+													value="own-removal" {{ ( old('username-type') === 'own-removal' ) ? 'selected' : '' }}>
 													... {{ __('dpa-username-mine') }}.
 												</option>
 												<option
-													value="under-13" {{ ( old('username-type') == 'under-13' ) ? 'selected' : '' }}>
+													value="under-13" {{ ( old('username-type') === 'under-13' ) ? 'selected' : '' }}>
 													... {{ __('dpa-username-u13') }}.
 												</option>
 											</select>

@@ -8,12 +8,9 @@ use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -23,10 +20,8 @@ class ReportController
 {
 	/**
 	 * Indexes all reports, filtering for non-privileged users.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
+	public function index( Request $request ): View
 	{
 		$allReports = Report::all();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
@@ -46,7 +41,7 @@ class ReportController
 
 		if ( $request->input( 'closed' ) ) {
 			$allReports = $allReports->whereNotNull( 'reviewed' );
-		} else {
+		} elseif ( $request->input( 'reporter' ) === null && $request->input( 'user' ) === null ) {
 			$allReports = $allReports->whereNull( 'reviewed' );
 		}
 
@@ -55,10 +50,8 @@ class ReportController
 
 	/**
 	 * Stores a new report once made.
-	 *
-	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function store( Report $report, Request $request )
+	public function store( Report $report, Request $request ): RedirectResponse
 	{
 		$request->validate(
 			[
@@ -92,20 +85,16 @@ class ReportController
 
 	/**
 	 * Shows the creation form for a new report.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function create()
+	public function create(): View
 	{
 		return view( 'report.new' );
 	}
 
 	/**
 	 * Shows a specific report.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function show( Report $report )
+	public function show( Report $report ): View
 	{
 		return view( 'report.view' )->with( 'report', $report );
 	}

@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::table( 'ial', function ( Blueprint $table ) {
+		Schema::table( 'ial', static function ( Blueprint $table ): void {
 			$table->longText( 'comments' )->change();
 		} );
 	}
@@ -21,7 +21,7 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::table( 'ial', function ( Blueprint $table ) {
+		Schema::table( 'ial', static function ( Blueprint $table ): void {
 			$table->string( 'comments' )->change();
 		} );
 	}

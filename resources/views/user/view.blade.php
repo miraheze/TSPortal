@@ -36,7 +36,7 @@
 							<div class="card-body">
 								@can('ts')
 									<div class="mt-1">
-										<p><strong>{{ __('investigations') }}:</strong> <a href="/investigations?user={{ $user->id }}">{{ count($user->investigations) }} </a>
+										<p><strong>{{ __('investigations') }}:</strong> <a href="/investigations?subject={{ $user->id }}">{{ count($user->investigations) }} </a>
 										</p>
 									</div>
 									<div class="mt-1">
@@ -45,7 +45,7 @@
 									</div>
 								@endcan
 								<div class="mt-1">
-									<p><strong>{{ __('reports-made') }}:</strong> <a href="/reports?made={{ $user->id }}">{{ count( $user->reportsMade) }}</a></p>
+									<p><strong>{{ __('reports-made') }}:</strong> <a href="/reports?reporter={{ $user->id }}">{{ count( $user->reportsMade ) }}</a></p>
 								</div>
 							</div>
 						</div>
@@ -109,7 +109,7 @@
 							@foreach ( $user->events as $event)
 								<figure>
 									<blockquote class="blockquote">
-										@if ( $event->action == 'update-flags' )
+										@if ( $event->action === 'update-flags' )
 											<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'flags' => implode( ', ', json_decode( $event->comment, true ) ) ] ) }}</p>
 										@else
 											<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'comment' => $event->comment ] ) }}</p>

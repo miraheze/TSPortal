@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+#[Table( name: 'users', timestamps: false )]
+#[Unguarded]
 class User extends Authenticatable
 {
 	/** @use HasFactory<UserFactory> */
@@ -18,39 +20,18 @@ class User extends Authenticatable
 	/**
 	 * Standing constants to ensure consistency.
 	 *
-	 * @var int[]
+	 * @var array<string, int>
 	 */
-	public const STANDING = [
+	private const array STANDING = [
 		'GOOD' => 1,
 		'SANCTIONED' => 0,
 		'BANNED' => -1,
 	];
 
 	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
-
-	/**
-	 * Table associated with this model
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-
-	/**
 	 * All flags available to be assigned to users.
 	 *
-	 * @var array|string[]
+	 * @var string[]
 	 */
 	private array $allFlags = [
 		'login-disabled',
@@ -73,24 +54,18 @@ class User extends Authenticatable
 
 	/**
 	 * Find a user by username, or create a new user with the username.
-	 *
-	 * @return Model|mixed
 	 */
-	public static function findOrCreate( string $username, bool $oauth = false )
+	public static function findOrCreate( string $username, bool $oauth = false ): self
 	{
 		$authUser = self::firstWhere( 'username', $username );
 		if ( !$authUser ) {
 			$authUser = self::factory()->createOne(
-				[
-					'username' => $username,
-				]
+				[ 'username' => $username ]
 			);
 		}
 
 		if ( $oauth ) {
-			$authUser->update( [
-				'user_verified' => true,
-			] );
+			$authUser->update( [ 'user_verified' => true ] );
 		}
 
 		return $authUser;
@@ -98,10 +73,8 @@ class User extends Authenticatable
 
 	/**
 	 * Find a user by ID.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public static function findById( int $id )
+	public static function findById( int $id ): self
 	{
 		return self::find( $id );
 	}
@@ -149,7 +122,7 @@ class User extends Authenticatable
 	/**
 	 * Returns all flags that are available for the user.
 	 *
-	 * @return array|string[]
+	 * @return string[]
 	 */
 	public function allFlags(): array
 	{
@@ -161,6 +134,10 @@ class User extends Authenticatable
 	 */
 	public function updateFlags( array $newFlags, ?User $actor = null ): void
 	{
+		if ( $newFlags === $this->flags ) {
+			return;
+		}
+
 		$this->flags = $newFlags;
 		$this->save();
 

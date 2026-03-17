@@ -5,6 +5,40 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v33...main)
 
+### Added
+
+- Added proper `down()` implementation for users table migration.
+- Added PHP type-hints wherever possible.
+- Added proper implementation for appeals count on home page.
+
+### Fixed
+
+- Fixed Popper in Bootstrap JS properly.
+- Fixed to not save flags and add an event when no changes are actually made.
+- Fixed an issue with a migration order.
+- Fixed link to reports made in user view.
+- Fixed link to investigations in user view.
+- Fixed to show all reports by default when providing reporter or user query parameters.
+- Fixed to show all investigations by default when providing assigned or subject query parameters.
+- Fixed allowing users to view and update their own reports.
+- Fixed checking for assigned when editing investigations.
+
+### Changed
+
+- Changed migrations to use anonymous classes.
+- Changed to use PHP 8 property promotion wherever possible.
+- Changed to use strict comparisons wherever possible.
+- Changed to use strict `in_array` wherever possible.
+- Changed the `User::STANDING` constant to be private and type-hinted it.
+- Changed to use new attributes from Laravel 13.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 12.54.1 to 13.0.0.
+  - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
+ 
+### Removed
+
+- Removed usage of `is_null` wherever possible.
+
 ## Version 33 (2026-03-14)
 
 ### Fixed

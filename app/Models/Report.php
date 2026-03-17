@@ -3,29 +3,18 @@
 namespace App\Models;
 
 use Database\Factories\ReportFactory;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Table( timestamps: false )]
+#[Unguarded]
 class Report extends Model
 {
 	/** @use HasFactory<ReportFactory> */
 	use HasFactory;
-
-	/**
-	 * Disable standard timestamps
-	 *
-	 * @var bool
-	 */
-	public $timestamps = false;
-
-	/**
-	 * Allow mass-assignment of all variables
-	 *
-	 * @var array
-	 */
-	protected $guarded = [];
 
 	/**
 	 * Get the attributes that should be cast.
@@ -66,20 +55,16 @@ class Report extends Model
 
 	/**
 	 * Return a user object when querying the reporter attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getReporterAttribute( int $id )
+	public function getReporterAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}
 
 	/**
 	 * Return a user object when querying the user attribute.
-	 *
-	 * @return User[]|Collection|Model|null
 	 */
-	public function getUserAttribute( int $id )
+	public function getUserAttribute( int $id ): User
 	{
 		return User::findById( $id );
 	}

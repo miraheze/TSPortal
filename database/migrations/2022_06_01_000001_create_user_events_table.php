@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create( 'users_events', function ( Blueprint $table ) {
+		Schema::create( 'users_events', static function ( Blueprint $table ): void {
 			$table->foreignId( 'user' )->nullable()->constrained( 'users' );
 			$table->foreignId( 'investigation' )->nullable()->constrained( 'investigations' );
 			$table->timestamp( 'created' );
