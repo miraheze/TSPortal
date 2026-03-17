@@ -9,6 +9,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 - Added proper `down()` implementation for users table migration.
 - Added PHP type-hints wherever possible.
+- Added proper implementation for appeals count on home page.
 
 ### Fixed
 
