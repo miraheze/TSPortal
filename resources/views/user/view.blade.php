@@ -45,7 +45,7 @@
 									</div>
 								@endcan
 								<div class="mt-1">
-									<p><strong>{{ __('reports-made') }}:</strong> <a href="/reports?made={{ $user->id }}">{{ count( $user->reportsMade) }}</a></p>
+									<p><strong>{{ __('reports-made') }}:</strong> <a href="/reports?reporter={{ $user->id }}">{{ count( $user->reportsMade ) }}</a></p>
 								</div>
 							</div>
 						</div>
