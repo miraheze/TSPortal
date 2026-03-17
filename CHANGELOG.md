@@ -22,7 +22,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed to use PHP 8 property promotion wherever possible.
 - Changed to use strict comparisons wherever possible.
 - Changed to use strict `in_array` wherever possible.
-- Changed the `User::STANDING` constant private and type-hinted it.
+- Changed the `User::STANDING` constant to be private and type-hinted it.
 - Changed to use new attributes from Laravel 13.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.0.0.
