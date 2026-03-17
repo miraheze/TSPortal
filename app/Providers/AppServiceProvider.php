@@ -33,15 +33,15 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
-		RateLimiter::for( 'api', function ( Request $request ): Limit {
+		RateLimiter::for( 'api', static function ( Request $request ): Limit {
 			return Limit::perMinute( 60 )->by( $request->user()?->id ?: $request->ip() );
 		} );
 
-		Gate::define( 'ts', function ( User $user ): bool {
+		Gate::define( 'ts', static function ( User $user ): bool {
 			return $user->hasFlag( 'ts' );
 		} );
 
-		Gate::define( 'user-manager', function ( User $user ): bool {
+		Gate::define( 'user-manager', static function ( User $user ): bool {
 			return $user->hasFlag( 'user-manager' );
 		} );
 
