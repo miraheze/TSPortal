@@ -13,14 +13,13 @@ use App\Models\IAL;
 use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
 /*
  * Main web route returning the home/dashboard view.
  */
-Route::get( '/', function() {
-	return view( 'home' );
-} );
+Route::get( '/', static fn (): View => view( 'home' ) );
 
 /*
  * Web group for account actions
