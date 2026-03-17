@@ -27,6 +27,10 @@ The main reasoning behind this choice is the software is not built to be extende
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.0.0.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
+ 
+### Removed
+
+- Removed usage of `is_null` wherever possible.
 
 ## Version 33 (2026-03-14)
 
