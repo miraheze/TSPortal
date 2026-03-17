@@ -3,8 +3,6 @@
 namespace App\View\Components\User;
 
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -25,10 +23,8 @@ class Standing extends Component
 
 	/**
 	 * Get the view that represent the component.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function render()
+	public function render(): View
 	{
 		return view( 'components.user.standing' );
 	}
