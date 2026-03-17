@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Appeal;
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -18,10 +17,8 @@ class AppealController
 {
 	/**
 	 * Indexes all appeals, with filters for non-privileged users.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function index( Request $request )
+	public function index( Request $request ): Factory|View
 	{
 		$allAppeals = Appeal::all();
 		$query = $request->query();
@@ -51,20 +48,16 @@ class AppealController
 
 	/**
 	 * Shows a specific appeal.
-	 *
-	 * @return Application|Factory|View
 	 */
-	public function show( Appeal $appeal )
+	public function show( Appeal $appeal ): Factory|View
 	{
 		return view( 'appeal.view' )->with( 'appeal', $appeal );
 	}
 
 	/**
 	 * Processor for processing updates to an appeal.
-	 *
-	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function update( Appeal $appeal, Request $request )
+	public function update( Appeal $appeal, Request $request ): Redirector|RedirectResponse
 	{
 		$allInputs = $request->input();
 		unset( $allInputs['_token'], $allInputs['_method'] );
