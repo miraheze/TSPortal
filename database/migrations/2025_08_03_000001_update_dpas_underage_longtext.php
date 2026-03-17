@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::table( 'dpas', function ( Blueprint $table ) {
+		Schema::table( 'dpas', static function ( Blueprint $table ): void {
 			$table->longText( 'underage' )->nullable()->change();
 		} );
 	}
@@ -21,7 +21,7 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::table( 'dpas', function ( Blueprint $table ) {
+		Schema::table( 'dpas', static function ( Blueprint $table ): void {
 			$table->text( 'underage' )->nullable()->change();
 		} );
 	}
