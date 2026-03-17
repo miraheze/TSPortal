@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create( 'ial', function ( Blueprint $table ) {
+		Schema::create( 'ial', static function ( Blueprint $table ): void {
 			$table->id();
 			$table->timestamp( 'added' );
 			$table->foreignId( 'user' )->constrained( 'users' );
@@ -20,7 +20,6 @@ return new class extends Migration
 			$table->string( 'comments' );
 			$table->string( 'dpa', 32 )->nullable();
 			$table->foreignId( 'investigation' )->nullable()->constrained( 'investigations' );
-
 			$table->foreign( 'dpa' )->references( 'id' )->on( 'dpas' );
 		} );
 	}
