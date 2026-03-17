@@ -43,7 +43,7 @@ class InvestigationController
 
 		if ( $request->input( 'closed' ) ) {
 			$allInvestigations = $allInvestigations->whereNotNull( 'closed' );
-		} else {
+		} elseif ( $request->input( 'assigned' ) === null && $request->input( 'subject' ) === null ) {
 			$allInvestigations = $allInvestigations->whereNull( 'closed' );
 		}
 
