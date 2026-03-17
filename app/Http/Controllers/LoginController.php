@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -47,20 +44,16 @@ class LoginController extends Controller
 
 	/**
 	 * Handles login web requests to forward to OAuth.
-	 *
-	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function login()
+	public function login(): RedirectResponse
 	{
 		return Socialite::driver( 'mediawiki' )->redirect();
 	}
 
 	/**
 	 * Handles a logout.
-	 *
-	 * @return Application|RedirectResponse|Redirector
 	 */
-	public function logout( Request $request )
+	public function logout( Request $request ): RedirectResponse
 	{
 		$this->guard()->logout();
 		$request->session()->invalidate();
@@ -69,10 +62,8 @@ class LoginController extends Controller
 
 	/**
 	 * Guards the application for logins.
-	 *
-	 * @return Guard|StatefulGuard
 	 */
-	private function guard()
+	private function guard(): StatefulGuard
 	{
 		return Auth::guard();
 	}
