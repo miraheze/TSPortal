@@ -62,7 +62,7 @@ class AppealController
 		$appeal->update(
 			[
 				'review' => json_encode( $allInputs ),
-				'assigned' => auth()->id(),
+				'assigned' => $request->user()->id,
 				'outcome' => $allInputs['appeal-outcome'],
 				'reviewed' => now(),
 			]
