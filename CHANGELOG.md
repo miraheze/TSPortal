@@ -31,6 +31,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed to use strict `in_array` wherever possible.
 - Changed the `User::STANDING` constant to be private and type-hinted it.
 - Changed to use new attributes from Laravel 13.
+- Changed to use `withProviders()` instead of providers.php.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.0.0.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.

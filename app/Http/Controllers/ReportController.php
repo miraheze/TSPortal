@@ -78,7 +78,7 @@ class ReportController
 		}
 
 		ReportNew::dispatch( $newReport );
-		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-submitted' ) );
+		$request->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-submitted' ) );
 
 		return redirect( '/reports' );
 	}
@@ -119,7 +119,7 @@ class ReportController
 			$report->update( [ 'reviewed' => now() ] );
 		}
 
-		request()->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
+		$request->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
 		return back();
 	}
 }

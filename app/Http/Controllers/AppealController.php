@@ -73,7 +73,7 @@ class AppealController
 			$appeal->investigation->subject->updateStanding( 'sanction-lifted' );
 		}
 
-		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
+		$request->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
 		return redirect( "/appeal/{$appeal->id}" );
 	}
 }
