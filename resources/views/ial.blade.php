@@ -1,6 +1,4 @@
-@php
-use App\Models\User;
-@endphp
+@use(App\Models\User)
 
 <x-layout>
 	<x-slot name="pgname">

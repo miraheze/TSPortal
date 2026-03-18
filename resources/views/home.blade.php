@@ -1,9 +1,4 @@
-@php
-use App\Models\Appeal;
-use App\Models\DPA;
-use App\Models\Investigation;
-use App\Models\Report;
-@endphp
+@use(App\Models\{Appeal, DPA, Investigation, Report})
 
 <x-layout>
 	<x-slot name="pgname">
