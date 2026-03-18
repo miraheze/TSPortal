@@ -1,3 +1,7 @@
+@php
+use App\Models\User;
+@endphp
+
 <x-layout>
 	<x-slot name="pgname">
 		{{ __('ial') }}
@@ -22,7 +26,7 @@
 						@foreach ( $ials as $ial )
 							<tr>
 								<td>{{ $ial->id }}</td>
-								<td><a class="nav-link" href="/user/{{ $ial->user }}">{{ \App\Models\User::findById( $ial->user )->username }}</a></td>
+								<td><a class="nav-link" href="/user/{{ $ial->user }}">{{ User::findById( $ial->user )->username }}</a></td>
 								<td>{{ $ial->wiki }}</td>
 								<td>{{ $ial->type }}</td>
 								<td>{{ $ial->comments }}</td>
