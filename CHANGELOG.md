@@ -32,8 +32,10 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed the `User::STANDING` constant to be private and type-hinted it.
 - Changed to use new attributes from Laravel 13.
 - Changed to use `withProviders()` instead of providers.php.
+- Changed `auth()->id()` to `$request->user()->id` in AppealController.
+- Changed `request()->session()->flash()` to `$request->session()->flash()` in all controllers.
 - Upgraded external libraries:
-  - Upgraded laravel/framework from 12.54.1 to 13.0.0.
+  - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
  
 ### Removed
