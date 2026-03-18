@@ -68,7 +68,7 @@ class AppealController
 			]
 		);
 
-		request()->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
+		$request->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
 		return redirect( "/appeal/{$appeal->id}" );
 	}
 }

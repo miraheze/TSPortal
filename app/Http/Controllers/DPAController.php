@@ -85,7 +85,7 @@ class DPAController
 		$newDPA = DPA::query()->latest( 'filed' )->first();
 		DPANew::dispatch( $newDPA );
 
-		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
+		$request->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );
 		return redirect( '/dpa' );
 	}
 
@@ -115,7 +115,7 @@ class DPAController
 		}
 
 		$dpa->user->newEvent( 'closed-dpa', $request->user() );
-		request()->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
+		$request->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
 
 		return back();
 	}

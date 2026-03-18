@@ -77,7 +77,7 @@ class InvestigationController
 		$investigationUser->newEvent( $event );
 
 		InvestigationNew::dispatch( $newInvestigation );
-		request()->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-submitted' ) );
+		$request->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-submitted' ) );
 
 		return redirect( '/investigations' );
 	}
@@ -165,7 +165,7 @@ class InvestigationController
 			}
 		}
 
-		request()->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-updated' ) );
+		$request->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-updated' ) );
 		return redirect( '/investigation/' . $investigation->id );
 	}
 }

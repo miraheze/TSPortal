@@ -35,11 +35,11 @@ class IALController
 		} elseif ( ctype_alnum( $id ) && DPA::all()->find( $id ) ) {
 			$ial->update( [ 'dpa' => $id ] );
 		} else {
-			request()->session()->flash( 'failureFlash', __( 'ial' ) . ' ' . __( 'toast-invalid-id' ) );
+			$request->session()->flash( 'failureFlash', __( 'ial' ) . ' ' . __( 'toast-invalid-id' ) );
 			return back();
 		}
 
-		request()->session()->flash( 'successFlash', __( 'ial' ) . ' ' . __( 'toast-updated' ) );
+		$request->session()->flash( 'successFlash', __( 'ial' ) . ' ' . __( 'toast-updated' ) );
 		return back();
 	}
 }
