@@ -103,7 +103,7 @@ Route::post( 'ial', static function ( Request $request ): JsonResponse {
 	$serializedID = ( is_array( $explodedComment ) && isset( $explodedComment[1] ) ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
 
 	$updates = [
-		'user' => User::findOrCreate( $request->input( 'username' ) )->id,
+		'user' => User::findOrCreate( $request->input( 'username' ) ),
 		'type' => $request->input( 'log' ),
 		'wiki' => $request->input( 'wiki' ),
 		'comments' => $comment,

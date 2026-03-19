@@ -8,7 +8,6 @@ use App\Models\Investigation;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Controller class for Internal Actions Log requests and actions.
@@ -20,7 +19,7 @@ class IALController
 	 */
 	public function index( Request $request ): View
 	{
-		$allIALs = DB::table( 'ial' )->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
+		$allIALs = IAL::query()->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
 		return view( 'ial' )->with( 'ials', $allIALs );
 	}
 
