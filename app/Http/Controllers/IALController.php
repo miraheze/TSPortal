@@ -19,7 +19,7 @@ class IALController
 	 */
 	public function index( Request $request ): View
 	{
-		$allIALs = IAL::query()->orderBy( 'id', 'DESC' )->cursorPaginate( 25 );
+		$allIALs = IAL::query()->latest( 'id' )->cursorPaginate( 25 );
 		return view( 'ial' )->with( 'ials', $allIALs );
 	}
 
@@ -29,9 +29,9 @@ class IALController
 	public function update( IAL $ial, Request $request ): RedirectResponse
 	{
 		$id = $request->input( 'assign-id' );
-		if ( is_numeric( $id ) && Investigation::all()->find( $id ) ) {
+		if ( is_numeric( $id ) && Investigation::find( $id ) ) {
 			$ial->update( [ 'investigation' => $id ] );
-		} elseif ( ctype_alnum( $id ) && DPA::all()->find( $id ) ) {
+		} elseif ( ctype_alnum( $id ) && DPA::find( $id ) ) {
 			$ial->update( [ 'dpa' => $id ] );
 		} else {
 			$request->session()->flash( 'failureFlash', __( 'ial' ) . ' ' . __( 'toast-invalid-id' ) );
