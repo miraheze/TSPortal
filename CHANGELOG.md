@@ -34,7 +34,8 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed to use `withProviders()` instead of providers.php.
 - Changed `auth()->id()` to `$request->user()->id` in AppealController.
 - Changed `request()->session()->flash()` to `$request->session()->flash()` in all controllers.
-- Changed fully qualified class names to `@use` in blade templates.
+- Changed fully qualified class names to `@use` in the home page view blade template.
+- Changed IALController to use `IAL::query()` instead of `DB::table()` to be consistent with other controllers.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
@@ -42,6 +43,8 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Removed
 
 - Removed usage of `is_null` wherever possible.
+- Removed the need to access the User model directly in the ial view blade template.
+- Removed the `->id()` when setting user using IALFactory in the IAL API route to be consistent with other routes.
 
 ## Version 33 (2026-03-14)
 
