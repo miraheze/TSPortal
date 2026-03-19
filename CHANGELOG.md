@@ -36,6 +36,8 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed `request()->session()->flash()` to `$request->session()->flash()` in all controllers.
 - Changed fully qualified class names to `@use` in the home page view blade template.
 - Changed IALController to use `IAL::query()` instead of `DB::table()` to be consistent with other controllers.
+- Changed the queries used in IALController to not use `::all()` to improve performance.
+- Changed `->orderBy()` to use `->latest()` in IALController.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
