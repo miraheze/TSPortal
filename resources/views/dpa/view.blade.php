@@ -90,7 +90,7 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __('dpa-reject') }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __('close') }}"></button>
 										</div>
 										<form method="POST" action="/dpa/{{ $dpa->id }}">
 											@csrf

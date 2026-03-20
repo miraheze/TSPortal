@@ -75,7 +75,7 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __('ial-assign-header') }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __('close') }}"></button>
 										</div>
 										<div class="modal-body">
 											<label class="form-label mt-1" for="assign-id"><strong>{{ __('ial-assign-label') }}</strong></label>

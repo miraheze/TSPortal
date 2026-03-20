@@ -104,7 +104,7 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __( 'appeal' ) }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __( 'close' ) }}"></button>
 										</div>
 										<div class="modal-body text-center">
 											@foreach ( config( 'app.appeals.' . $appeal->type ) as $label => $outcomes )
