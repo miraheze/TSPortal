@@ -47,7 +47,8 @@ The main reasoning behind this choice is the software is not built to be extende
 
 - Removed usage of `is_null` wherever possible.
 - Removed the need to access the User model directly in the ial view blade template.
-- Removed the `->id()` when setting user using IALFactory in the IAL API route to be consistent with other routes.
+- Removed the `->id` when setting user using IALFactory in the IAL API route to be consistent with others.
+- Removed the `->id` when setting assigned using AppealFactory in InvestigationController to be consistent with others.
 
 ## Version 33 (2026-03-14)
 
