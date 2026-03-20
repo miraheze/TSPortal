@@ -43,19 +43,19 @@ class DPAController
 	 */
 	public function store( DPA $dpa, Request $request ): RedirectResponse
 	{
-		$request->validate(
-			[
-				'username' => [ 'required', 'string', new MirahezeUsernameRule, new DPAAlreadyLive ],
-			]
-		);
+		$request->validate( [
+			'username' => [ 'required', 'string' ],
+		] );
+
+		$request->validate( [
+			'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ],
+		] );
 
 		$dpaUser = User::findOrCreate( $request->input( 'username' ) );
 		if ( $request->input( 'username-type' ) === 'own-removal' ) {
-			$request->validate(
-				[
-					'username' => [ new SameAccountRule ],
-				]
-			);
+			$request->validate( [
+				'username' => [ new SameAccountRule ],
+			] );
 
 			$dpa::factory()->create(
 				[
@@ -64,11 +64,9 @@ class DPAController
 				]
 			);
 		} else {
-			$request->validate(
-				[
-					'evidence' => [ 'required', 'string' ],
-				]
-			);
+			$request->validate( [
+				'evidence' => [ 'required', 'string' ],
+			] );
 
 			$dpa::factory()->create(
 				[
