@@ -54,11 +54,7 @@ class ReportController
 	public function store( Report $report, Request $request ): RedirectResponse
 	{
 		$request->validate( [
-			'username' => [ 'required', 'string' ],
-		] );
-
-		$request->validate( [
-			'username' => [ new MirahezeUsernameRule ],
+			'username' => [ 'bail', 'required', 'string', new MirahezeUsernameRule ],
 		] );
 
 		$subjectUser = User::findOrCreate( $request->input( 'username' ) );

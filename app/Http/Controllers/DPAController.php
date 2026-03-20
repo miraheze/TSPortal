@@ -44,11 +44,11 @@ class DPAController
 	public function store( DPA $dpa, Request $request ): RedirectResponse
 	{
 		$request->validate( [
-			'username' => [ 'required', 'string' ],
-		] );
-
-		$request->validate( [
-			'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ],
+			'username' => [
+				'bail', 'required', 'string',
+				new MirahezeUsernameRule,
+				new DPAAlreadyLive,
+			],
 		] );
 
 		$dpaUser = User::findOrCreate( $request->input( 'username' ) );
