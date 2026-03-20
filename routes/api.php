@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 use App\Events\DPANew;
 use App\Events\ReportNew;
 use App\Models\DPA;
