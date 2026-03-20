@@ -129,7 +129,7 @@
 											<textarea class="form-control" name="comments" id="comments"></textarea>
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __( 'submit' ) }}</button>
 										</div>
 									</div>
 								</div>
