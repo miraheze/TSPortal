@@ -131,7 +131,7 @@ class InvestigationController
 					'investigation' => $investigation,
 					'type' => $request->input( 'appeal-type' ),
 					'text' => $request->input( 'comments' ),
-					'assigned' => $request->user()->id,
+					'assigned' => $request->user(),
 				]
 			);
 
