@@ -2,26 +2,20 @@
 
 namespace App\Rules;
 
+use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
 
 class MirahezeUsernameRule implements ValidationRule
 {
-	use ValidationTrait;
-
 	/**
-	 * Conduct a HTTP request.
+	 * Validate that the username is a valid user in MediaWiki.
 	 */
-	public function passes( string $attribute, string $value ): bool
+	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
-		return ( Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false );
-	}
-
-	/**
-	 * Get the validation error message.
-	 */
-	public function message(): string
-	{
-		return __( 'username-exist' );
+		$check = Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
+		if ( !$check ) {
+			$fail( 'username-exist' )->translate();
+		}
 	}
 }

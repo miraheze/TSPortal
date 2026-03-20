@@ -2,25 +2,18 @@
 
 namespace App\Rules;
 
+use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class SameAccountRule implements ValidationRule
 {
-	use ValidationTrait;
-
 	/**
-	 * Compare request user matches requested username.
+	 * Validate that the request user matches the requested username.
 	 */
-	public function passes( string $attribute, string $value ): bool
+	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
-		return auth()->user()->username === $value;
-	}
-
-	/**
-	 * Get the validation error message.
-	 */
-	public function message(): string
-	{
-		return __( 'username-not-same' );
+		if ( auth()->user()->username !== $value ) {
+			$fail( 'username-not-same' )->translate();
+		}
 	}
 }
