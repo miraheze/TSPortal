@@ -4,25 +4,16 @@ namespace App\Rules;
 
 use App\Models\DPA;
 use App\Models\User;
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class DPAAlreadyLive implements Rule
+class DPAAlreadyLive implements ValidationRule
 {
-	/**
-	 * Create a new rule instance.
-	 */
-	public function __construct()
-	{
-		//
-	}
+	use ValidationTrait;
 
 	/**
 	 * Compare DPA user to see if another request already exists.
-	 *
-	 * @param string $attribute
-	 * @param mixed $value
 	 */
-	public function passes( $attribute, $value ): bool
+	public function passes( string $attribute, string $value ): bool
 	{
 		$userId = ( auth()->id() === User::findOrCreate( $value )->id ) ? auth()->id() : $value;
 		return !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );

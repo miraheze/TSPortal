@@ -57,7 +57,7 @@ class InvestigationController
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule ],
+				'username' => [ 'required', 'string', new MirahezeUsernameRule ],
 			]
 		);
 

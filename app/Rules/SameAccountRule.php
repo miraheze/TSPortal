@@ -2,25 +2,16 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class SameAccountRule implements Rule
+class SameAccountRule implements ValidationRule
 {
-	/**
-	 * Create a new rule instance.
-	 */
-	public function __construct()
-	{
-		//
-	}
+	use ValidationTrait;
 
 	/**
 	 * Compare request user matches requested username.
-	 *
-	 * @param string $attribute
-	 * @param mixed $value
 	 */
-	public function passes( $attribute, $value ): bool
+	public function passes( string $attribute, string $value ): bool
 	{
 		return auth()->user()->username === $value;
 	}

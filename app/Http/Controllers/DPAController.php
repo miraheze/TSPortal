@@ -45,7 +45,7 @@ class DPAController
 	{
 		$request->validate(
 			[
-				'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ],
+				'username' => [ 'required', 'string', new MirahezeUsernameRule, new DPAAlreadyLive ],
 			]
 		);
 
