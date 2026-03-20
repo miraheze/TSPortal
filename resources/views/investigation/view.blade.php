@@ -100,7 +100,7 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __('investigation-event-add') }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __('close') }}"></button>
 										</div>
 										<div class="modal-body">
 											<label class="form-label" for="event"><strong>{{ __('investigation-event-q') }}</strong></label>
@@ -123,7 +123,7 @@
 												class="form-control" name="comments" id="comments"></textarea>
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __('submit') }}</button>
 										</div>
 									</div>
 								</div>

@@ -75,14 +75,14 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __('ial-assign-header') }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __('close') }}"></button>
 										</div>
 										<div class="modal-body">
 											<label class="form-label mt-1" for="assign-id"><strong>{{ __('ial-assign-label') }}</strong></label>
 											<input class="form-control" name="assign-id" id="assign-id">
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __('submit') }}</button>
 										</div>
 									</div>
 								</div>

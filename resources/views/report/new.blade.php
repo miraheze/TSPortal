@@ -1,6 +1,6 @@
 <x-layout>
 	<x-slot name="pgname">
-		Reports
+		{{ __('reports') }}
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4">{{ __('report-header') }}</h3>

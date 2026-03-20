@@ -219,7 +219,7 @@
 				<div class="toast-header bg-gradient-success text-white">
 					<strong class="me-auto">{{ __('toast-success') }}</strong>
 					<small>Just Now</small>
-					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __('close') }}"></button>
 				</div>
 				<div class="toast-body">
 					{{ request()->session()->get('successFlash') }}
@@ -233,7 +233,7 @@
 				<div class="toast-header bg-gradient-danger text-white">
 					<strong class="me-auto">{{ __('toast-failure') }}</strong>
 					<small>Just Now</small>
-					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __('close') }}"></button>
 				</div>
 				<div class="toast-body">
 					{{ request()->session()->get('failureFlash') }}

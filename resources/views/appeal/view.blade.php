@@ -104,7 +104,7 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __( 'appeal' ) }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __( 'close' ) }}"></button>
 										</div>
 										<div class="modal-body text-center">
 											@foreach ( config( 'app.appeals.' . $appeal->type ) as $label => $outcomes )
@@ -129,7 +129,7 @@
 											<textarea class="form-control" name="comments" id="comments"></textarea>
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __( 'submit' ) }}</button>
 										</div>
 									</div>
 								</div>
