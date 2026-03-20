@@ -82,7 +82,7 @@
 											<input class="form-control" name="assign-id" id="assign-id">
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __('submit') }}</button>
 										</div>
 									</div>
 								</div>
