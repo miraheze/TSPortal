@@ -6,12 +6,14 @@ use App\Models\DPA;
 use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Override;
 
 class DPAAlreadyLive implements ValidationRule
 {
 	/**
 	 * Validate that there is not already another DPA request for this user.
 	 */
+	#[Override]
 	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
 		$userId = ( auth()->id() === User::findOrCreate( $value )->id ) ? auth()->id() : $value;

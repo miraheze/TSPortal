@@ -55,9 +55,11 @@ class InvestigationController
 	 */
 	public function store( Investigation $investigation, Request $request ): RedirectResponse
 	{
-		$request->validate( [
-			'username' => [ 'bail', 'required', 'string', new MirahezeUsernameRule ],
-		] );
+		$request->validate(
+			[
+				'username' => [ new MirahezeUsernameRule ],
+			]
+		);
 
 		$investigationUser = User::findOrCreate( $request->input( 'username' ) );
 		$newInvestigation = $investigation::factory()->create(
