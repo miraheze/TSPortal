@@ -42,6 +42,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed `->orderBy()` to use `->latest()` in IALController.
 - Changed deprecated Rule to use ValidationRule.
 - Changed manual Gate check to use `@can` in dpa view blade template.
+- Changed to use `@checked`, `@disabled`, and `@selected` helpers in blade templates.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
