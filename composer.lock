@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "537a2cab2effd9f28051a54e05c03191",
+    "content-hash": "698aa22e9c1f8a45fe7d7e488e41c6db",
     "packages": [
         {
             "name": "brick/math",
@@ -6354,11 +6354,11 @@
         },
         {
             "name": "taavi/laravel-socialite-mediawiki",
-            "version": "1.6.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://git.sr.ht/~taavi/laravel-socialite-mediawiki",
-                "reference": "ad9167180b31c47ce81198cb4190a50ad4aa565f"
+                "reference": "b8ac677ea0603876dcac34c913472d33909d9970"
             },
             "require": {
                 "ext-json": "*",
@@ -6366,7 +6366,7 @@
                 "php": "^7.0|^8.0"
             },
             "require-dev": {
-                "mediawiki/mediawiki-codesniffer": "38.0.0"
+                "mediawiki/mediawiki-codesniffer": "50.0.0"
             },
             "type": "library",
             "extra": {
@@ -6392,7 +6392,7 @@
                 }
             ],
             "description": "A MediaWiki authentication provider for Laravel Socialite",
-            "time": "2022-01-06T19:09:07+00:00"
+            "time": "2026-03-21T18:51:33+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
