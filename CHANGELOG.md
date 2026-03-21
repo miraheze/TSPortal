@@ -11,6 +11,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added PHP type-hints wherever possible.
 - Added proper implementation for appeals count on home page.
 - Added some missing localization to blade templates.
+- Added `strict_types` declarations to all PHP files.
 
 ### Fixed
 
