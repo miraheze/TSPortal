@@ -22,7 +22,7 @@
 											<select class="form-select" name="topic" id="topic">
 												@foreach ( config('app.investigationTopics') as $topic )
 													<option
-														value="{{ $topic }}" {{ ( $investigation->type === $topic ) ? "selected" : "" }}>
+														value="{{ $topic }}" @selected($investigation->type === $topic)>
 														... {{ __('investigation-topic-' . $topic ) }}
 													</option>
 												@endforeach
@@ -58,7 +58,7 @@
 											<select class="form-select" name="recommend" id="recommend">
 												@foreach ( config('app.recommendations') as $recommend )
 													<option
-														value="{{ $recommend }}" {{ ( $investigation->recommendation === $recommend ) ? "selected" : "" }}>
+														value="{{ $recommend }}" @selected($investigation->recommendation === $recommend)>
 														... {{ __('recommendation-' . $recommend ) }}
 													</option>
 												@endforeach

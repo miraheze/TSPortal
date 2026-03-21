@@ -11,8 +11,8 @@
 						<div class="col col-sm-4">
 							<select class="form-select form-control" id="filter" onchange="updateFilter()">
 								<option value="">----</option>
-								<option value="type" {{ request()->input( 'type' ) ? 'selected' : '' }}>{{ __('topic') }}</option>
-								<option value="investigation" {{ request()->input( 'investigation' ) ? 'selected' : '' }}>{{ __('investigation') }}</option>
+								<option value="type" @selected(request()->input( 'type' ))>{{ __('topic') }}</option>
+								<option value="investigation" @selected(request()->input( 'investigation' ))>{{ __('investigation') }}</option>
 							</select>
 						</div>
 						<div class="col col-sm-1">
@@ -25,7 +25,7 @@
 									<optgroup label="{{ $type }}">
 										@foreach( $topics as $topic )
 											{{ $allTopics[] = $topic }}
-											<option value="{{ $type . '-' . $topic }}" {{ ( request()->input( 'type' ) === $type . '-' . $topic ) ? 'selected' : '' }}>... {{ __('report-topic-' . $type . '-' . $topic) }}.</option>
+											<option value="{{ $type . '-' . $topic }}" @selected(request()->input( 'type' ) === $type . '-' . $topic)>... {{ __('report-topic-' . $type . '-' . $topic) }}.</option>
 										@endforeach
 									</optgroup>
 								@endforeach
@@ -34,7 +34,7 @@
 						</div>
 						<div class="col col-sm-2">
 							<div class="form-check">
-								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" {{ request()->input( 'closed' ) ? 'checked' : '' }}/>
+								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" @checked(request()->input( 'closed' ))/>
 								<label class="form-check-label" for="formCheck-1">{{ __('filter-closed') }}</label>
 							</div>
 						</div>
