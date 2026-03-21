@@ -43,6 +43,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
+  - Upgraded taavi/laravel-socialite-mediawiki from 1.6.0 to 1.7.1.
  
 ### Removed
 
