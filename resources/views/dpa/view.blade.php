@@ -64,8 +64,8 @@
 						<x-user.verified :user="$dpa->user"/>
 					</div>
 				</div>
-				@if ( !$dpa->completed )
-					@can('ts')
+				@can('ts')
+					@if ( !$dpa->completed )
 						<div class="card shadow mb-3">
 							<div class="card-header py-3">
 								<p class="text-primary m-0 fw-bold text-center">{{ __('resolution') }}</p>
@@ -124,8 +124,8 @@
 								</div>
 							</div>
 						</div>
-					@endcan
-				@endif
+					@endif
+				@endcan
 			</div>
 		</div>
 	</x-slot>
