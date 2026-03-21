@@ -54,10 +54,10 @@
 					@if ( $ials->hasPages() )
 						<nav>
 							<ul class="pagination justify-content-center">
-								<li class="page-item" @disabled($ials->onFirstPage())>
+								<li class="page-item @disabled($ials->onFirstPage())">
 									<a class="page-link" {{ $ials->onFirstPage() ? '' : 'href=' . $ials->previousPageUrl() }} ">{{ __('nav-previous') }}</a>
 								</li>
-								<li class="page-item" @disabled(!$ials->hasMorePages())>
+								<li class="page-item @disabled(!$ials->hasMorePages())">
 									<a class="page-link" {{ $ials->hasMorePages() ? 'href=' . $ials->nextPageUrl() : '' }}>{{ __('nav-next') }}</a>
 								</li>
 							</ul>
