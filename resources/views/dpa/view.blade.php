@@ -64,65 +64,67 @@
 						<x-user.verified :user="$dpa->user"/>
 					</div>
 				</div>
-				@if ( !$dpa->completed && Gate::check('ts') )
-					<div class="card shadow mb-3">
-						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold text-center">{{ __('resolution') }}</p>
-						</div>
-						<div class="card-body">
-							<form method="POST" action="/dpa/{{ $dpa->id }}">
-								@csrf
-								@method('PATCH')
-								<div class="row">
-									<div class="col text-center" style="margin-bottom: 20px;">
-										<button class="btn btn-success text-white" name="approve" value="approve" type="submit">{{ __('approve') }}</button>
-									</div>
-								</div>
-							</form>
-							<div class="col text-center">
-								<button class="btn btn-danger" type="button" data-bs-target="#modal-reject"
-								        data-bs-toggle="modal">{{ __('reject') }}
-								</button>
+				@if ( !$dpa->completed )
+					@can('ts')
+						<div class="card shadow mb-3">
+							<div class="card-header py-3">
+								<p class="text-primary m-0 fw-bold text-center">{{ __('resolution') }}</p>
 							</div>
-							<div class="modal fade" role="dialog" tabindex="-1" id="modal-reject">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">{{ __('dpa-reject') }}</h4>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="{{ __('close') }}"></button>
+							<div class="card-body">
+								<form method="POST" action="/dpa/{{ $dpa->id }}">
+									@csrf
+									@method('PATCH')
+									<div class="row">
+										<div class="col text-center" style="margin-bottom: 20px;">
+											<button class="btn btn-success text-white" name="approve" value="approve" type="submit">{{ __('approve') }}</button>
 										</div>
-										<form method="POST" action="/dpa/{{ $dpa->id }}">
-											@csrf
-											@method('PATCH')
-											<div class="modal-body">
-												<div class="alert alert-danger text-center" role="alert">
-													<span><strong>{{ __('dpa-reject-notice') }}</strong></span>
-												</div>
-												<div class="col">
-													<div class="mb-3"></div>
-													<label class="form-label" for="reason"><strong>{{ __('dpa-reject-label') }}...</strong></label>
-													<select class="form-select" name="reason" id="reason">
-														@foreach ( config('app.rejectDPA') as $reason )
-															<option value="{{ $reason }}">{{ __('dpa-reject-' . $reason ) }}
-															</option>
-														@endforeach
-													</select>
-												</div>
+									</div>
+								</form>
+								<div class="col text-center">
+									<button class="btn btn-danger" type="button" data-bs-target="#modal-reject"
+									        data-bs-toggle="modal">{{ __('reject') }}
+									</button>
+								</div>
+								<div class="modal fade" role="dialog" tabindex="-1" id="modal-reject">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">{{ __('dpa-reject') }}</h4>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+												        aria-label="{{ __('close') }}"></button>
 											</div>
-											<div class="modal-footer">
-												<button class="btn btn-light" type="button" data-bs-dismiss="modal">
-													{{ __('close') }}
-												</button>
-												<button class="btn btn-primary" name="reject" type="submit">{{ __('reject') }}
-												</button>
-											</div>
-										</form>
+											<form method="POST" action="/dpa/{{ $dpa->id }}">
+												@csrf
+												@method('PATCH')
+												<div class="modal-body">
+													<div class="alert alert-danger text-center" role="alert">
+														<span><strong>{{ __('dpa-reject-notice') }}</strong></span>
+													</div>
+													<div class="col">
+														<div class="mb-3"></div>
+														<label class="form-label" for="reason"><strong>{{ __('dpa-reject-label') }}...</strong></label>
+														<select class="form-select" name="reason" id="reason">
+															@foreach ( config('app.rejectDPA') as $reason )
+																<option value="{{ $reason }}">{{ __('dpa-reject-' . $reason ) }}
+																</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-light" type="button" data-bs-dismiss="modal">
+														{{ __('close') }}
+													</button>
+													<button class="btn btn-primary" name="reject" type="submit">{{ __('reject') }}
+													</button>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					@endcan
 				@endif
 			</div>
 		</div>
