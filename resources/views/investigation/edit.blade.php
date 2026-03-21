@@ -110,7 +110,7 @@
 											<div class="card-body p-2">
 												<table class="table table-sm table-borderless mb-0">
 													<tbody>
-														@foreach ($laws as $name => $act)
+														@foreach ( $laws as $name => $act )
 															<tr>
 																<td class="fw-semibold">{{ $name }}</td>
 																<td>{{ $act }}</td>
