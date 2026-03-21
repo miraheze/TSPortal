@@ -12,6 +12,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added proper implementation for appeals count on home page.
 - Added some missing localization to blade templates.
 - Added `strict_types` declarations to all PHP files.
+- Added per-country (United States and United Kingdom) legislation cheat sheets in investigations.
 
 ### Fixed
 
