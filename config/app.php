@@ -243,7 +243,7 @@ return [
 			'Human Trafficking' => '22 U.S.C. § 7101 et seq.',
 			'Identity Theft / Data Theft' => '18 U.S.C. § 1028',
 			'Terrorism Preparation / Material Support' => '18 U.S.C. § 2339B',
-			'Revenge Pornography / Non-consensual Pornography' => '47 U.S. Code § 223a',
+			'Revenge Pornography / Non-consensual Pornography' => '47 U.S.C. § 223a',
 		],
 		'United Kingdom' => [
 			'Animal Cruelty' => 'S.8(3) Animal Welfare Act 2006',
