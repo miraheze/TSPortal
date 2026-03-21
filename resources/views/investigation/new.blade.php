@@ -28,7 +28,7 @@
 											<select class="form-select" name="topic" id="topic">
 												@foreach ( config('app.investigationTopics') as $topic )
 													<option
-														value="{{ $topic }}" {{ ( old( 'topic' ) === $topic ) ? 'selected' : '' }}>
+														value="{{ $topic }}" @selected(old( 'topic' ) === $topic)>
 														... {{ __('investigation-topic-' . $topic ) }}
 													</option>
 												@endforeach

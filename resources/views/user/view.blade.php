@@ -82,7 +82,7 @@
 											<div class="form-check">
 												<input id="{{ $flag }}" name="new-access[]" value="{{ $flag }}"
 												       class="form-check-input"
-												       type="checkbox" {{ ( $user->hasFlag( $flag ) ) ? "checked" : "" }}/>
+												       type="checkbox" @checked($user->hasFlag( $flag ))/>
 												<label class="form-check-label" for="{{ $flag }}">{{ __( 'user-flags-' . $flag ) }}</label>
 											</div>
 										@endforeach

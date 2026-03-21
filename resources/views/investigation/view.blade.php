@@ -116,7 +116,7 @@
 											<label class="form-label toggle-hideall d-none" id="filter-appeal-recv-label" for="filter-appeal-recv"><strong>{{ __('appeal-type') }}</strong></label>
 											<select class="form-select form-control toggle-hideall d-none" name="appeal-type" id="filter-appeal-recv">
 												@foreach( config('app.appeals') as $type => $data )
-													<option value="{{ $type }}" {{ ( request()->input( 'type' ) === $type ) ? 'selected' : '' }}>{{ ucfirst(__('appeal-type-' . $type)) }}.</option>
+													<option value="{{ $type }}" @selected(request()->input( 'type' ) === $type)>{{ ucfirst(__('appeal-type-' . $type)) }}.</option>
 												@endforeach
 											</select>
 											<label class="form-label mt-1" for="comments"><strong>{{ __('comments') }}</strong></label><textarea

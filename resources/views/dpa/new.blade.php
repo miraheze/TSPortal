@@ -39,11 +39,11 @@
 											<label class="form-label" for="username-type"><strong>{{ __('dpa-username-above') }}...</strong></label>
 											<select class="form-select" id="username-type" name="username-type" onchange="dpaEvidence()">
 												<option
-													value="own-removal" {{ ( old('username-type') === 'own-removal' ) ? 'selected' : '' }}>
+													value="own-removal" @selected(old( 'username-type' ) === 'own-removal')>
 													... {{ __('dpa-username-mine') }}.
 												</option>
 												<option
-													value="under-13" {{ ( old('username-type') === 'under-13' ) ? 'selected' : '' }}>
+													value="under-13" @selected(old( 'username-type' ) === 'under-13')>
 													... {{ __('dpa-username-u13') }}.
 												</option>
 											</select>
@@ -87,7 +87,7 @@
 						<div class="col">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="dpa" name="dpa" value="dpa"
-								       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" {{ old('dpa') ? 'checked' : '' }}/>
+								       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" @checked(old( 'dpa' ))/>
 								<label class="form-check-label" for="dpa">
 									{{ __('dpa-statutory') }}
 								</label>
