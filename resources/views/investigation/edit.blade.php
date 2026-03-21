@@ -100,8 +100,12 @@
 							<h6 class="text-center text-primary fw-bold m-0">{{ __('legislation') }}</h6>
 						</div>
 						<div class="card-body">
-							@foreach ( config('app.legislation') as $name => $act )
-								<strong>{{ $name }}</strong> - {{ $act }} <br>
+							@foreach ( config( 'app.legislation' ) as $country => $laws )
+								<strong>{{ $country }}</strong><br>
+								@foreach ( $laws as $name => $act )
+									&nbsp;&nbsp;<strong>{{ $name }}</strong> - {{ $act }}<br>
+								@endforeach
+								<br>
 							@endforeach
 						</div>
 					</div>
