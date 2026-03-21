@@ -233,6 +233,18 @@ return [
 	|
 	*/
 	'legislation' => [
+		'United States' => [
+			'Animal Cruelty' => '18 U.S.C. § 48',
+			'Child Pornography' => '18 U.S.C. § 2251',
+			'Computer Fraud and Abuse' => '18 U.S.C. § 1030',
+			'Copyright Infringement' => '17 U.S.C. § 506',
+			'Encouragement of Terrorism' => '18 U.S.C. § 2339A',
+			'Harassment/Threats' => '18 U.S.C. § 875',
+			'Human Trafficking' => '22 U.S.C. § 7101 et seq.',
+			'Identity Theft / Data Theft' => '18 U.S.C. § 1028',
+			'Terrorism Preparation / Material Support' => '18 U.S.C. § 2339B',
+			'Revenge Pornography / Non-consensual Pornography' => 'Varies by state',
+		],
 		'United Kingdom' => [
 			'Animal Cruelty' => 'S.8(3) Animal Welfare Act 2006',
 			'Belong (or Profess) to a Proscribed Terrorist Organisation' => 'S.11 Terrorism Act 2000',
@@ -252,18 +264,6 @@ return [
 			'Preparation of Terrorism Activity' => 'S.5 Terrorism Act 2006',
 			'Revenge Pornography' => 'S.33 Criminal Justice and Courts Act 2015',
 			'Threats to Kill' => 'S.16 Offences Against the Person Act 1861',
-		],
-		'United States' => [
-			'Animal Cruelty' => '18 U.S.C. § 48',
-			'Child Pornography' => '18 U.S.C. § 2251',
-			'Computer Fraud and Abuse' => '18 U.S.C. § 1030',
-			'Copyright Infringement' => '17 U.S.C. § 506',
-			'Encouragement of Terrorism' => '18 U.S.C. § 2339A',
-			'Harassment/Threats' => '18 U.S.C. § 875',
-			'Human Trafficking' => '22 U.S.C. § 7101 et seq.',
-			'Identity Theft / Data Theft' => '18 U.S.C. § 1028',
-			'Terrorism Preparation / Material Support' => '18 U.S.C. § 2339B',
-			'Revenge Pornography / Non-consensual Pornography' => 'Varies by state',
 		],
 	],
 
