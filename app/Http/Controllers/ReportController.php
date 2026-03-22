@@ -27,7 +27,7 @@ class ReportController
 	{
 		$allReports = Report::query();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allReports = $allReports->where( 'reporter', $request->user() );
+			$allReports->where( 'reporter', $request->user() );
 		}
 
 		$query = $request->query();
@@ -35,16 +35,16 @@ class ReportController
 			if ( !$key ) {
 				continue;
 			} elseif ( in_array( $type, [ 'user', 'reporter' ], true ) ) {
-				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
+				$allReports->where( $type, User::findById( (int)$key ) );
 			} elseif ( in_array( $type, [ 'investigation', 'type' ], true ) ) {
-				$allReports = $allReports->where( $type, $key );
+				$allReports->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allReports = $allReports->whereNotNull( 'reviewed' );
+			$allReports->whereNotNull( 'reviewed' );
 		} elseif ( $request->input( 'reporter' ) === null && $request->input( 'user' ) === null ) {
-			$allReports = $allReports->whereNull( 'reviewed' );
+			$allReports->whereNull( 'reviewed' );
 		}
 
 		return view( 'reports' )->with( 'reports', $allReports->get() );
