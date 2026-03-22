@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Models\IAL;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<IAL>
@@ -18,6 +19,7 @@ class IALFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
+	#[Override]
 	public function definition(): array
 	{
 		return [
