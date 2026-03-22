@@ -7,6 +7,7 @@ namespace App\View\Components\User;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Override;
 
 class Flags extends Component
 {
@@ -26,6 +27,7 @@ class Flags extends Component
 	/**
 	 * Get the view that represent the component.
 	 */
+	#[Override]
 	public function render(): View
 	{
 		return view( 'components.user.flags' );

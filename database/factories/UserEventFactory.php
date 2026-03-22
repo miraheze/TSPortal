@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Models\User;
 use App\Models\UserEvent;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<UserEvent>
@@ -18,6 +19,7 @@ class UserEventFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
+	#[Override]
 	public function definition(): array
 	{
 		return [

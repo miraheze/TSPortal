@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Models\Investigation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<Investigation>
@@ -18,6 +19,7 @@ class InvestigationFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
+	#[Override]
 	public function definition(): array
 	{
 		return [
