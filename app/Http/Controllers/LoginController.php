@@ -26,7 +26,7 @@ class LoginController
 		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
 		$user = User::findOrCreate( $socialiteUser->name, true );
 
-		if ( count( $user->events ) === 0 ) {
+		if ( $user->events()->doesntExist() ) {
 			$user->newEvent( 'created-login' );
 		}
 
