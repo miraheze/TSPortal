@@ -7,6 +7,9 @@ namespace App\Mail;
 use App\Models\Report;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class AtRiskAlert extends Mailable
@@ -16,7 +19,7 @@ class AtRiskAlert extends Mailable
 	/**
 	 * ID of report the email is regarding.
 	 */
-	private int $id;
+	private readonly int $id;
 
 	/**
 	 * Create a new message instance.
@@ -27,10 +30,33 @@ class AtRiskAlert extends Mailable
 	}
 
 	/**
-	 * Build the message.
+	 * Get the message envelope.
 	 */
-	public function build(): self
+	public function envelope(): Envelope
 	{
-		return $this->text( 'emails.atrisk' );
+		return new Envelope(
+			subject: __( 'atrisk-email-subject' ),
+		);
+	}
+
+	/**
+	 * Get the message content definition.
+	 */
+	public function content(): Content
+	{
+		return new Content(
+			view: 'emails.atrisk',
+			with: [ 'id' => $this->id ],
+		);
+	}
+
+	/**
+	 * Get the attachments for the message.
+	 *
+	 * @return array<int, Attachment>
+	 */
+	public function attachments(): array
+	{
+		return [];
 	}
 }
