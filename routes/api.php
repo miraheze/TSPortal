@@ -41,7 +41,7 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 	}
 
 	$dpaUser = User::findOrCreate( $request->input( 'username' ) );
-	if ( count( DPA::query()->where( 'user', $dpaUser->id )->whereNull( 'completed' )->limit( 1 )->get() ) ) {
+	if ( DPA::where( 'user', $dpaUser )->whereNull( 'completed' )->exists() ) {
 		return response()->json( [ 'exists' => true ] );
 	}
 
@@ -53,10 +53,10 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 		]
 	);
 
-	$event = ( count( $dpaUser->events ) === 0 ) ? 'created-dpa' : 'new-dpa';
+	$event = $dpaUser->events()->exists() ? 'new-dpa' : 'created-dpa';
 	$dpaUser->newEvent( $event );
 
-	$newDPA = DPA::query()->latest( 'filed' )->first();
+	$newDPA = DPA::latest( 'filed' )->first();
 	DPANew::dispatch( $newDPA );
 
 	return response()->json( [ 'id' => $newDPA->id ] );
@@ -82,7 +82,7 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 		]
 	);
 
-	$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
+	$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 	$subjectUser->newEvent( $event, $newReport->id );
 
 	$reportingUser->newEvent( 'filed-report', $newReport->id );
@@ -102,7 +102,7 @@ Route::post( 'ial', static function ( Request $request ): JsonResponse {
 	$comment = $request->input( 'comment' ) ?? '';
 	$explodedComment = explode( '#', $comment );
 
-	$serializedID = ( is_array( $explodedComment ) && isset( $explodedComment[1] ) ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
+	$serializedID = isset( $explodedComment[1] ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
 
 	$updates = [
 		'user' => User::findOrCreate( $request->input( 'username' ) ),
