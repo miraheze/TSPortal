@@ -47,6 +47,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed deprecated Rule to use ValidationRule.
 - Changed manual Gate check to use `@can` in dpa view blade template.
 - Changed to use `@checked`, `@disabled`, and `@selected` helpers in blade templates.
+- Changed AtRiskAlert to use new Mailable architecture.
 - Changed `minimum-stability` in composer to stable.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.1.1.
