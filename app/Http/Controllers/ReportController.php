@@ -27,7 +27,7 @@ class ReportController
 	{
 		$allReports = Report::query();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allReports->where( 'reporter', $request->user() );
+			$allReports = Report::where( 'reporter', $request->user() );
 		}
 
 		$query = $request->query();
