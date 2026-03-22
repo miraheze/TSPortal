@@ -56,7 +56,7 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 	$event = ( count( $dpaUser->events ) === 0 ) ? 'created-dpa' : 'new-dpa';
 	$dpaUser->newEvent( $event );
 
-	$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get()->all()[0];
+	$newDPA = DPA::query()->latest( 'filed' )->first();
 	DPANew::dispatch( $newDPA );
 
 	return response()->json( [ 'id' => $newDPA->id ] );
@@ -113,9 +113,9 @@ Route::post( 'ial', static function ( Request $request ): JsonResponse {
 		'investigation' => null,
 	];
 
-	if ( is_numeric( $serializedID ) && Investigation::all()->find( $serializedID ) ) {
+	if ( is_numeric( $serializedID ) && Investigation::find( $serializedID ) ) {
 		$updates['investigation'] = $serializedID;
-	} elseif ( ctype_alnum( $serializedID ) && DPA::all()->find( $serializedID ) ) {
+	} elseif ( ctype_alnum( $serializedID ) && DPA::find( $serializedID ) ) {
 		$updates['dpa'] = $serializedID;
 	}
 
