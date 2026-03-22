@@ -20,7 +20,7 @@ class AppealController
 	 */
 	public function index( Request $request ): View
 	{
-		$allAppeals = Appeal::all();
+		$allAppeals = Appeal::query();
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
@@ -43,7 +43,7 @@ class AppealController
 			$allAppeals = $allAppeals->whereNull( 'reviewed' );
 		}
 
-		return view( 'appeals' )->with( 'appeals', $allAppeals );
+		return view( 'appeals' )->with( 'appeals', $allAppeals->get() );
 	}
 
 	/**
