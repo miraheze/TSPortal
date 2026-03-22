@@ -145,7 +145,7 @@
 				</div>
 			</div>
 		</div>
-		@if ( count( $investigation->events ) )
+		@if ( $investigation->events()->exists() )
 			<div class="card shadow mb-3" style="margin-bottom: 0;">
 				<div class="card-header py-3">
 					<p class="text-primary m-0 fw-bold text-center">{{ __('history') }}</p>
