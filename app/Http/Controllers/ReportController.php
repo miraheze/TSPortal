@@ -30,6 +30,7 @@ class ReportController
 			$allReports = $allReports->where( 'reporter', $request->user() );
 		}
 
+		$query = $request->query();
 		foreach ( $query as $type => $key ) {
 			if ( !$key ) {
 				continue;
