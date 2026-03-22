@@ -5,7 +5,6 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.4",
-		"ext-json": "*",
 		"ext-pdo": "*",
 		"guzzlehttp/guzzle": "7.10.0",
 		"laravel/framework": "13.1.1",
