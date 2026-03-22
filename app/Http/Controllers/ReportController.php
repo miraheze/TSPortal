@@ -25,12 +25,11 @@ class ReportController
 	 */
 	public function index( Request $request ): View
 	{
-		$allReports = Report::all();
+		$allReports = Report::query();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
 			$allReports = $allReports->where( 'reporter', $request->user() );
 		}
 
-		$query = $request->query();
 		foreach ( $query as $type => $key ) {
 			if ( !$key ) {
 				continue;
@@ -47,7 +46,7 @@ class ReportController
 			$allReports = $allReports->whereNull( 'reviewed' );
 		}
 
-		return view( 'reports' )->with( 'reports', $allReports );
+		return view( 'reports' )->with( 'reports', $allReports->get() );
 	}
 
 	/**
@@ -71,7 +70,7 @@ class ReportController
 			]
 		);
 
-		$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
+		$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 		$subjectUser->newEvent( $event, $report->id );
 
 		$request->user()->newEvent( 'filed-report', $report->id );
