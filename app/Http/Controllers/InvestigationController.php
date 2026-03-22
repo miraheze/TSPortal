@@ -26,7 +26,7 @@ class InvestigationController
 	 */
 	public function index( Request $request ): View
 	{
-		$allInvestigations = Investigation::all();
+		$allInvestigations = Investigation::query();
 		$query = $request->query();
 
 		foreach ( $query as $type => $key ) {
@@ -49,7 +49,7 @@ class InvestigationController
 			$allInvestigations = $allInvestigations->whereNull( 'closed' );
 		}
 
-		return view( 'investigations' )->with( 'investigations', $allInvestigations );
+		return view( 'investigations' )->with( 'investigations', $allInvestigations->get() );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class InvestigationController
 			]
 		);
 
-		$event = ( count( $investigationUser->events ) === 0 ) ? 'created-investigation' : 'new-investigation';
+		$event = $investigationUser->events()->exists() ? 'new-investigation' : 'created-investigation';
 		$investigationUser->newEvent( $event );
 
 		InvestigationNew::dispatch( $newInvestigation );
