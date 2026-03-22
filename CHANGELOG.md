@@ -37,6 +37,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed the `User::STANDING` constant to be private and type-hinted it.
 - Changed to use new attributes from Laravel 13.
 - Changed to use `withProviders()` instead of providers.php.
+- Changed to use `withSchedule()` instead of the console.php route for registering IALScheduler.
 - Changed `auth()->id()` to `$request->user()->id` in AppealController.
 - Changed `request()->session()->flash()` to `$request->session()->flash()` in all controllers.
 - Changed fully qualified class names to `@use` in the home page view blade template.
