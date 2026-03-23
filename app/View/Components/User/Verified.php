@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Override;
+use function view;
 
 class Verified extends Component
 {

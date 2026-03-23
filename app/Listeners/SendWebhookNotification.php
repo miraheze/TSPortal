@@ -5,6 +5,9 @@ declare( strict_types = 1 );
 namespace App\Listeners;
 
 use Illuminate\Support\Facades\Http;
+use function config;
+use function in_array;
+use function strtolower;
 
 class SendWebhookNotification
 {

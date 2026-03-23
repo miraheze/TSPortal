@@ -12,6 +12,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Override;
+use function array_flip;
+use function in_array;
+use function json_encode;
+use function now;
+use function strtolower;
+use function ucfirst;
 
 #[Table( name: 'users', timestamps: false )]
 #[Unguarded]

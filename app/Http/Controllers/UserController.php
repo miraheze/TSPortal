@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function back;
+use function view;
 
 /**
  * Controller for all user related actions outside a login.

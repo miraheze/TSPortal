@@ -14,6 +14,12 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use function back;
+use function config;
+use function in_array;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller for all Report actions.

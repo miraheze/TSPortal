@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserEvent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
+use function now;
 
 /**
  * @extends Factory<UserEvent>
