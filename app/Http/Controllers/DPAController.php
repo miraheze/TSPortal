@@ -109,16 +109,24 @@ class DPAController
 			$dpa->user->update( [
 				'username' => 'MirahezeGDPR ' . $dpa->id,
 			] );
+
+			$dpa->user->newEvent( 'closed-dpa', actor: $request->user() );
 		} else {
+			$request->validate(
+				[
+					'reason' => [ 'required', 'string' ],
+				]
+			);
+
 			$dpa->update( [
 				'completed' => now(),
 				'reject' => $request->input( 'reason' ),
 			] );
+
+			$dpa->user->newEvent( 'closed-dpa', $request->input( 'reason' ), $request->user() );
 		}
 
-		$dpa->user->newEvent( 'closed-dpa', $request->user() );
 		$request->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-updated' ) );
-
 		return back();
 	}
 }
