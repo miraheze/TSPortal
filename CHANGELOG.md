@@ -18,6 +18,7 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Fixed
 
+- SECURITY: Fixed DPAAlreadyLive creating arbitrary users ([GHSA-f346-8rp3-4h9h](https://github.com/miraheze/TSPortal/security/advisories/GHSA-f346-8rp3-4h9h)).
 - Fixed Popper in Bootstrap JS properly.
 - Fixed to not save flags and add an event when no changes are actually made.
 - Fixed an issue with a migration order.
@@ -30,6 +31,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Fixed setting active on current navigation item.
 - Fixed serializing user object in `users_events` when closing DPAs (properly insert as the actor and only store using the ID).
 - Fixed some PHP type errors by adding extra validation to rules.
+- Fixed DPAAlreadyLive not working for DPA requests for accounts that are not their own account.
 
 ### Changed
 

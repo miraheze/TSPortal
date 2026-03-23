@@ -22,9 +22,13 @@ class DPAAlreadyLive implements ValidationRule
 			return;
 		}
 
-		$userId = ( auth()->id() === User::findOrCreate( $value )->id ) ? auth()->id() : $value;
-		$check = !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
-		if ( !$check ) {
+		$userId = User::firstWhere( 'username', $value )?->id;
+		if ( $userId === null ) {
+			return;
+		}
+
+		$exists = DPA::where( 'user', $userId )->whereNull( 'completed' )->exists();
+		if ( $exists ) {
 			$fail( 'dpa-already-exists' )->translate();
 		}
 	}
