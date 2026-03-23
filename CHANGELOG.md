@@ -14,6 +14,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added `strict_types` declarations to all PHP files.
 - Added per-country (United States and United Kingdom) legislation cheat sheets in investigations.
 - Added `#[Override]` where possible.
+- Added validation to the reason field when rejecting DPAs to ensure it is provided.
 
 ### Fixed
 
@@ -27,6 +28,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Fixed allowing users to view and update their own reports.
 - Fixed checking for assigned when editing investigations.
 - Fixed setting active on current navigation item.
+- Fixed serializing user object in `users_events` when closing DPAs (properly insert as the actor and only store using the ID).
 
 ### Changed
 
