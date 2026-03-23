@@ -26,30 +26,28 @@ class InvestigationController
 	 */
 	public function index( Request $request ): View
 	{
-		$allInvestigations = Investigation::query();
-		$query = $request->query();
-
-		foreach ( $query as $type => $key ) {
+		$query = Investigation::query();
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
 			} elseif ( in_array( $type, [ 'subject', 'assigned' ], true ) ) {
-				$allInvestigations = $allInvestigations->where( $type, User::findById( (int)$key ) );
+				$query->where( $type, (int)$key );
 			} elseif ( in_array( $type, [ 'type', 'recommendation' ], true ) ) {
 				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 
-				$allInvestigations = $allInvestigations->where( $type, $key );
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allInvestigations = $allInvestigations->whereNotNull( 'closed' );
+			$query->whereNotNull( 'closed' );
 		} elseif ( $request->input( 'assigned' ) === null && $request->input( 'subject' ) === null ) {
-			$allInvestigations = $allInvestigations->whereNull( 'closed' );
+			$query->whereNull( 'closed' );
 		}
 
-		return view( 'investigations' )->with( 'investigations', $allInvestigations->get() );
+		return view( 'investigations' )->with( 'investigations', $query->get() );
 	}
 
 	/**
