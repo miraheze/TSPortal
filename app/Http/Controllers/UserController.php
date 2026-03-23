@@ -20,7 +20,7 @@ class UserController
 	public function index(): View
 	{
 		$query = User::cursorPaginate( 500 );
-		return view( 'user' )->with( 'users', $query );
+		return view( 'users' )->with( 'users', $query );
 	}
 
 	/**
