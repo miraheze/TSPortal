@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace App\Http\Controllers;
 
 use App\Models\Appeal;
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,30 +19,28 @@ class AppealController
 	 */
 	public function index( Request $request ): View
 	{
-		$allAppeals = Appeal::query();
-		$query = $request->query();
-
-		foreach ( $query as $type => $key ) {
+		$query = Appeal::query();
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
 			} elseif ( $type === 'assigned' ) {
-				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
+				$query->where( $type, (int)$key );
 			} elseif ( in_array( $type, [ 'type', 'outcome' ], true ) ) {
 				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 
-				$allAppeals = $allAppeals->where( $type, $key );
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allAppeals = $allAppeals->whereNotNull( 'reviewed' );
+			$query->whereNotNull( 'reviewed' );
 		} else {
-			$allAppeals = $allAppeals->whereNull( 'reviewed' );
+			$query->whereNull( 'reviewed' );
 		}
 
-		return view( 'appeals' )->with( 'appeals', $allAppeals->get() );
+		return view( 'appeals' )->with( 'appeals', $query->get() );
 	}
 
 	/**
