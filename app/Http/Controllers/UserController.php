@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class UserController
 {
 	/**
-	 * Shows a list of all users.
+	 * Indexes and shows a list of all users.
 	 */
 	public function index(): View
 	{
