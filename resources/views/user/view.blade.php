@@ -36,16 +36,16 @@
 							<div class="card-body">
 								@can('ts')
 									<div class="mt-1">
-										<p><strong>{{ __('investigations') }}:</strong> <a href="/investigations?subject={{ $user->id }}">{{ count($user->investigations) }} </a>
+										<p><strong>{{ __('investigations') }}:</strong> <a href="/investigations?subject={{ $user->id }}">{{ $user->investigations()->count() }} </a>
 										</p>
 									</div>
 									<div class="mt-1">
-										<p><strong>{{ __('reports') }}:</strong> <a href="/reports?user={{ $user->id }}">{{ count($user->reports) }}</a>
+										<p><strong>{{ __('reports') }}:</strong> <a href="/reports?user={{ $user->id }}">{{ $user->reports()->count() }}</a>
 										</p>
 									</div>
 								@endcan
 								<div class="mt-1">
-									<p><strong>{{ __('reports-made') }}:</strong> <a href="/reports?reporter={{ $user->id }}">{{ count( $user->reportsMade ) }}</a></p>
+									<p><strong>{{ __('reports-made') }}:</strong> <a href="/reports?reporter={{ $user->id }}">{{ $user->reportsMade()->count() }}</a></p>
 								</div>
 							</div>
 						</div>

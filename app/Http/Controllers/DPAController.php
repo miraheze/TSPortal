@@ -24,7 +24,7 @@ class DPAController
 	 */
 	public function index( Request $request ): View
 	{
-		$query = DPA::query()->whereNull( 'completed' )->oldest( 'filed' );
+		$query = DPA::whereNull( 'completed' )->oldest( 'filed' );
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
 			$query->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
@@ -84,7 +84,7 @@ class DPAController
 		$event = $dpaUser->events()->exists() ? 'new-dpa' : 'created-dpa';
 		$dpaUser->newEvent( $event );
 
-		$newDPA = DPA::query()->latest( 'filed' )->first();
+		$newDPA = DPA::latest( 'filed' )->first();
 		DPANew::dispatch( $newDPA );
 
 		$request->session()->flash( 'successFlash', __( 'dpa' ) . ' ' . __( 'toast-submitted' ) );

@@ -21,7 +21,7 @@ class IALController
 	 */
 	public function index( Request $request ): View
 	{
-		$allIALs = IAL::query()->latest( 'id' )->cursorPaginate( 25 );
+		$allIALs = IAL::latest( 'id' )->cursorPaginate( 25 );
 		return view( 'ial' )->with( 'ials', $allIALs );
 	}
 

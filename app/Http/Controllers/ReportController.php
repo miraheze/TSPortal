@@ -25,29 +25,28 @@ class ReportController
 	 */
 	public function index( Request $request ): View
 	{
-		$allReports = Report::all();
+		$query = Report::query();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allReports = $allReports->where( 'reporter', $request->user() );
+			$query->where( 'reporter', $request->user()->id );
 		}
 
-		$query = $request->query();
-		foreach ( $query as $type => $key ) {
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
 			} elseif ( in_array( $type, [ 'user', 'reporter' ], true ) ) {
-				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
+				$query->where( $type, (int)$key );
 			} elseif ( in_array( $type, [ 'investigation', 'type' ], true ) ) {
-				$allReports = $allReports->where( $type, $key );
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allReports = $allReports->whereNotNull( 'reviewed' );
+			$query->whereNotNull( 'reviewed' );
 		} elseif ( $request->input( 'reporter' ) === null && $request->input( 'user' ) === null ) {
-			$allReports = $allReports->whereNull( 'reviewed' );
+			$query->whereNull( 'reviewed' );
 		}
 
-		return view( 'reports' )->with( 'reports', $allReports );
+		return view( 'reports' )->with( 'reports', $query->get() );
 	}
 
 	/**
@@ -71,7 +70,7 @@ class ReportController
 			]
 		);
 
-		$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
+		$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 		$subjectUser->newEvent( $event, $report->id );
 
 		$request->user()->newEvent( 'filed-report', $report->id );
