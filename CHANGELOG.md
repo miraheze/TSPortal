@@ -53,6 +53,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed AtRiskAlert to use new Mailable architecture.
 - Changed `minimum-stability` in composer to stable.
 - Changed to use more efficient database Eloquent methods (`->count()`, `->exists()`, `->doesntExist()`) wherever possible.
+- Changed the main user list route from `/user` to `/users`.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
