@@ -44,6 +44,18 @@
 						</tr>
 						</tfoot>
 					</table>
+					@if ( $users->hasPages() )
+						<nav>
+							<ul class="pagination justify-content-center">
+								<li class="page-item @disabled($users->onFirstPage())">
+									<a class="page-link" {{ $users->onFirstPage() ? '' : 'href=' . $users->previousPageUrl() }} ">{{ __('nav-previous') }}</a>
+								</li>
+								<li class="page-item @disabled(!$users->hasMorePages())">
+									<a class="page-link" {{ $users->hasMorePages() ? 'href=' . $users->nextPageUrl() : '' }}>{{ __('nav-next') }}</a>
+								</li>
+							</ul>
+						</nav>
+					@endif
 				</div>
 			</div>
 		</div>
