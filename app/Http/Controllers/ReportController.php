@@ -25,29 +25,28 @@ class ReportController
 	 */
 	public function index( Request $request ): View
 	{
-		$allReports = Report::query();
+		$query = Report::query();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allReports->where( 'reporter', $request->user()->id );
+			$query->where( 'reporter', $request->user()->id );
 		}
 
-		$query = $request->query();
-		foreach ( $query as $type => $key ) {
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
 			} elseif ( in_array( $type, [ 'user', 'reporter' ], true ) ) {
-				$allReports->where( $type, User::findById( (int)$key ) );
+				$query->where( $type, (int)$key );
 			} elseif ( in_array( $type, [ 'investigation', 'type' ], true ) ) {
-				$allReports->where( $type, $key );
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allReports->whereNotNull( 'reviewed' );
+			$query->whereNotNull( 'reviewed' );
 		} elseif ( $request->input( 'reporter' ) === null && $request->input( 'user' ) === null ) {
-			$allReports->whereNull( 'reviewed' );
+			$query->whereNull( 'reviewed' );
 		}
 
-		return view( 'reports' )->with( 'reports', $allReports->get() );
+		return view( 'reports' )->with( 'reports', $query->get() );
 	}
 
 	/**
