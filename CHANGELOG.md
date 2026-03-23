@@ -14,7 +14,6 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added `strict_types` declarations to all PHP files.
 - Added per-country (United States and United Kingdom) legislation cheat sheets in investigations.
 - Added `#[Override]` where possible.
-- Added validation to the reason field when rejecting DPAs to ensure it is provided.
 
 ### Fixed
 
