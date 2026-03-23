@@ -17,6 +17,11 @@ class MirahezeUsernameRule implements ValidationRule
 	#[Override]
 	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
+		if ( !$value ) {
+			$fail( 'username-exist' )->translate();
+			return;
+		}
+
 		$check = Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
 		if ( !$check ) {
 			$fail( 'username-exist' )->translate();

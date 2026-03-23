@@ -18,6 +18,10 @@ class DPAAlreadyLive implements ValidationRule
 	#[Override]
 	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
+		if ( !$value ) {
+			return;
+		}
+
 		$userId = ( auth()->id() === User::findOrCreate( $value )->id ) ? auth()->id() : $value;
 		$check = !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
 		if ( !$check ) {
