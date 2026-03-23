@@ -26,7 +26,7 @@ class DPAController
 	{
 		$query = DPA::whereNull( 'completed' )->oldest( 'filed' );
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$query->where( 'user', $request->user() )->whereNull( 'underage' );
+			$query->where( 'user', $request->user()->id )->whereNull( 'underage' );
 		}
 
 		return view( 'dpa' )->with( 'dpas', $query->get() );
