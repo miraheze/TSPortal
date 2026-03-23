@@ -32,7 +32,6 @@ Route::get( '/logout', [ LoginController::class, 'logout' ] )->middleware( 'auth
 Route::get( '/users', [ UserController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', User::class );
 Route::get( '/user/{user}', [ UserController::class, 'show' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'view', 'user' );
 Route::patch( '/user/{user}', [ UserController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'user' );
-Route::redirect( '/user', '/users' );
 
 /*
  * Investigations web group.
