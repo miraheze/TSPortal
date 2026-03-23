@@ -15,6 +15,10 @@ use App\Rules\MirahezeUsernameRule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function in_array;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller class for all Investigation actions.
@@ -166,6 +170,6 @@ class InvestigationController
 		}
 
 		$request->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-updated' ) );
-		return redirect( '/investigation/' . $investigation->id );
+		return redirect( "/investigation/{$investigation->id}" );
 	}
 }

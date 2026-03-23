@@ -13,6 +13,10 @@ use App\Rules\SameAccountRule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function back;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller class for DPA request and actions.

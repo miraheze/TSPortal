@@ -7,6 +7,11 @@ namespace App\Schedules;
 use App\Models\IAL;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use function array_count_values;
+use function array_keys;
+use function array_values;
+use function config;
+use function str_replace;
 
 class IALScheduler
 {

@@ -7,6 +7,7 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Override;
+use function auth;
 
 class SameAccountRule implements ValidationRule
 {

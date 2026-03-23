@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
 use Override;
+use function htmlspecialchars;
 
 class MirahezeUsernameRule implements ValidationRule
 {

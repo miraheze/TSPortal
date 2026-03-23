@@ -8,6 +8,11 @@ use App\Models\Appeal;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function in_array;
+use function json_encode;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller class for all Appeal actions.

@@ -10,6 +10,10 @@ use App\Models\Investigation;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function back;
+use function ctype_alnum;
+use function is_numeric;
+use function view;
 
 /**
  * Controller class for Internal Actions Log requests and actions.

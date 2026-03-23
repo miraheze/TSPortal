@@ -8,6 +8,7 @@ use App\Models\IAL;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
+use function now;
 
 /**
  * @extends Factory<IAL>
