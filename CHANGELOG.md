@@ -28,6 +28,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Fixed checking for assigned when editing investigations.
 - Fixed setting active on current navigation item.
 - Fixed serializing user object in `users_events` when closing DPAs (properly insert as the actor and only store using the ID).
+- Fixed some PHP type errors by adding extra validation to rules.
 
 ### Changed
 
