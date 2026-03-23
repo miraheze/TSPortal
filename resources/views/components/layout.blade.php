@@ -71,7 +71,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === __('users') ) ? 'active' : '' }}" href="/user">
+						<a class="nav-link {{ ( trim( $pgname ) === __('users') ) ? 'active' : '' }}" href="/users">
 							<i class="fa-solid fa-user"></i>
 							<span>{{ __('users') }}</span>
 						</a>

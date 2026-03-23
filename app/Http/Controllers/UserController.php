@@ -15,11 +15,12 @@ use Illuminate\Http\Request;
 class UserController
 {
 	/**
-	 * Shows a list of all users.
+	 * Indexes and shows a list of all users.
 	 */
 	public function index(): View
 	{
-		return view( 'user' )->with( 'users', User::query()->get() );
+		$query = User::cursorPaginate( 500 );
+		return view( 'users' )->with( 'users', $query );
 	}
 
 	/**
