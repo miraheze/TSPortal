@@ -24,17 +24,18 @@ use Illuminate\Support\Facades\Route;
 Route::get( '/', static fn (): View => view( 'home' ) );
 
 /*
- * Web group for account actions
+ * Web group for account actions.
  */
 Route::get( '/login', [ LoginController::class, 'login' ] )->name( 'login' );
 Route::get( '/callback', [ LoginController::class, 'callback' ] );
 Route::get( '/logout', [ LoginController::class, 'logout' ] )->middleware( 'auth' );
-Route::get( '/user', [ UserController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', User::class );
+Route::get( '/users', [ UserController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', User::class );
 Route::get( '/user/{user}', [ UserController::class, 'show' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'view', 'user' );
 Route::patch( '/user/{user}', [ UserController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'user' );
+Route::redirect( '/user', '/users' );
 
 /*
- * Investigations web group
+ * Investigations web group.
  */
 Route::get( '/investigations', [ InvestigationController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', Investigation::class );
 Route::get( '/investigation/new', [ InvestigationController::class, 'create' ] )->middleware( 'auth' )->can( 'create', Investigation::class );
@@ -44,7 +45,7 @@ Route::get( '/investigation/edit/{investigation}', [ InvestigationController::cl
 Route::patch( '/investigation/{investigation}', [ InvestigationController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'investigation' );
 
 /*
- * Reports web group
+ * Reports web group.
  */
 Route::get( '/reports', [ ReportController::class, 'index' ] )->middleware( 'auth' );
 Route::get( '/report/new', [ ReportController::class, 'create' ] )->middleware( 'auth' )->can( 'create', Report::class );
@@ -53,7 +54,7 @@ Route::get( '/report/{report}', [ ReportController::class, 'show' ] )->whereNumb
 Route::patch( '/report/{report}', [ ReportController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'report' );
 
 /*
- * DPA web groups
+ * DPA web group.
  */
 Route::get( '/dpa', [ DPAController::class, 'index' ] )->middleware( 'auth' );
 Route::get( '/dpa/new', [ DPAController::class, 'create' ] )->middleware( 'auth' )->can( 'create', DPA::class );
@@ -63,14 +64,14 @@ Route::patch( '/dpa/{dpa}', [ DPAController::class, 'update' ] )->whereAlphaNume
 Route::redirect( '/gdpr', '/dpa' );
 
 /*
- * Appeal web group
+ * Appeal web group.
  */
 Route::get( '/appeals', [ AppealController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', Appeal::class );
 Route::get( '/appeal/{appeal}', [ AppealController::class, 'show' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'view', 'appeal' );
 Route::patch( '/appeal/{appeal}', [ AppealController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'appeal' );
 
 /*
- * Internal Actions Log web group
+ * Internal Actions Log web group.
  */
 Route::get( '/ial', [ IALController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', IAL::class );
 Route::patch( '/ial/{ial}', [ IALController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'ial' );
