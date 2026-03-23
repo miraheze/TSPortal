@@ -19,7 +19,7 @@ class UserController
 	 */
 	public function index(): View
 	{
-		return view( 'user' )->with( 'users', User::all() );
+		return view( 'user' )->with( 'users', User::query()->get() );
 	}
 
 	/**
