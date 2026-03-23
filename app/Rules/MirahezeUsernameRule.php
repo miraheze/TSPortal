@@ -22,8 +22,8 @@ class MirahezeUsernameRule implements ValidationRule
 			return;
 		}
 
-		$check = Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
-		if ( !$check ) {
+		$valid = Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
+		if ( !$valid ) {
 			$fail( 'username-exist' )->translate();
 		}
 	}
