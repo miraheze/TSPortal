@@ -25,7 +25,7 @@ class IALScheduler
 	}
 
 	/**
-	 * Gets all recent IALs and counts by types, actors and associations.
+	 * Gets recent IALs and counts by types, actors and associations.
 	 */
 	private function getRecentIALs(): array
 	{
@@ -40,9 +40,8 @@ class IALScheduler
 			],
 		];
 
-		$allRecentIALs = IAL::where( 'added', '>=', Carbon::yesterday() )->get();
-
-		foreach ( $allRecentIALs as $ial ) {
+		$recentIALs = IAL::where( 'added', '>=', Carbon::yesterday() )->get();
+		foreach ( $recentIALs as $ial ) {
 			$data['total'] += 1;
 
 			$actor = $ial->user->username;

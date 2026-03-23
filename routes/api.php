@@ -17,15 +17,10 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group.
-|
 */
 
 /*
- * DPA API Group
+ * DPA API Group.
  */
 Route::get( 'dpa/{dpa}/{username}', static function ( DPA $dpa, string $username ): JsonResponse {
 	return response()->json( [
@@ -63,7 +58,7 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 } );
 
 /*
- * Reports API Group
+ * Reports API Group.
  */
 Route::post( 'report', static function ( Request $request ): JsonResponse {
 	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
@@ -92,7 +87,7 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 } );
 
 /*
- * Internal Actions Log
+ * Internal Actions Log API Group.
  */
 Route::post( 'ial', static function ( Request $request ): JsonResponse {
 	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
