@@ -112,12 +112,6 @@ class DPAController
 
 			$dpa->user->newEvent( 'closed-dpa', actor: $request->user() );
 		} else {
-			$request->validate(
-				[
-					'reason' => [ 'required', 'string' ],
-				]
-			);
-
 			$dpa->update( [
 				'completed' => now(),
 				'reject' => $request->input( 'reason' ),
