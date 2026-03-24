@@ -36,7 +36,7 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 	}
 
 	$dpaUser = User::findOrCreate( $request->input( 'username' ) );
-	if ( DPA::where( 'user', $dpaUser )->whereNull( 'completed' )->exists() ) {
+	if ( DPA::where( 'user', $dpaUser->id )->whereNull( 'completed' )->exists() ) {
 		return response()->json( [ 'exists' => true ] );
 	}
 
