@@ -141,6 +141,8 @@ class ReportController
 			DPANew::dispatch( $dpa );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [ 'reviewed' => now() ] );
+		} elseif ( $request->input( 'reopen' ) ?? false ) {
+			$report->update( [ 'reviewed' => null ] );
 		}
 
 		$request->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );
