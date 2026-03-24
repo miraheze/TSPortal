@@ -7,7 +7,7 @@
 		@if ( $report->reviewed )
 			@if ( $report->investigation )
 				<div class="alert alert-success text-center" role="alert">
-					@can('update', $report)
+					@can('ts')
 						<span>
                             <strong>{{ __( 'report-investigation' ) }} <a
 		                            href="/investigation/{{ $report->investigation }}">#{{ $report->investigation }}</a>.</strong>
@@ -70,7 +70,7 @@
 						<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'subject' ) }}</h6>
 					</div>
 					<div class="card-body">
-						@can('update', $report)
+						@can('ts')
 							@if ( $report->user->reports()->exists() || $report->user->investigations()->exists() )
 								<div class="alert alert-danger text-center" role="alert">
 									<strong>{{ __( 'subject-known' ) }}</strong>
@@ -86,47 +86,49 @@
 						</p>
 					</div>
 				</div>
-				@can('update', $report)
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'resolution' ) }}</h6>
+				@can('ts')
+					@unless ( $report->investigation || $report->dpa )
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'resolution' ) }}</h6>
+							</div>
+							<div class="card-body">
+								<form method="POST" action="/report/{{ $report->id }}">
+									@csrf
+									@method('PATCH')
+									@unless ( $report->reviewed )
+										<div class="row g-2">
+											<div class="col-12 col-md-4 d-grid">
+												<button class="btn btn-success" name="investigate" value="true" type="submit">
+													<i class="fa-solid fa-magnifying-glass"></i>
+													<span class="ms-1">{{ __( 'investigation-launch' ) }}</span>
+												</button>
+											</div>
+											<div class="col-12 col-md-4 d-grid">
+												<button class="btn btn-warning" name="dpa" value="true" type="submit">
+													<i class="fa-solid fa-user-slash"></i>
+													<span class="ms-1">{{ __( 'dpa-launch' ) }}</span>
+												</button>
+											</div>
+											<div class="col-12 col-md-4 d-grid">
+												<button class="btn btn-danger" name="close" value="true" type="submit">
+													<i class="fa-solid fa-xmark"></i>
+													<span class="ms-1">{{ __( 'report-close' ) }}</span>
+												</button>
+											</div>
+										</div>
+									@else
+										<div class="d-grid">
+											<button class="btn btn-primary" name="reopen" value="true" type="submit">
+												<i class="fa-solid fa-rotate-left"></i>
+												<span class="ms-1">{{ __( 'report-reopen' ) }}</span>
+											</button>
+										</div>
+									@endunless
+								</form>
+							</div>
 						</div>
-						<div class="card-body">
-							<form method="POST" action="/report/{{ $report->id }}">
-								@csrf
-								@method('PATCH')
-								@unless ( $report->reviewed )
-									<div class="row g-2">
-										<div class="col-12 col-md-4 d-grid">
-											<button class="btn btn-success" name="investigate" value="true" type="submit">
-												<i class="fa-solid fa-magnifying-glass"></i>
-												<span class="ms-1">{{ __( 'investigation-launch' ) }}</span>
-											</button>
-										</div>
-										<div class="col-12 col-md-4 d-grid">
-											<button class="btn btn-warning" name="dpa" value="true" type="submit">
-												<i class="fa-solid fa-user-slash"></i>
-												<span class="ms-1">{{ __( 'dpa-launch' ) }}</span>
-											</button>
-										</div>
-										<div class="col-12 col-md-4 d-grid">
-											<button class="btn btn-danger" name="close" value="true" type="submit">
-												<i class="fa-solid fa-xmark"></i>
-												<span class="ms-1">{{ __( 'report-close' ) }}</span>
-											</button>
-										</div>
-									</div>
-								@else
-									<div class="d-grid">
-										<button class="btn btn-primary" name="reopen" value="true" type="submit">
-											<i class="fa-solid fa-rotate-left"></i>
-											<span class="ms-1">{{ __( 'report-reopen' ) }}</span>
-										</button>
-									</div>
-								@endif
-							</form>
-						</div>
-					</div>
+					@endunless
 				@endcan
 			</div>
 		</div>
