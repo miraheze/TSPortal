@@ -99,9 +99,9 @@
 										</button>
 									</div>
 									<div class="col-12 col-md-4 d-grid">
-										<button class="btn btn-warning" name="convert-dpa" value="true" type="submit">
+										<button class="btn btn-warning" name="dpa" value="true" type="submit">
 											<i class="fa-solid fa-file-contract"></i>
-											<span class="ms-1">{{ __( 'convert-to-dpa' ) }}</span>
+											<span class="ms-1">{{ __( 'dpa-launch' ) }}</span>
 										</button>
 									</div>
 									<div class="col-12 col-md-4 d-grid">
