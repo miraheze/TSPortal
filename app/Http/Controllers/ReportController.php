@@ -123,7 +123,7 @@ class ReportController
 				'reviewed' => now(),
 			] );
 
-			$report->user->newEvent( 'report-investigation', $report->id );
+			$report->user->newEvent( 'report-investigation', $report->id, $request->user() );
 			InvestigationNew::dispatch( $investigation );
 		} elseif ( $request->input( 'dpa' ) ?? false ) {
 			$newDPA = DPA::factory()->create( [
@@ -137,7 +137,7 @@ class ReportController
 				'reviewed' => now(),
 			] );
 
-			$report->user->newEvent( 'report-dpa', $report->id );
+			$report->user->newEvent( 'report-dpa', $report->id, $request->user() );
 			DPANew::dispatch( $newDPA );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [ 'reviewed' => now() ] );
