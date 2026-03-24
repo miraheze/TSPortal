@@ -18,14 +18,7 @@
 				</div>
 			@elseif ( $report->dpa )
 				<div class="alert alert-success text-center" role="alert">
-					@can('update', $report)
-						<span>
-                            <strong>{{ __( 'report-dpa' ) }} <a
-		                            href="/dpa/{{ $report->dpa }}">{{ $report->dpa }}</a>.</strong>
-                        </span>
-					@else
-						<span><strong>{{ __( 'report-dpa-public' ) }}</strong></span>
-					@endcan
+					<span><strong>{{ __( 'report-dpa' ) }}</strong></span>
 				</div>
 			@else
 				<div class="alert alert-danger text-center" role="alert">
