@@ -191,6 +191,7 @@
 	"report-at-risk": "I believe there is a current threat to life against someone involved in this report. I have made sure to identify who this person is.",
 	"report-close": "Close Report",
 	"report-closed": "This report has been closed without further action by Trust and Safety.",
+	"report-dpa": "A Data Protection Request has been launched following this report.",
 	"report-header": "Trust and Safety Report",
 	"report-investigation": "An investigation follows this report, see",
 	"report-investigation-public": "An investigation has been launched following this report.",
