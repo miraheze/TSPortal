@@ -1,9 +1,9 @@
 <x-layout>
 	<x-slot name="pgname">
-		{{ __('dpa') }}
+		{{ __('dpas') }}
 	</x-slot>
 	<x-slot name="content">
-		<h3 class="text-dark mb-4">{{ __('open-dpa') }}</h3>
+		<h3 class="text-dark mb-4">{{ __('open-dpas') }}</h3>
 		<div class="card shadow">
 			<div class="card-body">
 				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
