@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace App\Http\Controllers;
 
+use App\Events\InvestigationNew;
 use App\Events\ReportNew;
 use App\Mail\AtRiskAlert;
 use App\Models\Investigation;
@@ -122,6 +123,8 @@ class ReportController
 				'investigation' => $investigation->id,
 				'reviewed' => now(),
 			] );
+
+			InvestigationNew::dispatch( $investigation );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [ 'reviewed' => now() ] );
 		}
