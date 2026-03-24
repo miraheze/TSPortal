@@ -4,9 +4,11 @@ declare( strict_types = 1 );
 
 namespace App\Http\Controllers;
 
+use App\Events\DPANew;
 use App\Events\InvestigationNew;
 use App\Events\ReportNew;
 use App\Mail\AtRiskAlert;
+use App\Models\DPA;
 use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
@@ -40,9 +42,9 @@ class ReportController
 		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'user', 'reporter' ], true ) ) {
-				$query->where( $type, (int)$key );
-			} elseif ( in_array( $type, [ 'investigation', 'type' ], true ) ) {
+			}
+
+			if ( in_array( $type, [ 'investigation', 'reporter', 'type', 'user' ], true ) ) {
 				$query->where( $type, $key );
 			}
 		}
@@ -61,21 +63,18 @@ class ReportController
 	 */
 	public function store( Report $report, Request $request ): RedirectResponse
 	{
-		$request->validate(
-			[
-				'username' => [ new MirahezeUsernameRule ],
-			]
-		);
+		$request->validate( [
+			'evidence' => [ 'required', 'string' ],
+			'username' => [ new MirahezeUsernameRule ],
+		] );
 
 		$subjectUser = User::findOrCreate( $request->input( 'username' ) );
-		$newReport = $report::factory()->create(
-			[
-				'type' => $request->input( 'report' ),
-				'user' => $subjectUser,
-				'reporter' => $request->user(),
-				'text' => $request->input( 'evidence' ),
-			]
-		);
+		$newReport = $report::factory()->create( [
+			'type' => $request->input( 'report' ),
+			'user' => $subjectUser,
+			'reporter' => $request->user(),
+			'text' => $request->input( 'evidence' ),
+		] );
 
 		$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 		$subjectUser->newEvent( $event, $report->id );
@@ -124,7 +123,22 @@ class ReportController
 				'reviewed' => now(),
 			] );
 
+			$report->user->newEvent( 'report-investigation', $report->id );
 			InvestigationNew::dispatch( $investigation );
+		} elseif ( $request->input( 'dpa' ) ?? false ) {
+			$newDPA = DPA::factory()->create( [
+				'user' => $report->user,
+				'underage' => $report->text,
+				'statutory' => true,
+			] );
+			
+			$report->update( [
+				'dpa' => true,
+				'reviewed' => now(),
+			] );
+
+			$report->user->newEvent( 'report-dpa', $report->id );
+			DPANew::dispatch( $newDPA );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [ 'reviewed' => now() ] );
 		}
