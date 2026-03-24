@@ -1,24 +1,24 @@
 <x-layout>
 	<x-slot name="pgname">
-		{{ __('reports') }}
+		{{ __( 'reports' ) }}
 	</x-slot>
 	<x-slot name="content">
-		<h3 class="text-dark mb-4">{{ __('report-header') }} (#{{ $report->id }})</h3>
+		<h3 class="text-dark mb-4">{{ __( 'report-header' ) }} (#{{ $report->id }})</h3>
 		@if ( $report->reviewed )
 			@if ( $report->investigation )
 				<div class="alert alert-success text-center" role="alert">
 					@can('update', $report)
 						<span>
-                            <strong>{{ __('report-investigation') }} <a
+                            <strong>{{ __( 'report-investigation' ) }} <a
 		                            href="/investigation/{{ $report->investigation }}">#{{ $report->investigation }}</a>.</strong>
                         </span>
 					@else
-						<span><strong>{{ __('report-investigation-public') }}</strong></span>
+						<span><strong>{{ __( 'report-investigation-public' ) }}</strong></span>
 					@endcan
 				</div>
 			@else
 				<div class="alert alert-danger text-center" role="alert">
-					<span><strong>{{ __('report-closed') }}</strong></span>
+					<span><strong>{{ __( 'report-closed' ) }}</strong></span>
 				</div>
 			@endif
 		@endif
@@ -28,15 +28,15 @@
 					<div class="col">
 						<div class="card shadow mb-3">
 							<div class="card-header py-3">
-								<p class="text-primary m-0 fw-bold text-center">{{ __('core') }}</p>
+								<p class="text-primary m-0 fw-bold text-center">{{ __( 'core' ) }}</p>
 							</div>
 							<div class="card-body">
 								<div class="row">
 									<div class="col">
 										<div class="mb-3">
-											<p><strong>{{ __('report-about') }} </strong>{{ __( 'report-topic-' . $report->type ) }}.</p>
+											<p><strong>{{ __( 'report-about' ) }} </strong>{{ __( 'report-topic-' . $report->type ) }}.</p>
 										</div>
-										<p><strong>{{ __('investigation-involved') }}:</strong> <a
+										<p><strong>{{ __( 'investigation-involved' ) }}:</strong> <a
 												href="/user/{{ $report->user->id }}">{{ $report->user->username }}</a>
 										</p>
 									</div>
@@ -45,7 +45,7 @@
 						</div>
 						<div class="card shadow">
 							<div class="card-header py-3">
-								<p class="text-primary m-0 fw-bold text-center">{{ __('evidence') }}</p>
+								<p class="text-primary m-0 fw-bold text-center">{{ __( 'evidence' ) }}</p>
 							</div>
 							<div class="card-body">
 								<form>
@@ -63,17 +63,17 @@
 			<div class="col-lg-4">
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="text-primary fw-bold m-0 text-center">{{ __('subject') }}</h6>
+						<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'subject' ) }}</h6>
 					</div>
 					<div class="card-body">
 						@can('update', $report)
-							@if ( ( $report->user->reports()->count() + $report->user->investigations()->count() ) > 1 )
+							@if ( $report->user->reports()->exists() || $report->user->investigations()->exists() )
 								<div class="alert alert-danger text-center" role="alert">
-									<strong>{{ __('subject-known') }}</strong>
+									<strong>{{ __( 'subject-known' ) }}</strong>
 								</div>
 							@else
 								<div class="alert alert-success text-center" role="alert">
-									<strong>{{ __('subject-notknown') }}</strong>
+									<strong>{{ __( 'subject-notknown' ) }}</strong>
 								</div>
 							@endif
 						@endcan
@@ -85,17 +85,31 @@
 				@can('update', $report)
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="text-primary fw-bold m-0 text-center">{{ __('resolution') }}</h6>
+							<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'resolution' ) }}</h6>
 						</div>
 						<div class="card-body">
 							<form method="POST" action="/report/{{ $report->id }}">
 								@csrf
 								@method('PATCH')
-								<div class="col text-center" style="margin-bottom: 20px;">
-									<button class="btn btn-success" name="investigate" value="true" type="submit">{{ __('investigation-launch') }}</button>
-								</div>
-								<div class="col text-center" style="margin: 0;">
-									<button class="btn btn-danger" name="close" value="true" type="submit">{{ __('report-close') }}</button>
+								<div class="row g-2">
+									<div class="col-12 col-md-4 d-grid">
+										<button class="btn btn-success" name="investigate" value="true" type="submit">
+											<i class="fa-solid fa-magnifying-glass"></i>
+											<span class="ms-1">{{ __( 'investigation-launch' ) }}</span>
+										</button>
+									</div>
+									<div class="col-12 col-md-4 d-grid">
+										<button class="btn btn-warning" name="convert-dpa" value="true" type="submit">
+											<i class="fa-solid fa-file-contract"></i>
+											<span class="ms-1">{{ __( 'convert-to-dpa' ) }}</span>
+										</button>
+									</div>
+									<div class="col-12 col-md-4 d-grid">
+										<button class="btn btn-danger" name="close" value="true" type="submit">
+											<i class="fa-solid fa-xmark"></i>
+											<span class="ms-1">{{ __( 'report-close' ) }}</span>
+										</button>
+									</div>
 								</div>
 							</form>
 						</div>
