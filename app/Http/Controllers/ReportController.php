@@ -133,7 +133,7 @@ class ReportController
 			] );
 			
 			$report->update( [
-				'dpa' => $dpa->id,
+				'dpa' => true,
 				'reviewed' => now(),
 			] );
 
