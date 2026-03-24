@@ -137,7 +137,7 @@ class ReportController
 				'reviewed' => now(),
 			] );
 
-			$report->user->newEvent( 'report-dpa', $report->id, $request->user() );
+			$report->user->newEvent( 'report-dpa', actor: $request->user() );
 			DPANew::dispatch( $dpa );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [ 'reviewed' => now() ] );
