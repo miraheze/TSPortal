@@ -71,7 +71,7 @@
 					</div>
 					<div class="card-body">
 						@can('ts')
-							@if ( $report->user->reports()->exists() || $report->user->investigations()->exists() )
+							@if ( ( $report->user->reports()->count() + $report->user->investigations()->count() ) > 1 )
 								<div class="alert alert-danger text-center" role="alert">
 									<strong>{{ __( 'subject-known' ) }}</strong>
 								</div>
