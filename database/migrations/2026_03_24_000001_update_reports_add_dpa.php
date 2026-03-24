@@ -14,8 +14,7 @@ return new class extends Migration
 	public function up(): void
 	{
 		Schema::table( 'reports', static function ( Blueprint $table ): void {
-			$table->string( 'dpa', 32 )->nullable()->after( 'investigation' );
-			$table->foreign( 'dpa' )->references( 'id' )->on( 'dpas' );
+			$table->boolean( 'dpa' )->default( false )->after( 'investigation' );
 		} );
 	}
 
@@ -25,7 +24,6 @@ return new class extends Migration
 	public function down(): void
 	{
 		Schema::table( 'reports', static function ( Blueprint $table ): void {
-			$table->dropForeign( 'dpa' );
 			$table->dropColumn( 'dpa' );
 		} );
 	}
