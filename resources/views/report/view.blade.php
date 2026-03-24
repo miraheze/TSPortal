@@ -16,6 +16,17 @@
 						<span><strong>{{ __( 'report-investigation-public' ) }}</strong></span>
 					@endcan
 				</div>
+			@elseif ( $report->dpa )
+				<div class="alert alert-success text-center" role="alert">
+					@can('update', $report)
+						<span>
+                            <strong>{{ __( 'report-dpa' ) }} <a
+		                            href="/dpa/{{ $report->dpa }}">{{ $report->dpa }}</a>.</strong>
+                        </span>
+					@else
+						<span><strong>{{ __( 'report-dpa-public' ) }}</strong></span>
+					@endcan
+				</div>
 			@else
 				<div class="alert alert-danger text-center" role="alert">
 					<span><strong>{{ __( 'report-closed' ) }}</strong></span>
@@ -91,26 +102,35 @@
 							<form method="POST" action="/report/{{ $report->id }}">
 								@csrf
 								@method('PATCH')
-								<div class="row g-2">
-									<div class="col-12 col-md-4 d-grid">
-										<button class="btn btn-success" name="investigate" value="true" type="submit">
-											<i class="fa-solid fa-magnifying-glass"></i>
-											<span class="ms-1">{{ __( 'investigation-launch' ) }}</span>
+								@unless ( $report->reviewed )
+									<div class="row g-2">
+										<div class="col-12 col-md-4 d-grid">
+											<button class="btn btn-success" name="investigate" value="true" type="submit">
+												<i class="fa-solid fa-magnifying-glass"></i>
+												<span class="ms-1">{{ __( 'investigation-launch' ) }}</span>
+											</button>
+										</div>
+										<div class="col-12 col-md-4 d-grid">
+											<button class="btn btn-warning" name="dpa" value="true" type="submit">
+												<i class="fa-solid fa-user-slash"></i>
+												<span class="ms-1">{{ __( 'dpa-launch' ) }}</span>
+											</button>
+										</div>
+										<div class="col-12 col-md-4 d-grid">
+											<button class="btn btn-danger" name="close" value="true" type="submit">
+												<i class="fa-solid fa-xmark"></i>
+												<span class="ms-1">{{ __( 'report-close' ) }}</span>
+											</button>
+										</div>
+									</div>
+								@else
+									<div class="d-grid">
+										<button class="btn btn-primary" name="reopen" value="true" type="submit">
+											<i class="fa-solid fa-rotate-left"></i>
+											<span class="ms-1">{{ __( 'report-reopen' ) }}</span>
 										</button>
 									</div>
-									<div class="col-12 col-md-4 d-grid">
-										<button class="btn btn-warning" name="dpa" value="true" type="submit">
-											<i class="fa-solid fa-file-contract"></i>
-											<span class="ms-1">{{ __( 'dpa-launch' ) }}</span>
-										</button>
-									</div>
-									<div class="col-12 col-md-4 d-grid">
-										<button class="btn btn-danger" name="close" value="true" type="submit">
-											<i class="fa-solid fa-xmark"></i>
-											<span class="ms-1">{{ __( 'report-close' ) }}</span>
-										</button>
-									</div>
-								</div>
+								@endif
 							</form>
 						</div>
 					</div>
