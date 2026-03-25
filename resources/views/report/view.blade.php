@@ -81,15 +81,11 @@
 								</div>
 							@endif
 						@endcan
-						<div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
-							<div class="mb-2 mb-sm-0">
-								<span class="text-muted small">{{ __( 'centralauth' ) }}:</span>
-							</div>
-							<div>
-								<a class="btn btn-outline-primary btn-sm text-truncate" href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->user->username }}" style="max-width: 200px;">
-									{{ $report->user->username }}
-								</a>
-							</div>
+						<div class="d-flex flex-column gap-1">
+							<span class="fw-semibold text-dark">{{ __('CentralAuth') }}:</span>
+							<a class="btn btn-outline-primary btn-sm text-truncate" href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->user->username }}" style="max-width: 250px;">
+								{{ $report->user->username }}
+							</a>
 						</div>
 					</div>
 				</div>
