@@ -72,18 +72,25 @@
 					<div class="card-body">
 						@can('ts')
 							@if ( ( $report->user->reports()->count() + $report->user->investigations()->count() ) > 1 )
-								<div class="alert alert-danger text-center border-0 shadow-sm">
-									<strong>{{ __( 'subject-known' ) }}</strong>
+								<div class="alert alert-danger text-center border-0 shadow-sm mb-3">
+									<span class="fw-semibold">{{ __( 'subject-known' ) }}</span>
 								</div>
 							@else
-								<div class="alert alert-success text-center border-0 shadow-sm">
-									<strong>{{ __( 'subject-notknown' ) }}</strong>
+								<div class="alert alert-success text-center border-0 shadow-sm mb-3">
+									<span class="fw-semibold">{{ __( 'subject-notknown' ) }}</span>
 								</div>
 							@endif
 						@endcan
-						<p>CentralAuth: <a
-								href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->user->username }}">{{ $report->user->username }}</a>
-						</p>
+						<div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
+							<div class="mb-2 mb-sm-0">
+								<span class="text-muted small">{{ __( 'centralauth' ) }}:</span>
+							</div>
+							<div>
+								<a class="btn btn-outline-primary btn-sm text-truncate" href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->user->username }}" style="max-width: 200px;">
+									{{ $report->user->username }}
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 				@can('ts')
