@@ -97,15 +97,19 @@
 									@csrf
 									@method('PATCH')
 									@unless ( $report->reviewed )
-										<div class="row">
-											<div class="col d-flex justify-content-center gap-2 flex-wrap">
-												<button class="btn btn-lg btn-success px-4 flex-fill flex-sm-grow-0" name="investigate" value="true" type="submit">
+										<div class="row g-2">
+											<div class="col-12 col-md-4 d-grid">
+												<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="investigate" value="true" type="submit">
 													{{ __( 'investigation-launch' ) }}
 												</button>
-												<button class="btn btn-lg btn-warning px-4 flex-fill flex-sm-grow-0" name="dpa" value="true" type="submit">
+											</div>
+											<div class="col-12 col-md-4 d-grid">
+												<button class="btn btn-warning px-4 flex-fill flex-sm-grow-0" name="dpa" value="true" type="submit">
 													{{ __( 'dpa-open' ) }}
 												</button>
-												<button class="btn btn-lg btn-danger px-4 flex-fill flex-sm-grow-0" name="close" value="true" type="submit">
+											</div>
+											<div class="col-12 col-md-4 d-grid">
+												<button class="btn btn-danger px-4 flex-fill flex-sm-grow-0" name="close" value="true" type="submit">
 													{{ __( 'report-close' ) }}
 												</button>
 											</div>
