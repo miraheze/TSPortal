@@ -28,9 +28,9 @@ class AppealController
 		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( $type === 'assigned' ) {
-				$query->where( $type, (int)$key );
-			} elseif ( in_array( $type, [ 'type', 'outcome' ], true ) ) {
+			}
+
+			if ( in_array( $type, [ 'assigned', 'type', 'outcome' ], true ) ) {
 				if ( $key === 'unknown' ) {
 					$key = null;
 				}
@@ -63,14 +63,12 @@ class AppealController
 	{
 		$allInputs = $request->input();
 		unset( $allInputs['_token'], $allInputs['_method'] );
-		$appeal->update(
-			[
-				'review' => json_encode( $allInputs ),
-				'assigned' => $request->user()->id,
-				'outcome' => $allInputs['appeal-outcome'],
-				'reviewed' => now(),
-			]
-		);
+		$appeal->update( [
+			'review' => json_encode( $allInputs ),
+			'assigned' => $request->user()->id,
+			'outcome' => $allInputs['appeal-outcome'],
+			'reviewed' => now(),
+		] );
 
 		$request->session()->flash( 'successFlash', __( 'appeal' ) . ' ' . __( 'toast-updated' ) );
 		return redirect( "/appeal/{$appeal->id}" );
