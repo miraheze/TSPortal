@@ -25,7 +25,7 @@
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'appeal-review' ) }}</p>
 							</div>
 							<div class="card-body">
-								@if ( $appeal->review === null )
+								@unless ( $appeal->review )
 									<div class="row">
 										<div class="col">
 											{{ __( 'empty' ) }}
@@ -60,7 +60,7 @@
 											@endif
 										@endforeach
 									</div>
-								@endif
+								@endunless
 							</div>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 								<span class="badge bg-danger">{{ __( 'status-open' ) }}</span>
 							@endif
 						</p>
-						@if ( !$appeal->reviewed )
+						@unless ( $appeal->reviewed )
 							<div class="row">
 								<div class="col" style="text-align: center;">
 									<button class="btn btn-primary text-white" type="button" data-bs-target="#modal-1"
@@ -94,7 +94,7 @@
 									</button>
 								</div>
 							</div>
-						@endif
+						@endunless
 						<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
 							<form method="POST" action="/appeal/{{ $appeal->id }}">
 								@csrf
@@ -149,9 +149,9 @@
 								<p class="fw-bold mt-1 mb-1">{{ __( 'report' ) }}</p>
 							@endif
 							<a href="/report/{{ $report->id }}">#{{ $report->id }}</a>
-							@if ( !$loop->last )
+							@unless ( $loop->last )
 								<br>
-							@endif
+							@endunless
 						@endforeach
 						@foreach ( $appeal->investigation->appeals as $otherAppeal )
 							@if ( $loop->first && $loop->count > 1 )
@@ -159,9 +159,9 @@
 							@endif
 							@if ( $appeal->id !== $otherAppeal->id )
 								<a href="/appeal/{{ $otherAppeal->id }}">#{{ $otherAppeal->id }}</a>
-								@if ( !$loop->last )
+								@unless ( $loop->last )
 									<br>
-								@endif
+								@endunless
 							@endif
 						@endforeach
 					</div>
