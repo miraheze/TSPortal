@@ -71,7 +71,7 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 	$newReport = Report::factory()->create(
 		[
 			'type' => $request->input( 'report' ),
-			'auto' => $request->boolean( 'auto' ),
+			'auto' => $request->input( 'auto' ) ?? false,
 			'user' => $subjectUser,
 			'reporter' => $reportingUser,
 			'text' => $request->input( 'evidence' ),
