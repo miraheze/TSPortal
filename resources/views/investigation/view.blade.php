@@ -151,7 +151,7 @@
 					<p class="text-primary m-0 fw-bold text-center">{{ __('history') }}</p>
 				</div>
 				<div class="card-body">
-					@foreach ( $investigation->events as $event)
+					@foreach ( $investigation->events as $event )
 						<figure>
 							<blockquote class="blockquote">
 								<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'comment' => $event->comment ?? __('events-no-comment') ] ) }}</p>
@@ -159,9 +159,9 @@
 							<figcaption class="blockquote-footer">{{ $event->created_by->username }}
 								at {{ $event->created }}</figcaption>
 						</figure>
-						@if ( !$loop->last )
+						@unless ( $loop->last )
 							<hr/>
-						@endif
+						@endunless
 					@endforeach
 				</div>
 			</div>
