@@ -3,10 +3,10 @@
 		{{ __( 'reports' ) }}
 	</x-slot>
 	<x-slot name="content">
-		<h3 class="text-dark mb-4">{{ __( 'report-header' ) }} (#{{ $report->id }})</h3>
+		<h3 class="text-dark mb-4 fw-semibold">{{ __( 'report-header' ) }} (#{{ $report->id }})</h3>
 		@if ( $report->reviewed )
 			@if ( $report->investigation )
-				<div class="alert alert-success text-center" role="alert">
+				<div class="alert alert-success text-center shadow-sm border-0" role="alert">
 					@can('ts')
 						<span>
                             <strong>{{ __( 'report-investigation' ) }} <a
@@ -17,11 +17,11 @@
 					@endcan
 				</div>
 			@elseif ( $report->dpa )
-				<div class="alert alert-success text-center" role="alert">
+				<div class="alert alert-success text-center shadow-sm border-0" role="alert">
 					<span><strong>{{ __( 'report-dpa' ) }}</strong></span>
 				</div>
 			@else
-				<div class="alert alert-danger text-center" role="alert">
+				<div class="alert alert-danger text-center shadow-sm border-0" role="alert">
 					<span><strong>{{ __( 'report-closed' ) }}</strong></span>
 				</div>
 			@endif
@@ -30,8 +30,8 @@
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col">
-						<div class="card shadow mb-4">
-							<div class="card-header py-3">
+						<div class="card shadow-sm mb-4 border-0">
+							<div class="card-header py-3 border-bottom">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'core' ) }}</p>
 							</div>
 							<div class="card-body">
@@ -47,36 +47,36 @@
 								</div>
 							</div>
 						</div>
-						<div class="card shadow mb-4">
-							<div class="card-header py-3">
+						<div class="card shadow-sm mb-4 border-0">
+							<div class="card-header py-3 border-bottom">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'evidence' ) }}</p>
 							</div>
 							<div class="card-body">
-								<form>
-									<div class="row">
-										<div class="col">
-											<p>{{ $report->text }}</p>
+								<div class="row">
+									<div class="col">
+										<div class="p-3 bg-light rounded border">
+											<p class="mb-0">{{ $report->text }}</p>
 										</div>
 									</div>
-								</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-4">
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
+				<div class="card shadow-sm mb-4 border-0">
+					<div class="card-header py-3 border-bottom">
 						<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'subject' ) }}</h6>
 					</div>
 					<div class="card-body">
 						@can('ts')
 							@if ( ( $report->user->reports()->count() + $report->user->investigations()->count() ) > 1 )
-								<div class="alert alert-danger text-center" role="alert">
+								<div class="alert alert-danger text-center border-0 shadow-sm">
 									<strong>{{ __( 'subject-known' ) }}</strong>
 								</div>
 							@else
-								<div class="alert alert-success text-center" role="alert">
+								<div class="alert alert-success text-center border-0 shadow-sm">
 									<strong>{{ __( 'subject-notknown' ) }}</strong>
 								</div>
 							@endif
@@ -88,8 +88,8 @@
 				</div>
 				@can('ts')
 					@unless ( $report->investigation || $report->dpa )
-						<div class="card shadow mb-4">
-							<div class="card-header py-3">
+						<div class="card shadow-sm mb-4 border-0">
+							<div class="card-header py-3 border-bottom">
 								<h6 class="text-primary fw-bold m-0 text-center">{{ __( 'resolution' ) }}</h6>
 							</div>
 							<div class="card-body">
@@ -97,18 +97,14 @@
 									@csrf
 									@method('PATCH')
 									@unless ( $report->reviewed )
-										<div class="row g-2">
-											<div class="col-12 col-md-4 d-grid">
+										<div class="row">
+											<div class="col d-flex justify-content-center gap-2 flex-wrap">
 												<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="investigate" value="true" type="submit">
 													{{ __( 'investigation-launch' ) }}
 												</button>
-											</div>
-											<div class="col-12 col-md-4 d-grid">
 												<button class="btn btn-warning px-4 flex-fill flex-sm-grow-0" name="dpa" value="true" type="submit">
 													{{ __( 'dpa-open' ) }}
 												</button>
-											</div>
-											<div class="col-12 col-md-4 d-grid">
 												<button class="btn btn-danger px-4 flex-fill flex-sm-grow-0" name="close" value="true" type="submit">
 													{{ __( 'report-close' ) }}
 												</button>
