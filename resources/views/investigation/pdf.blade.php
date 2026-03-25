@@ -33,6 +33,8 @@
 
         .section {
             margin-bottom: 15px;
+			page-break-inside: avoid;
+			break-inside: avoid;
         }
 
         .box {
@@ -40,6 +42,8 @@
             padding: 6px 8px;
             margin-bottom: 6px;
             border-radius: 4px;
+			page-break-inside: avoid;
+			break-inside: avoid;
         }
 
         .alert {
