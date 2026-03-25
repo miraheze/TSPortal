@@ -32,8 +32,6 @@
 													<span id="username">{{ $dpa->user->username }}</span>
 												</label>
 											</div>
-										</div>
-										<div class="col">
 											<div class="mb-3">
 												<label class="form-label" for="username">
 													<strong>{{ __( 'id' ) }}:</strong>&nbsp;
