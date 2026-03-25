@@ -17,31 +17,39 @@
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col">
-						<div class="card shadow mb-3">
+						<div class="card shadow-sm mb-3 border-0">
 							<div class="card-header py-3">
-								<p class="text-primary m-0 fw-bold text-center">{{ __('subject') }}</p>
+								<p class="text-primary m-0 fw-bold text-center">{{ __( 'subject' ) }}</p>
 							</div>
 							<div class="card-body">
-								<form>
-									<div class="row">
-										<div class="col">
-											<div class="mb-3">
-												<label class="form-label" for="username">
-													<strong>{{ __( 'username' ) }}:</strong>&nbsp;
-													<span id="username">{{ $dpa->user->username }}</span>
-													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="username"></i>
-												</label>
+								<div class="row g-3">
+									<div class="col-12">
+										<div class="p-3 bg-light rounded d-flex justify-content-between align-items-center">
+											<div>
+												<div class="text-muted small">{{ __( 'username' ) }}</div>
+												<div class="fw-semibold" id="username">
+													{{ $dpa->user->username }}
+												</div>
 											</div>
-											<div class="mb-3">
-												<label class="form-label" for="username">
-													<strong>{{ __( 'id' ) }}:</strong>&nbsp;
-													<span id="id">{{ $dpa->id }}</span>
-													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="id"></i>
-												</label>
-											</div>
+											<button type="button" class="btn btn-sm btn-outline-primary copyToClipboard" data-copy="username">
+												<i class="fa fa-clipboard"></i>
+											</button>
 										</div>
 									</div>
-								</form>
+									<div class="col-12">
+										<div class="p-3 bg-light rounded d-flex justify-content-between align-items-center">
+											<div>
+												<div class="text-muted small">{{ __( 'id' ) }}</div>
+												<div class="fw-semibold" id="id">
+													{{ $dpa->id }}
+												</div>
+											</div>
+											<button type="button" class="btn btn-sm btn-outline-primary copyToClipboard" data-copy="id">
+												<i class="fa fa-clipboard"></i>
+											</button>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="card shadow">
