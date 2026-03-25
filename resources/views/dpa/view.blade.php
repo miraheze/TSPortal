@@ -28,15 +28,13 @@
 											<div class="mb-3">
 												<label class="form-label" for="username">
 													<strong>{{ __( 'username' ) }}:</strong>&nbsp;
-													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="username"></i>
 													<span id="username">{{ $dpa->user->username }}</span>
+													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="username"></i>
 												</label>
-											</div>
-											<div class="mb-3">
 												<label class="form-label" for="username">
 													<strong>{{ __( 'id' ) }}:</strong>&nbsp;
-													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="id"></i>
 													<span id="id">{{ $dpa->id }}</span>
+													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="id"></i>
 												</label>
 											</div>
 										</div>
