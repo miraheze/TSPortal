@@ -66,7 +66,7 @@ class DPAController
 			$dpa::factory()->create(
 				[
 					'user' => $dpaUser,
-					'statutory' => (bool)$request->input( 'dpa' ),
+					'statutory' => $request->boolean( 'dpa' ),
 				]
 			);
 		} else {
