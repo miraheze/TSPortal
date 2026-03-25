@@ -34,9 +34,9 @@ class InvestigationController
 		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'subject', 'assigned' ], true ) ) {
-				$query->where( $type, (int)$key );
-			} elseif ( in_array( $type, [ 'type', 'recommendation' ], true ) ) {
+			}
+
+			if ( in_array( $type, [ 'assigned', 'recommendation', 'subject', 'type' ], true ) ) {
 				if ( $key === 'unknown' ) {
 					$key = null;
 				}
@@ -59,23 +59,19 @@ class InvestigationController
 	 */
 	public function store( Investigation $investigation, Request $request ): RedirectResponse
 	{
-		$request->validate(
-			[
-				'username' => [ new MirahezeUsernameRule ],
-			]
-		);
+		$request->validate( [
+			'username' => [ new MirahezeUsernameRule ],
+		] );
 
 		$investigationUser = User::findOrCreate( $request->input( 'username' ) );
-		$newInvestigation = $investigation::factory()->create(
-			[
-				'type' => $request->input( 'topic' ),
-				'text' => $request->input( 'evidence' ),
-				'recommendation' => $request->input( 'recommend' ),
-				'explanation' => $request->input( 'justify' ),
-				'subject' => $investigationUser,
-				'assigned' => $request->user(),
-			]
-		);
+		$newInvestigation = $investigation::factory()->create( [
+			'type' => $request->input( 'topic' ),
+			'text' => $request->input( 'evidence' ),
+			'recommendation' => $request->input( 'recommend' ),
+			'explanation' => $request->input( 'justify' ),
+			'subject' => $investigationUser,
+			'assigned' => $request->user(),
+		] );
 
 		$event = $investigationUser->events()->exists() ? 'new-investigation' : 'created-investigation';
 		$investigationUser->newEvent( $event );
@@ -130,14 +126,12 @@ class InvestigationController
 			$investigation->update( $updates );
 			$investigation->newEvent( 'edit-investigation', false, null, $request->user() );
 		} elseif ( $request->input( 'event' ) === 'appeal-recv' ) {
-			$newAppeal = Appeal::factory()->create(
-				[
-					'investigation' => $investigation,
-					'type' => $request->input( 'appeal-type' ),
-					'text' => $request->input( 'comments' ),
-					'assigned' => $request->user(),
-				]
-			);
+			$newAppeal = Appeal::factory()->create( [
+				'investigation' => $investigation,
+				'type' => $request->input( 'appeal-type' ),
+				'text' => $request->input( 'comments' ),
+				'assigned' => $request->user(),
+			] );
 
 			$investigation->newEvent(
 				'appeal-recv',
