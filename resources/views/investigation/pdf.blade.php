@@ -161,7 +161,7 @@
         <h2>{{ __('history') }}</h2>
         @foreach($investigation->events as $event)
             <div class="box">
-                {{ $event->created }} — {{ $event->action }}
+                {{ $event->created }} — {{ __( 'events-' . $event->action ) }}
                 @if($event->comment)
                     <br>{{ $event->comment }}
                 @endif
