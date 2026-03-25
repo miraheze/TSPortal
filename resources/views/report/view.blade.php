@@ -107,7 +107,7 @@
 											<div class="col-12 col-md-4 d-grid">
 												<button class="btn btn-warning" name="dpa" value="true" type="submit">
 													<i class="fa-solid fa-user-slash"></i>
-													<span class="ms-1">{{ __( 'dpa-launch' ) }}</span>
+													<span class="ms-1">{{ __( 'dpa-open' ) }}</span>
 												</button>
 											</div>
 											<div class="col-12 col-md-4 d-grid">
