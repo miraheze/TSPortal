@@ -194,6 +194,7 @@
 	"report-age": "Report Age",
 	"report-at-risk": "I believe there is a current threat to life against someone involved in this report. I have made sure to identify who this person is.",
 	"report-auto": "[AUTO]",
+	"report-auto-created": "This report was automatically created. It may not have useful information or may be a false positive.",
 	"report-close": "Close Report",
 	"report-closed": "This report has been closed without further action by Trust and Safety.",
 	"report-dpa": "A Data Protection Removal request has been opened following this report.",
