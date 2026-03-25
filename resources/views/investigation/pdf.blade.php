@@ -30,13 +30,9 @@
             margin-bottom: 3px;
             color: #198754;
         }
-
         .section {
             margin-bottom: 15px;
-			page-break-inside: avoid;
-			break-inside: avoid;
         }
-
         .box {
             border: 1px solid #ccc;
             padding: 6px 8px;
@@ -45,7 +41,6 @@
 			page-break-inside: avoid;
 			break-inside: avoid;
         }
-
         .alert {
             border: 1px solid #dc3545;
             background-color: #f8d7da;
@@ -56,7 +51,6 @@
             border-radius: 4px;
             font-weight: bold;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -70,7 +64,6 @@
             font-weight: bold;
             width: 120px;
         }
-
         .badge {
             display: inline-block;
             padding: 2px 6px;
@@ -80,12 +73,10 @@
         }
         .badge-success { background-color: #198754; }
         .badge-danger { background-color: #dc3545; }
-
         a {
             color: #0d6efd;
             text-decoration: none;
         }
-
         hr {
             border: 0;
             border-top: 1px solid #ccc;
