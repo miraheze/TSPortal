@@ -126,7 +126,7 @@ class ReportController
 			$report->user->newEvent( 'report-investigation', $report->id, $request->user() );
 			InvestigationNew::dispatch( $investigation );
 		} elseif ( $request->input( 'dpa' ) ?? false ) {
-			$dpa = DPA::factory()->create( [
+			DPA::factory()->create( [
 				'user' => $report->user,
 				'underage' => $report->text,
 				'statutory' => true,
@@ -138,7 +138,8 @@ class ReportController
 			] );
 
 			$report->user->newEvent( 'report-dpa', actor: $request->user() );
-			DPANew::dispatch( $dpa );
+			$newDPA = DPA::latest( 'filed' )->first();
+			DPANew::dispatch( $newDPA );
 		} elseif ( $request->input( 'close' ) ?? false ) {
 			$report->update( [ 'reviewed' => now() ] );
 		} elseif ( $request->input( 'reopen' ) ?? false ) {
