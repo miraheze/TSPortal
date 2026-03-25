@@ -99,29 +99,25 @@
 									@unless ( $report->reviewed )
 										<div class="row g-2">
 											<div class="col-12 col-md-4 d-grid">
-												<button class="btn btn-success" name="investigate" value="true" type="submit">
-													<i class="fa-solid fa-magnifying-glass"></i>
-													<span class="ms-1">{{ __( 'investigation-launch' ) }}</span>
+												<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="investigate" value="true" type="submit">
+													{{ __( 'investigation-launch' ) }}
 												</button>
 											</div>
 											<div class="col-12 col-md-4 d-grid">
-												<button class="btn btn-warning" name="dpa" value="true" type="submit">
-													<i class="fa-solid fa-user-slash"></i>
-													<span class="ms-1">{{ __( 'dpa-open' ) }}</span>
+												<button class="btn btn-warning px-4 flex-fill flex-sm-grow-0" name="dpa" value="true" type="submit">
+													{{ __( 'dpa-open' ) }}
 												</button>
 											</div>
 											<div class="col-12 col-md-4 d-grid">
-												<button class="btn btn-danger" name="close" value="true" type="submit">
-													<i class="fa-solid fa-xmark"></i>
-													<span class="ms-1">{{ __( 'report-close' ) }}</span>
+												<button class="btn btn-danger px-4 flex-fill flex-sm-grow-0" name="close" value="true" type="submit">
+													{{ __( 'report-close' ) }}
 												</button>
 											</div>
 										</div>
 									@else
 										<div class="d-grid">
-											<button class="btn btn-primary" name="reopen" value="true" type="submit">
-												<i class="fa-solid fa-rotate-left"></i>
-												<span class="ms-1">{{ __( 'report-reopen' ) }}</span>
+											<button class="btn btn-primary px-4 flex-fill flex-sm-grow-0" name="reopen" value="true" type="submit">
+												{{ __( 'report-reopen' ) }}
 											</button>
 										</div>
 									@endunless
