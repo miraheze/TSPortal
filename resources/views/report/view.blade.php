@@ -82,7 +82,7 @@
 							@endif
 						@endcan
 						<div class="d-flex flex-column gap-1">
-							<span class="fw-semibold text-dark">{{ __('CentralAuth') }}:</span>
+							<span class="fw-semibold text-dark">{{ __( 'centralauth' ) }}:</span>
 							<a class="btn btn-outline-primary btn-sm text-truncate" href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $report->user->username }}" style="max-width: 250px;">
 								{{ $report->user->username }}
 							</a>
