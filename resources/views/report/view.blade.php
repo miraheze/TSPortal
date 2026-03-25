@@ -26,18 +26,18 @@
 				</div>
 			@endif
 		@endif
-		<div class="row mb-3">
+		<div class="row mb-4">
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col">
-						<div class="card shadow mb-3">
+						<div class="card shadow mb-4">
 							<div class="card-header py-3">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'core' ) }}</p>
 							</div>
 							<div class="card-body">
 								<div class="row">
 									<div class="col">
-										<div class="mb-3">
+										<div class="mb-4">
 											<p><strong>{{ __( 'report-about' ) }} </strong>{{ __( 'report-topic-' . $report->type ) }}.</p>
 										</div>
 										<p><strong>{{ __( 'investigation-involved' ) }}:</strong> <a
@@ -47,7 +47,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="card shadow">
+						<div class="card shadow mb-4">
 							<div class="card-header py-3">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'evidence' ) }}</p>
 							</div>
