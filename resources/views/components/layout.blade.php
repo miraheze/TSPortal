@@ -243,6 +243,7 @@
 	@endif
 </div>
 <script src="/js/bootstrap.js"></script>
+<script src="/js/clipboard.js"></script>
 <script src="/js/scroll.js"></script>
 <script src="/js/toast.js"></script>
 {{ $scripts }}
