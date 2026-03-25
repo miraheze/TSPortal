@@ -31,6 +31,8 @@
 													<span id="username">{{ $dpa->user->username }}</span>
 													<i class="fa fa-clipboard copyToClipboard" aria-hidden="true" data-copy="username"></i>
 												</label>
+											</div>
+											<div class="mb-3">
 												<label class="form-label" for="username">
 													<strong>{{ __( 'id' ) }}:</strong>&nbsp;
 													<span id="id">{{ $dpa->id }}</span>
