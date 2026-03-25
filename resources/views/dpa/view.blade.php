@@ -17,7 +17,7 @@
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col">
-						<div class="card shadow">
+						<div class="card shadow mb-3">
 							<div class="card-header py-3">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'subject' ) }}</p>
 							</div>
