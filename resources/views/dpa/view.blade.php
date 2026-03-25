@@ -93,7 +93,7 @@
 									@method('PATCH')
 									<div class="row">
 										<div class="col d-flex justify-content-center gap-2 flex-wrap" style="margin-bottom: 20px;">
-											<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="approve" value="approve" type="submit">
+											<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="approve" value="true" type="submit">
 												{{ __( 'approve' ) }}
 											</button>
 											<button class="btn btn-danger px-4 flex-fill flex-sm-grow-0" type="button" data-bs-target="#modal-reject"
