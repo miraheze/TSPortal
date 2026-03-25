@@ -157,7 +157,7 @@
 
 @if ( $investigation->events()->exists() )
 	<div class="section">
-		<h2>{{ __('history') }}</h2>
+		<h2>{{ __( 'history' ) }}</h2>
 		@foreach ( $investigation->events as $event )
 			<div class="box">
 				{{ $event->created }} — {{ __( 'events-' . $event->action . '-desc', [ 'comment' => '' ] ) }}
@@ -169,7 +169,7 @@
 	</div>
 @endif
 
-@if ( $investigation->appeals()->exists()c)
+@if ( $investigation->appeals()->exists() )
 	<div class="section">
 		<h2>{{ __( 'appeals' ) }}</h2>
 		@foreach ( $investigation->appeals()->get() as $appeal )
