@@ -111,7 +111,7 @@ class ReportController
 	 */
 	public function update( Report $report, Request $request ): RedirectResponse
 	{
-		if ( $request->input( 'investigate' ) ?? false ) {
+		if ( $request->boolean( 'investigate' ) ) {
 			$investigation = Investigation::factory()->create( [
 				'subject' => $report->user,
 				'created' => now(),
@@ -125,7 +125,7 @@ class ReportController
 
 			$report->user->newEvent( 'report-investigation', $report->id, $request->user() );
 			InvestigationNew::dispatch( $investigation );
-		} elseif ( $request->input( 'dpa' ) ?? false ) {
+		} elseif ( $request->boolean( 'dpa' ) ) {
 			DPA::factory()->create( [
 				'user' => $report->user,
 				'underage' => $report->text,
@@ -140,9 +140,9 @@ class ReportController
 			$report->user->newEvent( 'report-dpa', actor: $request->user() );
 			$newDPA = DPA::latest( 'filed' )->first();
 			DPANew::dispatch( $newDPA );
-		} elseif ( $request->input( 'close' ) ?? false ) {
+		} elseif ( $request->boolean( 'close' ) ) {
 			$report->update( [ 'reviewed' => now() ] );
-		} elseif ( $request->input( 'reopen' ) ?? false ) {
+		} elseif ( $request->boolean( 'reopen' ) ) {
 			$report->update( [ 'reviewed' => null ] );
 		}
 
