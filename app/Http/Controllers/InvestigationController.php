@@ -116,7 +116,7 @@ class InvestigationController
 			[ 'investigation' => $investigation ]
 		)->setPaper( 'a4' );
 
-		return $pdf->download( "investigation-{$investigation->id}.pdf" );
+		return $pdf->stream( "investigation-{$investigation->id}.pdf" );
 	}
 
 	/**
