@@ -11,7 +11,12 @@
 				</span>
 			</div>
 		@endif
-		<h3 class="text-dark mb-4">{{ __('investigation-header') }} (#{{ $investigation->id }})</h3>
+		<h3 class="text-dark mb-4 d-flex justify-content-between align-items-center">
+			<span>{{ __('investigation-header') }} (#{{ $investigation->id }})</span>
+			<a href="{{ route('investigation.pdf', $investigation) }}" class="btn btn-sm btn-outline-primary">
+				<i class="fa-solid fa-file-pdf"></i>
+			</a>
+		</h3>
 		<div class="row mb-3">
 			<div class="col-lg-8">
 				<div class="row">

@@ -42,6 +42,7 @@ Route::post( '/investigation/new', [ InvestigationController::class, 'store' ] )
 Route::get( '/investigation/{investigation}', [ InvestigationController::class, 'show' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'view', 'investigation' );
 Route::get( '/investigation/edit/{investigation}', [ InvestigationController::class, 'edit' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'investigation' );
 Route::patch( '/investigation/{investigation}', [ InvestigationController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'investigation' );
+Route::get( '/investigation/{investigation}/pdf', [ InvestigationController::class, 'downloadPdf' ] )->middleware( 'auth' )->can( 'viewAny', Investigation::class )->name( 'investigation.pdf' );
 
 /*
  * Reports web group.
