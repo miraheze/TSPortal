@@ -18,7 +18,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow-sm mb-4 border-0">
-							<div class="card-header bg-white py-3 border-bottom">
+							<div class="card-header py-3 border-bottom">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'subject' ) }}</p>
 							</div>
 							<div class="card-body">
@@ -53,7 +53,7 @@
 							</div>
 						</div>
 						<div class="card shadow-sm border-0">
-							<div class="card-header bg-white py-3 border-bottom">
+							<div class="card-header py-3 border-bottom">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'evidence' ) }}</p>
 							</div>
 							<div class="card-body">
@@ -84,7 +84,7 @@
 				@can('ts')
 					@unless ( $dpa->completed )
 						<div class="card shadow-sm mb-3 border-0">
-							<div class="card-header bg-white py-3 border-bottom">
+							<div class="card-header py-3 border-bottom">
 								<p class="text-primary m-0 fw-bold text-center">{{ __( 'resolution' ) }}</p>
 							</div>
 							<div class="card-body">
