@@ -62,7 +62,7 @@
 						@foreach ( $reports as $report )
 							<tr>
 								<td><a class="nav-link" href="/report/{{ $report->id }}">{{ $report->id }}</a></td>
-								<td><span class="fw-bold">{{ $report->auto ? __( 'report-auto' ) . ' ' : '' }}</span>{{ ucfirst(__('report-topic-' . $report->type)) }}</td>
+								<td>{{ ucfirst(__('report-topic-' . $report->type)) }}<span class="fw-bold">{{ $report->auto ? ' ' . __( 'report-auto' ) : '' }}</span></td>
 								<td>{{ $report->created->diffForHumans() }}</td>
 							</tr>
 						@endforeach
