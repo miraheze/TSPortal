@@ -12,9 +12,11 @@ use App\Models\Appeal;
 use App\Models\Investigation;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use function in_array;
 use function now;
 use function redirect;
@@ -104,6 +106,17 @@ class InvestigationController
 	public function edit( Investigation $investigation ): View
 	{
 		return view( 'investigation.edit' )->with( 'investigation', $investigation );
+	}
+
+	public function downloadPdf( Investigation $investigation ): Response
+	{
+		$investigation->load( [ 'reports', 'events', 'appeals' ] );
+		$pdf = Pdf::loadView(
+			'investigation.pdf',
+			[ 'investigation' => $investigation ]
+		)->setPaper( 'a4' );
+
+		return $pdf->download( "investigation-{$investigation->id}.pdf" );
 	}
 
 	/**
