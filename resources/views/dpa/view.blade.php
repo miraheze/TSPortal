@@ -31,7 +31,7 @@
 													{{ $dpa->user->username }}
 												</div>
 											</div>
-											<button type="button" class="btn btn-sm btn-outline-primary copyToClipboard" data-copy="username">
+											<button type="button" class="btn btn-outline-primary copyToClipboard" data-copy="username">
 												<i class="fa fa-clipboard"></i>
 											</button>
 										</div>
@@ -44,7 +44,7 @@
 													{{ $dpa->id }}
 												</div>
 											</div>
-											<button type="button" class="btn btn-sm btn-outline-primary copyToClipboard" data-copy="id">
+											<button type="button" class="btn btn-outline-primary copyToClipboard" data-copy="id">
 												<i class="fa fa-clipboard"></i>
 											</button>
 										</div>
