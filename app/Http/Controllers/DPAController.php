@@ -115,7 +115,7 @@ class DPAController
 
 			$dpa->update( [ 'completed' => now() ] );
 			$dpa->user->update( [
-				'username' => 'MirahezeGDPR ' . $dpa->id,
+				'username' => config( 'app.dpa_username_prefix' ) . ' ' . $dpa->id,
 			] );
 
 			$dpa->user->newEvent( 'closed-dpa', actor: $request->user() );
