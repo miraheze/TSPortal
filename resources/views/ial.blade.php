@@ -9,61 +9,70 @@
 				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 					<table class="table table-striped my-0 text-center align-middle" id="dataTable">
 						<thead>
-						<tr>
-							<th style="width: 10%;">{{ __( 'id' ) }}</th>
-							<th style="width: 20%;">{{ __( 'username' ) }}</th>
-							<th style="width: 15%;">{{ __( 'wiki' ) }}</th>
-							<th style="width: 10%;">{{ __( 'ial-type' ) }}</th>
-							<th style="width: 35%">{{ __( 'comments' ) }}</th>
-							<th style="width: 10%;">{{ __( 'assigned' ) }}</th>
-						</tr>
+							<tr>
+								<th style="width: 10%;">{{ __( 'id' ) }}</th>
+								<th style="width: 20%;">{{ __( 'username' ) }}</th>
+								<th style="width: 15%;">{{ __( 'wiki' ) }}</th>
+								<th style="width: 10%;">{{ __( 'ial-type' ) }}</th>
+								<th style="width: 35%">{{ __( 'comments' ) }}</th>
+								<th style="width: 10%;">{{ __( 'assigned' ) }}</th>
+							</tr>
 						</thead>
 						<tbody>
-						@foreach ( $ials as $ial )
-							<tr>
-								<td>{{ $ial->id }}</td>
-								<td><a class="nav-link" href="/user/{{ $ial->user->id }}">{{ $ial->user->username }}</a></td>
-								<td>{{ $ial->wiki }}</td>
-								<td>{{ $ial->type }}</td>
-								<td>{{ $ial->comments }}</td>
-								@if ( $ial->dpa )
-									<td><a class="nav-link" href="/dpa/{{ $ial->dpa }}">{{ __( 'dpa' ) }}</a></td>
-								@elseif ( $ial->investigation )
-									<td><a class="nav-link" href="/investigation/{{ $ial->investigation }}">{{ __( 'investigation' ) }}</a></td>
-								@else
-									<td>
-										<button class="btn btn-danger text-white" type="button" data-bs-target="#ial-{{ $ial->id }}-modal" data-bs-toggle="modal">
-											<i class="fa-solid fa-link"></i> {{ __( 'assign' ) }}
-										</button>
-									</td>
-								@endif
-							</tr>
-						@endforeach
+							@foreach ( $ials as $ial )
+								<tr>
+									<td>{{ $ial->id }}</td>
+									<td><a class="nav-link" href="/user/{{ $ial->user->id }}">{{ $ial->user->username }}</a></td>
+									<td>{{ $ial->wiki }}</td>
+									<td>{{ $ial->type }}</td>
+									<td>{{ $ial->comments }}</td>
+									@if ( $ial->dpa )
+										<td><a class="nav-link" href="/dpa/{{ $ial->dpa }}">{{ __( 'dpa' ) }}</a></td>
+									@elseif ( $ial->investigation )
+										<td><a class="nav-link" href="/investigation/{{ $ial->investigation }}">{{ __( 'investigation' ) }}</a></td>
+									@else
+										<td>
+											<button class="btn btn-danger text-white" type="button" data-bs-target="#ial-{{ $ial->id }}-modal" data-bs-toggle="modal">
+												<i class="fa-solid fa-link"></i> {{ __( 'assign' ) }}
+											</button>
+										</td>
+									@endif
+								</tr>
+							@endforeach
 						</tbody>
 						<tfoot>
-						<tr>
-							<th style="width: 10%;">{{ __( 'id' ) }}</th>
-							<th style="width: 20%;">{{ __( 'username' ) }}</th>
-							<th style="width: 15%;">{{ __( 'wiki' ) }}</th>
-							<th style="width: 10%;">{{ __( 'ial-type' ) }}</th>
-							<th style="width: 35%">{{ __( 'comments' ) }}</th>
-							<th style="width: 10%;">{{ __( 'assigned' ) }}</th>
-						</tr>
+							<tr>
+								<th style="width: 10%;">{{ __( 'id' ) }}</th>
+								<th style="width: 20%;">{{ __( 'username' ) }}</th>
+								<th style="width: 15%;">{{ __( 'wiki' ) }}</th>
+								<th style="width: 10%;">{{ __( 'ial-type' ) }}</th>
+								<th style="width: 35%">{{ __( 'comments' ) }}</th>
+								<th style="width: 10%;">{{ __( 'assigned' ) }}</th>
+							</tr>
 						</tfoot>
 					</table>
+
 					@if ( $ials->hasPages() )
 						<nav>
 							<ul class="pagination justify-content-center">
-								<li class="page-item @disabled($ials->onFirstPage())">
-									<a class="page-link" {{ $ials->onFirstPage() ? '' : 'href=' . $ials->previousPageUrl() }} ">{{ __( 'nav-previous' ) }}</a>
+								<li class="page-item" @disabled( $ials->onFirstPage() )>
+									<a class="page-link" href="@if ( $ials->onFirstPage() ) # @else {{ $ials->previousPageUrl() }} @endif" tabindex="-1">{{ __( 'nav-previous' ) }}</a>
 								</li>
+
+								@foreach ( $ials->links()->elements[0] as $page => $url )
+									<li class="page-item @disabled($ials->currentPage() === $page)" @if ( $ials->currentPage() === $page ) aria-current="page" @endif>
+										<a class="page-link" href="{{ $url }}">{{ $page }}</a>
+									</li>
+								@endforeach
+
 								<li class="page-item @disabled(!$ials->hasMorePages())">
-									<a class="page-link" {{ $ials->hasMorePages() ? 'href=' . $ials->nextPageUrl() : '' }}>{{ __( 'nav-next' ) }}</a>
+									<a class="page-link" href="@if ( $ials->hasMorePages() ) {{ $ials->nextPageUrl() }} @else # @endif">{{ __( 'nav-next' ) }}</a>
 								</li>
 							</ul>
 						</nav>
 					@endif
 				</div>
+
 				@foreach ( $ials as $ial )
 					@unless ( $ial->investigation || $ial->dpa )
 						<div class="modal fade" role="dialog" tabindex="-1" id="ial-{{ $ial->id }}-modal">
@@ -89,6 +98,7 @@
 						</div>
 					@endunless
 				@endforeach
+
 			</div>
 		</div>
 	</x-slot>
