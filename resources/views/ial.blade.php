@@ -51,12 +51,10 @@
 							</tr>
 						</tfoot>
 					</table>
-
 					@if ( $ials->hasPages() )
 						{{ $ials->links() }}
 					@endif
 				</div>
-
 				@foreach ( $ials as $ial )
 					@unless ( $ial->investigation || $ial->dpa )
 						<div class="modal fade" role="dialog" tabindex="-1" id="ial-{{ $ial->id }}-modal">
@@ -82,7 +80,6 @@
 						</div>
 					@endunless
 				@endforeach
-
 			</div>
 		</div>
 	</x-slot>
