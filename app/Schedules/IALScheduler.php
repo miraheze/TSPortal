@@ -123,7 +123,7 @@ class IALScheduler
 		if ( config( 'app.mattermosthook' ) ) {
 			Http::post( config( 'app.mattermosthook' ), [
 				'text' => $message,
-				'username' => 'TSPortal',
+				'username' => config( 'app.name' ),
 			] );
 		}
 	}

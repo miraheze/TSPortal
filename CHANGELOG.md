@@ -32,6 +32,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed `request()->session()->get()` to more simple `session()` in blade template.
 - Changed to use `$request->boolean()` where possible.
 - Changed UI for DPAs and Reports.
+- Changed the `app.name` config to be just TSPortal and use it in the interface.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 13.1.1 to 13.2.0.
   - Upgraded laravel/socialite from 5.25.0 to 5.26.0.

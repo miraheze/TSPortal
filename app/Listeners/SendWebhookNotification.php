@@ -46,7 +46,7 @@ class SendWebhookNotification
 		if ( config( 'app.mattermosthook' ) ) {
 			Http::post( config( 'app.mattermosthook' ), [
 				'text' => $text,
-				'username' => 'TSPortal',
+				'username' => config( 'app.name' ),
 			] );
 		}
 	}
