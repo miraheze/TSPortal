@@ -12,7 +12,7 @@ use App\Models\DPA;
 use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
-use App\Rules\MirahezeUsernameRule;
+use App\Rules\MediaWikiUsernameRule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -65,7 +65,7 @@ class ReportController
 	{
 		$request->validate( [
 			'evidence' => [ 'required', 'string' ],
-			'username' => [ new MirahezeUsernameRule ],
+			'username' => [ new MediaWikiUsernameRule ],
 		] );
 
 		$subjectUser = User::findOrCreate( $request->input( 'username' ) );

@@ -8,9 +8,10 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
 use Override;
+use function config;
 use function htmlspecialchars;
 
-class MirahezeUsernameRule implements ValidationRule
+class MediaWikiUsernameRule implements ValidationRule
 {
 	/**
 	 * Validate that the username is a valid user in MediaWiki.
@@ -23,7 +24,7 @@ class MirahezeUsernameRule implements ValidationRule
 			return;
 		}
 
-		$response = Http::get( 'https://login.miraheze.org/w/api.php', [
+		$response = Http::get( config( 'app.urls.mediawiki.api' ), [
 			'format' => 'json',
 			'action' => 'query',
 			'meta' => 'globaluserinfo',

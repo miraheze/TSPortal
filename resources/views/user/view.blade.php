@@ -18,7 +18,7 @@
 										<div class="mb-1">
 											<label class="form-label" for="username">
 												<strong>{{ __( 'username' ) }}: </strong>
-												<a href="https://meta.miraheze.org/wiki/Special:CentralAuth/{{ $user->username }}">{{ $user->username }}</a>
+												<a href="{{ config( 'app.urls.mediawiki.centralauth' ) }}/{{ $user->username }}">{{ $user->username }}</a>
 											</label>
 										</div>
 										<div class="mt-1">
