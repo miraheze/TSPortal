@@ -12,12 +12,23 @@
 			return new bootstrap.Collapse(collapseEl, {toggle: false});
 		});
 
+		// Restore sidebar state on load
+		if (localStorage.getItem('sidebar-toggled') === 'true') {
+			document.body.classList.add('sidebar-toggled');
+			sidebar.classList.add('toggled');
+		}
+
 		for (let toggle of sidebarToggles) {
 
 			// Toggle the side navigation
 			toggle.addEventListener('click', function (e) {
 				document.body.classList.toggle('sidebar-toggled');
 				sidebar.classList.toggle('toggled');
+
+				const isToggled = sidebar.classList.contains('toggled');
+
+				// Save sidebar state
+				localStorage.setItem('sidebar-toggled', isToggled);
 
 				if (sidebar.classList.contains('toggled')) {
 					for (let bsCollapse of sidebarCollapseList) {
