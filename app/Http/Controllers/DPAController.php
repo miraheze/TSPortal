@@ -109,7 +109,7 @@ class DPAController
 
 			if ( isset( $response['query']['globaluserinfo']['id'] ) ) {
 				// Username still exists
-				$request->session()->flash( 'failureFlash', __( 'username-still-exists' ) );
+				$request->session()->flash( 'errorFlash', __( 'username-still-exists' ) );
 				return back();
 			}
 
