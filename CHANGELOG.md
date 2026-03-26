@@ -5,6 +5,34 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ## [Unreleased](https://github.com/miraheze/TSPortal/compare/v34...main)
 
+### Added
+
+- Added `use function` statements.
+- Added InvestigationNew trigger when creating an investigation from a report.
+- Added the ability to flag automatic reports when created via the API.
+- Added UI feedback for automatically created reports to aid a bit with triaging them.
+- Added DPA ID to the specific DPA page view.
+- Added a copy to clipboard button for DPA usernames and IDs.
+- Added the ability to generate PDFs from investigations.
+- Added the ability to reopen reports that were closed without further action.
+- Added the ability to open a DPA directly from a report.
+- Added a user event when investigation is created from a report, rather than only when it is manually created separately.
+- Added validation to require supplying evidence to reports.
+- Added the `barryvdh/laravel-dompdf` library for generating PDFs from investigations.
+
+### Fixed
+
+- Fixed query used in DPA POST API.
+
+### Changed
+
+- Changed to use `@unless` in blade templates where it makes sense to.
+- Changed to use `$request->boolean()` where possible.
+- Changed UI for DPAs and Reports.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 13.1.1 to 13.2.0.
+  - Upgraded laravel/socialite from 5.25.0 to 5.26.0.
+
 ## Version 34 (2026-03-23)
 
 ### Added
