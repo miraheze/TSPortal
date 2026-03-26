@@ -233,6 +233,7 @@
 	"toast-submitted": "has been submitted successfully!",
 	"toast-updated": "has been updated successfully!",
 	"topic": "Topic",
+	"unassigned": "[Unassigned]",
 	"user-flags": "User Access",
 	"user-flags-modify": "Modify Access for",
 	"user-flags-none": "No access flags",
