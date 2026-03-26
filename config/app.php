@@ -269,6 +269,26 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| URLs
+	|--------------------------------------------------------------------------
+	|
+	| URLs that are used throughout the interface.
+	|
+	*/
+	'urls' => [
+		'home' => 'https://meta.miraheze.org/wiki/Miraheze_Meta',
+		'mediawiki' => [
+			'api' => 'https://login.miraheze.org/w/api.php',
+			'centralauth' => 'https://meta.miraheze.org/wiki/Special:CentralAuth',
+		],
+		'policies' => [
+			'privacy' => 'https://meta.miraheze.org/wiki/Privacy_Policy',
+			'tou' => 'https://meta.miraheze.org/wiki/Terms_of_Use',
+		],
+	],
+
+	/*
+	|--------------------------------------------------------------------------
 	| At Risk Emails
 	|--------------------------------------------------------------------------
 	|
