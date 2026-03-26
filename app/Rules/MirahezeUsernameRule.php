@@ -30,8 +30,8 @@ class MirahezeUsernameRule implements ValidationRule
 			'guiuser'=> htmlspecialchars( $value ),
 		] );
 
-		if ( isset( $response['query']['globaluserinfo']['id'] ) ) {
-			$fail( 'username-still-exists' )->translate();
+		if ( !isset( $response['query']['globaluserinfo']['id'] ) ) {
+			$fail( 'username-exist' )->translate();
 		}
 	}
 }
