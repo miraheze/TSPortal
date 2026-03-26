@@ -12,12 +12,33 @@
 			return new bootstrap.Collapse(collapseEl, {toggle: false});
 		});
 
+		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+
+		// Restore sidebar state on load (desktop only)
+		if (vw >= 768 && localStorage.getItem('sidebar-toggled') === 'true') {
+			document.body.classList.add('sidebar-toggled');
+			sidebar.classList.add('toggled');
+		}
+
+		// Force hidden on mobile
+		if (vw < 768) {
+			document.body.classList.add('sidebar-toggled');
+			sidebar.classList.add('toggled');
+		}
+
 		for (let toggle of sidebarToggles) {
 
 			// Toggle the side navigation
 			toggle.addEventListener('click', function (e) {
 				document.body.classList.toggle('sidebar-toggled');
 				sidebar.classList.toggle('toggled');
+
+				const isToggled = sidebar.classList.contains('toggled');
+
+				// Save sidebar state (desktop only)
+				if (vw >= 768) {
+					localStorage.setItem('sidebar-toggled', isToggled);
+				}
 
 				if (sidebar.classList.contains('toggled')) {
 					for (let bsCollapse of sidebarCollapseList) {
@@ -32,6 +53,9 @@
 			const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 			if (vw < 768) {
+				document.body.classList.add('sidebar-toggled');
+				sidebar.classList.add('toggled');
+
 				for (let bsCollapse of sidebarCollapseList) {
 					bsCollapse.hide();
 				}
