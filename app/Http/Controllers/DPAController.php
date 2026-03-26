@@ -8,13 +8,14 @@ use App\Events\DPANew;
 use App\Models\DPA;
 use App\Models\User;
 use App\Rules\DPAAlreadyLive;
-use App\Rules\MirahezeUsernameRule;
+use App\Rules\MediaWikiUsernameRule;
 use App\Rules\SameAccountRule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use function back;
+use function config;
 use function now;
 use function redirect;
 use function view;
@@ -51,7 +52,7 @@ class DPAController
 	public function store( DPA $dpa, Request $request ): RedirectResponse
 	{
 		$request->validate( [
-			'username' => [ new MirahezeUsernameRule, new DPAAlreadyLive ],
+			'username' => [ new MediaWikiUsernameRule, new DPAAlreadyLive ],
 		] );
 
 		$dpaUser = User::findOrCreate( $request->input( 'username' ) );
@@ -100,7 +101,7 @@ class DPAController
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->boolean( 'approve' ) ) {
-			$response = Http::get( 'https://login.miraheze.org/w/api.php', [
+			$response = Http::get( config( 'app.urls.mediawiki.api' ), [
 				'format' => 'json',
 				'action' => 'query',
 				'meta' => 'globaluserinfo',
