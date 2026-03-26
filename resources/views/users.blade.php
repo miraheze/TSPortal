@@ -7,9 +7,7 @@
 		<div class="card shadow">
 			<div class="card-body">
 				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-					@if ( $users->hasPages() )
-						{{ $users->links() }}
-					@endif
+					{{ $users->links() }}
 					<table class="table table-striped my-0 text-center align-middle" id="dataTable">
 						<thead>
 							<tr>
