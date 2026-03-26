@@ -4,6 +4,13 @@
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4 fw-semibold">{{ __( 'dpa-new' ) }}</h3>
+		@if ( $errors->any() )
+			<div class="alert alert-danger">
+				@foreach ( $errors->all() as $error )
+					<li>{{ $error }}</li>
+				@endforeach
+			</div>
+		@endif
 		<div class="row mb-3">
 			@if ( $dpa->reject )
 				<div role="alert" class="alert alert-danger text-center shadow-sm border-0">
