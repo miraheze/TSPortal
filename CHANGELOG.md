@@ -28,6 +28,7 @@ The main reasoning behind this choice is the software is not built to be extende
 ### Changed
 
 - Changed to use `@unless` in blade templates where it makes sense to.
+- Changed `request()->session()->get()` to more simple `session()` in blade template.
 - Changed to use `$request->boolean()` where possible.
 - Changed UI for DPAs and Reports.
 - Upgraded external libraries:
