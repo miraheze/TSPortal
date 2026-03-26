@@ -213,7 +213,7 @@
 		</footer>
 	</div>
 	<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fa-solid fa-angle-up"></i></a>
-	@if( request()->session()->get('successFlash') )
+	@if ( session( 'successFlash' ) )
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 				<div class="toast-header bg-gradient-success text-white">
@@ -222,12 +222,12 @@
 					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __('close') }}"></button>
 				</div>
 				<div class="toast-body">
-					{{ request()->session()->get('successFlash') }}
+					{{ session( 'successFlash' ) }}
 				</div>
 			</div>
 		</div>
 	@endif
-	@if( request()->session()->get('failureFlash') )
+	@if ( session( 'failureFlash' ) )
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 				<div class="toast-header bg-gradient-danger text-white">
@@ -236,7 +236,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __('close') }}"></button>
 				</div>
 				<div class="toast-body">
-					{{ request()->session()->get('failureFlash') }}
+					{{ session( 'failureFlash' ) }}
 				</div>
 			</div>
 		</div>
