@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Investigation #{{ $investigation->id }}</title>
+	<title>{{ __( 'investigation' ) }} #{{ $investigation->id }}</title>
 	<style>
 		body {
 			font-family: DejaVu Sans, sans-serif;
@@ -104,7 +104,7 @@
 	<table>
 		<tr>
 			<td class="label">{{ __( 'assigned' ) }}:</td>
-			<td>{{ $investigation->assigned?->username ?? '[Unassigned]' }}</td>
+			<td>{{ $investigation->assigned?->username ?? __( 'unassigned' ) }}</td>
 		</tr>
 		<tr>
 			<td class="label">{{ __( 'status' ) }}:</td>
