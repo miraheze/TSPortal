@@ -26,6 +26,7 @@ class ReportFactory extends Factory
 		return [
 			'investigation' => null,
 			'dpa' => false,
+			'auto' => false,
 			'type' => 'other',
 			'text' => null,
 			'user' => User::class,

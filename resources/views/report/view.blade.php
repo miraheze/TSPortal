@@ -8,23 +8,27 @@
 			@if ( $report->investigation )
 				<div class="alert alert-success text-center shadow-sm border-0" role="alert">
 					@can('ts')
-						<span>
-                            <strong>{{ __( 'report-investigation' ) }} <a
-		                            href="/investigation/{{ $report->investigation }}">#{{ $report->investigation }}</a>.</strong>
+						<span class="fw-bold">
+                            {{ __( 'report-investigation' ) }}
+							<a href="/investigation/{{ $report->investigation }}">#{{ $report->investigation }}</a>.
                         </span>
 					@else
-						<span><strong>{{ __( 'report-investigation-public' ) }}</strong></span>
+						<span class="fw-bold">{{ __( 'report-investigation-public' ) }}</span>
 					@endcan
 				</div>
 			@elseif ( $report->dpa )
 				<div class="alert alert-success text-center shadow-sm border-0" role="alert">
-					<span><strong>{{ __( 'report-dpa' ) }}</strong></span>
+					<span class="fw-bold">{{ __( 'report-dpa' ) }}</span>
 				</div>
 			@else
 				<div class="alert alert-danger text-center shadow-sm border-0" role="alert">
-					<span><strong>{{ __( 'report-closed' ) }}</strong></span>
+					<span class="fw-bold">{{ __( 'report-closed' ) }}</span>
 				</div>
 			@endif
+		@elseif ( $report->auto )
+			<div class="alert alert-warning text-center shadow-sm border-0" role="alert">
+				<span class="fw-bold">{{ __( 'report-auto-created' ) }}</span>
+			</div>
 		@endif
 		<div class="row mb-4">
 			<div class="col-lg-8">
