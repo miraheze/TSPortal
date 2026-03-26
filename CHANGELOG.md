@@ -22,10 +22,12 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added check that a user no longer exists in MediaWiki when approving a DPA.
 - Added some missing messages.
 - Added new configuration option to set URLs used throughout the interface (MediaWiki API, CentralAuth, Privacy Policy, Terms of Use, and Miraheze Meta).
+- Added `Special:MyLanguage` to Miraheze Meta and Policy URLs.
 
 ### Fixed
 
 - Fixed query used in DPA POST API.
+- Fixed URL for Miraheze Meta to not link to a redirect page.
 
 ### Changed
 
