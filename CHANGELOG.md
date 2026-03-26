@@ -33,6 +33,8 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed to use `$request->boolean()` where possible.
 - Changed UI for DPAs and Reports.
 - Changed the `app.name` config to be just TSPortal and use it in the interface.
+- Changed sidebar navigation to be collapsed by default on mobile.
+- Changed sidebar handling to save and restore the state if collapsed on desktop.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 13.1.1 to 13.2.0.
   - Upgraded laravel/socialite from 5.25.0 to 5.26.0.
