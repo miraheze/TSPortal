@@ -142,7 +142,7 @@ return [
 	| The prefix to change usernames to when approving a DPA request.
 	|
 	*/
-	'dpaUsernamePrefix' => 'MirahezeGDPR',
+	'dpaUsernamePrefix' => 'MirahezeGDPR ',
 
 	/*
 	|--------------------------------------------------------------------------
