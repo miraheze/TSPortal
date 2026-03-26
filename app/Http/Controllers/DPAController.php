@@ -108,7 +108,7 @@ class DPAController
 					'meta' => 'globaluserinfo',
 					'guiuser' => $dpa->user->username,
 				],
-			] )->json();
+			] );
 
 			if ( isset( $response['query']['globaluserinfo']['id'] ) ) {
 				// Username still exists
