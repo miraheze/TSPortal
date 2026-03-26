@@ -189,17 +189,17 @@
 			<div class="container text-muted py-lg-4">
 				<ul class="list-inline">
 					<li class="list-inline-item me-4">
-						<a class="link-secondary" href="https://meta.miraheze.org/wiki/Privacy_Policy">
+						<a class="link-secondary" href="{{ config( 'app.urls.policies.privacy' ) }}">
 							{{ __( 'footer-privacy' ) }}
 						</a>
 					</li>
 					<li class="list-inline-item me-4">
-						<a class="link-secondary" href="https://meta.miraheze.org/wiki/Terms_of_Use">
+						<a class="link-secondary" href="{{ config( 'app.urls.policies.tou' ) }}">
 							{{ __( 'footer-tou' ) }}
 						</a>
 					</li>
 					<li class="list-inline-item">
-						<a class="link-secondary" href="https://meta.miraheze.org/wiki/Miraheze">
+						<a class="link-secondary" href="{{ config( 'app.urls.home' ) }}">
 							{{ __( 'footer-meta' ) }}
 						</a>
 					</li>
