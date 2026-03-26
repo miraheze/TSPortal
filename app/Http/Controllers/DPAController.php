@@ -100,14 +100,11 @@ class DPAController
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->boolean( 'approve' ) ) {
-			$response = Http::get(
-				'https://login.miraheze.org/w/api.php', [
-				'query' => [
-					'format' => 'json',
-					'action' => 'query',
-					'meta' => 'globaluserinfo',
-					'guiuser' => $dpa->user->username,
-				],
+			$response = Http::get( 'https://login.miraheze.org/w/api.php', [
+				'format' => 'json',
+				'action' => 'query',
+				'meta' => 'globaluserinfo',
+				'guiuser' => $dpa->user->username,
 			] );
 
 			if ( isset( $response['query']['globaluserinfo']['id'] ) ) {
