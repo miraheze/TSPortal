@@ -244,6 +244,7 @@
 	"username": "Username",
 	"username-exist": "The username must be a valid Miraheze username.",
 	"username-not-same": "You are not currently logged in as this user account.",
+	"username-still-exists": "This user still exists in MediaWiki. It must be processed in MediaWiki before you can approve this request.",
 	"users": "Users",
 	"users-list": "List All Users",
 	"wiki": "Wiki",

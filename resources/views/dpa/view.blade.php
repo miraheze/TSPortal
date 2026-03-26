@@ -4,6 +4,11 @@
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4 fw-semibold">{{ __( 'dpa-new' ) }}</h3>
+		@if ( session( 'errorFlash' ) )
+			<div class="alert alert-danger text-center shadow-sm border-0">
+				{{ session( 'errorFlash' ) }}
+			</div>
+		@endif
 		<div class="row mb-3">
 			@if ( $dpa->reject )
 				<div role="alert" class="alert alert-danger text-center shadow-sm border-0">

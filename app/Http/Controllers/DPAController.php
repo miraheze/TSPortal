@@ -13,6 +13,7 @@ use App\Rules\SameAccountRule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use function back;
 use function now;
 use function redirect;
@@ -99,6 +100,19 @@ class DPAController
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->boolean( 'approve' ) ) {
+			$response = Http::get( 'https://login.miraheze.org/w/api.php', [
+				'format' => 'json',
+				'action' => 'query',
+				'meta' => 'globaluserinfo',
+				'guiuser' => $dpa->user->username,
+			] );
+
+			if ( isset( $response['query']['globaluserinfo']['id'] ) ) {
+				// Username still exists
+				$request->session()->flash( 'errorFlash', __( 'username-still-exists' ) );
+				return back();
+			}
+
 			$dpa->update( [ 'completed' => now() ] );
 			$dpa->user->update( [
 				'username' => 'MirahezeGDPR ' . $dpa->id,
