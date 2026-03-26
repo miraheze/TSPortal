@@ -23,15 +23,9 @@
 								<tr>
 									<td><a class="nav-link" href="/user/{{ $user->id }}">{{ $user->id }}</a></td>
 									<td>{{ $user->username }}</td>
-									<td>
-										<x-user.standing :user="$user"/>
-									</td>
-									<td>
-										<x-user.verified :user="$user"/>
-									</td>
-									<td>
-										<x-user.flags :user="$user"/>
-									</td>
+									<td><x-user.standing :user="$user" /></td>
+									<td><x-user.verified :user="$user" /></td>
+									<td><x-user.flags :user="$user" /></td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -45,9 +39,7 @@
 							</tr>
 						</tfoot>
 					</table>
-					@if ( $users->hasPages() )
-						{{ $users->links() }}
-					@endif
+					{{ $users->links() }}
 				</div>
 			</div>
 		</div>
