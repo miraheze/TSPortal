@@ -7,55 +7,39 @@
 		<div class="card shadow">
 			<div class="card-body">
 				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+					{{ $users->links() }}
 					<table class="table table-striped my-0 text-center align-middle" id="dataTable">
 						<thead>
-						<tr>
-							<th style="width: 10%;">{{ __( 'id' ) }}</th>
-							<th style="width: 40%;">{{ __( 'username' ) }}</th>
-							<th style="width: 20%;">{{ __( 'status' ) }}</th>
-							<th style="width: 10%;">{{ __( 'verified' ) }}</th>
-							<th style="width: 20%;">{{ __( 'flags' ) }}</th>
-						</tr>
+							<tr>
+								<th style="width: 10%;">{{ __( 'id' ) }}</th>
+								<th style="width: 40%;">{{ __( 'username' ) }}</th>
+								<th style="width: 20%;">{{ __( 'status' ) }}</th>
+								<th style="width: 10%;">{{ __( 'verified' ) }}</th>
+								<th style="width: 20%;">{{ __( 'flags' ) }}</th>
+							</tr>
 						</thead>
 						<tbody>
-						@foreach ( $users as $user )
-							<tr>
-								<td><a class="nav-link" href="/user/{{ $user->id }}">{{ $user->id }}</a></td>
-								<td>{{ $user->username }}</td>
-								<td>
-									<x-user.standing :user="$user"/>
-								</td>
-								<td>
-									<x-user.verified :user="$user"/>
-								</td>
-								<td>
-									<x-user.flags :user="$user"/>
-								</td>
-							</tr>
-						@endforeach
+							@foreach ( $users as $user )
+								<tr>
+									<td><a class="nav-link" href="/user/{{ $user->id }}">{{ $user->id }}</a></td>
+									<td>{{ $user->username }}</td>
+									<td><x-user.standing :user="$user" /></td>
+									<td><x-user.verified :user="$user" /></td>
+									<td><x-user.flags :user="$user" /></td>
+								</tr>
+							@endforeach
 						</tbody>
 						<tfoot>
-						<tr>
-							<th style="width: 10%;">{{ __( 'id' ) }}</th>
-							<th style="width: 40%;">{{ __( 'username' ) }}</th>
-							<th style="width: 20%;">{{ __( 'status' ) }}</th>
-							<th style="width: 10%;">{{ __( 'verified' ) }}</th>
-							<th style="width: 20%;">{{ __( 'flags' ) }}</th>
-						</tr>
+							<tr>
+								<th style="width: 10%;">{{ __( 'id' ) }}</th>
+								<th style="width: 40%;">{{ __( 'username' ) }}</th>
+								<th style="width: 20%;">{{ __( 'status' ) }}</th>
+								<th style="width: 10%;">{{ __( 'verified' ) }}</th>
+								<th style="width: 20%;">{{ __( 'flags' ) }}</th>
+							</tr>
 						</tfoot>
 					</table>
-					@if ( $users->hasPages() )
-						<nav>
-							<ul class="pagination justify-content-center">
-								<li class="page-item @disabled($users->onFirstPage())">
-									<a class="page-link" {{ $users->onFirstPage() ? '' : 'href=' . $users->previousPageUrl() }} ">{{ __( 'nav-previous' ) }}</a>
-								</li>
-								<li class="page-item @disabled(!$users->hasMorePages())">
-									<a class="page-link" {{ $users->hasMorePages() ? 'href=' . $users->nextPageUrl() : '' }}>{{ __( 'nav-next' ) }}</a>
-								</li>
-							</ul>
-						</nav>
-					@endif
+					{{ $users->links() }}
 				</div>
 			</div>
 		</div>

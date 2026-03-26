@@ -24,6 +24,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added a new configuration option to set URLs used throughout the interface (MediaWiki API, CentralAuth, Privacy Policy, Terms of Use, and Miraheze Meta).
 - Added `Special:MyLanguage` to Miraheze Meta and Policy URLs.
 - Added a new configuration option, `app.dpaUsernamePrefix` to set the DPA username prefix.
+- Added pagination for users on the top of the table as well.
 
 ### Fixed
 
@@ -40,6 +41,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed sidebar navigation to be collapsed by default on mobile.
 - Changed sidebar handling to save and restore the state if collapsed on desktop.
 - Changed MirahezeUsernameRule to MediaWikiUsernameRule.
+- Changed to numbered pagination for IAL and Users.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 13.1.1 to 13.2.0.
   - Upgraded laravel/socialite from 5.25.0 to 5.26.0.
