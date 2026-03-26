@@ -21,6 +21,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added the `barryvdh/laravel-dompdf` library for generating PDFs from investigations.
 - Added check that a user no longer exists in MediaWiki when approving a DPA.
 - Added some missing messages.
+- Added new configuration option to set URLs used throughout the interface (MediaWiki API, CentralAuth, Privacy Policy, Terms of Use, and Miraheze Meta).
 
 ### Fixed
 
@@ -35,6 +36,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed the `app.name` config to be just TSPortal and use it in the interface.
 - Changed sidebar navigation to be collapsed by default on mobile.
 - Changed sidebar handling to save and restore the state if collapsed on desktop.
+- Changed MirahezeUsernameRule to MediaWikiUsernameRule.
 - Upgraded external libraries:
   - Upgraded laravel/framework from 13.1.1 to 13.2.0.
   - Upgraded laravel/socialite from 5.25.0 to 5.26.0.
