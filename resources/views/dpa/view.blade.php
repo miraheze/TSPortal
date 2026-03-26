@@ -4,11 +4,9 @@
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4 fw-semibold">{{ __( 'dpa-new' ) }}</h3>
-		@if ( $errors->any() )
+		@if ( request()->session()->get( 'failureFlash' ) )
 			<div class="alert alert-danger">
-				@foreach ( $errors->all() as $error )
-					<li>{{ $error }}</li>
-				@endforeach
+				{{ request()->session()->get( 'failureFlash' ) }}
 			</div>
 		@endif
 		<div class="row mb-3">
