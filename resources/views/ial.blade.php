@@ -51,9 +51,7 @@
 							</tr>
 						</tfoot>
 					</table>
-					@if ( $ials->hasPages() )
-						{{ $ials->links() }}
-					@endif
+					{{ $ials->links() }}
 				</div>
 				@foreach ( $ials as $ial )
 					@unless ( $ial->investigation || $ial->dpa )
