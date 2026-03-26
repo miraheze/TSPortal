@@ -4,9 +4,9 @@
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4 fw-semibold">{{ __( 'dpa-new' ) }}</h3>
-		@if ( request()->session()->get( 'errorFlash' ) )
+		@if ( session( 'errorFlash' ) )
 			<div class="alert alert-danger text-center shadow-sm border-0">
-				{{ request()->session()->get( 'errorFlash' ) }}
+				{{ session( 'errorFlash' ) }}
 			</div>
 		@endif
 		<div class="row mb-3">
