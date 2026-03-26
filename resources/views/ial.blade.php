@@ -53,7 +53,7 @@
 					</table>
 
 					@if ( $ials->hasPages() )
-						{{ $ials->onEachSide( 5 )->links() }}
+						{{ $ials->onEachSide( 1 )->links() }}
 					@endif
 				</div>
 
