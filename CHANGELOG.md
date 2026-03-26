@@ -20,6 +20,7 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added validation to require supplying evidence to reports.
 - Added the `barryvdh/laravel-dompdf` library for generating PDFs from investigations.
 - Added check that a user no longer exists in MediaWiki when approving a DPA.
+- Added some missing messages.
 
 ### Fixed
 
