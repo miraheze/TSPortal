@@ -11,7 +11,7 @@ use App\Events\InvestigationReopened;
 use App\Models\Appeal;
 use App\Models\Investigation;
 use App\Models\User;
-use App\Rules\MirahezeUsernameRule;
+use App\Rules\MediaWikiUsernameRule;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -62,7 +62,7 @@ class InvestigationController
 	public function store( Investigation $investigation, Request $request ): RedirectResponse
 	{
 		$request->validate( [
-			'username' => [ new MirahezeUsernameRule ],
+			'username' => [ new MediaWikiUsernameRule ],
 		] );
 
 		$investigationUser = User::findOrCreate( $request->input( 'username' ) );
