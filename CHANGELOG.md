@@ -21,8 +21,9 @@ The main reasoning behind this choice is the software is not built to be extende
 - Added the `barryvdh/laravel-dompdf` library for generating PDFs from investigations.
 - Added check that a user no longer exists in MediaWiki when approving a DPA.
 - Added some missing messages.
-- Added new configuration option to set URLs used throughout the interface (MediaWiki API, CentralAuth, Privacy Policy, Terms of Use, and Miraheze Meta).
+- Added a new configuration option to set URLs used throughout the interface (MediaWiki API, CentralAuth, Privacy Policy, Terms of Use, and Miraheze Meta).
 - Added `Special:MyLanguage` to Miraheze Meta and Policy URLs.
+- Added a new configuration option, `app.dpaUsernamePrefix` to set the DPA username prefix.
 
 ### Fixed
 
