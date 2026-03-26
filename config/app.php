@@ -276,14 +276,14 @@ return [
 	|
 	*/
 	'urls' => [
-		'home' => 'https://meta.miraheze.org/wiki/Miraheze_Meta',
+		'home' => 'https://meta.miraheze.org/wiki/Special:MyLanguage/Miraheze_Meta',
 		'mediawiki' => [
 			'api' => 'https://login.miraheze.org/w/api.php',
 			'centralauth' => 'https://meta.miraheze.org/wiki/Special:CentralAuth',
 		],
 		'policies' => [
-			'privacy' => 'https://meta.miraheze.org/wiki/Privacy_Policy',
-			'tou' => 'https://meta.miraheze.org/wiki/Terms_of_Use',
+			'privacy' => 'https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy',
+			'tou' => 'https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use',
 		],
 	],
 
