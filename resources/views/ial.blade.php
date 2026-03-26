@@ -55,11 +55,11 @@
 					@if ( $ials->hasPages() )
 						<nav>
 							<ul class="pagination justify-content-center">
-								<li class="page-item" @disabled( $ials->onFirstPage() )>
+								<li class="page-item @disabled($ials->onFirstPage())">
 									<a class="page-link" href="@if ( $ials->onFirstPage() ) # @else {{ $ials->previousPageUrl() }} @endif" tabindex="-1">{{ __( 'nav-previous' ) }}</a>
 								</li>
 
-								@foreach ( $ials->links()->elements[0] as $page => $url )
+								@foreach ( $ials->links() as $page => $url )
 									<li class="page-item @disabled($ials->currentPage() === $page)" @if ( $ials->currentPage() === $page ) aria-current="page" @endif>
 										<a class="page-link" href="{{ $url }}">{{ $page }}</a>
 									</li>
