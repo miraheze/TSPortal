@@ -99,6 +99,23 @@ class DPAController
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->boolean( 'approve' ) ) {
+			$oldUsername = $dpa->user->username;
+			$response = Http::get(
+				'https://login.miraheze.org/w/api.php', [
+				'query' => [
+					'format' => 'json',
+					'action' => 'query',
+					'meta' => 'globaluserinfo',
+					'guiuser' => $oldUsername,
+				],
+			] )->json();
+
+			if ( isset( $response['query']['globaluserinfo']['id'] ) ) {
+				// Username still exists
+				$request->session()->flash( 'errorFlash', __( 'username-still-exists' ) );
+				return back();
+			}
+
 			$dpa->update( [ 'completed' => now() ] );
 			$dpa->user->update( [
 				'username' => 'MirahezeGDPR ' . $dpa->id,
