@@ -58,13 +58,7 @@
 								<li class="page-item @disabled($ials->onFirstPage())">
 									<a class="page-link" href="@if ( $ials->onFirstPage() ) # @else {{ $ials->previousPageUrl() }} @endif" tabindex="-1">{{ __( 'nav-previous' ) }}</a>
 								</li>
-								{{ $ials->links() }}
-
-								@foreach ( $ials->links() as $page => $url )
-									<li class="page-item @disabled($ials->currentPage() === $page)" @if ( $ials->currentPage() === $page ) aria-current="page" @endif>
-										<a class="page-link" href="{{ $url }}">{{ $page }}</a>
-									</li>
-								@endforeach
+								{{ $users->onEachSide( 5 )->links() }}
 
 								<li class="page-item @disabled(!$ials->hasMorePages())">
 									<a class="page-link" href="@if ( $ials->hasMorePages() ) {{ $ials->nextPageUrl() }} @else # @endif">{{ __( 'nav-next' ) }}</a>
