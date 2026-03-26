@@ -23,57 +23,54 @@
 			<hr class="sidebar-divider my-0">
 			<ul class="navbar-nav text-light" id="accordionSidebar">
 				<li class="nav-item">
-					<a class="nav-link {{ ( trim( $pgname ) === __('home') ) ? 'active' : '' }}" href="/">
+					<a class="nav-link {{ ( trim( $pgname ) === __( 'home' ) ) ? 'active' : '' }}" href="/">
 						<i class="fa-solid fa-house"></i>
-						<span>{{ __('home') }}</span>
+						<span>{{ __( 'home' ) }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ ( trim( $pgname ) === __('reports') ) ? 'active' : '' }}" href="/reports">
+					<a class="nav-link {{ ( trim( $pgname ) === __( 'reports' ) ) ? 'active' : '' }}" href="/reports">
 						<i class="fa-solid fa-triangle-exclamation"></i>
-						<span>{{ __('reports') }}</span>
+						<span>{{ __( 'reports' ) }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ ( trim( $pgname ) === __('dpa') ) ? 'active' : '' }}" href="/dpa">
+					<a class="nav-link {{ ( trim( $pgname ) === __( 'dpa' ) ) ? 'active' : '' }}" href="/dpa">
 						<i class="fa-solid fa-user-slash"></i>
-						<span>{{ __('dpa') }}</span>
+						<span>{{ __( 'dpa' ) }}</span>
 					</a>
 				</li>
 				@can('ts')
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === __('investigations') ) ? 'active' : '' }}"
-						   href="/investigations">
+						<a class="nav-link {{ ( trim( $pgname ) === __( 'investigations' ) ) ? 'active' : '' }}" href="/investigations">
 							<i class="fa-solid fa-magnifying-glass"></i>
-							<span>{{ __('investigations') }}</span>
+							<span>{{ __( 'investigations' ) }}</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === __('appeals') ) ? 'active' : '' }}"
-						   href="/appeals">
+						<a class="nav-link {{ ( trim( $pgname ) === __( 'appeals' ) ) ? 'active' : '' }}" href="/appeals">
 							<i class="fa-solid fa-scale-balanced"></i>
-							<span>{{ __('appeals') }}</span>
+							<span>{{ __( 'appeals' ) }}</span>
 						</a>
 					</li>
 					<!-- TODO: Transparency Reports
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === 'Transparency Reports' ) ? 'active' : '' }}"
-						   href="/transparency">
+						<a class="nav-link {{ ( trim( $pgname ) === 'Transparency Reports' ) ? 'active' : '' }}" href="/transparency">
 							<i class="fas fa-chart-bar"></i>
 							<span>Transparency Report</span>
 						</a>
 					</li>
 					-->
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === __('ial') ) ? 'active' : '' }}" href="/ial">
+						<a class="nav-link {{ ( trim( $pgname ) === __( 'ial' ) ) ? 'active' : '' }}" href="/ial">
 							<i class="fa-solid fa-list-check"></i>
-							<span>{{ __('ial') }}</span>
+							<span>{{ __( 'ial' ) }}</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === __('users') ) ? 'active' : '' }}" href="/users">
+						<a class="nav-link {{ ( trim( $pgname ) === __( 'users' ) ) ? 'active' : '' }}" href="/users">
 							<i class="fa-solid fa-user"></i>
-							<span>{{ __('users') }}</span>
+							<span>{{ __( 'users' ) }}</span>
 						</a>
 					</li>
 				@endcan
@@ -101,16 +98,13 @@
 					</form>-->
 					<ul class="navbar-nav flex-nowrap ms-auto">
 						<!--<li class="nav-item dropdown d-sm-none no-arrow">
-							<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-							   href="#">
+							<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
 								<i class="fas fa-search"></i>
 							</a>
-							<div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
-							     aria-labelledby="searchDropdown">
+							<div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
 								<form class="me-auto navbar-search w-100">
 									<div class="input-group">
-										<input class="bg-light form-control border-0 small" type="text"
-										       placeholder="Search for ...">
+										<input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
 										<div class="input-group-append">
 											<button class="btn btn-primary py-0" type="button">
 												<i class="fas fa-search"></i>
@@ -122,21 +116,19 @@
 						</li>-->
 						<li class="nav-item dropdown no-arrow mx-1">
 							<div class="nav-item dropdown no-arrow">
-								<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-								   href="#">
+								<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
 									<span class="badge bg-danger badge-counter"></span>
 									<i class="fa-solid fa-plus fa-fw"></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-									<h6 class="dropdown-header">{{ __('create-new') }}...</h6>
+									<h6 class="dropdown-header">{{ __( 'create-new' ) }}...</h6>
 									<a class="dropdown-item d-flex align-items-center" href="/report/new">
 										<div class="dropdown-list-image me-3" style="padding: 5px;">
-											<i class="fa-solid fa-triangle-exclamation"
-											   style="font-size: 30px;height: 51px;"></i>
+											<i class="fa-solid fa-triangle-exclamation" style="font-size: 30px; height: 51px;"></i>
 										</div>
 										<div class="fw-bold">
 											<div class="text-truncate">
-												<span>{{ __('report') }}</span>
+												<span>{{ __( 'report' ) }}</span>
 											</div>
 										</div>
 									</a>
@@ -147,7 +139,7 @@
 											</div>
 											<div class="fw-bold">
 												<div class="text-truncate">
-													<span>{{ __('investigation') }}</span>
+													<span>{{ __( 'investigation' ) }}</span>
 												</div>
 											</div>
 										</a>
@@ -156,34 +148,31 @@
 										<div class="dropdown-list-image me-3" style="padding: 5px;"><i
 												class="fa-solid fa-user-slash" style="font-size: 30px;"></i></div>
 										<div class="fw-bold">
-											<div class="text-truncate"><span>{{ __('dpa') }}</span></div>
+											<div class="text-truncate"><span>{{ __( 'dpa' ) }}</span></div>
 										</div>
 									</a>
 								</div>
 							</div>
-							<div class="shadow dropdown-list dropdown-menu dropdown-menu-end"
-							     aria-labelledby="alertsDropdown"></div>
+							<div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
 						</li>
 						<div class="d-none d-sm-block topbar-divider"></div>
 						<li class="nav-item dropdown no-arrow">
 							<div class="nav-item dropdown no-arrow">
 								@auth('web')
-									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-									   href="#">
+									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">
 										<span class="d-none d-lg-inline me-2 text-gray-600 small">{{ request()->user()->username }}</span>
 										<span class="d-inline d-lg-none me-2 text-gray-600 small fa-solid fa-user"></span>
 									</a>
 									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="/user/{{ request()->user()->id }}">
-											<i class="fa-solid fa-user fa-sm fa-fw me-2 text-gray-400"></i>{{ __('profile') }}</a>
+											<i class="fa-solid fa-user fa-sm fa-fw me-2 text-gray-400"></i>{{ __( 'profile' ) }}</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/logout"><i
-												class="fa-solid fa-right-from-bracket fa-sm fa-fw me-2 text-gray-400"></i>{{ __('logout') }}</a>
+												class="fa-solid fa-right-from-bracket fa-sm fa-fw me-2 text-gray-400"></i>{{ __( 'logout' ) }}</a>
 									</div>
 								@else
-									<a href="/login"
-									   class="dropdown-toggle nav-link">
-										<span class="d-none d-lg-inline me-2 text-gray-600 small">{{ __('login') }}</span>
+									<a href="/login" class="dropdown-toggle nav-link">
+										<span class="d-none d-lg-inline me-2 text-gray-600 small">{{ __( 'login' ) }}</span>
 										<span class="d-inline d-lg-none me-2 text-gray-600 small fa-solid fa-right-to-bracket"></span>
 									</a>
 								@endauth
@@ -199,16 +188,24 @@
 		<footer class="text-center">
 			<div class="container text-muted py-lg-4">
 				<ul class="list-inline">
-					<li class="list-inline-item me-4"><a class="link-secondary"
-					                                     href="https://meta.miraheze.org/wiki/Privacy_Policy">{{ __('footer-privacy') }}</a></li>
-					<li class="list-inline-item me-4"><a class="link-secondary"
-					                                     href="https://meta.miraheze.org/wiki/Terms_of_Use">{{ __('footer-tou') }}</a></li>
-					<li class="list-inline-item"><a class="link-secondary"
-					                                href="https://meta.miraheze.org/wiki/Miraheze">{{ __('footer-meta') }}</a>
+					<li class="list-inline-item me-4">
+						<a class="link-secondary" href="https://meta.miraheze.org/wiki/Privacy_Policy">
+							{{ __( 'footer-privacy' ) }}
+						</a>
+					</li>
+					<li class="list-inline-item me-4">
+						<a class="link-secondary" href="https://meta.miraheze.org/wiki/Terms_of_Use">
+							{{ __( 'footer-tou' ) }}
+						</a>
+					</li>
+					<li class="list-inline-item">
+						<a class="link-secondary" href="https://meta.miraheze.org/wiki/Miraheze">
+							{{ __( 'footer-meta' ) }}
+						</a>
 					</li>
 				</ul>
-				<p class="mb-0">{{ __('footer-company') }}</p>
-				<p class="mb-0">{{ __('version', [ 'v' => config('app.version') ] ) }}</p>
+				<p class="mb-0">{{ __( 'footer-company' ) }}</p>
+				<p class="mb-0">{{ __( 'version', [ 'v' => config( 'app.version' ) ] ) }}</p>
 			</div>
 		</footer>
 	</div>
@@ -217,9 +214,9 @@
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 				<div class="toast-header bg-gradient-success text-white">
-					<strong class="me-auto">{{ __('toast-success') }}</strong>
+					<strong class="me-auto">{{ __( 'toast-success' ) }}</strong>
 					<small>Just Now</small>
-					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __('close') }}"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __( 'close' ) }}"></button>
 				</div>
 				<div class="toast-body">
 					{{ session( 'successFlash' ) }}
@@ -231,9 +228,9 @@
 		<div class="toast-container position-fixed bottom-0 end-0 p-3">
 			<div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 				<div class="toast-header bg-gradient-danger text-white">
-					<strong class="me-auto">{{ __('toast-failure') }}</strong>
+					<strong class="me-auto">{{ __( 'toast-failure' ) }}</strong>
 					<small>Just Now</small>
-					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __('close') }}"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ __( 'close' ) }}"></button>
 				</div>
 				<div class="toast-body">
 					{{ session( 'failureFlash' ) }}

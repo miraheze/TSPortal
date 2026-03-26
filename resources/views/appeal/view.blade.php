@@ -89,8 +89,8 @@
 						@unless ( $appeal->reviewed )
 							<div class="row">
 								<div class="col" style="text-align: center;">
-									<button class="btn btn-primary text-white" type="button" data-bs-target="#modal-1"
-									        data-bs-toggle="modal"><i class="fa-solid fa-eye"></i> {{ __( 'appeal-edit-review' ) }}
+									<button class="btn btn-primary text-white" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">
+										<i class="fa-solid fa-eye"></i> {{ __( 'appeal-edit-review' ) }}
 									</button>
 								</div>
 							</div>
@@ -103,8 +103,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __( 'appeal' ) }}</h4>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="{{ __( 'close' ) }}"></button>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __( 'close' ) }}"></button>
 										</div>
 										<div class="modal-body text-center">
 											@foreach ( config( 'app.appeals.' . $appeal->type ) as $label => $outcomes )

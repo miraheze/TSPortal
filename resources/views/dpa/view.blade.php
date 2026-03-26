@@ -101,8 +101,7 @@
 											<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="approve" value="true" type="submit">
 												{{ __( 'approve' ) }}
 											</button>
-											<button class="btn btn-danger px-4 flex-fill flex-sm-grow-0" type="button" data-bs-target="#modal-reject"
-											        data-bs-toggle="modal">
+											<button class="btn btn-danger px-4 flex-fill flex-sm-grow-0" type="button" data-bs-target="#modal-reject" data-bs-toggle="modal">
 												{{ __( 'reject' ) }}
 											</button>
 										</div>
@@ -113,8 +112,7 @@
 										<div class="modal-content border-0 shadow">
 											<div class="modal-header border-bottom">
 												<h4 class="modal-title fw-semibold">{{ __( 'dpa-reject' ) }}</h4>
-												<button type="button" class="btn-close" data-bs-dismiss="modal"
-												        aria-label="{{ __( 'close' ) }}"></button>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __( 'close' ) }}"></button>
 											</div>
 											<form method="POST" action="/dpa/{{ $dpa->id }}">
 												@csrf

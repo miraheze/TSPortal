@@ -1,20 +1,20 @@
 <x-layout>
 	<x-slot name="pgname">
-		{{ __('users') }}
+		{{ __( 'users' ) }}
 	</x-slot>
 	<x-slot name="content">
-		<h3 class="text-dark mb-4">{{ __('users-list') }}</h3>
+		<h3 class="text-dark mb-4">{{ __( 'users-list' ) }}</h3>
 		<div class="card shadow">
 			<div class="card-body">
 				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 					<table class="table table-striped my-0 text-center align-middle" id="dataTable">
 						<thead>
 						<tr>
-							<th style="width: 10%;">{{ __('id') }}</th>
-							<th style="width: 40%;">{{ __('username') }}</th>
-							<th style="width: 20%;">{{ __('status') }}</th>
-							<th style="width: 10%;">{{ __('verified') }}</th>
-							<th style="width: 20%;">{{ __('flags') }}</th>
+							<th style="width: 10%;">{{ __( 'id' ) }}</th>
+							<th style="width: 40%;">{{ __( 'username' ) }}</th>
+							<th style="width: 20%;">{{ __( 'status' ) }}</th>
+							<th style="width: 10%;">{{ __( 'verified' ) }}</th>
+							<th style="width: 20%;">{{ __( 'flags' ) }}</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -36,11 +36,11 @@
 						</tbody>
 						<tfoot>
 						<tr>
-							<th style="width: 10%;">{{ __('id') }}</th>
-							<th style="width: 40%;">{{ __('username') }}</th>
-							<th style="width: 20%;">{{ __('status') }}</th>
-							<th style="width: 10%;">{{ __('verified') }}</th>
-							<th style="width: 20%;">{{ __('flags') }}</th>
+							<th style="width: 10%;">{{ __( 'id' ) }}</th>
+							<th style="width: 40%;">{{ __( 'username' ) }}</th>
+							<th style="width: 20%;">{{ __( 'status' ) }}</th>
+							<th style="width: 10%;">{{ __( 'verified' ) }}</th>
+							<th style="width: 20%;">{{ __( 'flags' ) }}</th>
 						</tr>
 						</tfoot>
 					</table>
@@ -48,10 +48,10 @@
 						<nav>
 							<ul class="pagination justify-content-center">
 								<li class="page-item @disabled($users->onFirstPage())">
-									<a class="page-link" {{ $users->onFirstPage() ? '' : 'href=' . $users->previousPageUrl() }} ">{{ __('nav-previous') }}</a>
+									<a class="page-link" {{ $users->onFirstPage() ? '' : 'href=' . $users->previousPageUrl() }} ">{{ __( 'nav-previous' ) }}</a>
 								</li>
 								<li class="page-item @disabled(!$users->hasMorePages())">
-									<a class="page-link" {{ $users->hasMorePages() ? 'href=' . $users->nextPageUrl() : '' }}>{{ __('nav-next') }}</a>
+									<a class="page-link" {{ $users->hasMorePages() ? 'href=' . $users->nextPageUrl() : '' }}>{{ __( 'nav-next' ) }}</a>
 								</li>
 							</ul>
 						</nav>

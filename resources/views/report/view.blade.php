@@ -9,9 +9,9 @@
 				<div class="alert alert-success text-center shadow-sm border-0" role="alert">
 					@can('ts')
 						<span class="fw-bold">
-                            {{ __( 'report-investigation' ) }}
+							{{ __( 'report-investigation' ) }}
 							<a href="/investigation/{{ $report->investigation }}">#{{ $report->investigation }}</a>.
-                        </span>
+						</span>
 					@else
 						<span class="fw-bold">{{ __( 'report-investigation-public' ) }}</span>
 					@endcan

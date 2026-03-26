@@ -26,7 +26,7 @@ class MirahezeUsernameRule implements ValidationRule
 		$response = Http::get( 'https://login.miraheze.org/w/api.php', [
 			'format' => 'json',
 			'action' => 'query',
-			'meta'   => 'globaluserinfo',
+			'meta' => 'globaluserinfo',
 			'guiuser'=> htmlspecialchars( $value ),
 		] );
 
