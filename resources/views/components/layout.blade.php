@@ -17,7 +17,7 @@
 					<i class="fa-solid fa-shield-halved"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3">
-					<span>TSPortal</span>
+					<span>{{ config( 'app.name' ) }}</span>
 				</div>
 			</a>
 			<hr class="sidebar-divider my-0">
