@@ -1,10 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\View\Components\User;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Override;
+use function view;
 
 class Standing extends Component
 {
@@ -24,6 +28,7 @@ class Standing extends Component
 	/**
 	 * Get the view that represent the component.
 	 */
+	#[Override]
 	public function render(): View
 	{
 		return view( 'components.user.standing' );

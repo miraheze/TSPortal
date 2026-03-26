@@ -1,36 +1,31 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
+use Override;
+use function htmlspecialchars;
 
-class MirahezeUsernameRule implements Rule
+class MirahezeUsernameRule implements ValidationRule
 {
 	/**
-	 * Create a new rule instance.
+	 * Validate that the username is a valid user in MediaWiki.
 	 */
-	public function __construct()
+	#[Override]
+	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
-		//
-	}
+		if ( !$value ) {
+			$fail( 'username-exist' )->translate();
+			return;
+		}
 
-	/**
-	 * Conduct a HTTP request.
-	 *
-	 * @param string $attribute
-	 * @param mixed $value
-	 */
-	public function passes( $attribute, $value ): bool
-	{
-		return ( Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false );
-	}
-
-	/**
-	 * Get the validation error message.
-	 */
-	public function message(): string
-	{
-		return __( 'username-exist' );
+		$valid = Http::get( 'https://login.miraheze.org/w/api.php?format=json&action=query&meta=globaluserinfo&guiuser=' . htmlspecialchars( $value ) )['query']['globaluserinfo']['id'] ?? false;
+		if ( !$valid ) {
+			$fail( 'username-exist' )->translate();
+		}
 	}
 }

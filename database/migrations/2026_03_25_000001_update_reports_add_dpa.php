@@ -13,8 +13,8 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::table( 'dpas', static function ( Blueprint $table ): void {
-			$table->longText( 'underage' )->nullable()->change();
+		Schema::table( 'reports', static function ( Blueprint $table ): void {
+			$table->boolean( 'dpa' )->default( false )->after( 'investigation' );
 		} );
 	}
 
@@ -23,8 +23,8 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::table( 'dpas', static function ( Blueprint $table ): void {
-			$table->text( 'underage' )->nullable()->change();
+		Schema::table( 'reports', static function ( Blueprint $table ): void {
+			$table->dropColumn( 'dpa' );
 		} );
 	}
 };

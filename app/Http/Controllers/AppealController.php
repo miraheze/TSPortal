@@ -1,12 +1,18 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Http\Controllers;
 
 use App\Models\Appeal;
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function in_array;
+use function json_encode;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller class for all Appeal actions.
@@ -18,30 +24,28 @@ class AppealController
 	 */
 	public function index( Request $request ): View
 	{
-		$allAppeals = Appeal::all();
-		$query = $request->query();
-
-		foreach ( $query as $type => $key ) {
+		$query = Appeal::query();
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( $type === 'assigned' ) {
-				$allAppeals = $allAppeals->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'type', 'outcome' ], true ) ) {
+			}
+
+			if ( in_array( $type, [ 'assigned', 'type', 'outcome' ], true ) ) {
 				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 
-				$allAppeals = $allAppeals->where( $type, $key );
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allAppeals = $allAppeals->whereNotNull( 'reviewed' );
+			$query->whereNotNull( 'reviewed' );
 		} else {
-			$allAppeals = $allAppeals->whereNull( 'reviewed' );
+			$query->whereNull( 'reviewed' );
 		}
 
-		return view( 'appeals' )->with( 'appeals', $allAppeals );
+		return view( 'appeals' )->with( 'appeals', $query->get() );
 	}
 
 	/**
@@ -59,14 +63,12 @@ class AppealController
 	{
 		$allInputs = $request->input();
 		unset( $allInputs['_token'], $allInputs['_method'] );
-		$appeal->update(
-			[
-				'review' => json_encode( $allInputs ),
-				'assigned' => $request->user()->id,
-				'outcome' => $allInputs['appeal-outcome'],
-				'reviewed' => now(),
-			]
-		);
+		$appeal->update( [
+			'review' => json_encode( $allInputs ),
+			'assigned' => $request->user()->id,
+			'outcome' => $allInputs['appeal-outcome'],
+			'reviewed' => now(),
+		] );
 
 		if ( $allInputs['appeal-outcome'] === 'not-upheld' ) {
 			$appeal->investigation->newEvent( 'sanction-lifted', true, $allInputs['appeal-outcome'], $request->user() );

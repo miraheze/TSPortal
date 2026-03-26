@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 use App\Events\DPANew;
 use App\Events\ReportNew;
 use App\Models\DPA;
@@ -15,15 +17,10 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group.
-|
 */
 
 /*
- * DPA API Group
+ * DPA API Group.
  */
 Route::get( 'dpa/{dpa}/{username}', static function ( DPA $dpa, string $username ): JsonResponse {
 	return response()->json( [
@@ -39,7 +36,7 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 	}
 
 	$dpaUser = User::findOrCreate( $request->input( 'username' ) );
-	if ( count( DPA::query()->where( 'user', $dpaUser->id )->whereNull( 'completed' )->limit( 1 )->get() ) ) {
+	if ( DPA::where( 'user', $dpaUser->id )->whereNull( 'completed' )->exists() ) {
 		return response()->json( [ 'exists' => true ] );
 	}
 
@@ -51,17 +48,17 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 		]
 	);
 
-	$event = ( count( $dpaUser->events ) === 0 ) ? 'created-dpa' : 'new-dpa';
+	$event = $dpaUser->events()->exists() ? 'new-dpa' : 'created-dpa';
 	$dpaUser->newEvent( $event );
 
-	$newDPA = DPA::query()->orderBy( 'filed', 'DESC' )->limit( 1 )->get()->all()[0];
+	$newDPA = DPA::latest( 'filed' )->first();
 	DPANew::dispatch( $newDPA );
 
 	return response()->json( [ 'id' => $newDPA->id ] );
 } );
 
 /*
- * Reports API Group
+ * Reports API Group.
  */
 Route::post( 'report', static function ( Request $request ): JsonResponse {
 	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
@@ -74,13 +71,14 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 	$newReport = Report::factory()->create(
 		[
 			'type' => $request->input( 'report' ),
+			'auto' => $request->boolean( 'auto' ),
 			'user' => $subjectUser,
 			'reporter' => $reportingUser,
 			'text' => $request->input( 'evidence' ),
 		]
 	);
 
-	$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
+	$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 	$subjectUser->newEvent( $event, $newReport->id );
 
 	$reportingUser->newEvent( 'filed-report', $newReport->id );
@@ -90,7 +88,7 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 } );
 
 /*
- * Internal Actions Log
+ * Internal Actions Log API Group.
  */
 Route::post( 'ial', static function ( Request $request ): JsonResponse {
 	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
@@ -100,10 +98,10 @@ Route::post( 'ial', static function ( Request $request ): JsonResponse {
 	$comment = $request->input( 'comment' ) ?? '';
 	$explodedComment = explode( '#', $comment );
 
-	$serializedID = ( is_array( $explodedComment ) && isset( $explodedComment[1] ) ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
+	$serializedID = isset( $explodedComment[1] ) ? preg_replace( '/[^a-z\d]/i', '', $explodedComment[1] ) : null;
 
 	$updates = [
-		'user' => User::findOrCreate( $request->input( 'username' ) )->id,
+		'user' => User::findOrCreate( $request->input( 'username' ) ),
 		'type' => $request->input( 'log' ),
 		'wiki' => $request->input( 'wiki' ),
 		'comments' => $comment,
@@ -111,9 +109,9 @@ Route::post( 'ial', static function ( Request $request ): JsonResponse {
 		'investigation' => null,
 	];
 
-	if ( is_numeric( $serializedID ) && Investigation::all()->find( $serializedID ) ) {
+	if ( is_numeric( $serializedID ) && Investigation::find( $serializedID ) ) {
 		$updates['investigation'] = $serializedID;
-	} elseif ( ctype_alnum( $serializedID ) && DPA::all()->find( $serializedID ) ) {
+	} elseif ( ctype_alnum( $serializedID ) && DPA::find( $serializedID ) ) {
 		$updates['dpa'] = $serializedID;
 	}
 

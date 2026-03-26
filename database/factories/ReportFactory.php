@@ -1,10 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Database\Factories;
 
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
+use function now;
 
 /**
  * @extends Factory<Report>
@@ -16,10 +20,13 @@ class ReportFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
+	#[Override]
 	public function definition(): array
 	{
 		return [
 			'investigation' => null,
+			'dpa' => false,
+			'auto' => false,
 			'type' => 'other',
 			'text' => null,
 			'user' => User::class,

@@ -22,7 +22,7 @@
 						@foreach ( $ials as $ial )
 							<tr>
 								<td>{{ $ial->id }}</td>
-								<td><a class="nav-link" href="/user/{{ $ial->user }}">{{ \App\Models\User::findById( $ial->user )->username }}</a></td>
+								<td><a class="nav-link" href="/user/{{ $ial->user->id }}">{{ $ial->user->username }}</a></td>
 								<td>{{ $ial->wiki }}</td>
 								<td>{{ $ial->type }}</td>
 								<td>{{ $ial->comments }}</td>
@@ -54,10 +54,10 @@
 					@if ( $ials->hasPages() )
 						<nav>
 							<ul class="pagination justify-content-center">
-								<li class="page-item {{ $ials->onFirstPage() ? 'disabled' : '' }}">
+								<li class="page-item @disabled($ials->onFirstPage())">
 									<a class="page-link" {{ $ials->onFirstPage() ? '' : 'href=' . $ials->previousPageUrl() }} ">{{ __('nav-previous') }}</a>
 								</li>
-								<li class="page-item {{ $ials->hasMorePages() ? '' : 'disabled' }}">
+								<li class="page-item @disabled(!$ials->hasMorePages())">
 									<a class="page-link" {{ $ials->hasMorePages() ? 'href=' . $ials->nextPageUrl() : '' }}>{{ __('nav-next') }}</a>
 								</li>
 							</ul>
@@ -65,7 +65,7 @@
 					@endif
 				</div>
 				@foreach ( $ials as $ial )
-					@if ( $ial->investigation === null && $ial->dpa === null )
+					@unless ( $ial->investigation || $ial->dpa )
 						<div class="modal fade" role="dialog" tabindex="-1" id="ial-{{ $ial->id }}-modal">
 							<form method="POST" action="/ial/{{ $ial->id }}">
 								@csrf
@@ -75,20 +75,20 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __('ial-assign-header') }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __('close') }}"></button>
 										</div>
 										<div class="modal-body">
 											<label class="form-label mt-1" for="assign-id"><strong>{{ __('ial-assign-label') }}</strong></label>
 											<input class="form-control" name="assign-id" id="assign-id">
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __('submit') }}</button>
 										</div>
 									</div>
 								</div>
 							</form>
 						</div>
-					@endif
+					@endunless
 				@endforeach
 			</div>
 		</div>

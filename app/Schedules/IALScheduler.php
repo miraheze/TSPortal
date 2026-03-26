@@ -1,10 +1,17 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Schedules;
 
 use App\Models\IAL;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use function array_count_values;
+use function array_keys;
+use function array_values;
+use function config;
+use function str_replace;
 
 class IALScheduler
 {
@@ -23,7 +30,7 @@ class IALScheduler
 	}
 
 	/**
-	 * Gets all recent IALs and counts by types, actors and associations.
+	 * Gets recent IALs and counts by types, actors and associations.
 	 */
 	private function getRecentIALs(): array
 	{
@@ -38,9 +45,8 @@ class IALScheduler
 			],
 		];
 
-		$allRecentIALs = IAL::where( 'added', '>=', Carbon::yesterday() )->get();
-
-		foreach ( $allRecentIALs as $ial ) {
+		$recentIALs = IAL::where( 'added', '>=', Carbon::yesterday() )->get();
+		foreach ( $recentIALs as $ial ) {
 			$data['total'] += 1;
 
 			$actor = $ial->user->username;

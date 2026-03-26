@@ -11,8 +11,8 @@
 						<div class="col col-sm-4">
 							<select class="form-select form-control" id="filter" onchange="updateFilter()">
 								<option value="">----</option>
-								<option value="type" {{ request()->input( 'type' ) ? 'selected' : '' }}>{{ __('topic') }}</option>
-								<option value="recommendation" {{ request()->input( 'recommendation' ) ? 'selected' : '' }}>{{ __('recommendation') }}</option>
+								<option value="type" @selected(request()->input( 'type' ))>{{ __('topic') }}</option>
+								<option value="recommendation" @selected(request()->input( 'recommendation' ))>{{ __('recommendation') }}</option>
 							</select>
 						</div>
 						<div class="col col-sm-1">
@@ -22,13 +22,13 @@
 							<select class="form-select form-control toggle-hideall" name="type" id="filter-type" @disabled(!request()->input('type'))>
 								<option value="">----</option>
 								@foreach( config('app.investigationTopics') as $topic )
-									<option value="{{ $topic }}" {{ ( request()->input( 'type' ) === $topic ) ? 'selected' : '' }}>... {{ __('investigation-topic-' . $topic) }}.</option>
+									<option value="{{ $topic }}" @selected(request()->input( 'type' ) === $topic)>... {{ __('investigation-topic-' . $topic) }}.</option>
 								@endforeach
 							</select>
 							<select class="form-select form-control toggle-hideall" name="recommendation" id="filter-recommendation">
 								@foreach ( config('app.recommendations') as $recommend )
 									<option
-										value="{{ $recommend }}" {{ ( request()->input( 'recommendation' ) === $recommend ) ? 'selected' : '' }}>
+										value="{{ $recommend }}" @selected(request()->input( 'recommendation' ) === $recommend)>
 										... {{ __('recommendation-' . $recommend ) }}
 									</option>
 								@endforeach
@@ -36,7 +36,7 @@
 						</div>
 						<div class="col col-sm-2">
 							<div class="form-check">
-								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" {{ request()->input( 'closed' ) ? 'checked' : '' }}/>
+								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" @checked(request()->input( 'closed' ))/>
 								<label class="form-check-label" for="formCheck-1">{{ __('filter-closed') }}</label>
 							</div>
 						</div>

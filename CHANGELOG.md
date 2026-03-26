@@ -3,16 +3,52 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v33...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v34...main)
+
+### Added
+
+- Added `use function` statements.
+- Added InvestigationNew trigger when creating an investigation from a report.
+- Added the ability to flag automatic reports when created via the API.
+- Added UI feedback for automatically created reports to aid a bit with triaging them.
+- Added DPA ID to the specific DPA page view.
+- Added a copy to clipboard button for DPA usernames and IDs.
+- Added the ability to generate PDFs from investigations.
+- Added the ability to reopen reports that were closed without further action.
+- Added the ability to open a DPA directly from a report.
+- Added a user event when investigation is created from a report, rather than only when it is manually created separately.
+- Added validation to require supplying evidence to reports.
+- Added the `barryvdh/laravel-dompdf` library for generating PDFs from investigations.
+
+### Fixed
+
+- Fixed query used in DPA POST API.
+
+### Changed
+
+- Changed to use `@unless` in blade templates where it makes sense to.
+- Changed to use `$request->boolean()` where possible.
+- Changed UI for DPAs and Reports.
+- Upgraded external libraries:
+  - Upgraded laravel/framework from 13.1.1 to 13.2.0.
+  - Upgraded laravel/socialite from 5.25.0 to 5.26.0.
+
+## Version 34 (2026-03-23)
 
 ### Added
 
 - Added proper `down()` implementation for users table migration.
 - Added PHP type-hints wherever possible.
 - Added proper implementation for appeals count on home page.
+- Added some missing localization to blade templates.
+- Added `strict_types` declarations to all PHP files.
+- Added per-country (United States and United Kingdom) legislation cheat sheets in investigations.
+- Added `#[Override]` where possible.
+- Added pagination to users list (each page shows 500 users).
 
 ### Fixed
 
+- SECURITY: Fixed DPAAlreadyLive creating arbitrary users ([GHSA-f346-8rp3-4h9h](https://github.com/miraheze/TSPortal/security/advisories/GHSA-f346-8rp3-4h9h)).
 - Fixed Popper in Bootstrap JS properly.
 - Fixed to not save flags and add an event when no changes are actually made.
 - Fixed an issue with a migration order.
@@ -22,6 +58,10 @@ The main reasoning behind this choice is the software is not built to be extende
 - Fixed to show all investigations by default when providing assigned or subject query parameters.
 - Fixed allowing users to view and update their own reports.
 - Fixed checking for assigned when editing investigations.
+- Fixed setting active on current navigation item.
+- Fixed serializing user object in `users_events` when closing DPAs (properly insert as the actor and only store using the ID).
+- Fixed some PHP type errors by adding extra validation to rules.
+- Fixed DPAAlreadyLive not working for DPA requests for accounts that are not their own account.
 
 ### Changed
 
@@ -32,13 +72,32 @@ The main reasoning behind this choice is the software is not built to be extende
 - Changed the `User::STANDING` constant to be private and type-hinted it.
 - Changed to use new attributes from Laravel 13.
 - Changed to use `withProviders()` instead of providers.php.
+- Changed to use `withSchedule()` instead of the console.php route for registering IALScheduler.
+- Changed `auth()->id()` to `$request->user()->id` in AppealController.
+- Changed `request()->session()->flash()` to `$request->session()->flash()` in all controllers.
+- Changed fully qualified class names to `@use` in the home page view blade template.
+- Changed IALController to use `IAL::` instead of `DB::table()` to be consistent with other controllers.
+- Changed queries to not use `all()` wherever possible to improve performance.
+- Changed `->orderBy()` to use `->latest()` wherever possible.
+- Changed deprecated Rule to use ValidationRule.
+- Changed manual Gate check to use `@can` in dpa view blade template.
+- Changed to use `@checked`, `@disabled`, and `@selected` helpers in blade templates.
+- Changed AtRiskAlert to use new Mailable architecture.
+- Changed `minimum-stability` in composer to stable.
+- Changed to use more efficient database Eloquent methods (`->count()`, `->exists()`, `->doesntExist()`) wherever possible.
+- Changed the main user list route from `/user` to `/users` and renamed the associated view.
 - Upgraded external libraries:
-  - Upgraded laravel/framework from 12.54.1 to 13.0.0.
+  - Upgraded laravel/framework from 12.54.1 to 13.1.1.
   - Upgraded laravel/tinker from 2.11.1 to 3.0.0.
+  - Upgraded taavi/laravel-socialite-mediawiki from 1.6.0 to 1.7.1.
  
 ### Removed
 
 - Removed usage of `is_null` wherever possible.
+- Removed the need to access the User model directly in the ial view blade template.
+- Removed the `->id` when setting user using IALFactory in the IAL API route to be consistent with others.
+- Removed the `->id` when setting assigned using AppealFactory in InvestigationController to be consistent with others.
+- Removed explicit `ext-json` requirement from composer since it is always available in PHP 8.0+.
 
 ## Version 33 (2026-03-14)
 

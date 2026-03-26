@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -9,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Attributes\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use function abort_if;
+use function redirect;
 
 /**
  * Controller for handling user logins and creations.
@@ -24,7 +28,7 @@ class LoginController
 		$socialiteUser = Socialite::driver( 'mediawiki' )->user();
 		$user = User::findOrCreate( $socialiteUser->name, true );
 
-		if ( count( $user->events ) === 0 ) {
+		if ( $user->events()->doesntExist() ) {
 			$user->newEvent( 'created-login' );
 		}
 

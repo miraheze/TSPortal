@@ -1,6 +1,6 @@
 <x-layout>
 	<x-slot name="pgname">
-		Reports
+		{{ __('reports') }}
 	</x-slot>
 	<x-slot name="content">
 		<h3 class="text-dark mb-4">{{ __('report-header') }}</h3>
@@ -31,7 +31,7 @@
 														<optgroup label="{{ $type }}">
 															@foreach( $topics as $topic )
 																{{ $allTopics[] = $topic }}
-																<option value="{{ $type . '-' . $topic }}" {{ ( old('report') === $type . '-' . $topic ) ? 'selected' : '' }}>... {{ __('report-topic-' . $type . '-' . $topic) }}.</option>
+																<option value="{{ $type . '-' . $topic }}" @selected(old( 'report' ) === $type . '-' . $topic)>... {{ __('report-topic-' . $type . '-' . $topic) }}.</option>
 															@endforeach
 														</optgroup>
 													@endforeach
@@ -86,7 +86,7 @@
 						<div class="col">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="at" name="at" value="at"
-								       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" {{ old('at') ? 'checked' : '' }}/>
+								       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" @checked(old( 'at' ))/>
 								<label class="form-check-label" for="at">{{ __('report-at-risk') }}</label>
 							</div>
 						</div>

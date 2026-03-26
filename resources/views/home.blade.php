@@ -1,3 +1,5 @@
+@use(App\Models\{Appeal, DPA, Investigation, Report})
+
 <x-layout>
 	<x-slot name="pgname">
 		{{ __('home') }}
@@ -13,7 +15,7 @@
 									<div class="text-uppercase text-primary fw-bold text-xs mb-1">
 										<span>{{ __('open-investigations') }}</span></div>
 									<div class="text-dark fw-bold h5 mb-0">
-										<span>{{ count( \App\Models\Investigation::all()->whereNull( 'closed' ) ) }}</span>
+										<span>{{ Investigation::whereNull( 'closed' )->count() }}</span>
 									</div>
 								</div>
 								<div class="col-auto"><i class="fa-solid fa-magnifying-glass fa-2x text-gray-300"></i></div>
@@ -30,7 +32,7 @@
 										<span>{{ __('open-reports') }}</span>
 									</div>
 									<div class="text-dark fw-bold h5 mb-0">
-										<span>{{ count( \App\Models\Report::all()->whereNull( 'reviewed' ) ) }}</span></div>
+										<span>{{ Report::whereNull( 'reviewed' )->count() }}</span></div>
 								</div>
 								<div class="col-auto"><i class="fa-solid fa-triangle-exclamation fa-2x text-gray-300"></i>
 								</div>
@@ -48,7 +50,7 @@
 									<div class="row g-0 align-items-center">
 										<div class="col-auto">
 											<div class="text-dark fw-bold h5 mb-0 me-3">
-												<span>{{ count( \App\Models\DPA::all()->whereNull( 'completed' ) ) }}</span>
+												<span>{{ DPA::whereNull( 'completed' )->count() }}</span>
 											</div>
 										</div>
 									</div>
@@ -67,7 +69,7 @@
 										<span>{{ __('open-appeals') }}</span>
 									</div>
 									<div class="text-dark fw-bold h5 mb-0">
-										<span>{{ count( \App\Models\Appeal::all()->whereNull( 'reviewed' ) ) }}</span>
+										<span>{{ Appeal::whereNull( 'reviewed' )->count() }}</span>
 									</div>
 								</div>
 								<div class="col-auto"><i class="fa-solid fa-gavel fa-2x text-gray-300"></i></div>

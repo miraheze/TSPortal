@@ -1,10 +1,17 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Database\Factories;
 
 use App\Models\DPA;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
+use function now;
+use function random_bytes;
+use function sha1;
+use function substr;
 
 /**
  * @extends Factory<DPA>
@@ -16,6 +23,7 @@ class DPAFactory extends Factory
 	 *
 	 * @return array<string, mixed>
 	 */
+	#[Override]
 	public function definition(): array
 	{
 		return [

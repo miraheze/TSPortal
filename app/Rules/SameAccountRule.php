@@ -1,35 +1,24 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
+use Override;
+use function auth;
 
-class SameAccountRule implements Rule
+class SameAccountRule implements ValidationRule
 {
 	/**
-	 * Create a new rule instance.
+	 * Validate that the request user matches the requested username.
 	 */
-	public function __construct()
+	#[Override]
+	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
-		//
-	}
-
-	/**
-	 * Compare request user matches requested username.
-	 *
-	 * @param string $attribute
-	 * @param mixed $value
-	 */
-	public function passes( $attribute, $value ): bool
-	{
-		return auth()->user()->username === $value;
-	}
-
-	/**
-	 * Get the validation error message.
-	 */
-	public function message(): string
-	{
-		return __( 'username-not-same' );
+		if ( auth()->user()->username !== $value ) {
+			$fail( 'username-not-same' )->translate();
+		}
 	}
 }

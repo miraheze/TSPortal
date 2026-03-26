@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Http\Controllers;
 
 use App\Events\AppealNew;
@@ -10,9 +12,15 @@ use App\Models\Appeal;
 use App\Models\Investigation;
 use App\Models\User;
 use App\Rules\MirahezeUsernameRule;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use function in_array;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller class for all Investigation actions.
@@ -24,30 +32,28 @@ class InvestigationController
 	 */
 	public function index( Request $request ): View
 	{
-		$allInvestigations = Investigation::all();
-		$query = $request->query();
-
-		foreach ( $query as $type => $key ) {
+		$query = Investigation::query();
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'subject', 'assigned' ], true ) ) {
-				$allInvestigations = $allInvestigations->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'type', 'recommendation' ], true ) ) {
+			}
+
+			if ( in_array( $type, [ 'assigned', 'recommendation', 'subject', 'type' ], true ) ) {
 				if ( $key === 'unknown' ) {
 					$key = null;
 				}
 
-				$allInvestigations = $allInvestigations->where( $type, $key );
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allInvestigations = $allInvestigations->whereNotNull( 'closed' );
+			$query->whereNotNull( 'closed' );
 		} elseif ( $request->input( 'assigned' ) === null && $request->input( 'subject' ) === null ) {
-			$allInvestigations = $allInvestigations->whereNull( 'closed' );
+			$query->whereNull( 'closed' );
 		}
 
-		return view( 'investigations' )->with( 'investigations', $allInvestigations );
+		return view( 'investigations' )->with( 'investigations', $query->get() );
 	}
 
 	/**
@@ -55,25 +61,21 @@ class InvestigationController
 	 */
 	public function store( Investigation $investigation, Request $request ): RedirectResponse
 	{
-		$request->validate(
-			[
-				'username' => [ new MirahezeUsernameRule ],
-			]
-		);
+		$request->validate( [
+			'username' => [ new MirahezeUsernameRule ],
+		] );
 
 		$investigationUser = User::findOrCreate( $request->input( 'username' ) );
-		$newInvestigation = $investigation::factory()->create(
-			[
-				'type' => $request->input( 'topic' ),
-				'text' => $request->input( 'evidence' ),
-				'recommendation' => $request->input( 'recommend' ),
-				'explanation' => $request->input( 'justify' ),
-				'subject' => $investigationUser,
-				'assigned' => $request->user(),
-			]
-		);
+		$newInvestigation = $investigation::factory()->create( [
+			'type' => $request->input( 'topic' ),
+			'text' => $request->input( 'evidence' ),
+			'recommendation' => $request->input( 'recommend' ),
+			'explanation' => $request->input( 'justify' ),
+			'subject' => $investigationUser,
+			'assigned' => $request->user(),
+		] );
 
-		$event = ( count( $investigationUser->events ) === 0 ) ? 'created-investigation' : 'new-investigation';
+		$event = $investigationUser->events()->exists() ? 'new-investigation' : 'created-investigation';
 		$investigationUser->newEvent( $event );
 
 		InvestigationNew::dispatch( $newInvestigation );
@@ -106,6 +108,17 @@ class InvestigationController
 		return view( 'investigation.edit' )->with( 'investigation', $investigation );
 	}
 
+	public function downloadPdf( Investigation $investigation ): Response
+	{
+		$investigation->load( [ 'reports', 'events', 'appeals' ] );
+		$pdf = Pdf::loadView(
+			'investigation.pdf',
+			[ 'investigation' => $investigation ]
+		)->setPaper( 'a4' );
+
+		return $pdf->download( "investigation-{$investigation->id}.pdf" );
+	}
+
 	/**
 	 * Processor for processing updates to an investigation.
 	 */
@@ -126,14 +139,12 @@ class InvestigationController
 			$investigation->update( $updates );
 			$investigation->newEvent( 'edit-investigation', false, null, $request->user() );
 		} elseif ( $request->input( 'event' ) === 'appeal-recv' ) {
-			$newAppeal = Appeal::factory()->create(
-				[
-					'investigation' => $investigation,
-					'type' => $request->input( 'appeal-type' ),
-					'text' => $request->input( 'comments' ),
-					'assigned' => $request->user()->id,
-				]
-			);
+			$newAppeal = Appeal::factory()->create( [
+				'investigation' => $investigation,
+				'type' => $request->input( 'appeal-type' ),
+				'text' => $request->input( 'comments' ),
+				'assigned' => $request->user(),
+			] );
 
 			$investigation->newEvent(
 				'appeal-recv',
@@ -166,6 +177,6 @@ class InvestigationController
 		}
 
 		$request->session()->flash( 'successFlash', __( 'investigation' ) . ' ' . __( 'toast-updated' ) );
-		return redirect( '/investigation/' . $investigation->id );
+		return redirect( "/investigation/{$investigation->id}" );
 	}
 }

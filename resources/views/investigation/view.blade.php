@@ -11,7 +11,12 @@
 				</span>
 			</div>
 		@endif
-		<h3 class="text-dark mb-4">{{ __('investigation-header') }} (#{{ $investigation->id }})</h3>
+		<h3 class="text-dark mb-4 d-flex justify-content-between align-items-center">
+			<span>{{ __('investigation-header') }} (#{{ $investigation->id }})</span>
+			<a href="{{ route('investigation.pdf', $investigation) }}" class="btn btn-sm btn-outline-primary">
+				<i class="fa-solid fa-file-pdf"></i>
+			</a>
+		</h3>
 		<div class="row mb-3">
 			<div class="col-lg-8">
 				<div class="row">
@@ -100,7 +105,7 @@
 										<div class="modal-header">
 											<h4 class="modal-title">{{ __('investigation-event-add') }}</h4>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
-											        aria-label="Close"></button>
+											        aria-label="{{ __('close') }}"></button>
 										</div>
 										<div class="modal-body">
 											<label class="form-label" for="event"><strong>{{ __('investigation-event-q') }}</strong></label>
@@ -116,14 +121,14 @@
 											<label class="form-label toggle-hideall d-none" id="filter-appeal-recv-label" for="filter-appeal-recv"><strong>{{ __('appeal-type') }}</strong></label>
 											<select class="form-select form-control toggle-hideall d-none" name="appeal-type" id="filter-appeal-recv">
 												@foreach( config('app.appeals') as $type => $data )
-													<option value="{{ $type }}" {{ ( request()->input( 'type' ) === $type ) ? 'selected' : '' }}>{{ ucfirst(__('appeal-type-' . $type)) }}.</option>
+													<option value="{{ $type }}" @selected(request()->input( 'type' ) === $type)>{{ ucfirst(__('appeal-type-' . $type)) }}.</option>
 												@endforeach
 											</select>
 											<label class="form-label mt-1" for="comments"><strong>{{ __('comments') }}</strong></label><textarea
 												class="form-control" name="comments" id="comments"></textarea>
 										</div>
 										<div class="modal-footer">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">{{ __('submit') }}</button>
 										</div>
 									</div>
 								</div>
@@ -145,13 +150,13 @@
 				</div>
 			</div>
 		</div>
-		@if ( count( $investigation->events ) )
+		@if ( $investigation->events()->exists() )
 			<div class="card shadow mb-3" style="margin-bottom: 0;">
 				<div class="card-header py-3">
 					<p class="text-primary m-0 fw-bold text-center">{{ __('history') }}</p>
 				</div>
 				<div class="card-body">
-					@foreach ( $investigation->events as $event)
+					@foreach ( $investigation->events as $event )
 						<figure>
 							<blockquote class="blockquote">
 								<p class="mb-0">{{ __('events-' . $event->action . '-desc', [ 'comment' => $event->comment ?? __('events-no-comment') ] ) }}</p>
@@ -159,9 +164,9 @@
 							<figcaption class="blockquote-footer">{{ $event->created_by->username }}
 								at {{ $event->created }}</figcaption>
 						</figure>
-						@if ( !$loop->last )
+						@unless ( $loop->last )
 							<hr/>
-						@endif
+						@endunless
 					@endforeach
 				</div>
 			</div>

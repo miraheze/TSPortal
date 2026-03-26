@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Models;
 
 use Database\Factories\UserEventFactory;
@@ -8,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Override;
 
 #[Table( name: 'users_events', timestamps: false )]
 #[Unguarded]
@@ -21,6 +24,7 @@ class UserEvent extends Model
 	 *
 	 * @return array<string, string>
 	 */
+	#[Override]
 	protected function casts(): array
 	{
 		return [
@@ -50,7 +54,7 @@ class UserEvent extends Model
 	public function getCreatedByAttribute( ?int $user ): User
 	{
 		if ( !$user ) {
-			$user = new User();
+			$user = new User;
 			$user->username = 'System';
 		} else {
 			$user = User::findById( $user );

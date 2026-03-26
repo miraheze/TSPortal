@@ -22,7 +22,7 @@
 											<select class="form-select" name="topic" id="topic">
 												@foreach ( config('app.investigationTopics') as $topic )
 													<option
-														value="{{ $topic }}" {{ ( $investigation->type === $topic ) ? "selected" : "" }}>
+														value="{{ $topic }}" @selected($investigation->type === $topic)>
 														... {{ __('investigation-topic-' . $topic ) }}
 													</option>
 												@endforeach
@@ -58,7 +58,7 @@
 											<select class="form-select" name="recommend" id="recommend">
 												@foreach ( config('app.recommendations') as $recommend )
 													<option
-														value="{{ $recommend }}" {{ ( $investigation->recommendation === $recommend ) ? "selected" : "" }}>
+														value="{{ $recommend }}" @selected($investigation->recommendation === $recommend)>
 														... {{ __('recommendation-' . $recommend ) }}
 													</option>
 												@endforeach
@@ -85,11 +85,11 @@
 									<input class="form-check-input" type="checkbox" name="assign" id="assign" value="assign"
 									       style="padding: 0; height: 16px; margin: 5px 0 0 -24px;"/>
 									<label class="form-check-label" for="assign">
-										@if ( $investigation->assigned === null )
+										@unless ( $investigation->assigned )
 											{{ __('reassign-claim') }}
 										@else
 											{!! __('reassign-assigned', [ 'assigned' => $investigation->assigned->username ]) !!}
-										@endif
+										@endunless
 									</label>
 								</div>
 							</div>
@@ -100,9 +100,29 @@
 							<h6 class="text-center text-primary fw-bold m-0">{{ __('legislation') }}</h6>
 						</div>
 						<div class="card-body">
-							@foreach ( config('app.legislation') as $name => $act )
-								<strong>{{ $name }}</strong> - {{ $act }} <br>
-							@endforeach
+							<div class="row">
+								@foreach ( config( 'app.legislation' ) as $country => $laws )
+									<div class="col-lg-6 mb-4">
+										<div class="card shadow-sm h-100">
+											<div class="card-header py-2 bg-primary text-white text-center fw-bold">
+												{{ $country }}
+											</div>
+											<div class="card-body p-2">
+												<table class="table table-sm table-borderless mb-0">
+													<tbody>
+														@foreach ( $laws as $name => $act )
+															<tr>
+																<td class="fw-semibold">{{ $name }}</td>
+																<td>{{ $act }}</td>
+															</tr>
+														@endforeach
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								@endforeach
+							</div>
 						</div>
 					</div>
 				</div>

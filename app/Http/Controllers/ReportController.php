@@ -1,9 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Http\Controllers;
 
+use App\Events\DPANew;
+use App\Events\InvestigationNew;
 use App\Events\ReportNew;
 use App\Mail\AtRiskAlert;
+use App\Models\DPA;
 use App\Models\Investigation;
 use App\Models\Report;
 use App\Models\User;
@@ -12,6 +17,12 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use function back;
+use function config;
+use function in_array;
+use function now;
+use function redirect;
+use function view;
 
 /**
  * Controller for all Report actions.
@@ -23,29 +34,28 @@ class ReportController
 	 */
 	public function index( Request $request ): View
 	{
-		$allReports = Report::all();
+		$query = Report::query();
 		if ( !$request->user()->hasFlag( 'ts' ) ) {
-			$allReports = $allReports->where( 'reporter', $request->user() );
+			$query->where( 'reporter', $request->user()->id );
 		}
 
-		$query = $request->query();
-		foreach ( $query as $type => $key ) {
+		foreach ( $request->query() as $type => $key ) {
 			if ( !$key ) {
 				continue;
-			} elseif ( in_array( $type, [ 'user', 'reporter' ], true ) ) {
-				$allReports = $allReports->where( $type, User::findById( (int)$key ) );
-			} elseif ( in_array( $type, [ 'investigation', 'type' ], true ) ) {
-				$allReports = $allReports->where( $type, $key );
+			}
+
+			if ( in_array( $type, [ 'investigation', 'reporter', 'type', 'user' ], true ) ) {
+				$query->where( $type, $key );
 			}
 		}
 
 		if ( $request->input( 'closed' ) ) {
-			$allReports = $allReports->whereNotNull( 'reviewed' );
+			$query->whereNotNull( 'reviewed' );
 		} elseif ( $request->input( 'reporter' ) === null && $request->input( 'user' ) === null ) {
-			$allReports = $allReports->whereNull( 'reviewed' );
+			$query->whereNull( 'reviewed' );
 		}
 
-		return view( 'reports' )->with( 'reports', $allReports );
+		return view( 'reports' )->with( 'reports', $query->get() );
 	}
 
 	/**
@@ -53,23 +63,20 @@ class ReportController
 	 */
 	public function store( Report $report, Request $request ): RedirectResponse
 	{
-		$request->validate(
-			[
-				'username' => [ new MirahezeUsernameRule ],
-			]
-		);
+		$request->validate( [
+			'evidence' => [ 'required', 'string' ],
+			'username' => [ new MirahezeUsernameRule ],
+		] );
 
 		$subjectUser = User::findOrCreate( $request->input( 'username' ) );
-		$newReport = $report::factory()->create(
-			[
-				'type' => $request->input( 'report' ),
-				'user' => $subjectUser,
-				'reporter' => $request->user(),
-				'text' => $request->input( 'evidence' ),
-			]
-		);
+		$newReport = $report::factory()->create( [
+			'type' => $request->input( 'report' ),
+			'user' => $subjectUser,
+			'reporter' => $request->user(),
+			'text' => $request->input( 'evidence' ),
+		] );
 
-		$event = ( count( $subjectUser->events ) === 0 ) ? 'created-report' : 'new-report';
+		$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 		$subjectUser->newEvent( $event, $report->id );
 
 		$request->user()->newEvent( 'filed-report', $report->id );
@@ -104,7 +111,7 @@ class ReportController
 	 */
 	public function update( Report $report, Request $request ): RedirectResponse
 	{
-		if ( $request->input( 'investigate' ) ?? false ) {
+		if ( $request->boolean( 'investigate' ) ) {
 			$investigation = Investigation::factory()->create( [
 				'subject' => $report->user,
 				'created' => now(),
@@ -115,8 +122,28 @@ class ReportController
 				'investigation' => $investigation->id,
 				'reviewed' => now(),
 			] );
-		} elseif ( $request->input( 'close' ) ?? false ) {
+
+			$report->user->newEvent( 'report-investigation', $report->id, $request->user() );
+			InvestigationNew::dispatch( $investigation );
+		} elseif ( $request->boolean( 'dpa' ) ) {
+			DPA::factory()->create( [
+				'user' => $report->user,
+				'underage' => $report->text,
+				'statutory' => true,
+			] );
+			
+			$report->update( [
+				'dpa' => true,
+				'reviewed' => now(),
+			] );
+
+			$report->user->newEvent( 'report-dpa', actor: $request->user() );
+			$newDPA = DPA::latest( 'filed' )->first();
+			DPANew::dispatch( $newDPA );
+		} elseif ( $request->boolean( 'close' ) ) {
 			$report->update( [ 'reviewed' => now() ] );
+		} elseif ( $request->boolean( 'reopen' ) ) {
+			$report->update( [ 'reviewed' => null ] );
 		}
 
 		$request->session()->flash( 'successFlash', __( 'report' ) . ' ' . __( 'toast-updated' ) );

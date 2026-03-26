@@ -1,38 +1,35 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Rules;
 
 use App\Models\DPA;
 use App\Models\User;
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
+use Override;
 
-class DPAAlreadyLive implements Rule
+class DPAAlreadyLive implements ValidationRule
 {
 	/**
-	 * Create a new rule instance.
+	 * Validate that there is not already another DPA request for this user.
 	 */
-	public function __construct()
+	#[Override]
+	public function validate( string $attribute, mixed $value, Closure $fail ): void
 	{
-		//
-	}
+		if ( !$value ) {
+			return;
+		}
 
-	/**
-	 * Compare DPA user to see if another request already exists.
-	 *
-	 * @param string $attribute
-	 * @param mixed $value
-	 */
-	public function passes( $attribute, $value ): bool
-	{
-		$userId = ( auth()->id() === User::findOrCreate( $value )->id ) ? auth()->id() : $value;
-		return !( count( DPA::query()->where( 'user', $userId )->whereNull( 'completed' )->limit( 1 )->get() ) );
-	}
+		$userId = User::firstWhere( 'username', $value )?->id;
+		if ( $userId === null ) {
+			return;
+		}
 
-	/**
-	 * Get the validation error message.
-	 */
-	public function message(): string
-	{
-		return __( 'dpa-already-exists' );
+		$exists = DPA::where( 'user', $userId )->whereNull( 'completed' )->exists();
+		if ( $exists ) {
+			$fail( 'dpa-already-exists' )->translate();
+		}
 	}
 }

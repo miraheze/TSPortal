@@ -11,8 +11,8 @@
 						<div class="col col-sm-4">
 							<select class="form-select form-control" id="filter" onchange="updateFilter()">
 								<option value="">----</option>
-								<option value="type" {{ request()->input( 'type' ) ? 'selected' : '' }}>{{ __('appeal-type') }}</option>
-								<option value="outcome" {{ request()->input( 'outcome' ) ? 'selected' : '' }}>{{ __('appeal-outcome') }}</option>
+								<option value="type" @selected(request()->input( 'type' ))>{{ __('appeal-type') }}</option>
+								<option value="outcome" @selected(request()->input( 'outcome' ))>{{ __('appeal-outcome') }}</option>
 							</select>
 						</div>
 						<div class="col col-sm-1">
@@ -22,13 +22,13 @@
 							<select class="form-select form-control toggle-hideall" name="type" id="filter-type" @disabled(!request()->input('type'))>
 								<option value="">----</option>
 								@foreach( config('app.appeals') as $type => $data )
-									<option value="{{ $type }}" {{ ( request()->input( 'type' ) === $type ) ? 'selected' : '' }}>... {{ __('appeal-type-' . $type) }}.</option>
+									<option value="{{ $type }}" @selected(request()->input( 'type' ) === $type)>... {{ __('appeal-type-' . $type) }}.</option>
 								@endforeach
 							</select>
 							<select class="form-select form-control toggle-hideall" name="outcome" id="filter-outcome">
 								@foreach ( [ 'upheld', 'not-upheld' ] as $outcome )
 									<option
-										value="{{ $outcome }}" {{ ( request()->input( 'outcome' ) === $outcome ) ? 'selected' : '' }}>
+										value="{{ $outcome }}" @selected(request()->input( 'outcome' ) === $outcome)>
 										... {{ __('appeal-outcome-' . $outcome ) }}
 									</option>
 								@endforeach
@@ -36,7 +36,7 @@
 						</div>
 						<div class="col col-sm-2">
 							<div class="form-check">
-								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" {{ request()->input( 'closed' ) ? 'checked' : '' }}/>
+								<input id="formCheck-1" class="form-check-input" name="closed" value="true" type="checkbox" @checked(request()->input( 'closed' ))/>
 								<label class="form-check-label" for="formCheck-1">{{ __('filter-closed') }}</label>
 							</div>
 						</div>

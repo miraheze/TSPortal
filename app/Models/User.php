@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace App\Models;
 
 use Database\Factories\UserFactory;
@@ -9,6 +11,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Override;
+use function array_flip;
+use function in_array;
+use function json_encode;
+use function now;
+use function strtolower;
+use function ucfirst;
 
 #[Table( name: 'users', timestamps: false )]
 #[Unguarded]
@@ -44,6 +53,7 @@ class User extends Authenticatable
 	 *
 	 * @return array<string, string>
 	 */
+	#[Override]
 	protected function casts(): array
 	{
 		return [

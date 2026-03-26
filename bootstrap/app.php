@@ -1,6 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 use App\Providers\AppServiceProvider;
+use App\Schedules\IALScheduler;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,7 +17,6 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 	->withRouting(
 		web: __DIR__ . '/../routes/web.php',
 		api: __DIR__ . '/../routes/api.php',
-		commands: __DIR__ . '/../routes/console.php',
 		health: '/up',
 	)
 	->withMiddleware( static function ( Middleware $middleware ): void {
@@ -31,6 +34,11 @@ return Application::configure( basePath: dirname( __DIR__ ) )
 				Request::HEADER_X_FORWARDED_PROTO |
 				Request::HEADER_X_FORWARDED_AWS_ELB
 		);
+	} )
+	->withSchedule( static function ( Schedule $schedule ): void {
+		$schedule->call( new IALScheduler )
+			->dailyAt( '00:00' )
+			->description( 'Daily Webhook Disgest for IAL' );
 	} )
 	->withExceptions( static function ( Exceptions $exceptions ): void {
 		//
