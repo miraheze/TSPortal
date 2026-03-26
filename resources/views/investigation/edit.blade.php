@@ -85,7 +85,7 @@
 							</div>
 							<div class="card-body">
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" name="assign" id="assign" value="assign"
+									<input class="form-check-input" type="checkbox" name="assign" id="assign" value="true"
 										style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" />
 									<label class="form-check-label" for="assign">
 										@unless ( $investigation->assigned )

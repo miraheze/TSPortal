@@ -88,7 +88,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="at" name="at" value="at"
+								<input class="form-check-input" type="checkbox" id="at" name="at" value="true"
 									style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" @checked(old( 'at' )) />
 								<label class="form-check-label" for="at">{{ __( 'report-at-risk' ) }}</label>
 							</div>

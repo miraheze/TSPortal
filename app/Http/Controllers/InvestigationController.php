@@ -132,7 +132,7 @@ class InvestigationController
 				'explanation' => $request->input( 'justify' ),
 			];
 
-			if ( $request->input( 'assign' ) !== null ) {
+			if ( $request->boolean( 'assign' ) ) {
 				$updates['assigned'] = $request->user()->id;
 			}
 
@@ -163,7 +163,7 @@ class InvestigationController
 			);
 
 			$investigation->subject->updateStanding( $request->input( 'event' ) );
-			if ( $request->input( 'status' ) !== null ) {
+			if ( $request->boolean( 'status' ) ) {
 				if ( $investigation->closed ) {
 					$investigation->update( [ 'closed' => null ] );
 					$investigation->newEvent( 'reopen-investigation', false, $request->input( 'comments' ), $request->user() );

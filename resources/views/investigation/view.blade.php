@@ -181,7 +181,7 @@
 				<div class="card-body">
 					<input class="form-control" name="comments" id="comments" type="text"/>
 					<div class="form-check mt-2">
-						<input class="form-check-input" type="checkbox" id="status" name="status" value="status"
+						<input class="form-check-input" type="checkbox" id="status" name="status" value="true"
 							style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" />
 						<label class="form-check-label" for="status">
 							@if ( $investigation->closed )

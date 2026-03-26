@@ -87,7 +87,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="dpa" name="dpa" value="dpa"
+								<input class="form-check-input" type="checkbox" id="dpa" name="dpa" value="true"
 									style="padding: 0; height: 16px; margin: 5px 0 0 -24px;" @checked(old( 'dpa' )) />
 								<label class="form-check-label" for="dpa">
 									{{ __( 'dpa-statutory' ) }}

@@ -80,7 +80,7 @@ class ReportController
 		$subjectUser->newEvent( $event, $report->id );
 
 		$request->user()->newEvent( 'filed-report', $report->id );
-		if ( config( 'app.atrisk' ) && $request->input( 'at' ) ) {
+		if ( config( 'app.atrisk' ) && $request->boolean( 'at' ) ) {
 			Mail::to( config( 'app.atrisk' ) )->send( new AtRiskAlert( $report ) );
 		}
 
