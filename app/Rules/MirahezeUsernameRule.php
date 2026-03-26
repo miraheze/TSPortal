@@ -27,7 +27,7 @@ class MirahezeUsernameRule implements ValidationRule
 			'format' => 'json',
 			'action' => 'query',
 			'meta' => 'globaluserinfo',
-			'guiuser'=> htmlspecialchars( $value ),
+			'guiuser' => htmlspecialchars( $value ),
 		] );
 
 		if ( !isset( $response['query']['globaluserinfo']['id'] ) ) {
