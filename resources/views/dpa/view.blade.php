@@ -92,6 +92,9 @@
 									@csrf
 									@method('PATCH')
 									<div class="row">
+										<div class="alert alert-warning text-center border-0 shadow-sm">
+											<span><strong>{{ __( 'dpa-remove-pii-notice' ) }}</strong></span>
+										</div>
 										<div class="col d-flex justify-content-center gap-2 flex-wrap" style="margin-bottom: 20px;">
 											<button class="btn btn-success px-4 flex-fill flex-sm-grow-0" name="approve" value="true" type="submit">
 												{{ __( 'approve' ) }}
