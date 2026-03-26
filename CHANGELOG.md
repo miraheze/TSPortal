@@ -3,7 +3,9 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v34...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v35...main)
+
+## Version 35 (2026-03-26)
 
 ### Added
 
