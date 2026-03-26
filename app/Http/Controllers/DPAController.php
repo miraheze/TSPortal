@@ -13,6 +13,7 @@ use App\Rules\SameAccountRule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use function back;
 use function now;
 use function redirect;
@@ -99,14 +100,13 @@ class DPAController
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->boolean( 'approve' ) ) {
-			$oldUsername = $dpa->user->username;
 			$response = Http::get(
 				'https://login.miraheze.org/w/api.php', [
 				'query' => [
 					'format' => 'json',
 					'action' => 'query',
 					'meta' => 'globaluserinfo',
-					'guiuser' => $oldUsername,
+					'guiuser' => $dpa->user->username,
 				],
 			] )->json();
 
