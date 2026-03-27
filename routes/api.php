@@ -40,13 +40,11 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 		return response()->json( [ 'exists' => true ] );
 	}
 
-	DPA::factory()->create(
-		[
-			'user' => $dpaUser,
-			'underage' => $request->input( 'evidence' ),
-			'statutory' => true,
-		]
-	);
+	DPA::factory()->create( [
+		'user' => $dpaUser,
+		'underage' => $request->input( 'evidence' ),
+		'statutory' => true,
+	] );
 
 	$event = $dpaUser->events()->exists() ? 'new-dpa' : 'created-dpa';
 	$dpaUser->newEvent( $event );
@@ -68,15 +66,13 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 	$subjectUser = User::findOrCreate( $request->input( 'username' ) );
 	$reportingUser = User::findOrCreate( $request->input( 'reporter' ) );
 
-	$newReport = Report::factory()->create(
-		[
-			'type' => $request->input( 'report' ),
-			'auto' => $request->boolean( 'auto' ),
-			'user' => $subjectUser,
-			'reporter' => $reportingUser,
-			'text' => $request->input( 'evidence' ),
-		]
-	);
+	$newReport = Report::factory()->create( [
+		'type' => $request->input( 'report' ),
+		'auto' => $request->boolean( 'auto' ),
+		'user' => $subjectUser,
+		'reporter' => $reportingUser,
+		'text' => $request->input( 'evidence' ),
+	] );
 
 	$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
 	$subjectUser->newEvent( $event, (string)$newReport->id );
