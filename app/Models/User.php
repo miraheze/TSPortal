@@ -159,6 +159,10 @@ class User extends Authenticatable
 	 */
 	public function newEvent( string $action, ?string $comment = null, ?User $actor = null ): void
 	{
+		if ( $comment === '' ) {
+			$comment = null;
+		}
+
 		UserEvent::factory()->create(
 			[
 				'user' => $this,

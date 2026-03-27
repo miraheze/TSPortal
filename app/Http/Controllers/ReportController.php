@@ -77,9 +77,9 @@ class ReportController
 		] );
 
 		$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
-		$subjectUser->newEvent( $event, $report->id );
+		$subjectUser->newEvent( $event, (string)$report->id );
 
-		$request->user()->newEvent( 'filed-report', $report->id );
+		$request->user()->newEvent( 'filed-report', (string)$report->id );
 		if ( config( 'app.atrisk' ) && $request->boolean( 'at' ) ) {
 			Mail::to( config( 'app.atrisk' ) )->send( new AtRiskAlert( $report ) );
 		}

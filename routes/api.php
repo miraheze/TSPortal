@@ -79,9 +79,9 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 	);
 
 	$event = $subjectUser->events()->exists() ? 'new-report' : 'created-report';
-	$subjectUser->newEvent( $event, $newReport->id );
+	$subjectUser->newEvent( $event, (string)$newReport->id );
 
-	$reportingUser->newEvent( 'filed-report', $newReport->id );
+	$reportingUser->newEvent( 'filed-report', (string)$newReport->id );
 	ReportNew::dispatch( $newReport );
 
 	return response()->json( [ 'id' => $newReport->id ] );
