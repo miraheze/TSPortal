@@ -1,3 +1,5 @@
+@use(Composer\InstalledVersions)
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -205,7 +207,7 @@
 					</li>
 				</ul>
 				<p class="mb-0">{{ __( 'footer-company' ) }}</p>
-				<p class="mb-0">{{ __( 'version', [ 'v' => config( 'app.version' ) ] ) }}</p>
+				<p class="mb-0">{{ __( 'version', [ 'v' => str_replace( 'v', '', InstalledVersions::getPrettyVersion( 'miraheze/ts-portal' ) ) ] ) }}</p>
 			</div>
 		</footer>
 	</div>
