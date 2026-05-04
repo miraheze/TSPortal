@@ -7,6 +7,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Attributes\Unguarded;
+use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,8 +20,9 @@ use function now;
 use function strtolower;
 use function ucfirst;
 
-#[Table( name: 'users', timestamps: false )]
+#[Table( name: 'users' )]
 #[Unguarded]
+#[WithoutTimestamps]
 class User extends Authenticatable
 {
 	/** @use HasFactory<UserFactory> */

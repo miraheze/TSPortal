@@ -7,13 +7,15 @@ namespace App\Models;
 use Database\Factories\DPAFactory;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Attributes\Unguarded;
+use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Override;
 
-#[Table( name: 'dpas', keyType: 'string', timestamps: false )]
+#[Table( name: 'dpas', keyType: 'string' )]
 #[Unguarded]
+#[WithoutTimestamps]
 class DPA extends Model
 {
 	/** @use HasFactory<DPAFactory> */

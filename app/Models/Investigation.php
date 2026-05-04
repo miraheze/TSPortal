@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace App\Models;
 
 use Database\Factories\InvestigationFactory;
-use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Attributes\Unguarded;
+use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Override;
 use function now;
 
-#[Table( timestamps: false )]
 #[Unguarded]
+#[WithoutTimestamps]
 class Investigation extends Model
 {
 	/** @use HasFactory<InvestigationFactory> */
