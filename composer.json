@@ -9,7 +9,7 @@
 		"barryvdh/laravel-dompdf": "^3.1",
 		"doctrine/dbal": "^4.4",
 		"guzzlehttp/guzzle": "7.10.0",
-		"laravel/framework": "13.7.0",
+		"laravel/framework": "13.8.0",
 		"laravel/serializable-closure": "2.0.13",
 		"laravel/socialite": "5.27.0",
 		"laravel/tinker": "3.0.2",
