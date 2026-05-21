@@ -103,6 +103,8 @@
 	"events-reopen-investigation-desc": "Reopened investigation.",
 	"events-report-dpa-desc": "New Data Protection Removal request opened from report.",
 	"events-report-investigation-desc": "New investigation opened on account from report.",
+	"events-sanction-lifted": "Sanction Lifted",
+	"events-sanction-lifted-desc": "Sanction Lifted after successful appeal: :comment",
 	"events-update-flags-desc": "User access flags changed. Now: :flags",
 	"evidence": "Evidence",
 	"filter": "Filter",
