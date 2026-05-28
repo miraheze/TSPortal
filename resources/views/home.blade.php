@@ -90,7 +90,7 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col">
-										<p style="border-color: rgb(133, 135, 150); color: rgb(133, 135, 150);">{{ __( 'home-a-trust-and-safety' ) }}</p>
+										<p style="border-color: rgb(133, 135, 150);">{{ __( 'home-a-trust-and-safety' ) }}</p>
 									</div>
 								</div>
 							</div>
@@ -104,7 +104,7 @@
 							<div class="card-body">
 								<div class="row" style="border-color: rgb(255, 255, 255);">
 									<div class="col">
-										<p style="border-color: rgb(133, 135, 150); color: rgb(133, 135, 150);">{{ __( 'home-a-how-report' ) }}</p>
+										<p style="border-color: rgb(133, 135, 150);">{{ __( 'home-a-how-report' ) }}</p>
 									</div>
 								</div>
 							</div>
@@ -118,7 +118,7 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col">
-										<p style="border-color: rgb(133, 135, 150); color: rgb(133, 135, 150);">{{ __( 'home-a-dpa' ) }}</p>
+										<p style="border-color: rgb(133, 135, 150);">{{ __( 'home-a-dpa' ) }}</p>
 									</div>
 								</div>
 							</div>
@@ -132,7 +132,7 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col">
-										<p style="border-color: rgb(133, 135, 150); color: rgb(133, 135, 150);">{{ __( 'home-a-appeal' ) }}</p>
+										<p style="border-color: rgb(133, 135, 150);">{{ __( 'home-a-appeal' ) }}</p>
 									</div>
 								</div>
 							</div>
