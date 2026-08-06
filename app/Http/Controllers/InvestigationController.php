@@ -155,24 +155,24 @@ class InvestigationController
 
 			AppealNew::dispatch( $newAppeal );
 		} else {
-			$investigation->newEvent(
-				$request->input( 'event' ),
-				!( in_array( $request->input( 'event' ), [ 'comment', 'edit-investigation' ], true ) ),
-				$request->input( 'comments' ),
-				$request->user()
-			);
-
 			$investigation->subject->updateStanding( $request->input( 'event' ) );
 			if ( $request->boolean( 'status' ) ) {
 				if ( $investigation->closed ) {
 					$investigation->update( [ 'closed' => null ] );
-					$investigation->newEvent( 'reopen-investigation', false, $request->input( 'comments' ), $request->user() );
+					$investigation->newEvent( 'reopen-investigation', true, $request->input( 'comments' ), $request->user() );
 					InvestigationReopened::dispatch( $investigation );
 				} else {
 					$investigation->update( [ 'closed' => now() ] );
-					$investigation->newEvent( 'close-investigation', false, $request->input( 'comments' ), $request->user() );
+					$investigation->newEvent( 'close-investigation', true, $request->input( 'comments' ), $request->user() );
 					InvestigationClosed::dispatch( $investigation );
 				}
+			} else {
+				$investigation->newEvent(
+					$request->input( 'event' ),
+					!in_array( $request->input( 'event' ), [ 'comment', 'edit-investigation' ], true ),
+					$request->input( 'comments' ),
+					$request->user()
+				);
 			}
 		}
 
