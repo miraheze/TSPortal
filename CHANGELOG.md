@@ -3,7 +3,24 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v36...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v37...main)
+
+## Version 37 (2026-09-19)
+
+### Fixed
+
+### Changed
+
+- Changed to use the `WithoutTimestamps` attribute.
+- Changed contrast on home to be more consistent.
+- Upgraded external libraries:
+  - Upgraded guzzlehttp/guzzle from 7.10.0 to 8.2.0.
+  - Upgraded laravel/framework from 13.2.0 to 13.33.0.
+  - Upgraded laravel/serializable-closure from 2.0.10 to 2.1.0.
+  - Upgraded laravel/socialite from 5.26.0 to 5.31.0.
+  - Upgraded laravel/tinker from 3.0.0 to 3.0.2.
+  - Upgraded mockery/mockery from 1.6.12 to 1.6.15.
+  - Upgraded phpunit/phpunit from 13.0.5 to 13.3.4.
 
 ## Version 36 (2026-03-27)
 
