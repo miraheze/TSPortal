@@ -64,7 +64,7 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col">
-										@unless ( $dpa->underage )
+										@if ( $dpa->underage === null )
 											<div class="alert alert-success text-center border-0 shadow-sm">
 												<span><strong>{{ __( 'dpa-own-account' ) }}</strong><br/></span>
 											</div>
@@ -72,7 +72,7 @@
 											<div class="p-3 bg-light rounded border">
 												<p class="mb-0">{{ $dpa->underage }}</p>
 											</div>
-										@endunless
+										@endif
 									</div>
 								</div>
 							</div>
