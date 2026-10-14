@@ -20,6 +20,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*
+ * Validate the API write key using a constant-time comparison.
+ */
+$authorizeWriteKey = static function ( Request $request ): bool {
+	$providedKey = $request->input( 'writekey' );
+	$expectedKey = config( 'app.writekey' );
+	if ( !is_string( $providedKey ) || !is_string( $expectedKey ) ) {
+		return false;
+	}
+
+	return hash_equals( $expectedKey, $providedKey );
+};
+
+/*
  * DPA API Group.
  */
 Route::get( 'dpa/{dpa}/{username}', static function ( DPA $dpa, string $username ): JsonResponse {
@@ -30,8 +43,8 @@ Route::get( 'dpa/{dpa}/{username}', static function ( DPA $dpa, string $username
 	] );
 } );
 
-Route::post( 'dpa', static function ( Request $request ): JsonResponse {
-	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
+Route::post( 'dpa', static function ( Request $request ) use ( $authorizeWriteKey ): JsonResponse {
+	if ( !$authorizeWriteKey( $request ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
 
@@ -58,8 +71,8 @@ Route::post( 'dpa', static function ( Request $request ): JsonResponse {
 /*
  * Reports API Group.
  */
-Route::post( 'report', static function ( Request $request ): JsonResponse {
-	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
+Route::post( 'report', static function ( Request $request ) use ( $authorizeWriteKey ): JsonResponse {
+	if ( !$authorizeWriteKey( $request ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
 
@@ -86,8 +99,8 @@ Route::post( 'report', static function ( Request $request ): JsonResponse {
 /*
  * Internal Actions Log API Group.
  */
-Route::post( 'ial', static function ( Request $request ): JsonResponse {
-	if ( config( 'app.writekey' ) !== $request->input( 'writekey' ) ) {
+Route::post( 'ial', static function ( Request $request ) use ( $authorizeWriteKey ): JsonResponse {
+	if ( !$authorizeWriteKey( $request ) ) {
 		return response()->json( [ 'unauthorized' => true ] );
 	}
 
