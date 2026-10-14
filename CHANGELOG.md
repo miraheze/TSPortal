@@ -9,6 +9,9 @@ The main reasoning behind this choice is the software is not built to be extende
 
 ### Fixed
 
+- SECURITY: Fixed underage check ([GHSA-4835-jf76-3g69](https://github.com/miraheze/TSPortal/security/advisories/GHSA-4835-jf76-3g69)).
+- SECURITY: Fixed to use `hash_equals` for writekey validation in API ([GHSA-86xc-5q56-p5pg](https://github.com/miraheze/TSPortal/security/advisories/GHSA-86xc-5q56-p5pg)).
+
 ### Changed
 
 - Changed to use the `WithoutTimestamps` attribute.
