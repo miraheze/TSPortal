@@ -3,7 +3,23 @@
 TSPortal follows a basic numerical increase system for releases and not Semantic Versioning.
 The main reasoning behind this choice is the software is not built to be extended upon, therefore no stable public API exists.
 
-## [Unreleased](https://github.com/miraheze/TSPortal/compare/v37...main)
+## [Unreleased](https://github.com/miraheze/TSPortal/compare/v38...main)
+
+## Version 38 (2026-11-02)
+
+### Added
+
+- Added a `WebProxy` helper to apply the `WEB_PROXY` configuration to outbound requests.
+- Added proxy support for the MediaWiki OAuth login and MediaWiki API requests.
+- Added proxy support for Mattermost webhooks.
+
+### Changed
+
+- Changed Discord webhooks to use the `WebProxy` helper rather than duplicating the proxy check.
+- Upgraded external libraries:
+  - Upgraded guzzlehttp/guzzle from 8.2.0 to 8.3.1.
+  - Upgraded laravel/framework from 13.36.0 to 13.39.0.
+  - Upgraded phpunit/phpunit from 13.4.2 to 13.4.5.
 
 ## Version 37 (2026-10-14)
 
