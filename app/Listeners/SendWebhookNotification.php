@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace App\Listeners;
 
+use App\Support\WebProxy;
 use Illuminate\Support\Facades\Http;
 use function config;
 use function in_array;
@@ -32,19 +33,13 @@ class SendWebhookNotification
 		$text .= $event->name . ' has been ' . $event->state . '. Link: ' . config( 'app.url' ) . '/' . strtolower( $event->name ) . '/' . $event->model->id;
 
 		if ( config( 'app.discordhook' ) ) {
-			if ( config( 'app.proxy' ) ) {
-				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
-					'content' => $text,
-				] );
-			} else {
-				Http::post( config( 'app.discordhook' ), [
-					'content' => $text,
-				] );
-			}
+			Http::withOptions( WebProxy::options() )->post( config( 'app.discordhook' ), [
+				'content' => $text,
+			] );
 		}
 
 		if ( config( 'app.mattermosthook' ) ) {
-			Http::post( config( 'app.mattermosthook' ), [
+			Http::withOptions( WebProxy::options() )->post( config( 'app.mattermosthook' ), [
 				'text' => $text,
 				'username' => config( 'app.name' ),
 			] );
