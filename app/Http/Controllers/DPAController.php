@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Rules\DPAAlreadyLive;
 use App\Rules\MediaWikiUsernameRule;
 use App\Rules\SameAccountRule;
+use App\Support\WebProxy;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -101,7 +102,7 @@ class DPAController
 	public function update( DPA $dpa, Request $request ): RedirectResponse
 	{
 		if ( $request->boolean( 'approve' ) ) {
-			$response = Http::get( config( 'app.urls.mediawiki.api' ), [
+			$response = Http::withOptions( WebProxy::options() )->get( config( 'app.urls.mediawiki.api' ), [
 				'format' => 'json',
 				'action' => 'query',
 				'meta' => 'globaluserinfo',
