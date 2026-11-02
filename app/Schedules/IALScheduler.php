@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace App\Schedules;
 
 use App\Models\IAL;
+use App\Support\WebProxy;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use function array_count_values;
@@ -109,15 +110,9 @@ class IALScheduler
 	public function notify( string $message ): void
 	{
 		if ( config( 'app.discordhook' ) ) {
-			if ( config( 'app.proxy' ) ) {
-				Http::withOptions( [ 'proxy' => config( 'app.proxy' ) ] )->post( config( 'app.discordhook' ), [
-					'content' => $message,
-				] );
-			} else {
-				Http::post( config( 'app.discordhook' ), [
-					'content' => $message,
-				] );
-			}
+			Http::withOptions( WebProxy::options() )->post( config( 'app.discordhook' ), [
+				'content' => $message,
+			] );
 		}
 
 		if ( config( 'app.mattermosthook' ) ) {
