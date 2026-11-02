@@ -39,7 +39,7 @@ class SendWebhookNotification
 		}
 
 		if ( config( 'app.mattermosthook' ) ) {
-			Http::post( config( 'app.mattermosthook' ), [
+			Http::withOptions( WebProxy::options() )->post( config( 'app.mattermosthook' ), [
 				'text' => $text,
 				'username' => config( 'app.name' ),
 			] );
