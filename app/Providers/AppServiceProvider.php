@@ -12,6 +12,8 @@ use App\Events\InvestigationReopened;
 use App\Events\ReportNew;
 use App\Listeners\SendWebhookNotification;
 use App\Models\User;
+use App\Support\ProxiedMediaWikiServer;
+use App\Support\WebProxy;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -19,7 +21,10 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Socialite\Facades\Socialite;
 use Override;
+use Taavi\LaravelSocialiteMediawiki\Socialite\One\WikiSocialiteProvider;
+use function config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -60,6 +65,15 @@ class AppServiceProvider extends ServiceProvider
 			],
 			SendWebhookNotification::class
 		);
+
+		if ( WebProxy::options() !== [] ) {
+			Socialite::extend( 'mediawiki', function ( $app ): WikiSocialiteProvider {
+				return new WikiSocialiteProvider(
+					$app['request'],
+					new ProxiedMediaWikiServer( config( 'services.mediawiki' ) )
+				);
+			} );
+		}
 
 		Paginator::useBootstrapFive();
 	}
