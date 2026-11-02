@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace App\Rules;
 
+use App\Support\WebProxy;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
@@ -24,7 +25,7 @@ class MediaWikiUsernameRule implements ValidationRule
 			return;
 		}
 
-		$response = Http::get( config( 'app.urls.mediawiki.api' ), [
+		$response = Http::withOptions( WebProxy::options() )->get( config( 'app.urls.mediawiki.api' ), [
 			'format' => 'json',
 			'action' => 'query',
 			'meta' => 'globaluserinfo',
