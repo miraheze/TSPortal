@@ -4,7 +4,9 @@ declare( strict_types = 1 );
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Attributes\Unguarded;
+use Illuminate\Database\Eloquent\Attributes\WithoutIncrementing;
 use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -21,17 +23,15 @@ use function now;
  *
  * Rows hold no user, report or investigation reference on purpose.
  */
+#[Table( key: false )]
 #[Unguarded]
+#[WithoutIncrementing]
 #[WithoutTimestamps]
 class TransparencyReport extends Model
 {
 	public const string REQUESTED = 'requested';
 
 	public const string COMPLETED = 'completed';
-
-	public $incrementing = false;
-
-	protected $primaryKey = null;
 
 	/**
 	 * Adds to one counter for the given month, creating the row if needed.
