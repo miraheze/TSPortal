@@ -38,8 +38,7 @@ class TransparencyBackfill
 		foreach ( Report::query()->toBase()->get( [ 'type', 'investigation', 'dpa', 'created', 'reviewed' ] ) as $report ) {
 			$this->add( 'report', $report->type, 'requested', $report->created );
 			if ( $report->reviewed !== null ) {
-				$outcome = $report->investigation !== null ? 'investigation' : ( $report->dpa ? 'dpa' : 'closed' );
-				$this->add( 'report', $report->type, 'completed', $report->reviewed, $outcome );
+				$this->add( 'report', $report->type, 'completed', $report->reviewed, TransparencyReport::reportOutcome( $report->investigation, $report->dpa ) );
 			}
 		}
 
@@ -62,10 +61,10 @@ class TransparencyBackfill
 		}
 
 		foreach ( DPA::query()->toBase()->get( [ 'statutory', 'reject', 'filed', 'completed' ] ) as $dpa ) {
-			$type = $dpa->statutory ? 'statutory' : 'general';
+			$type = TransparencyReport::dpaType( $dpa->statutory );
 			$this->add( 'dpa', $type, 'requested', $dpa->filed );
 			if ( $dpa->completed !== null ) {
-				$this->add( 'dpa', $type, 'completed', $dpa->completed, $dpa->reject === null ? 'accepted' : 'rejected' );
+				$this->add( 'dpa', $type, 'completed', $dpa->completed, TransparencyReport::dpaOutcome( $dpa->reject ) );
 			}
 		}
 
