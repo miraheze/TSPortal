@@ -41,7 +41,7 @@ class TransparencyController
 			'available' => $available,
 			'year' => $current['year'] ?? 0,
 			'half' => $current['half'] ?? 0,
-			'stats' => $current === null ? null : ( new TransparencyStats( $current['months'] ) )->all(),
+			'stats' => $current === null ? null : new TransparencyStats( $current['months'] )->all(),
 		] );
 	}
 }
