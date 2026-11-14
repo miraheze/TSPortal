@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use function array_diff;
+use function array_diff_key;
+use function array_map;
+use function array_merge;
 use function array_values;
 use function config;
 use function now;
@@ -50,24 +53,45 @@ class TransparencyReport extends Model
 	}
 
 	/**
+	 * Account action keys grouped by kind, leaving out appeal events.
+	 *
+	 * @return array<string, string[]>
+	 */
+	public static function actionGroups(): array
+	{
+		$groups = [];
+		foreach ( array_diff_key( config( 'app.events' ), [ 'appeal' => true ] ) as $group => $events ) {
+			$groups[$group] = array_map( static fn ( string $event ): string => $group . '-' . $event, $events );
+		}
+
+		return $groups;
+	}
+
+	/**
 	 * Event keys that count as a completed action against an account.
 	 *
 	 * @return string[]
 	 */
 	public static function actionKeys(): array
 	{
-		$keys = [];
-		foreach ( config( 'app.events' ) as $group => $events ) {
-			if ( $group === 'appeal' ) {
-				continue;
-			}
+		return array_merge( [], ...array_values( self::actionGroups() ) );
+	}
 
-			foreach ( $events as $event ) {
-				$keys[] = $group . '-' . $event;
+	/**
+	 * Every report topic written as group-topic.
+	 *
+	 * @return string[]
+	 */
+	public static function reportTypes(): array
+	{
+		$types = [];
+		foreach ( config( 'app.reportTopics' ) as $group => $topics ) {
+			foreach ( $topics as $topic ) {
+				$types[] = $group . '-' . $topic;
 			}
 		}
 
-		return $keys;
+		return $types;
 	}
 
 	/**
@@ -78,5 +102,33 @@ class TransparencyReport extends Model
 	public static function recommendationKeys(): array
 	{
 		return array_values( array_diff( config( 'app.recommendations' ), [ 'unknown' ] ) );
+	}
+
+	/**
+	 * What became of a reviewed report.
+	 */
+	public static function reportOutcome( mixed $investigation, mixed $dpa ): string
+	{
+		return match ( true ) {
+			$investigation !== null => 'investigation',
+			(bool)$dpa => 'dpa',
+			default => 'closed',
+		};
+	}
+
+	/**
+	 * Splits data protection requests by whether they are statutory.
+	 */
+	public static function dpaType( mixed $statutory ): string
+	{
+		return $statutory ? 'statutory' : 'general';
+	}
+
+	/**
+	 * How a finished data protection request was decided.
+	 */
+	public static function dpaOutcome( mixed $reject ): string
+	{
+		return $reject === null ? 'accepted' : 'rejected';
 	}
 }
