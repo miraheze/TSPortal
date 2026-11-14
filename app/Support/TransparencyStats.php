@@ -6,10 +6,14 @@ namespace App\Support;
 
 use App\Models\TransparencyReport;
 use Carbon\CarbonImmutable;
+use function array_filter;
 use function array_keys;
 use function array_map;
+use function array_search;
 use function array_sum;
 use function config;
+use function count;
+use function is_null;
 use function max;
 use function min;
 use function now;
@@ -100,7 +104,7 @@ class TransparencyStats
 	public static function published( string $month ): bool
 	{
 		$date = CarbonImmutable::createFromFormat( '!Y-m', $month );
-		$end = $date->month <= 6 ? $date->setMonth( 6 ) : $date->setMonth( 12 );
+		$end = $date->setMonth( $date->month <= 6 ? 6 : 12 );
 
 		return !$end->endOfMonth()->addDays( self::DELAY_DAYS )->isFuture();
 	}
@@ -122,24 +126,10 @@ class TransparencyStats
 	public static function suppress( array $values ): array
 	{
 		$out = array_map( self::mask( ... ), $values );
-		$hidden = 0;
-		foreach ( $out as $value ) {
-			if ( $value === null ) {
-				$hidden++;
-			}
-		}
-
-		if ( $hidden === 1 ) {
-			$smallest = null;
-			foreach ( $out as $key => $value ) {
-				if ( $value !== null && $value > 0 && ( $smallest === null || $value < $out[$smallest] ) ) {
-					$smallest = $key;
-				}
-			}
-
-			if ( $smallest !== null ) {
-				$out[$smallest] = null;
-			}
+		$hidden = count( array_filter( $out, is_null( ... ) ) );
+		$visible = array_filter( $out, static fn ( ?int $value ): bool => $value > 0 );
+		if ( $hidden === 1 && $visible !== [] ) {
+			$out[array_search( min( $visible ), $visible, true )] = null;
 		}
 
 		return $out;
@@ -169,13 +159,6 @@ class TransparencyStats
 	 */
 	public function reports(): array
 	{
-		$types = [];
-		foreach ( config( 'app.reportTopics' ) as $group => $topics ) {
-			foreach ( $topics as $topic ) {
-				$types[] = $group . '-' . $topic;
-			}
-		}
-
 		return [
 			'requested' => self::mask( $this->value( 'report', 'requested' ) ),
 			'completed' => self::mask( $this->value( 'report', 'completed' ) ),
@@ -184,7 +167,7 @@ class TransparencyStats
 				'dpa' => $this->value( 'report', 'completed', null, 'dpa' ),
 				'closed' => $this->value( 'report', 'completed', null, 'closed' ),
 			] ),
-			'types' => $this->rows( 'report', $types, [ 'requested', 'completed' ] ),
+			'types' => $this->rows( 'report', TransparencyReport::reportTypes(), [ 'requested', 'completed' ] ),
 		];
 	}
 
@@ -210,21 +193,7 @@ class TransparencyStats
 	 */
 	public function actions(): array
 	{
-		$grouped = [];
-		foreach ( config( 'app.events' ) as $group => $events ) {
-			if ( $group === 'appeal' ) {
-				continue;
-			}
-
-			$keys = [];
-			foreach ( $events as $event ) {
-				$keys[] = $group . '-' . $event;
-			}
-
-			$grouped[$group] = $this->rows( 'action', $keys, [ 'completed' ] );
-		}
-
-		return $grouped;
+		return array_map( fn ( array $keys ): array => $this->rows( 'action', $keys, [ 'completed' ] ), TransparencyReport::actionGroups() );
 	}
 
 	/**
@@ -336,9 +305,11 @@ class TransparencyStats
 		foreach ( $keys as $key ) {
 			$row = [
 				'key' => $key,
-				'percent' => $shown[$columns[0]][$key] !== null && $total > 0
-					? min( 100, (int)round( $raw[$columns[0]][$key] / $total * 100 ) )
-					: ( $shown[$columns[0]][$key] === null ? null : 0 ),
+				'percent' => match ( true ) {
+					$shown[$columns[0]][$key] === null => null,
+					$total > 0 => min( 100, (int)round( $raw[$columns[0]][$key] / $total * 100 ) ),
+					default => 0,
+				},
 			];
 			foreach ( $columns as $column ) {
 				$row[$column] = $shown[$column][$key];
