@@ -6,27 +6,17 @@ namespace App\Console\Commands;
 
 use App\Models\TransparencyReport;
 use App\Support\TransparencyBackfill;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
 /**
  * Fills the transparency counters from existing records.
  */
+#[Description( 'Build the transparency counters from existing records' )]
+#[Signature( 'transparency:backfill {--force : Replace counters that already exist} {--include-published : Also rewrite published periods}' )]
 class TransparencyBackfillCommand extends Command
 {
-	/**
-	 * The name and signature of the console command.
-	 *
-	 * @var string
-	 */
-	protected $signature = 'transparency:backfill {--force : Replace counters that already exist} {--include-published : Also rewrite published periods}';
-
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Build the transparency counters from existing records';
-
 	/**
 	 * Execute the console command.
 	 */
