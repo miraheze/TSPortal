@@ -24,18 +24,15 @@ class TransparencyObserver
 	public function created( Model $model ): void
 	{
 		$data = $model->getAttributes();
-		if ( $model instanceof Report ) {
-			$this->requested( 'report', $data['type'] ?? 'other' );
-		} elseif ( $model instanceof Investigation ) {
-			$this->requested( 'investigation', $data['type'] ?? 'other' );
-			$this->recommended( $data['recommendation'] ?? null );
-		} elseif ( $model instanceof Appeal ) {
-			$this->requested( 'appeal', $data['type'] ?? 'new-information' );
-		} elseif ( $model instanceof DPA ) {
-			$this->requested( 'dpa', $this->dpaType( $model ) );
-		} elseif ( $model instanceof UserEvent && in_array( $data['action'] ?? '', TransparencyReport::actionKeys(), true ) ) {
-			TransparencyReport::bump( 'action', $data['action'], TransparencyReport::COMPLETED );
-		}
+		match ( true ) {
+			$model instanceof Report => $this->requested( 'report', $data['type'] ?? 'other' ),
+			$model instanceof Investigation => $this->investigationCreated( $data ),
+			$model instanceof Appeal => $this->requested( 'appeal', $data['type'] ?? 'new-information' ),
+			$model instanceof DPA => $this->requested( 'dpa', TransparencyReport::dpaType( $data['statutory'] ?? false ) ),
+			$model instanceof UserEvent && in_array( $data['action'] ?? '', TransparencyReport::actionKeys(), true )
+				=> TransparencyReport::bump( 'action', $data['action'], TransparencyReport::COMPLETED ),
+			default => null,
+		};
 	}
 
 	/**
@@ -44,19 +41,25 @@ class TransparencyObserver
 	public function updated( Model $model ): void
 	{
 		$data = $model->getAttributes();
-		if ( $model instanceof Report ) {
-			$outcome = ( $data['investigation'] ?? null ) !== null ? 'investigation' : ( ( $data['dpa'] ?? false ) ? 'dpa' : 'closed' );
-			$this->toggled( $model, 'reviewed', 'report', $data['type'] ?? 'other', $outcome );
-		} elseif ( $model instanceof Investigation ) {
-			$this->toggled( $model, 'closed', 'investigation', $data['type'] ?? 'other' );
-			if ( $model->wasChanged( 'recommendation' ) && in_array( $model->getOriginal( 'recommendation' ), [ null, '', 'unknown' ], true ) ) {
-				$this->recommended( $data['recommendation'] ?? null );
-			}
-		} elseif ( $model instanceof Appeal ) {
-			$this->toggled( $model, 'reviewed', 'appeal', $data['type'] ?? 'new-information', $data['outcome'] ?? '' );
-		} elseif ( $model instanceof DPA ) {
-			$this->toggled( $model, 'completed', 'dpa', $this->dpaType( $model ), ( $data['reject'] ?? null ) === null ? 'accepted' : 'rejected' );
-		}
+		match ( true ) {
+			$model instanceof Report => $this->toggled(
+				$model,
+				'reviewed',
+				'report',
+				$data['type'] ?? 'other',
+				TransparencyReport::reportOutcome( $data['investigation'] ?? null, $data['dpa'] ?? false )
+			),
+			$model instanceof Investigation => $this->investigationUpdated( $model ),
+			$model instanceof Appeal => $this->toggled( $model, 'reviewed', 'appeal', $data['type'] ?? 'new-information', $data['outcome'] ?? '' ),
+			$model instanceof DPA => $this->toggled(
+				$model,
+				'completed',
+				'dpa',
+				TransparencyReport::dpaType( $data['statutory'] ?? false ),
+				TransparencyReport::dpaOutcome( $data['reject'] ?? null )
+			),
+			default => null,
+		};
 	}
 
 	/**
@@ -65,6 +68,29 @@ class TransparencyObserver
 	private function requested( string $category, string $type ): void
 	{
 		TransparencyReport::bump( $category, $type, TransparencyReport::REQUESTED );
+	}
+
+	/**
+	 * Counts a new investigation and any recommendation it starts with.
+	 *
+	 * @param array<string, mixed> $data
+	 */
+	private function investigationCreated( array $data ): void
+	{
+		$this->requested( 'investigation', $data['type'] ?? 'other' );
+		$this->recommended( $data['recommendation'] ?? null );
+	}
+
+	/**
+	 * Counts a closure, and a recommendation the first time one is made.
+	 */
+	private function investigationUpdated( Model $model ): void
+	{
+		$data = $model->getAttributes();
+		$this->toggled( $model, 'closed', 'investigation', $data['type'] ?? 'other' );
+		if ( $model->wasChanged( 'recommendation' ) && in_array( $model->getOriginal( 'recommendation' ), [ null, '', 'unknown' ], true ) ) {
+			$this->recommended( $data['recommendation'] ?? null );
+		}
 	}
 
 	/**
@@ -78,11 +104,11 @@ class TransparencyObserver
 
 		$was = $model->getOriginal( $column );
 		$now = $model->getAttributes()[$column] ?? null;
-		if ( $was === null && $now !== null ) {
-			TransparencyReport::bump( $category, $type, TransparencyReport::COMPLETED, $outcome );
-		} elseif ( $was !== null && $now === null ) {
-			TransparencyReport::bump( $category, $type, TransparencyReport::COMPLETED, $outcome, -1 );
-		}
+		match ( true ) {
+			$was === null && $now !== null => TransparencyReport::bump( $category, $type, TransparencyReport::COMPLETED, $outcome ),
+			$was !== null && $now === null => TransparencyReport::bump( $category, $type, TransparencyReport::COMPLETED, $outcome, -1 ),
+			default => null,
+		};
 	}
 
 	/**
@@ -93,13 +119,5 @@ class TransparencyObserver
 		if ( in_array( $recommendation, TransparencyReport::recommendationKeys(), true ) ) {
 			TransparencyReport::bump( 'recommendation', $recommendation, TransparencyReport::REQUESTED );
 		}
-	}
-
-	/**
-	 * Splits data protection requests by whether they are statutory.
-	 */
-	private function dpaType( Model $model ): string
-	{
-		return ( $model->getAttributes()['statutory'] ?? false ) ? 'statutory' : 'general';
 	}
 }
