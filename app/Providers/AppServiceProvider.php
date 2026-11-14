@@ -11,7 +11,13 @@ use App\Events\InvestigationNew;
 use App\Events\InvestigationReopened;
 use App\Events\ReportNew;
 use App\Listeners\SendWebhookNotification;
+use App\Models\Appeal;
+use App\Models\DPA;
+use App\Models\Investigation;
+use App\Models\Report;
 use App\Models\User;
+use App\Models\UserEvent;
+use App\Observers\TransparencyObserver;
 use App\Support\ProxiedMediaWikiServer;
 use App\Support\WebProxy;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -65,6 +71,10 @@ class AppServiceProvider extends ServiceProvider
 			],
 			SendWebhookNotification::class
 		);
+
+		foreach ( [ Appeal::class, DPA::class, Investigation::class, Report::class, UserEvent::class ] as $model ) {
+			$model::observe( TransparencyObserver::class );
+		}
 
 		if ( WebProxy::options() !== [] ) {
 			Socialite::extend( 'mediawiki', function ( $app ): WikiSocialiteProvider {
