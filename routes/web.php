@@ -8,6 +8,7 @@ use App\Http\Controllers\IALController;
 use App\Http\Controllers\InvestigationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransparencyController;
 use App\Http\Controllers\UserController;
 use App\Models\Appeal;
 use App\Models\DPA;
@@ -75,3 +76,8 @@ Route::patch( '/appeal/{appeal}', [ AppealController::class, 'update' ] )->where
  */
 Route::get( '/ial', [ IALController::class, 'index' ] )->middleware( 'auth' )->can( 'viewAny', IAL::class );
 Route::patch( '/ial/{ial}', [ IALController::class, 'update' ] )->whereNumber( 'id' )->middleware( 'auth' )->can( 'update', 'ial' );
+
+/*
+ * Transparency report web group.
+ */
+Route::get( '/transparency', [ TransparencyController::class, 'index' ] )->middleware( 'auth' )->can( 'ts' );

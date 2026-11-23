@@ -53,14 +53,12 @@
 							<span>{{ __( 'appeals' ) }}</span>
 						</a>
 					</li>
-					<!-- TODO: Transparency Reports
 					<li class="nav-item">
-						<a class="nav-link {{ ( trim( $pgname ) === 'Transparency Reports' ) ? 'active' : '' }}" href="/transparency">
-							<i class="fas fa-chart-bar"></i>
-							<span>Transparency Report</span>
+						<a class="nav-link {{ ( trim( $pgname ) === __( 'transparency' ) ) ? 'active' : '' }}" href="/transparency">
+							<i class="fa-solid fa-chart-column"></i>
+							<span>{{ __( 'transparency' ) }}</span>
 						</a>
 					</li>
-					-->
 					<li class="nav-item">
 						<a class="nav-link {{ ( trim( $pgname ) === __( 'ial' ) ) ? 'active' : '' }}" href="/ial">
 							<i class="fa-solid fa-list-check"></i>
